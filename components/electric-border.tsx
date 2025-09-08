@@ -69,12 +69,12 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
       dxAnims[1].setAttribute('values', `0; -${width}`);
     }
 
-    const baseDur = isMobile ? 20 : 6;
+    const baseDur = isMobile ? 10 : 6;
     const dur = Math.max(0.001, baseDur / (speed || 1));
     [...dyAnims, ...dxAnims].forEach(a => a.setAttribute('dur', `${dur}s`));
 
     const disp = svg.querySelector('feDisplacementMap');
-    if (disp) disp.setAttribute('scale', String((isMobile ? 5 : 30) * (chaos || 1)));
+    if (disp) disp.setAttribute('scale', String((isMobile ? 10 : 30) * (chaos || 1)));
 
     const filterEl = svg.querySelector(`#${CSS.escape(filterId)}`);
     if (filterEl) {
