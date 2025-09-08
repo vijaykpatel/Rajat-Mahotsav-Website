@@ -23,23 +23,63 @@ const LightweightBorder = ({
     borderRadius: style?.borderRadius ?? 'inherit'
   };
 
-  // Simple static border for mobile/tablet
-  const simpleBorderStyle = {
+  const borderStyle = {
     ...inheritRadius,
     border: `${thickness}px solid ${color}`,
-    boxShadow: deviceType === 'mobile' 
-      ? `0 0 8px ${color}40` // Minimal glow on mobile
-      : `0 0 12px ${color}60, inset 0 0 8px ${color}20` // Slightly more glow on tablet
+    position: 'relative' as const,
+    overflow: 'hidden' as const
   };
 
   return (
     <div className={`relative ${className ?? ''}`} style={style}>
-      <div 
-        className="relative" 
-        style={simpleBorderStyle}
-      >
-        {children}
+      <div style={borderStyle}>
+        {/* Static electric-like pattern using CSS gradients */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `
+              linear-gradient(45deg, transparent 30%, ${color}20 50%, transparent 70%),
+              linear-gradient(-45deg, transparent 40%, ${color}15 60%, transparent 80%)
+            `,
+            opacity: 0.6
+          }}
+        />
+        
+        {/* Multiple glow layers */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            ...inheritRadius,
+            boxShadow: `
+              0 0 ${deviceType === 'mobile' ? '8px' : '12px'} ${color}60,
+              inset 0 0 ${deviceType === 'mobile' ? '4px' : '8px'} ${color}30,
+              0 0 ${deviceType === 'mobile' ? '16px' : '24px'} ${color}40,
+              0 0 ${deviceType === 'mobile' ? '32px' : '48px'} ${color}20
+            `
+          }}
+        />
+        
+        {/* Subtle shimmer effect */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            ...inheritRadius,
+            background: `linear-gradient(90deg, transparent 0%, ${color}10 50%, transparent 100%)`,
+            animation: 'shimmer 3s ease-in-out infinite alternate'
+          }}
+        />
+        
+        <div className="relative">
+          {children}
+        </div>
       </div>
+      
+      <style jsx>{`
+        @keyframes shimmer {
+          0% { opacity: 0.3; transform: translateX(-100%); }
+          100% { opacity: 0.7; transform: translateX(100%); }
+        }
+      `}</style>
     </div>
   );
 };

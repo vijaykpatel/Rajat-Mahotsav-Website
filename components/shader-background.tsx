@@ -36,8 +36,8 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
   // Performance-optimized speeds based on device
   const getShaderSpeed = () => {
     switch (deviceType) {
-      case 'mobile': return { primary: 0.08, secondary: 0.05 }
-      case 'tablet': return { primary: 0.15, secondary: 0.1 }
+      case 'mobile': return { primary: 0.10, secondary: 0.05 }
+      case 'tablet': return { primary: 0.10, secondary: 0.05 }
       default: return { primary: 0.35, secondary: 0.3 }
     }
   }
