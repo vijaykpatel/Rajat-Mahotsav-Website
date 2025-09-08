@@ -12,10 +12,10 @@ export default function ShaderShowcase() {
     <ShaderBackground>
       <div className="h-screen w-screen flex flex-col items-center justify-between p-4 relative z-20 overflow-hidden">
         <div className="flex-1 flex flex-col items-center justify-center space-y-[2vh] relative z-30 max-h-[80vh]">
-          <div className="max-h-[45vh] flex items-center justify-center">
+          <div className="max-h-[45vh] landscape:max-h-[55vh] flex items-center justify-center">
             <Logo />
           </div>
-          <div className="max-h-[30vh] flex items-center justify-center">
+          <div className="max-h-[30vh] landscape:max-h-[25vh] flex items-center justify-center">
             <Countdown targetDate={targetDate} />
           </div>
         </div>
