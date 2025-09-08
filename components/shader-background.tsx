@@ -36,9 +36,9 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
   // Performance-optimized speeds based on device
   const getShaderSpeed = () => {
     switch (deviceType) {
-      case 'mobile': return { primary: 0.10, secondary: 0.05 }
-      case 'tablet': return { primary: 0.10, secondary: 0.05 }
-      default: return { primary: 0.35, secondary: 0.3 }
+      case 'mobile': return { primary: 0.20, secondary: 0.15 }
+      case 'tablet': return { primary: 0.20, secondary: 0.15 }
+      default: return { primary: 0.55, secondary: 0.35 }
     }
   }
 
@@ -57,9 +57,9 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
               <feColorMatrix
                 type="matrix"
                 values="1 0 0 0 0.02
-                        0 1 0 0 0.02
+                        0 1 0 7.05 0.02
                         0 0 1 0 0.05
-                        0 0 0 0.9 0"
+                        -13 0 0 0.9 0"
                 result="tint"
               />
             </filter>
@@ -68,7 +68,7 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
               <feColorMatrix
                 in="blur"
                 mode="matrix"
-                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+                values="1 0 3 0 0  0 1 0 0 -5  0 0 1 0 0  11 0 0 19 -9"
                 result="gooey"
               />
               <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
@@ -77,18 +77,24 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
         </svg>
       )}
 
-      {/* Primary Background Shader */}
+      {/* 
+        ORIGINAL COLOR SCHEME (stored for reference):
+        Primary: ["#644a40", "#582d1d", "#202020", "#e8e8e8"]
+        Secondary: ["#ffdfb5", "#644a40", "#582d1d", "#ffffff"]
+      */}
+      
+      {/* Primary Background Shader - Gold/Silver/Red/Sky Blue Theme */}
       <MeshGradient
         className="absolute inset-0 w-full h-full"
-        colors={["#644a40", "#582d1d", "#202020", "#e8e8e8"]}
+        colors={["#FFD700", "#C0C0C0", "#DC143C", "#72b8d3ff"]}
         speed={speeds.primary}
       />
       
       {/* Secondary Shader - Hidden on mobile for performance */}
       {showSecondaryShader && (
         <MeshGradient
-          className="absolute inset-0 w-full h-full opacity-60"
-          colors={["#ffdfb5", "#644a40", "#582d1d", "#ffffff"]}
+          className="absolute inset-0 w-full h-full opacity-50"
+          colors={["#FFA500", "#E5E5E5", "#B22222","#4682B4"]}
           speed={speeds.secondary}
           wireframe="true"
         />
