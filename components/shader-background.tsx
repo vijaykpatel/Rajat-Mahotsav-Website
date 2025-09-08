@@ -72,23 +72,17 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
       </svg>
 
       {/* Background Shaders - Elegant Brown & Beige */}
-      {isMobile ? (
-        <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#644a40] via-[#582d1d] to-[#202020]" />
-      ) : (
-        <>
-          <MeshGradient
-            className="absolute inset-0 w-full h-full"
-            colors={["#644a40", "#582d1d", "#202020", "#e8e8e8"]}
-            speed={0.35}
-          />
-          <MeshGradient
-            className="absolute inset-0 w-full h-full opacity-60"
-            colors={["#ffdfb5", "#644a40", "#582d1d", "#ffffff"]}
-            speed={0.3}
-            wireframe="true"
-          />
-        </>
-      )}
+      <MeshGradient
+        className="absolute inset-0 w-full h-full"
+        colors={["#644a40", "#582d1d", "#202020", "#e8e8e8"]}
+        speed={isMobile ? 0.15 : 0.35}
+      />
+      <MeshGradient
+        className="absolute inset-0 w-full h-full opacity-60"
+        colors={["#ffdfb5", "#644a40", "#582d1d", "#ffffff"]}
+        speed={isMobile ? 0.1 : 0.3}
+        wireframe="true"
+      />
 
       {children}
     </div>
