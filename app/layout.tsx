@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Figtree } from "next/font/google"
 import { GeistMono } from "geist/font/mono"
 import { Instrument_Serif } from "next/font/google"
+import { Noto_Music } from "next/font/google"
+import { Lato } from "next/font/google"
 import "./globals.css"
 
 const figtree = Figtree({
@@ -17,6 +19,20 @@ const instrumentSerif = Instrument_Serif({
   weight: ["400"],
   style: ["normal", "italic"],
   variable: "--font-instrument-serif",
+  display: "swap",
+})
+
+const notoMusic = Noto_Music({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-noto-music",
+  display: "swap",
+})
+
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
+  variable: "--font-lato",
   display: "swap",
 })
 
@@ -40,10 +56,12 @@ html {
   --font-sans: ${figtree.variable};
   --font-mono: ${GeistMono.variable};
   --font-instrument-serif: ${instrumentSerif.variable};
+  --font-noto-music: ${notoMusic.variable};
+  --font-lato: ${lato.variable};
 }
         `}</style>
       </head>
-      <body className={`${figtree.variable} ${instrumentSerif.variable}`}>{children}</body>
+      <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoMusic.variable} ${lato.variable}`}>{children}</body>
     </html>
   )
 }

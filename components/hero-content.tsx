@@ -14,6 +14,11 @@ export default function HeroContent() {
           <span className="text-white/90 text-xs font-light relative z-10">✨ New Paper Shaders Experience</span>
         </div>
 
+        {/* Stay Tuned Text */}
+        <div className="text-7xl md:text-8xl font-light text-white mb-6 tracking-wide">
+          <span className="italic font-serif opacity-90">Stay tuned...</span>
+        </div>
+
         {/* Main Heading */}
         <h1 className="text-5xl md:text-6xl md:leading-16 tracking-tight font-light text-white mb-4">
           <span className="font-medium italic instrument">Beautiful</span> Shader
