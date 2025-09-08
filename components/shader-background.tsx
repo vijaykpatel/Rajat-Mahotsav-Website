@@ -37,8 +37,8 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
       <svg className="absolute inset-0 w-0 h-0">
         <defs>
           <filter id="glass-effect" x="-50%" y="-50%" width="200%" height="200%">
-            <feTurbulence baseFrequency="0.005" numOctaves="1" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.3" />
+            <feTurbulence baseFrequency="0.1" numOctaves="1" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.6" />
             <feColorMatrix
               type="matrix"
               values="1 0 0 0 0.02
@@ -49,7 +49,7 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
             />
           </filter>
           <filter id="gooey-filter" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
             <feColorMatrix
               in="blur"
               mode="matrix"
@@ -65,12 +65,12 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
       <MeshGradient
         className="absolute inset-0 w-full h-full"
         colors={["#644a40", "#582d1d", "#202020", "#e8e8e8"]}
-        speed={0.3}
+        speed={0.35}
       />
       <MeshGradient
         className="absolute inset-0 w-full h-full opacity-60"
         colors={["#ffdfb5", "#644a40", "#582d1d", "#ffffff"]}
-        speed={0.2}
+        speed={0.3}
         wireframe="true"
       />
 

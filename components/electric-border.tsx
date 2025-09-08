@@ -134,7 +134,7 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
     mixBlendMode: 'overlay' as const,
     transform: 'scale(1.05)',
     filter: 'blur(12px)',
-    background: 'linear-gradient(-10deg, white, transparent 30%, transparent 70%, white)'
+    background: 'linear-gradient(-5deg, white, transparent 30%, transparent 70%, white)'
   };
 
   const overlay2Style = {
@@ -152,7 +152,7 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
     filter: 'blur(32px)',
     opacity: 0.3,
     zIndex: -1,
-    background: `linear-gradient(-30deg, ${color}, transparent, ${color})`
+    background: `linear-gradient(-80deg, ${color}, transparent, ${color})`
   };
 
   return (

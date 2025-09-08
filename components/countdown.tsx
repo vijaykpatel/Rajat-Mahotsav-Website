@@ -40,23 +40,29 @@ export default function Countdown({ targetDate }: CountdownProps) {
   }, [targetDate]);
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center px-4">
       <ElectricBorder
         color="#E8E8E8"
         speed={1.2}
         chaos={1}
         thickness={3}
-        style={{ borderRadius: 24, width: '1000px', height: '225px' }}
-        className="flex items-center justify-center"
+        style={{ 
+          borderRadius: 24, 
+          width: '100%', 
+          maxWidth: '1200px',
+          height: 'auto',
+          minHeight: '80px'
+        }}
+        className="flex items-center justify-center p-2 sm:p-4 md:p-6 lg:p-8"
       >
-        <div className="flex items-center justify-center gap-4 font-noto-music -mt-2">
-          <span className="text-8xl font-black text-white tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
-          <span className="text-6xl font-black text-white tracking-tight">-</span>
-          <span className="text-8xl font-black text-white tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
-          <span className="text-6xl font-black text-white tracking-tight">-</span>
-          <span className="text-8xl font-black text-white tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
-          <span className="text-8xl font-black text-white tracking-tight">-</span>
-          <span className="text-8xl font-black text-white tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 font-noto-music px-4 sm:px-6 md:px-8 lg:px-12 lg:-mt-2">
+          <span className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
+          <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">-</span>
+          <span className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
+          <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">-</span>
+          <span className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
+          <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">-</span>
+          <span className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
         </div>
       </ElectricBorder>
     </div>
