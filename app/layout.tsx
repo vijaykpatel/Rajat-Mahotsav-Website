@@ -37,9 +37,12 @@ const lato = Lato({
 })
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
+  title: "New Jersey Rajat Mahotsav",
+  description: "Shree Swaminarayan Temple Secaucu, NJ Celebrates its Rajat Mahotsav from July 29, 2026 - August 02, 2026.",
   generator: "v0.app",
+  icons: {
+    icon: "/LinenLogo.png",
+  },
 }
 
 export default function RootLayout({

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useId, useLayoutEffect, useRef } from 'react';
 
 function hexToRgba(hex: string, alpha = 1) {
   if (!hex) return `rgba(0,0,0,${alpha})`;
@@ -34,29 +34,11 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
   const svgRef = useRef<SVGSVGElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const strokeRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const updateAnim = () => {
     const svg = svgRef.current;
     const host = rootRef.current;
     if (!svg || !host) return;
-
-    // Skip complex SVG filters on mobile for better performance
-    if (isMobile) {
-      if (strokeRef.current) {
-        strokeRef.current.style.filter = 'none';
-      }
-      return;
-    }
 
     if (strokeRef.current) {
       strokeRef.current.style.filter = `url(#${filterId})`;
@@ -77,14 +59,13 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
       dxAnims[1].setAttribute('values', `0; -${width}`);
     }
 
-    // Slower animation on mobile for smoother performance
-    const baseDur = isMobile ? 12 : 6;
-    const dur = Math.max(0.001, baseDur / (speed || 1));
+    // This controls the animation speed - higher values = slower animation
+    const baseDuration = 18;
+    const dur = Math.max(0.001, baseDuration / (speed || 1));
     [...dyAnims, ...dxAnims].forEach(a => a.setAttribute('dur', `${dur}s`));
 
-    // Reduce chaos on mobile
     const disp = svg.querySelector('feDisplacementMap');
-    if (disp) disp.setAttribute('scale', String((isMobile ? 15 : 30) * (chaos || 1)));
+    if (disp) disp.setAttribute('scale', String(30 * (chaos || 1)));
 
     const filterEl = svg.querySelector(`#${CSS.escape(filterId)}`);
     if (filterEl) {
@@ -109,7 +90,7 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
 
   useEffect(() => {
     updateAnim();
-  }, [speed, chaos, isMobile]);
+  }, [speed, chaos]);
 
   useLayoutEffect(() => {
     if (!rootRef.current) return;
@@ -127,10 +108,7 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
     ...inheritRadius,
     borderWidth: thickness,
     borderStyle: 'solid',
-    borderColor: color,
-    ...(isMobile && {
-      animation: 'pulse 2s ease-in-out infinite alternate'
-    })
+    borderColor: color
   };
 
   const glow1Style = {
@@ -138,8 +116,7 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
     borderWidth: thickness,
     borderStyle: 'solid',
     borderColor: hexToRgba(color, 0.6),
-    filter: isMobile ? 'none' : 'blur(1px)',
-    opacity: isMobile ? 0.8 : 1
+    filter: 'blur(1px)'
   };
 
   const glow2Style = {
@@ -147,8 +124,7 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
     borderWidth: thickness,
     borderStyle: 'solid',
     borderColor: color,
-    filter: isMobile ? 'none' : 'blur(4px)',
-    opacity: isMobile ? 0.6 : 1
+    filter: 'blur(4px)'
   };
 
   const overlay1Style = {
@@ -180,14 +156,7 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
 
   return (
     <div ref={rootRef} className={'relative isolate ' + (className ?? '')} style={style}>
-      <style jsx>{`
-        @keyframes pulse {
-          0% { opacity: 0.8; }
-          100% { opacity: 1; }
-        }
-      `}</style>
-      {!isMobile && (
-        <svg
+      <svg
           ref={svgRef}
           className="fixed -left-[10000px] -top-[10000px] w-[10px] h-[10px] opacity-[0.001] pointer-events-none"
           aria-hidden
@@ -197,22 +166,22 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
           <filter id={filterId} colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
             <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves={10} result="noise1" seed="1" />
             <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
-              <animate attributeName="dy" values="700; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
+              <animate attributeName="dy" values="700; 0" dur="20s" repeatCount="indefinite" calcMode="linear" />
             </feOffset>
 
             <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves={10} result="noise2" seed="1" />
             <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
-              <animate attributeName="dy" values="0; -700" dur="6s" repeatCount="indefinite" calcMode="linear" />
+              <animate attributeName="dy" values="0; -700" dur="20s" repeatCount="indefinite" calcMode="linear" />
             </feOffset>
 
             <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves={10} result="noise1" seed="2" />
             <feOffset in="noise1" dx="0" dy="0" result="offsetNoise3">
-              <animate attributeName="dx" values="490; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
+              <animate attributeName="dx" values="490; 0" dur="20s" repeatCount="indefinite" calcMode="linear" />
             </feOffset>
 
             <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves={10} result="noise2" seed="2" />
             <feOffset in="noise2" dx="0" dy="0" result="offsetNoise4">
-              <animate attributeName="dx" values="0; -490" dur="6s" repeatCount="indefinite" calcMode="linear" />
+              <animate attributeName="dx" values="0; -490" dur="20s" repeatCount="indefinite" calcMode="linear" />
             </feOffset>
 
             <feComposite in="offsetNoise1" in2="offsetNoise2" result="part1" />
@@ -228,7 +197,6 @@ const ElectricBorder = ({ children, color = '#5227FF', speed = 1, chaos = 1, thi
           </filter>
         </defs>
         </svg>
-      )}
 
       <div className="absolute inset-0 pointer-events-none" style={inheritRadius}>
         <div ref={strokeRef} className="absolute inset-0 box-border" style={strokeStyle} />

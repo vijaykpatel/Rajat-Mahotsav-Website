@@ -40,7 +40,7 @@ export default function Countdown({ targetDate }: CountdownProps) {
   }, [targetDate]);
 
   return (
-    <div className="flex justify-center items-center px-4">
+    <div className="flex justify-center items-center px-6 sm:px-8 md:px-12">
       <ElectricBorder
         color="#E8E8E8"
         speed={0.8}
@@ -48,14 +48,12 @@ export default function Countdown({ targetDate }: CountdownProps) {
         thickness={3}
         style={{ 
           borderRadius: 24, 
-          width: '100%', 
-          maxWidth: '1200px',
-          height: 'auto',
-          minHeight: '80px'
+          width: 'fit-content',
+          height: 'auto'
         }}
-        className="flex items-center justify-center p-2 sm:p-4 md:p-6 lg:p-8"
+        className="flex items-center justify-center py-3 px-4 sm:py-4 sm:px-6"
       >
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 font-noto-music px-4 sm:px-6 md:px-8 lg:px-12 lg:-mt-2">
+        <div className="flex items-center justify-center gap-1 sm:gap-2 md:gap-4 font-noto-music whitespace-nowrap -mt-2">
           <span className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
           <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">-</span>
           <span className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
