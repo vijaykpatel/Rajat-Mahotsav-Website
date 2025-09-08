@@ -43,8 +43,8 @@ export default function Countdown({ targetDate }: CountdownProps) {
     <div className="flex justify-center items-center px-4">
       <ElectricBorder
         color="#E8E8E8"
-        speed={1.2}
-        chaos={1}
+        speed={0.8}
+        chaos={0.7}
         thickness={3}
         style={{ 
           borderRadius: 24, 

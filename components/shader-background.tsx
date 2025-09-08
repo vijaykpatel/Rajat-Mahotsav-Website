@@ -12,6 +12,16 @@ interface ShaderBackgroundProps {
 export default function ShaderBackground({ children }: ShaderBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isActive, setIsActive] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     const handleMouseEnter = () => setIsActive(true)
@@ -65,12 +75,12 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
       <MeshGradient
         className="absolute inset-0 w-full h-full"
         colors={["#644a40", "#582d1d", "#202020", "#e8e8e8"]}
-        speed={0.35}
+        speed={isMobile ? 0.15 : 0.35}
       />
       <MeshGradient
         className="absolute inset-0 w-full h-full opacity-60"
         colors={["#ffdfb5", "#644a40", "#582d1d", "#ffffff"]}
-        speed={0.3}
+        speed={isMobile ? 0.1 : 0.3}
         wireframe="true"
       />
 
