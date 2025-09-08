@@ -30,6 +30,7 @@ export default function PulsingCircle() {
           }}
         />
 
+
         {/* Rotating Text Around the Pulsing Border */}
         <motion.svg
           className="absolute inset-0 w-full h-full"
