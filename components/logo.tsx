@@ -4,13 +4,13 @@ import Image from "next/image"
 
 export default function Logo() {
   return (
-    <div className="text-center mb-4 lg:mb-6">
+    <div className="text-center w-full h-full flex items-center justify-center">
       <Image
         src="/LinenLogo.png"
         alt="Rajat Mahotsav Logo"
-        width={400}
-        height={250}
-        className="mx-auto w-[400px] md:w-[500px] lg:w-[800px] h-auto"
+        width={350}
+        height={225}
+        className="max-w-[80vw] max-h-full w-auto h-auto object-contain"
         priority
       />
     </div>

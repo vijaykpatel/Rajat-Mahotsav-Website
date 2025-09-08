@@ -40,7 +40,7 @@ export default function Countdown({ targetDate }: CountdownProps) {
   }, [targetDate]);
 
   return (
-    <div className="flex justify-center items-center px-6 sm:px-8 md:px-12">
+    <div className="w-full flex justify-center items-center px-4 sm:px-6 md:px-8">
       <ElectricBorder
         color="#E8E8E8"
         speed={0.8}
@@ -49,18 +49,19 @@ export default function Countdown({ targetDate }: CountdownProps) {
         style={{ 
           borderRadius: 24, 
           width: 'fit-content',
-          height: 'auto'
+          height: 'auto',
+          maxWidth: '100%'
         }}
-        className="flex items-center justify-center py-3 px-4 sm:py-4 sm:px-6"
+        className="flex items-center justify-center py-4 px-3 sm:py-5 sm:px-4 md:py-6 md:px-6 lg:py-7 lg:px-8 xl:py-8 xl:px-10"
       >
-        <div className="flex items-center justify-center gap-1 sm:gap-2 md:gap-4 font-noto-music whitespace-nowrap -mt-2">
-          <span className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
-          <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">-</span>
-          <span className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
-          <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">-</span>
-          <span className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
-          <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">-</span>
-          <span className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
+        <div className="flex items-center justify-center gap-1 sm:gap-2 md:gap-3 lg:gap-4 font-noto-music -mt-2">
+          <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-black text-white tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
+          <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight">-</span>
+          <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-black text-white tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
+          <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight">-</span>
+          <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-black text-white tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
+          <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight">-</span>
+          <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-black text-white tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
         </div>
       </ElectricBorder>
     </div>
