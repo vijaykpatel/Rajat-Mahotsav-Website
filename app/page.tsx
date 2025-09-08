@@ -3,10 +3,13 @@
 import ShaderBackground from "@/components/shader-background"
 import Countdown from "@/components/countdown"
 import Logo from "@/components/logo"
+import { ChevronRight } from "lucide-react"
+import { useDeviceType } from "@/hooks/use-device-type"
 
 export default function ShaderShowcase() {
   // Set target date to July 28, 2026 at 5 PM EST
   const targetDate = new Date('2026-07-28T17:00:00-05:00');
+  const deviceType = useDeviceType();
 
   return (
     <ShaderBackground>
@@ -15,7 +18,7 @@ export default function ShaderShowcase() {
           <div className="max-h-[45vh] landscape:max-h-[45vh] flex items-center justify-center">
             <Logo />
           </div>
-          <div className="max-h-[30vh] landscape:max-h-[25vh] landscape:max-w-[80vw] flex items-center justify-center">
+          <div className="max-h-[30vh] landscape:max-h-[20vh] landscape:max-w-[80vw] flex items-center justify-center">
             <Countdown targetDate={targetDate} />
           </div>
         </div>
@@ -23,6 +26,14 @@ export default function ShaderShowcase() {
           <p className="text-white/80 text-[2.5vw] md:text-[1.5vw] lg:text-[1.2vw] xl:text-base font-lato text-center max-w-4xl leading-tight">
             Inspirator: His Divine Holiness Acharya Shree Jitendriyapriyadasji Swamiji Maharaj
           </p>
+        </div>
+        
+        {/* Enter Site Button */}
+        <div className={`absolute z-40 ${deviceType === 'mobile' ? 'bottom-16 left-4 right-4' : 'bottom-6 right-6'}`}>
+          <button className={`flex items-center justify-center px-4 py-2 text-white/90 hover:text-white transition-colors duration-200 bg-transparent backdrop-blur-md rounded-xl border-2 border-white/30 shadow-[0_0_20px_rgba(232,232,232,0.3)] hover:shadow-[0_0_30px_rgba(232,232,232,0.5)] hover:border-white/50 ${deviceType === 'mobile' ? 'w-full' : 'w-auto'}`}>
+            Enter Site
+            <ChevronRight className="ml-2 h-4 w-4" />
+          </button>
         </div>
       </div>
       {/* <HeroContent /> */}
