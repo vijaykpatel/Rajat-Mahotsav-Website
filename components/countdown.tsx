@@ -56,13 +56,13 @@ export default function Countdown({ targetDate }: CountdownProps) {
 
   const countdownContent = (
     <div className="flex items-center justify-center gap-1 sm:gap-2 md:gap-3 lg:gap-4 font-noto-music -mt-2">
-      <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-black text-white tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
-      <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight">-</span>
-      <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-black text-white tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
-      <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight">-</span>
-      <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-black text-white tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
-      <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight">-</span>
-      <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-black text-white tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
+      <span className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
+      <span className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight">-</span>
+      <span className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
+      <span className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight">-</span>
+      <span className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
+      <span className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight">-</span>
+      <span className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
     </div>
   );
 
