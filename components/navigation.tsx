@@ -45,12 +45,33 @@ const menuItems = [
 export function Navigation() {
   const [activeItem, setActiveItem] = useState<string>("Home")
   const [mounted, setMounted] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
   const deviceType = useDeviceType()
   const router = useRouter()
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      
+      if (currentScrollY < 10) {
+        setIsVisible(true)
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false)
+      } else if (currentScrollY < lastScrollY) {
+        setIsVisible(true)
+      }
+      
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
 
   const handleItemClick = (label: string, href: string) => {
     setActiveItem(label)
@@ -60,7 +81,9 @@ export function Navigation() {
   }
 
   return (
-    <div className="fixed top-6 left-0 right-0 z-50 px-4">
+    <div className={`fixed top-6 left-0 right-0 z-50 px-4 transition-all duration-300 ease-in-out ${
+      isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+    }`}>
       <div className="flex items-center justify-between max-w-3xl mx-auto">
         {/* Maninagar Logo - Left */}
         <div className="flex-shrink-0">
