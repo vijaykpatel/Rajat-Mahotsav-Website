@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { Home, ScrollText, ClipboardPen, CalendarDays} from "lucide-react"
 import { MenuBar } from "@/components/ui/glow-menu"
 import { useDeviceType } from "@/hooks/use-device-type"
+import Image from "next/image"
 
 const menuItems = [
   {
@@ -59,18 +60,47 @@ export function Navigation() {
   }
 
   return (
-    <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 px-4">
-      <MenuBar
-        items={menuItems}
-        activeItem={activeItem}
-        onItemClick={(label) => {
-          const item = menuItems.find(item => item.label === label)
-          if (item) {
-            handleItemClick(label, item.href)
-          }
-        }}
-        showLabels={mounted ? deviceType === 'desktop' : true}
-      />
+    <div className="fixed top-6 left-0 right-0 z-50 px-4">
+      <div className="flex items-center justify-between max-w-3xl mx-auto">
+        {/* Maninagar Logo - Left */}
+        <div className="flex-shrink-0">
+          <Image
+            src="/maninagar_logo.png"
+            alt="Maninagar Logo"
+            width={60}
+            height={60}
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+            priority
+          />
+        </div>
+
+        {/* Center Menu */}
+        <div className="flex-1 flex justify-center mx-4">
+          <MenuBar
+            items={menuItems}
+            activeItem={activeItem}
+            onItemClick={(label) => {
+              const item = menuItems.find(item => item.label === label)
+              if (item) {
+                handleItemClick(label, item.href)
+              }
+            }}
+            showLabels={mounted ? deviceType === 'desktop' : true}
+          />
+        </div>
+
+        {/* Tilak Logo - Right */}
+        <div className="flex-shrink-0">
+          <Image
+            src="/Tilak.png"
+            alt="Tilak Chandlo"
+            width={60}
+            height={60}
+            className="w-12 h-14 sm:w-14 sm:h-16 md:w-16 md:h-18 object-contain"
+            priority
+          />
+        </div>
+      </div>
     </div>
   )
 }
