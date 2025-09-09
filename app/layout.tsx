@@ -5,6 +5,8 @@ import { GeistMono } from "geist/font/mono"
 import { Instrument_Serif } from "next/font/google"
 import { Noto_Music } from "next/font/google"
 import { Lato } from "next/font/google"
+import { ThemeProvider } from "@/components/theme-provider"
+import { Navigation } from "@/components/navigation"
 import "./globals.css"
 
 const figtree = Figtree({
@@ -51,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style>{`
@@ -65,7 +67,12 @@ html {
 }
         `}</style>
       </head>
-      <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoMusic.variable} ${lato.variable}`}>{children}</body>
+      <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoMusic.variable} ${lato.variable}`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <Navigation />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

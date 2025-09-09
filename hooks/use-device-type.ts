@@ -5,18 +5,11 @@ import { useState, useEffect } from 'react';
 export type DeviceType = 'mobile' | 'tablet' | 'desktop';
 
 export function useDeviceType(): DeviceType {
-  const [deviceType, setDeviceType] = useState<DeviceType>(() => {
-    if (typeof window === 'undefined') return 'desktop';
-    const width = window.innerWidth;
-    if (width <= 768) return 'mobile';
-    if (width <= 1024) return 'tablet';
-    const ua = navigator.userAgent;
-    if (/iPhone|iPod|Android.*Mobile|BlackBerry|IEMobile|Opera Mini/i.test(ua)) return 'mobile';
-    if (/iPad|Android(?!.*Mobile)|Tablet|PlayBook|Silk/i.test(ua)) return 'tablet';
-    return 'desktop';
-  });
+  const [deviceType, setDeviceType] = useState<DeviceType>('desktop');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const checkDevice = () => {
       const width = window.innerWidth;
       const ua = navigator.userAgent;

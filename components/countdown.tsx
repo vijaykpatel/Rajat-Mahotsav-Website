@@ -13,7 +13,7 @@ interface TimeLeft {
 }
 
 interface CountdownProps {
-  targetDate: Date;
+  targetDate: string;
 }
 
 export default function Countdown({ targetDate }: CountdownProps) {
@@ -22,7 +22,7 @@ export default function Countdown({ targetDate }: CountdownProps) {
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const difference = +targetDate - +new Date();
+      const difference = +new Date(targetDate) - +new Date();
       
       if (difference > 0) {
         setTimeLeft({
