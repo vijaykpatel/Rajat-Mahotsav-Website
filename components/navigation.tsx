@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 import { Home, ScrollText, ClipboardPen, CalendarDays} from "lucide-react"
 import { MenuBar } from "@/components/ui/glow-menu"
 import { useDeviceType } from "@/hooks/use-device-type"
@@ -49,10 +49,16 @@ export function Navigation() {
   const [lastScrollY, setLastScrollY] = useState(0)
   const deviceType = useDeviceType()
   const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     setMounted(true)
-  }, [])
+    // Set active item based on current pathname
+    const currentItem = menuItems.find(item => item.href === pathname)
+    if (currentItem) {
+      setActiveItem(currentItem.label)
+    }
+  }, [pathname])
 
   useEffect(() => {
     const handleScroll = () => {
