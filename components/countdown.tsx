@@ -51,10 +51,22 @@ export default function Countdown({ targetDate }: CountdownProps) {
       height: 'auto',
       maxWidth: '100%'
     },
-    className: "flex items-center justify-center py-4 px-3 sm:py-5 sm:px-4 md:py-6 md:px-6 lg:py-7 lg:px-8 xl:py-8 xl:px-10"
+    className: "flex items-center justify-center py-4 px-3 sm:py-5 sm:px-4 md:py-6 md:px-6 lg:py-7 lg:px-8 xl:py-8 xl:px-10 max-sm:landscape:py-3 max-sm:landscape:px-3 sm:landscape:py-4 md:landscape:py-5 lg:landscape:py-7 xl:landscape:py-8"
   };
 
-  const countdownContent = (
+  const mobileCountdownContent = (
+    <div className="flex items-center justify-center gap-1 sm:gap-2 font-noto-music -mt-2">
+      <span className="text-3xl sm:text-4xl landscape:text-3xl font-black text-white tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
+      <span className="text-2xl sm:text-3xl landscape:text-2xl font-black text-white tracking-tight">-</span>
+      <span className="text-3xl sm:text-4xl landscape:text-3xl font-black text-white tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
+      <span className="text-2xl sm:text-3xl landscape:text-2xl font-black text-white tracking-tight">-</span>
+      <span className="text-3xl sm:text-4xl landscape:text-3xl font-black text-white tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
+      <span className="text-2xl sm:text-3xl landscape:text-2xl font-black text-white tracking-tight">-</span>
+      <span className="text-3xl sm:text-4xl landscape:text-3xl font-black text-white tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
+    </div>
+  );
+
+  const desktopCountdownContent = (
     <div className="flex items-center justify-center gap-1 sm:gap-2 md:gap-3 lg:gap-4 font-noto-music -mt-2">
       <span className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
       <span className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight">-</span>
@@ -74,11 +86,11 @@ export default function Countdown({ targetDate }: CountdownProps) {
           speed={0.8}
           chaos={0.7}
         >
-          {countdownContent}
+          {desktopCountdownContent}
         </ElectricBorder>
       ) : (
         <LightweightBorder {...borderProps}>
-          {countdownContent}
+          {mobileCountdownContent}
         </LightweightBorder>
       )}
     </div>

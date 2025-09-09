@@ -7,6 +7,9 @@ export type DeviceType = 'mobile' | 'tablet' | 'desktop';
 export function useDeviceType(): DeviceType {
   const [deviceType, setDeviceType] = useState<DeviceType>(() => {
     if (typeof window === 'undefined') return 'desktop';
+    const width = window.innerWidth;
+    if (width <= 768) return 'mobile';
+    if (width <= 1024) return 'tablet';
     const ua = navigator.userAgent;
     if (/iPhone|iPod|Android.*Mobile|BlackBerry|IEMobile|Opera Mini/i.test(ua)) return 'mobile';
     if (/iPad|Android(?!.*Mobile)|Tablet|PlayBook|Silk/i.test(ua)) return 'tablet';
@@ -15,23 +18,25 @@ export function useDeviceType(): DeviceType {
 
   useEffect(() => {
     const checkDevice = () => {
+      const width = window.innerWidth;
       const ua = navigator.userAgent;
       
-      // Mobile devices (phones)
-      if (/iPhone|iPod|Android.*Mobile|BlackBerry|IEMobile|Opera Mini/i.test(ua)) {
+      if (width <= 768) {
         setDeviceType('mobile');
-      }
-      // Tablets
-      else if (/iPad|Android(?!.*Mobile)|Tablet|PlayBook|Silk/i.test(ua)) {
+      } else if (width <= 1024) {
         setDeviceType('tablet');
-      }
-      // Desktop/laptop
-      else {
+      } else if (/iPhone|iPod|Android.*Mobile|BlackBerry|IEMobile|Opera Mini/i.test(ua)) {
+        setDeviceType('mobile');
+      } else if (/iPad|Android(?!.*Mobile)|Tablet|PlayBook|Silk/i.test(ua)) {
+        setDeviceType('tablet');
+      } else {
         setDeviceType('desktop');
       }
     };
 
     checkDevice();
+    window.addEventListener('resize', checkDevice);
+    return () => window.removeEventListener('resize', checkDevice);
   }, []);
 
   return deviceType;
