@@ -52,8 +52,8 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
         <svg className="absolute inset-0 w-0 h-0">
           <defs>
             <filter id="glass-effect" x="-50%" y="-50%" width="200%" height="200%">
-              <feTurbulence baseFrequency="0.1" numOctaves="1" result="noise" />
-              <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.6" />
+              <feTurbulence baseFrequency="0.2" numOctaves="2" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.3" />
               <feColorMatrix
                 type="matrix"
                 values="1 0 0 0 0.02
