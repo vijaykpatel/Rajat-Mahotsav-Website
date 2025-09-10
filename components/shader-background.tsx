@@ -57,24 +57,25 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
               <feColorMatrix
                 type="matrix"
                 values="1 0 0 0 0.02
-                        0 1 0 7.05 0.02
+                        0 1 0 0 0.02
                         0 0 1 0 0.05
-                        -13 0 0 0.9 0"
+                        0 0 0 0 0"
                 result="tint"
               />
             </filter>
             <filter id="gooey-filter" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+              <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur" />
               <feColorMatrix
                 in="blur"
                 mode="matrix"
-                values="1 0 3 0 0  0 1 0 0 -5  0 0 1 0 0  11 0 0 19 -9"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0 -9"
                 result="gooey"
               />
               <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
             </filter>
           </defs>
         </svg>
+        
       )}
 
       {/* 

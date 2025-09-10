@@ -89,11 +89,11 @@ export function Navigation() {
       isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
     }`}>
       <div className="flex items-center justify-between max-w-3xl mx-auto">
-        {/* Maninagar Logo - Left */}
+        {/* Tilak Logo - Left */}
         <div className="flex-shrink-0">
           <Image
-            src="/maninagar_logo.png"
-            alt="Maninagar Logo"
+            src="/Tilak.png"
+            alt="Tilak Chandlo"
             width={60}
             height={60}
             className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
@@ -116,11 +116,11 @@ export function Navigation() {
           />
         </div>
 
-        {/* Tilak Logo - Right */}
+        {/* Maninagar Logo - Right */}
         <div className="flex-shrink-0">
           <Image
-            src="/Tilak.png"
-            alt="Tilak Chandlo"
+            src="/maninagar_logo.png"
+            alt="Maninagar Logo"
             width={60}
             height={60}
             className="w-12 h-14 sm:w-14 sm:h-16 md:w-16 md:h-18 object-contain"

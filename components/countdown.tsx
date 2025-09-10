@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import ElectricBorder from './electric-border';
+import OptimizedElectricBorder from './optimized-electric-border';
 import LightweightBorder from './lightweight-border';
 import { useDeviceType } from '@/hooks/use-device-type';
 
@@ -81,13 +82,20 @@ export default function Countdown({ targetDate }: CountdownProps) {
   return (
     <div className="w-full h-full flex justify-center items-center px-4 sm:px-6 md:px-8">
       {deviceType === 'desktop' ? (
-        <ElectricBorder
+        // <ElectricBorder
+        //   {...borderProps}
+        //   speed={0.8}
+        //   chaos={0.7}
+        // >
+          // {desktopCountdownContent}
+        // </ElectricBorder>
+        <OptimizedElectricBorder
           {...borderProps}
           speed={0.8}
           chaos={0.7}
         >
           {desktopCountdownContent}
-        </ElectricBorder>
+        </OptimizedElectricBorder>
       ) : (
         <LightweightBorder {...borderProps}>
           {mobileCountdownContent}
