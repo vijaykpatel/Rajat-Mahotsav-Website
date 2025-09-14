@@ -26,7 +26,7 @@ const menuItems = [
   },
   {
     icon: ClipboardPen,
-    label: "Registration",
+    label: "Information",
     href: "#",
     gradient:
       "radial-gradient(circle, rgba(34,197,94,0.15) 0%, rgba(22,163,74,0.06) 50%, rgba(21,128,61,0) 100%)",
@@ -35,7 +35,7 @@ const menuItems = [
   {
     icon: CalendarDays,
     label: "Schedule",
-    href: "#",
+    href: "/schedule",
     gradient:
       "radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(220,38,38,0.06) 50%, rgba(185,28,28,0) 100%)",
     iconColor: "text-red-500",
