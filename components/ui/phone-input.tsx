@@ -49,7 +49,7 @@ const InputComponent = React.forwardRef<HTMLInputElement, any>(
   ({ className, ...props }, ref) => (
     <input
       className={cn(
-        'rounded-e-lg rounded-s-none px-3 py-2 h-14 text-base bg-white/20 border border-white/30 text-white placeholder:text-gray-300 backdrop-blur-sm outline-none border-l-0 flex-1 w-full',
+        'rounded-e-lg rounded-s-none px-3 py-2 h-14 text-base bg-white/20 border-white/30 text-white placeholder:text-gray-300 backdrop-blur-sm outline-none border-l-0 flex-1 w-full border border-t-white/30 border-r-white/30 border-b-white/30',
         className
       )}
       {...props}
@@ -95,8 +95,7 @@ const CountrySelect = ({
       <PopoverTrigger asChild>
         <Button
           type='button'
-          variant={'outline'}
-          className='flex gap-1 rounded-e-none rounded-s-lg px-3 h-14 bg-white/20 border-white/30 text-white backdrop-blur-sm hover:bg-white/30 border-r-0'
+          className='flex gap-1 rounded-e-none rounded-s-lg px-3 h-14 bg-white/20 border border-white/30 text-white backdrop-blur-sm hover:bg-white/30 border-r-0'
           disabled={disabled}
         >
           <FlagComponent country={value} countryName={value} />
