@@ -26,8 +26,8 @@ const menuItems = [
   },
   {
     icon: ClipboardPen,
-    label: "Information",
-    href: "#",
+    label: "Registration",
+    href: "/registration",
     gradient:
       "radial-gradient(circle, rgba(34,197,94,0.15) 0%, rgba(22,163,74,0.06) 50%, rgba(21,128,61,0) 100%)",
     iconColor: "text-green-500",
