@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { isValidPhoneNumber } from "react-phone-number-input"
+import { isValidPhoneNumber, parsePhoneNumber } from "react-phone-number-input"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -16,6 +16,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/hooks/use-toast"
 import Typewriter from "@/components/typewriter"
 import BackgroundPaths from "@/components/floating-paths"
+import { supabase } from "@/utils/supabase/client"
 
 
 const FormSchema = z.object({
@@ -27,6 +28,7 @@ const FormSchema = z.object({
   country: z.string().min(1, "Country is required"),
   mandal: z.string().min(1, "Mandal is required"),
   email: z.string().email("Invalid email address"),
+  phoneCountryCode: z.string().min(1, "Phone country code is required"),
   phone: z
     .string()
     .min(1, "Phone number is required")
@@ -71,25 +73,74 @@ export default function RegistrationPage() {
       country: "",
       mandal: "",
       email: "",
+      phoneCountryCode: "",
       phone: "",
       arrivalDate: "",
       departureDate: ""
     }
   })
 
-  const onSubmit = (data: FormData) => {
-    console.log("Form submitted!", data)
-    console.log("Toast function:", toast)
+  const onSubmit = async (data: FormData) => {
+    console.log('Environment check:', {
+      url: process.env.NEXT_PUBLIC_SUPABASE_URL,
+      keyExists: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    })
     
     try {
-      toast({
-        title: "Successfully registered!",
-        description: `Welcome ${data.firstName}! Your registration has been completed.`,
-        className: "bg-green-600 text-white border-green-700 shadow-xl backdrop-blur-sm",
-      })
-      console.log("Toast called successfully")
+      let nationalNumber = data.phone
+      if (data.phone && isValidPhoneNumber(data.phone)) {
+        try {
+          const parsed = parsePhoneNumber(data.phone)
+          if (parsed) {
+            nationalNumber = parsed.nationalNumber
+          }
+        } catch (error) {
+          console.log("Phone parsing error:", error)
+        }
+      }
+      
+      const dbData = {
+        first_name: data.firstName,
+        middle_name: data.middleName || null,
+        last_name: data.lastName,
+        age: parseInt(data.age),
+        ghaam: data.ghaam,
+        country: data.country,
+        mandal: data.mandal,
+        email: data.email,
+        phone_country_code: data.phoneCountryCode,
+        mobile_number: nationalNumber,
+        arrival_date: data.arrivalDate,
+        departure_date: data.departureDate
+      }
+      
+      console.log('Attempting to insert:', dbData)
+      
+      const { error } = await supabase
+        .from('registrations')
+        .insert([dbData])
+        
+      console.log('Supabase response:', { error })
+      
+      if (!error) {
+        toast({
+          title: "Successfully registered!",
+          description: `Welcome ${data.firstName}! Your registration has been completed.`,
+          className: "bg-green-600 text-white border-green-700 shadow-xl backdrop-blur-sm",
+        })
+      } else {
+        toast({
+          title: "Registration failed",
+          description: error.message,
+          className: "bg-red-600 text-white border-red-700 shadow-xl backdrop-blur-sm",
+        })
+      }
     } catch (error) {
-      console.error("Toast error:", error)
+      toast({
+        title: "Registration failed",
+        description: "Please check your connection and try again.",
+        className: "bg-red-600 text-white border-red-700 shadow-xl backdrop-blur-sm",
+      })
     }
   }
 
@@ -252,6 +303,7 @@ export default function RegistrationPage() {
                       <Select value={field.value} onValueChange={(value) => {
                         field.onChange(value)
                         updateFormData("country", value)
+                        
                         if (value === "india") {
                           updateFormData("mandal", "Maninagar")
                           setValue("mandal", "Maninagar", { shouldValidate: true })
@@ -356,6 +408,19 @@ export default function RegistrationPage() {
                         id="phone"
                         placeholder="Enter a phone number"
                         defaultCountry="US"
+                        onChange={(value) => {
+                          field.onChange(value)
+                          if (value && isValidPhoneNumber(value)) {
+                            try {
+                              const parsed = parsePhoneNumber(value)
+                              if (parsed) {
+                                setValue("phoneCountryCode", `+${parsed.countryCallingCode}`, { shouldValidate: true })
+                              }
+                            } catch (error) {
+                              console.log("Phone parsing error:", error)
+                            }
+                          }
+                        }}
                       />
                     )}
                   />
