@@ -37,7 +37,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       className="w-full bg-white dark:bg-neutral-950 font-sans md:px-10"
       ref={containerRef}
     >
-      <div className="max-w-7xl mx-auto pt-32 pb-8 px-4 md:px-8 lg:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto pt-8 pb-8 px-4 md:px-8 lg:px-10 relative z-10">
         <h2 className="text-lg md:text-4xl mb-4 text-white font-bold max-w-4xl">
           Temple History
         </h2>

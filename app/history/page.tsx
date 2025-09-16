@@ -1,9 +1,13 @@
+"use client"
+
 import Image from "next/image";
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
+import { useNavbarHeight } from "@/hooks/use-navbar-height";
 import ShaderBackground from "@/components/shader-background";
 
 export default function HistoryPage() {
+  const { dynamicPadding } = useNavbarHeight()
   const data = [
     {
       title: "2026",
@@ -83,7 +87,7 @@ export default function HistoryPage() {
 
   return (
     <ShaderBackground>
-      <div className="min-h-screen w-full pt-20">
+      <div className="min-h-screen w-full" style={{ paddingTop: dynamicPadding }}>
         <Timeline data={data} />
       </div>
     </ShaderBackground>

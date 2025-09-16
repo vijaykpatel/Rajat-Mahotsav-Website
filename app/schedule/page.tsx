@@ -1,7 +1,5 @@
 "use client"
 
-import FullscreenFooter from "@/components/fullscreen_footer"
-
 export default function SchedulePage() {
   return (
     <div className="scroll-smooth">
@@ -10,11 +8,6 @@ export default function SchedulePage() {
         <h1 className="text-black text-4xl md:text-6xl lg:text-7xl font-bold text-center">
           Jay Shree Swaminaryan
         </h1>
-      </div>
-      
-      {/* Use the FullscreenFooter component */}
-      <div className="relative">
-        <FullscreenFooter />
       </div>
     </div>
   )

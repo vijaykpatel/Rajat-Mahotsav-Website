@@ -14,6 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { PhoneInput } from "@/components/ui/phone-input"
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/hooks/use-toast"
+import { useNavbarHeight } from "@/hooks/use-navbar-height"
 import Typewriter from "@/components/typewriter"
 import BackgroundPaths from "@/components/floating-paths"
 import { supabase } from "@/utils/supabase/client"
@@ -51,6 +52,7 @@ type FormData = z.infer<typeof FormSchema>
 
 export default function RegistrationPage() {
   const { toast } = useToast()
+  const { dynamicPadding } = useNavbarHeight()
   const [formData, setFormData] = useState({
     country: "",
     mandal: ""
@@ -158,7 +160,7 @@ export default function RegistrationPage() {
   }
 
   return (
-    <div className="relative min-h-screen pt-40 pb-8 overflow-hidden" style={{backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+    <div className="relative min-h-screen pb-8 overflow-hidden" style={{backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', paddingTop: dynamicPadding}}>
       <div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 via-cyan-300/20 to-purple-400/30"></div>
       <BackgroundPaths />
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

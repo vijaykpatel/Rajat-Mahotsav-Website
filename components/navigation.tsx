@@ -47,6 +47,7 @@ export function Navigation() {
   const [mounted, setMounted] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const [isHoveringTop, setIsHoveringTop] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const deviceType = useDeviceType()
   const router = useRouter()
@@ -67,15 +68,32 @@ export function Navigation() {
       if (currentScrollY < 10) {
         setIsVisible(true)
       } else {
-        setIsVisible(false)
+        setIsVisible(isHoveringTop)
       }
       
       setLastScrollY(currentScrollY)
     }
 
+    const handleMouseMove = (e: MouseEvent) => {
+      const isNearTop = e.clientY < 100
+      setIsHoveringTop(isNearTop)
+      
+      // Immediately update visibility if hovering near top and scrolled down
+      if (isNearTop && window.scrollY >= 10) {
+        setIsVisible(true)
+      } else if (!isNearTop && window.scrollY >= 10) {
+        setIsVisible(false)
+      }
+    }
+
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollY])
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [isHoveringTop])
 
   const handleItemClick = (label: string, href: string) => {
     setActiveItem(label)
@@ -90,8 +108,9 @@ export function Navigation() {
   return (
     <>
       <div 
-        className={`fixed top-6 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
-        isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+        data-navbar
+        className={`fixed top-0 left-0 right-0 z-50 transition-opacity duration-300 ease-in-out pt-3 ${
+        isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}
         style={{ paddingLeft: '3vw', paddingRight: '3vw' }}
       >
@@ -150,7 +169,7 @@ export function Navigation() {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 left-0 h-full w-80 bg-black/20 backdrop-blur-md border-r-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] z-50 p-6"
+              className="fixed top-0 left-0 h-full bg-black/20 backdrop-blur-md border-r-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] z-50 p-6"
             >
               {/* Close Button */}
               <div className="flex justify-start mb-8">
