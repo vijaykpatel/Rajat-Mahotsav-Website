@@ -6,9 +6,10 @@ import type {
   ToastActionElement,
   ToastProps,
 } from "@/components/ui/toast"
+import { triggerFireworks } from "@/lib/confetti"
 
 const TOAST_LIMIT = 1
-const TOAST_REMOVE_DELAY = 2000
+const TOAST_REMOVE_DELAY = 3000
 
 type ToasterToast = ToastProps & {
   id: string
@@ -132,6 +133,14 @@ function toast({ ...props }: Toast) {
     },
   })
 
+  // Trigger fireworks for successful registration
+  if (props.title && typeof props.title === 'string' && 
+      (props.title.toLowerCase().includes('success') || 
+       props.title.toLowerCase().includes('registered') ||
+       props.title.toLowerCase().includes('welcome'))) {
+    triggerFireworks()
+  }
+
   // Auto remove after delay
   setTimeout(() => {
     dispatch({ type: "REMOVE_TOAST", toastId: id })
@@ -164,4 +173,4 @@ function useToast() {
   }
 }
 
-export { useToast, toast }
+export { useToast, toast, triggerFireworks }

@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
-import { Home, ScrollText, ClipboardPen, CalendarDays} from "lucide-react"
-import { MenuBar } from "@/components/ui/glow-menu"
+import { Home, ScrollText, ClipboardPen, CalendarDays, Menu, X } from "lucide-react"
 import { useDeviceType } from "@/hooks/use-device-type"
+import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 
 const menuItems = [
@@ -47,13 +47,13 @@ export function Navigation() {
   const [mounted, setMounted] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const deviceType = useDeviceType()
   const router = useRouter()
   const pathname = usePathname()
 
   useEffect(() => {
     setMounted(true)
-    // Set active item based on current pathname
     const currentItem = menuItems.find(item => item.href === pathname)
     if (currentItem) {
       setActiveItem(currentItem.label)
@@ -79,55 +79,134 @@ export function Navigation() {
 
   const handleItemClick = (label: string, href: string) => {
     setActiveItem(label)
+    setIsMobileMenuOpen(false)
     if (href !== "#") {
       router.push(href)
     }
   }
 
+  const isMobile = mounted && deviceType !== 'desktop'
+
   return (
-    <div className={`fixed top-6 left-0 right-0 z-50 px-4 transition-all duration-300 ease-in-out ${
-      isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-    }`}>
-      <div className="flex items-center justify-between max-w-3xl mx-auto">
-        {/* Tilak Logo - Left */}
-        <div className="flex-shrink-0">
-          <Image
-            src="/Tilak.png"
-            alt="Tilak Chandlo"
-            width={60}
-            height={60}
-            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
-            priority
-          />
-        </div>
+    <>
+      <div 
+        className={`fixed top-6 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
+        isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+      }`}
+        style={{ paddingLeft: '3vw', paddingRight: '3vw' }}
+      >
+        <div className="flex items-center justify-between w-full">
 
-        {/* Center Menu */}
-        <div className="flex-1 flex justify-center mx-4">
-          <MenuBar
-            items={menuItems}
-            activeItem={activeItem}
-            onItemClick={(label) => {
-              const item = menuItems.find(item => item.label === label)
-              if (item) {
-                handleItemClick(label, item.href)
-              }
-            }}
-            showLabels={mounted ? deviceType === 'desktop' : true}
-          />
-        </div>
+          {/* Left Side - Hamburger Menu */}
+          <motion.button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="p-3 rounded-xl bg-black/20 backdrop-blur-md border-2 border-white/40 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Menu className="h-6 w-6 text-white" />
+          </motion.button>
 
-        {/* Maninagar Logo - Right */}
-        <div className="flex-shrink-0">
+          {/* Center - Main Logo */}
+          <div className="flex justify-center px-4">
+            <Image
+              src="/main_logo.png"
+              alt="Main Logo"
+              width={200}
+              height={200}
+              className="max-h-30 max-w-full w-auto h-auto sm:max-h-36 md:max-h-42 lg:max-h-48 xl:max-h-54 object-contain"
+              priority
+            />
+          </div>
+
+          {/* Right Side - Maninagar Logo */}
           <Image
             src="/maninagar_logo.png"
             alt="Maninagar Logo"
-            width={60}
-            height={60}
-            className="w-12 h-14 sm:w-14 sm:h-16 md:w-16 md:h-18 object-contain"
+            width={80}
+            height={80}
+            className="h-12 w-auto sm:h-14 md:h-16 lg:h-18 object-contain"
             priority
           />
         </div>
       </div>
-    </div>
+
+      {/* Mobile Sidebar */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+            />
+            
+            {/* Sidebar */}
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 left-0 h-full w-80 bg-black/20 backdrop-blur-md border-r-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] z-50 p-6"
+            >
+              {/* Close Button */}
+              <div className="flex justify-start mb-8">
+                <motion.button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 rounded-xl bg-black/20 backdrop-blur-md border-2 border-white/40"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <X className="h-6 w-6 text-white" />
+                </motion.button>
+              </div>
+
+              {/* Vertical Menu Items */}
+              <nav className="space-y-4">
+                {menuItems.map((item, index) => {
+                  const Icon = item.icon
+                  const isActive = item.label === activeItem
+
+                  return (
+                    <motion.div
+                      key={item.label}
+                      initial={{ x: -50, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <motion.button
+                        onClick={() => handleItemClick(item.label, item.href)}
+                        className="w-full block rounded-xl overflow-visible group relative"
+                        style={{ perspective: "600px" }}
+                        whileHover="hover"
+                        initial="initial"
+                      >
+                        <motion.div
+                          className="absolute inset-0 z-0 pointer-events-none rounded-xl"
+                          animate={isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                          whileHover={{ opacity: 1, scale: 1 }}
+                          style={{
+                            background: item.gradient,
+                          }}
+                        />
+                        <div className="flex items-center gap-4 px-6 py-4 relative z-10 bg-transparent transition-colors rounded-xl font-bold text-lg antialiased text-white/90 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                          <span className={`transition-colors duration-300 ${isActive ? item.iconColor : "text-foreground"} group-hover:${item.iconColor}`}>
+                            <Icon className="h-6 w-6" />
+                          </span>
+                          <span>{item.label}</span>
+                        </div>
+                      </motion.button>
+                    </motion.div>
+                  )
+                })}
+              </nav>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   )
 }

@@ -117,29 +117,29 @@ export default function RegistrationPage() {
       console.log('Attempting to insert:', dbData)
       
       const { error } = await supabase
-        .from('registrations')
+        .from('registrations_dev')
         .insert([dbData])
         
       console.log('Supabase response:', { error })
       
       if (!error) {
         toast({
-          title: "Successfully registered!",
-          description: `Welcome ${data.firstName}! Your registration has been completed.`,
-          className: "bg-green-600 text-white border-green-700 shadow-xl backdrop-blur-sm",
+          title: `Successfully registered, ${data.firstName}!`,
+          description: "Jay Shree Swaminarayan",
+          className: "bg-green-500/10 text-white border-green-300 shadow-xl backdrop-blur-md",
         })
       } else {
         toast({
           title: "Registration failed",
           description: error.message,
-          className: "bg-red-600 text-white border-red-700 shadow-xl backdrop-blur-sm",
+          className: "bg-red-500/10 text-white border-red-300 shadow-xl backdrop-blur-md",
         })
       }
     } catch (error) {
       toast({
         title: "Registration failed",
         description: "Please check your connection and try again.",
-        className: "bg-red-600 text-white border-red-700 shadow-xl backdrop-blur-sm",
+        className: "bg-red-500/10 text-white border-red-300 shadow-xl backdrop-blur-md",
       })
     }
   }
@@ -163,15 +163,15 @@ export default function RegistrationPage() {
       <BackgroundPaths />
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title with Typewriter Animation */}
-        <div className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24">
+        <div className="text-center mb-8">
           <div className="flex justify-center">
             <Typewriter 
               text="Register yourself for the Rajat Mahotsav!"
               speed={80}
-              className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 drop-shadow-2xl md:whitespace-nowrap"
+              className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 drop-shadow-2xl md:whitespace-nowrap"
             />
           </div>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mt-4 sm:mt-6 md:mt-8 drop-shadow-lg px-4 leading-relaxed">Please register yourself and share with everyone you know is coming!</p>
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mt-2 drop-shadow-lg px-4 leading-relaxed">Please register yourself and share with everyone you know is coming!</p>
         </div>
 
         {/* Registration Form */}
@@ -180,7 +180,7 @@ export default function RegistrationPage() {
           <Card className="backdrop-blur-xl bg-white/10 border-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-3xl overflow-hidden relative">
 
             <CardHeader className="text-center pb-8">
-              <CardTitle className="text-2xl font-semibold text-white">Registration Form</CardTitle>
+              <CardTitle className="text-3xl font-semibold text-white">Registration Form</CardTitle>
               <CardDescription className="text-gray-300">Please fill in your details to register</CardDescription>
             </CardHeader>
             
@@ -476,19 +476,19 @@ export default function RegistrationPage() {
               </div>
 
               <div className="pt-6 space-y-4">
+                {/* Test Toast Button */}
                 <button 
                   type="button"
                   onClick={() => {
-                    console.log("Test button clicked")
                     toast({
-                      title: "Test Toast",
-                      description: "This is a test toast!",
-                      className: "bg-blue-600 text-white border-blue-700",
+                      title: "Test Toast - Success!",
+                      description: "This is how your registration confirmation will look with the improved design and larger fonts.",
+                      className: "bg-green-600 text-white border-green-700 shadow-xl backdrop-blur-sm",
                     })
                   }}
-                  className="w-full h-12 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                  className="relative w-full h-12 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center px-4 py-2 text-white text-sm rounded-lg bg-blue-600/80 border border-blue-500/50 backdrop-blur-sm shadow-lg hover:bg-blue-600 transition-all duration-300"
                 >
-                  Test Toast
+                  🧪 Test Toast Preview
                 </button>
                 
                 <button 

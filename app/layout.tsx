@@ -8,6 +8,7 @@ import { Lato } from "next/font/google"
 import { Antonio } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Navigation } from "@/components/navigation"
+import { Toaster } from "@/components/ui/toaster"
 import "./globals.css"
 
 const figtree = Figtree({
@@ -80,6 +81,7 @@ html {
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Navigation />
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
