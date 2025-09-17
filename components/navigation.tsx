@@ -45,9 +45,6 @@ const menuItems = [
 export function Navigation() {
   const [activeItem, setActiveItem] = useState<string>("Home")
   const [mounted, setMounted] = useState(false)
-  const [isVisible, setIsVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
-  const [isHoveringTop, setIsHoveringTop] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const deviceType = useDeviceType()
   const router = useRouter()
@@ -61,39 +58,7 @@ export function Navigation() {
     }
   }, [pathname])
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      
-      if (currentScrollY < 10) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(isHoveringTop)
-      }
-      
-      setLastScrollY(currentScrollY)
-    }
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const isNearTop = e.clientY < 100
-      setIsHoveringTop(isNearTop)
-      
-      // Immediately update visibility if hovering near top and scrolled down
-      if (isNearTop && window.scrollY >= 10) {
-        setIsVisible(true)
-      } else if (!isNearTop && window.scrollY >= 10) {
-        setIsVisible(false)
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('mousemove', handleMouseMove)
-    }
-  }, [isHoveringTop])
 
   const handleItemClick = (label: string, href: string) => {
     setActiveItem(label)
@@ -109,9 +74,7 @@ export function Navigation() {
     <>
       <div 
         data-navbar
-        className={`fixed top-0 left-0 right-0 z-50 transition-opacity duration-300 ease-in-out pt-3 ${
-        isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-      }`}
+        className="absolute top-0 left-0 right-0 z-50 pt-3"
         style={{ paddingLeft: '3vw', paddingRight: '3vw' }}
       >
         <div className="flex items-center justify-between w-full">

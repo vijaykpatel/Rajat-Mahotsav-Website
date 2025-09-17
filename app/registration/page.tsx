@@ -160,10 +160,16 @@ export default function RegistrationPage() {
   }
 
   return (
-    <div className="relative min-h-screen pb-8 overflow-hidden" style={{backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', paddingTop: dynamicPadding}}>
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 via-cyan-300/20 to-purple-400/30"></div>
-      <BackgroundPaths />
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <>
+      {/* Fixed Background */}
+      <div className="fixed inset-0 z-0" style={{backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 via-cyan-300/20 to-purple-400/30"></div>
+        <BackgroundPaths />
+      </div>
+      
+      {/* Scrollable Content */}
+      <div className="relative z-10 min-h-screen pb-8" style={{paddingTop: dynamicPadding}}>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title with Typewriter Animation */}
         <div className="text-center mb-8">
           <div className="flex justify-center">
@@ -504,8 +510,9 @@ export default function RegistrationPage() {
             </CardContent>
           </Card>
         </div>
+        </div>
       </div>
       <Toaster />
-    </div>
+    </>
   )
 }

@@ -134,6 +134,10 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    /* Prevent bounce effect when scrolling to top/bottom */
+    overscroll-behavior: none;
+  }
   body {
     @apply bg-background text-foreground;
     /* Set Figtree as the default font family for the entire website */

@@ -16,7 +16,6 @@ export default function ShaderShowcase() {
 
   return (
     <>
-      <LoadingScreen />
       <ShaderBackground>
       <div className="h-screen w-screen flex flex-col items-center justify-center p-4 relative z-20 overflow-hidden" style={{ paddingTop: dynamicPadding }}>
         <div className="flex-1 flex flex-col items-center justify-center relative z-30 max-h-[80vh] portrait:max-h-[60vh]">
