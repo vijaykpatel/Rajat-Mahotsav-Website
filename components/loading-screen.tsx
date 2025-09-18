@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
+import ShaderBackground from "./shader-background"
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true)
@@ -10,7 +10,7 @@ export default function LoadingScreen() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 3000)
+    }, 2800)
 
     return () => clearTimeout(timer)
   }, [])
@@ -19,134 +19,124 @@ export default function LoadingScreen() {
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
-          className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
+          initial={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+          exit={{ 
+            opacity: 0, 
+            scale: 0.8, 
+            filter: 'blur(10px)',
+            rotateY: 15
+          }}
+          transition={{ 
+            duration: 0.8, 
+            ease: [0.4, 0, 0.2, 1],
+            opacity: { duration: 0.7 },
+            scale: { duration: 0.9 },
+            filter: { duration: 0.5 },
+            rotateY: { duration: 0.8 }
+          }}
+          className="fixed inset-0 z-50 overflow-hidden"
         >
-          {/* Spotlight Shader Background */}
-          <div className="absolute inset-0 bg-black">
-            <div 
-              className="absolute inset-0"
-              style={{
-                background: `
-                  radial-gradient(
-                    circle at 50% 50%,
-                    rgba(255, 165, 0, 0.3) 0%,
-                    rgba(255, 69, 0, 0.2) 25%,
-                    rgba(139, 69, 19, 0.1) 50%,
-                    rgba(0, 0, 0, 0.9) 70%,
-                    rgba(0, 0, 0, 1) 100%
-                  )
-                `
-              }}
-            />
-            {/* Animated spotlight effect */}
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="absolute inset-0"
-              style={{
-                background: `
-                  radial-gradient(
-                    circle at 50% 50%,
-                    rgba(255, 215, 0, 0.4) 0%,
-                    rgba(255, 140, 0, 0.2) 30%,
-                    transparent 60%
-                  )
-                `
-              }}
-            />
-          </div>
-
-          {/* Logo with buzzing and glowing effects */}
-          <div className="relative z-10">
-            <motion.div
-              animate={{
-                x: [0, -2, 2, -1, 1, 0],
-                y: [0, 1, -1, 2, -2, 0],
-                rotate: [0, -0.5, 0.5, -0.3, 0.3, 0],
-              }}
-              transition={{
-                duration: 0.15,
-                repeat: Infinity,
-                repeatType: "loop"
-              }}
-              className="relative"
-            >
-              {/* Glow effect layers */}
+          <ShaderBackground>
+            <div className="h-screen w-screen flex items-center justify-center p-4">
+              {/* Beige Rectangle with Text Cutout */}
               <motion.div
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.5, 0.8, 0.5],
+                className="relative"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3, duration: 0.6, ease: 'easeOut' }}
+                style={{
+                  width: '75vw',
+                  height: '55vh',
+                  background: '#F5F5DC',
+                  borderRadius: '12px',
+                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), 0 8px 25px rgba(0, 0, 0, 0.2)',
+                  transform: 'translateY(-10px)'
                 }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="absolute inset-0 rounded-full blur-xl bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-500"
-                style={{ transform: 'scale(1.2)' }}
-              />
-              
-              <motion.div
-                animate={{
-                  scale: [1, 1.05, 1],
-                  opacity: [0.7, 1, 0.7],
-                }}
-                transition={{
-                  duration: 1,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="absolute inset-0 rounded-full blur-lg bg-gradient-to-r from-yellow-300 via-orange-300 to-red-400"
-                style={{ transform: 'scale(1.1)' }}
-              />
-
-              {/* Logo */}
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.2 }}
-                className="relative z-10"
               >
-                <Image
-                  src="/liquid_logo.png"
-                  alt="Loading Logo"
-                  width={200}
-                  height={200}
-                  className="drop-shadow-2xl"
-                  priority
-                />
-              </motion.div>
-            </motion.div>
+                <div className="h-full flex flex-col justify-between items-stretch px-0 py-4">
+                  {/* Header Text */}
+                  <h3
+                    className="font-medium text-center px-4"
+                    style={{
+                      fontSize: 'clamp(0.8rem, 2vw, 1.2rem)',
+                      lineHeight: '1.3',
+                      letterSpacing: '0.02em',
+                      background: 'linear-gradient(45deg, #FFD700, #C0C0C0, #DC143C, #72b8d3)',
+                      WebkitBackgroundClip: 'text',
+                      backgroundClip: 'text',
+                      color: 'transparent'
+                    }}
+                  >
+                    Maninagar Shree Swaminarayan Gadi Sansthan - Shree Swaminarayan Temple New Jersey
+                  </h3>
 
-            {/* Loading dots */}
-            {/* <div className="flex justify-center space-x-2 mt-8">
-              {[0, 1, 2].map((i) => (
-                <motion.div
-                  key={i}
-                  animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.5, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 1.2,
-                    repeat: Infinity,
-                    delay: i * 0.2,
-                  }}
-                  className="w-3 h-3 bg-gradient-to-r from-orange-400 to-yellow-300 rounded-full shadow-lg"
-                />
-              ))}
-            </div> */}
-          </div>
+                  <div className="flex flex-col justify-center items-stretch">
+                  {/* English Text */}
+                  <h1
+                    className="uppercase font-black text-center px-2 relative"
+                    style={{
+                      fontSize: 'clamp(2.3rem, 9vw, 7.5rem)',
+                      fontFamily: 'Impact, Arial Black, sans-serif',
+                      lineHeight: '1.0',
+                      letterSpacing: '0.09em',
+                      textAlign: 'center',
+                      background: 'linear-gradient(45deg, #FFD700, #C0C0C0, #DC143C, #72b8d3)',
+                      WebkitBackgroundClip: 'text',
+                      backgroundClip: 'text',
+                      color: 'transparent'
+                    }}
+                  >
+                    JAY SHREE SWAMINARAYAN
+                  </h1>
+
+                  {/* Loading Bar */}
+                  <div className="w-full mt-6 mb-6 relative z-0">
+                    <div className="h-px bg-gray-200 relative overflow-hidden">
+                      <motion.div
+                        className="h-full bg-gradient-to-r from-gray-400 to-gray-600"
+                        initial={{ width: '0%' }}
+                        animate={{ width: '100%' }}
+                        transition={{ duration: 2.5, ease: 'linear' }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Gujarati Text */}
+                  <h2
+                    className="font-bold text-center px-2 relative"
+                    style={{
+                      fontSize: 'clamp(2.5rem, 9vw, 8rem)',
+                      lineHeight: '1.2',
+                      letterSpacing: '0.05em',
+                      background: 'linear-gradient(45deg, #FFD700, #C0C0C0, #DC143C, #72b8d3)',
+                      WebkitBackgroundClip: 'text',
+                      backgroundClip: 'text',
+                      color: 'transparent'
+                    }}
+                  >
+                    જય શ્રી સ્વામિનારાયણ
+                  </h2>
+                  </div>
+
+                  {/* Footer Text */}
+                  <h4
+                    className="font-medium text-center px-4"
+                    style={{
+                      fontSize: 'clamp(0.8rem, 2vw, 1.2rem)',
+                      lineHeight: '1.3',
+                      letterSpacing: '0.02em',
+                      background: 'linear-gradient(45deg, #FFD700, #C0C0C0, #DC143C, #72b8d3)',
+                      WebkitBackgroundClip: 'text',
+                      backgroundClip: 'text',
+                      color: 'transparent'
+                    }}
+                  >
+                    Inspired By: His Divine Holiness Acharya Shree Jitendriyapriyadasji Swamiji Maharaj
+                  </h4>
+                </div>
+              </motion.div>
+            </div>
+          </ShaderBackground>
         </motion.div>
       )}
     </AnimatePresence>

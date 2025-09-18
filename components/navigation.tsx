@@ -89,8 +89,11 @@ export function Navigation() {
             <Menu className="h-6 w-6 text-white" />
           </motion.button>
 
-          {/* Center - Main Logo */}
-          <div className="flex justify-center px-4">
+          {/* Center - Empty space for better balance */}
+          <div className="flex-1"></div>
+
+                  {/* oild Center - Main Logo */}
+          {/* <div className="flex justify-center px-4">
             <Image
               src="/main_logo.png"
               alt="Main Logo"
@@ -99,17 +102,28 @@ export function Navigation() {
               className="max-h-30 max-w-full w-auto h-auto sm:max-h-36 md:max-h-42 lg:max-h-48 xl:max-h-54 object-contain"
               priority
             />
-          </div>
+          </div> */}
 
-          {/* Right Side - Maninagar Logo */}
-          <Image
-            src="/maninagar_logo.png"
-            alt="Maninagar Logo"
-            width={80}
-            height={80}
-            className="h-12 w-auto sm:h-14 md:h-16 lg:h-18 object-contain"
-            priority
-          />
+          {/* Right Side - Both Logos */}
+          <div className="flex items-center gap-3">
+            <Image
+              src="/main_logo.png"
+              alt="Main Logo"
+              width={80}
+              height={80}
+              className="h-12 w-auto sm:h-14 md:h-16 lg:h-18 object-contain"
+              priority
+            />
+            <div className="h-8 w-px bg-white/40 sm:h-10 md:h-12 lg:h-14"></div>
+            <Image
+              src="/maninagar_logo.png"
+              alt="Maninagar Logo"
+              width={80}
+              height={80}
+              className="h-12 w-auto sm:h-14 md:h-16 lg:h-18 object-contain"
+              priority
+            />
+          </div>
         </div>
       </div>
 
