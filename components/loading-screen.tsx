@@ -5,15 +5,35 @@ import { motion, AnimatePresence } from "framer-motion"
 import ShaderBackground from "./shader-background"
 
 export default function LoadingScreen() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
+  const [canSkip, setCanSkip] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 2800)
+    const isExternal = !document.referrer || !document.referrer.includes(window.location.hostname)
+    
+    if (isExternal) {
+      setIsLoading(true)
+      
+      const skipTimer = setTimeout(() => {
+        setCanSkip(true)
+      }, 1000)
 
-    return () => clearTimeout(timer)
+      const autoTimer = setTimeout(() => {
+        setIsLoading(false)
+      }, 2800)
+
+      return () => {
+        clearTimeout(skipTimer)
+        clearTimeout(autoTimer)
+      }
+    }
   }, [])
+
+  const handleSkip = () => {
+    if (canSkip) {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <AnimatePresence>
@@ -34,10 +54,16 @@ export default function LoadingScreen() {
             filter: { duration: 0.5 },
             rotateY: { duration: 0.8 }
           }}
-          className="fixed inset-0 z-50 overflow-hidden"
+          className="fixed inset-0 z-50 overflow-hidden cursor-pointer"
+          onClick={handleSkip}
         >
           <ShaderBackground>
             <div className="h-screen w-screen flex items-center justify-center p-4">
+              {canSkip && (
+                <div className="absolute top-4 right-4 text-white/60 text-sm animate-pulse">
+                  Tap to skip
+                </div>
+              )}
               {/* Beige Rectangle with Text Cutout */}
               <motion.div
                 className="relative"

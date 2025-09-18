@@ -9,6 +9,7 @@ import { Antonio } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Navigation } from "@/components/navigation"
 import { Toaster } from "@/components/ui/toaster"
+import StickyFooter from "@/components/sticky-footer"
 import "./globals.css"
 
 const figtree = Figtree({
@@ -80,7 +81,12 @@ html {
       <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoMusic.variable} ${lato.variable} ${antonio.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Navigation />
-          {children}
+          <div className="min-h-screen flex flex-col">
+            <div className="flex-1">
+              {children}
+            </div>
+            <StickyFooter />
+          </div>
           <Toaster />
         </ThemeProvider>
       </body>
