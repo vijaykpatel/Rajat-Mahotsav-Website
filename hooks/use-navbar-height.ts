@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 
 export function useNavbarHeight() {
   const [navbarHeight, setNavbarHeight] = useState(0)
-  const [dynamicPadding, setDynamicPadding] = useState("0px")
+  const [dynamicPadding, setDynamicPadding] = useState("120px") // Reasonable default
 
   useEffect(() => {
     const updateNavbarHeight = () => {
@@ -13,7 +13,7 @@ export function useNavbarHeight() {
         const rect = navbar.getBoundingClientRect()
         const navbarBottom = rect.bottom // This includes the top-6 offset
         const viewportHeight = window.innerHeight
-        const additionalPadding = viewportHeight * 0.03 // 4% of viewport height
+        const additionalPadding = viewportHeight * 0.03 // 3% of viewport height
         const totalPadding = navbarBottom + additionalPadding
         
         setNavbarHeight(rect.height)

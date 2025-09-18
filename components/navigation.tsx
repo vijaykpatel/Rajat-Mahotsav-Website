@@ -75,8 +75,21 @@ export function Navigation() {
       <div 
         data-navbar
         className="absolute top-0 left-0 right-0 z-50 pt-3"
-        style={{ paddingLeft: '3vw', paddingRight: '3vw' }}
+        style={{ 
+          paddingLeft: 'var(--nav-padding)', 
+          paddingRight: 'var(--nav-padding)' 
+        }}
       >
+        <style jsx>{`
+          div[data-navbar] {
+            --nav-padding: 3vw;
+          }
+          @media (min-width: 1024px) {
+            div[data-navbar] {
+              --nav-padding: 2vw;
+            }
+          }
+        `}</style>
         <div className="flex items-center justify-between w-full">
 
           {/* Left Side - Hamburger Menu */}
@@ -111,16 +124,16 @@ export function Navigation() {
               alt="Main Logo"
               width={80}
               height={80}
-              className="h-12 w-auto sm:h-14 md:h-16 lg:h-18 object-contain"
+              className="h-16 w-auto sm:h-20 md:h-30 lg:h-40 object-contain"
               priority
             />
-            <div className="h-8 w-px bg-white/40 sm:h-10 md:h-12 lg:h-14"></div>
+            <div className="h-10 w-px bg-white/40 sm:h-14 md:h-24 lg:h-34 "></div>
             <Image
               src="/maninagar_logo.png"
               alt="Maninagar Logo"
               width={80}
               height={80}
-              className="h-12 w-auto sm:h-14 md:h-16 lg:h-18 object-contain"
+              className="h-16 w-auto sm:h-20 md:h-30 lg:h-40 object-contain"
               priority
             />
           </div>

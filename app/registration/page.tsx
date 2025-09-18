@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -59,6 +59,7 @@ export default function RegistrationPage() {
     mandal: ""
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const {
     control,
@@ -164,23 +165,28 @@ export default function RegistrationPage() {
     return mandalOptions[country as keyof typeof mandalOptions] || []
   }
 
+  // Set loaded after component mounts
+  useEffect(() => {
+    setIsLoaded(true)
+  }, [])
+
   return (
     <>
       {/* Non-sticky Background */}
       <div className="fixed inset-0 z-0" style={{backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/15 via-red-300/15 to-blue-400/15"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/15 via-purple-300/15 to-blue-400/15"></div>
         <BackgroundPaths />
       </div>
       
       {/* Scrollable Content */}
-      <div className="relative z-10 min-h-screen pb-20" style={{paddingTop: dynamicPadding}}>
+      <div className={`relative z-10 min-h-screen transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{paddingTop: dynamicPadding}}>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-0">
         {/* Title with Typewriter Animation */}
         <div className="text-center mb-8">
           <div className="flex justify-center">
             <Typewriter 
               text="Register yourself for the Rajat Mahotsav!"
-              speed={80}
+              speed={isLoaded ? 80 : 0}
               className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 drop-shadow-2xl md:whitespace-nowrap"
             />
           </div>
@@ -188,11 +194,11 @@ export default function RegistrationPage() {
         </div>
 
         {/* Registration Form */}
-        <div className="relative">
+        <div className={`relative transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
           <div className="absolute -inset-8 bg-gradient-to-r from-red-500/20 via-white/30 to-blue-600/20 rounded-[3rem] blur-2xl opacity-60"></div>
           <Card className="backdrop-blur-xl bg-white/10 border-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-3xl overflow-hidden relative">
 
-            <CardHeader className="text-center pb-8">
+            <CardHeader className={`text-center pb-8 transition-all duration-500 delay-200 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
               <CardTitle className="text-3xl font-semibold text-white">Registration Form</CardTitle>
               <CardDescription className="text-gray-300">Please fill in your details to register</CardDescription>
             </CardHeader>
@@ -201,7 +207,7 @@ export default function RegistrationPage() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* First Name */}
-                <div className="space-y-2">
+                <div className={`space-y-2 transition-all duration-500 delay-300 ${isLoaded ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>
                   <Label htmlFor="firstName" className="text-base font-medium text-white">First Name *</Label>
                   <Controller
                     name="firstName"
@@ -222,7 +228,7 @@ export default function RegistrationPage() {
                 </div>
 
                 {/* Middle Name */}
-                <div className="space-y-2">
+                <div className={`space-y-2 transition-all duration-500 delay-400 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
                   <Label htmlFor="middleName" className="text-base font-medium text-white">Middle Name</Label>
                   <Controller
                     name="middleName"
@@ -240,7 +246,7 @@ export default function RegistrationPage() {
                 </div>
 
                 {/* Last Name */}
-                <div className="space-y-2">
+                <div className={`space-y-2 transition-all duration-500 delay-500 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}>
                   <Label htmlFor="lastName" className="text-base font-medium text-white">Last Name *</Label>
                   <Controller
                     name="lastName"
@@ -263,7 +269,7 @@ export default function RegistrationPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Age */}
-                <div className="space-y-2">
+                <div className={`space-y-2 transition-all duration-500 delay-600 ${isLoaded ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>
                   <Label htmlFor="age" className="text-base font-medium text-white">Age *</Label>
                   <Controller
                     name="age"
@@ -284,7 +290,7 @@ export default function RegistrationPage() {
                 </div>
 
                 {/* Ghaam */}
-                <div className="space-y-2">
+                <div className={`space-y-2 transition-all duration-500 delay-700 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}>
                   <Label htmlFor="ghaam" className="text-base font-medium text-white">Ghaam *</Label>
                   <Controller
                     name="ghaam"
@@ -307,7 +313,7 @@ export default function RegistrationPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Country */}
-                <div className="space-y-2">
+                <div className={`space-y-2 transition-all duration-500 delay-800 ${isLoaded ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>
                   <Label htmlFor="country" className="text-base font-medium text-white">Country *</Label>
                   <Controller
                     name="country"
@@ -354,7 +360,7 @@ export default function RegistrationPage() {
                 </div>
 
                 {/* Mandal */}
-                <div className="space-y-2">
+                <div className={`space-y-2 transition-all duration-500 delay-900 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}>
                   <Label htmlFor="mandal" className="text-base font-medium text-white">Mandal *</Label>
                   <Controller
                     name="mandal"
@@ -389,7 +395,7 @@ export default function RegistrationPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Email */}
-                <div className="space-y-2">
+                <div className={`space-y-2 transition-all duration-500 delay-1000 ${isLoaded ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>
                   <Label htmlFor="email" className="text-base font-medium text-white">Email Address *</Label>
                   <Controller
                     name="email"
@@ -410,7 +416,7 @@ export default function RegistrationPage() {
                 </div>
 
                 {/* Phone */}
-                <div className="space-y-2">
+                <div className={`space-y-2 transition-all duration-500 delay-1100 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}>
                   <Label htmlFor="phone" className="text-base font-medium text-white">Phone Number *</Label>
                   <Controller
                     name="phone"
@@ -445,7 +451,7 @@ export default function RegistrationPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Arrival Date */}
-                <div className="space-y-2">
+                <div className={`space-y-2 transition-all duration-500 delay-1200 ${isLoaded ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>
                   <Label htmlFor="arrivalDate" className="text-base font-medium text-white">Arrival Date *</Label>
                   <Controller
                     name="arrivalDate"
@@ -456,8 +462,8 @@ export default function RegistrationPage() {
                         id="arrivalDate"
                         type="date"
                         min="2026-07-01"
-                        max={watch("departureDate") || undefined}
-                        className="h-14 text-base bg-white/20 border-white/30 text-white backdrop-blur-sm [&::-webkit-calendar-picker-indicator]:invert"
+                        max={watch("departureDate")}
+                        className="h-14 text-base bg-white/20 border-white/30 text-white backdrop-blur-sm [&::-webkit-calendar-picker-indicator]:invert [&:invalid]:text-white [&:out-of-range]:text-white"
                       />
                     )}
                   />
@@ -467,7 +473,7 @@ export default function RegistrationPage() {
                 </div>
 
                 {/* Departure Date */}
-                <div className="space-y-2">
+                <div className={`space-y-2 transition-all duration-500 delay-1300 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}>
                   <Label htmlFor="departureDate" className="text-base font-medium text-white">Departure Date *</Label>
                   <Controller
                     name="departureDate"
@@ -488,9 +494,9 @@ export default function RegistrationPage() {
                 </div>
               </div>
 
-              <div className="pt-6 space-y-4">
+              <div className={`pt-6 space-y-4 transition-all duration-500 delay-1400 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
                 {/* Test Toast Button */}
-                <button 
+                {/* <button 
                   type="button"
                   onClick={() => {
                     toast({
@@ -502,7 +508,7 @@ export default function RegistrationPage() {
                   className="relative w-full h-12 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center px-4 py-2 text-white text-sm rounded-lg bg-blue-600/80 border border-blue-500/50 backdrop-blur-sm shadow-lg hover:bg-blue-600 transition-all duration-300"
                 >
                   🧪 Test Toast Preview
-                </button>
+                </button> */}
                 
                 <button 
                   type="submit" 
