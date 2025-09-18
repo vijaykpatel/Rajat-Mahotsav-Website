@@ -8,6 +8,7 @@ import { isValidPhoneNumber, parsePhoneNumber } from "react-phone-number-input"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Send } from "lucide-react"
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -57,6 +58,7 @@ export default function RegistrationPage() {
     country: "",
     mandal: ""
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const {
     control,
@@ -83,6 +85,7 @@ export default function RegistrationPage() {
   })
 
   const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true)
     console.log('Environment check:', {
       url: process.env.NEXT_PUBLIC_SUPABASE_URL,
       keyExists: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -143,6 +146,8 @@ export default function RegistrationPage() {
         description: "Please check your connection and try again.",
         className: "bg-red-500/10 text-white border-red-300 shadow-xl backdrop-blur-md",
       })
+    } finally {
+      setTimeout(() => setIsSubmitting(false), 2000)
     }
   }
 
@@ -163,13 +168,13 @@ export default function RegistrationPage() {
     <>
       {/* Non-sticky Background */}
       <div className="absolute inset-0 z-0 min-h-full" style={{backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 via-cyan-300/20 to-purple-400/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 via-white-300/2 to-purple-400/5"></div>
         <BackgroundPaths />
       </div>
       
       {/* Scrollable Content */}
       <div className="relative z-10 min-h-screen" style={{paddingTop: dynamicPadding}}>
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-0">
         {/* Title with Typewriter Animation */}
         <div className="text-center mb-8">
           <div className="flex justify-center">
@@ -184,8 +189,8 @@ export default function RegistrationPage() {
 
         {/* Registration Form */}
         <div className="relative">
-          <div className="absolute -inset-8 bg-gradient-to-r from-cyan-400/20 via-blue-500/30 to-purple-600/20 rounded-[3rem] blur-2xl opacity-60"></div>
-          <Card className="backdrop-blur-xl bg-white/10 border-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-3xl overflow-hidden relative">
+          <Card className="backdrop-blur-xl bg-white/5 border-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-3xl overflow-hidden relative">
+            <div className="absolute -inset-8 bg-gradient-to-r from-red-500/20 via-white/30 to-blue-600/20 rounded-[3rem] blur-2xl opacity-60 h-full w-full"></div>
 
             <CardHeader className="text-center pb-8">
               <CardTitle className="text-3xl font-semibold text-white">Registration Form</CardTitle>
@@ -501,9 +506,17 @@ export default function RegistrationPage() {
                 
                 <button 
                   type="submit" 
-                  className="relative w-full h-14 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center px-4 py-2 text-white text-base rounded-lg bg-white/10 border border-white/50 backdrop-blur-sm shadow-[inset_0_1px_0px_rgba(255,255,255,0.75),0_0_9px_rgba(0,0,0,0.2),0_3px_8px_rgba(0,0,0,0.15)] hover:bg-white/30 transition-all duration-300 before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-br before:from-white/60 before:via-transparent before:to-transparent before:opacity-70 before:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:bg-gradient-to-tl after:from-white/30 after:via-transparent after:to-transparent after:opacity-50 after:pointer-events-none antialiased"
+                  disabled={isSubmitting}
+                  className="relative w-full h-14 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center px-4 py-2 text-white text-base rounded-lg bg-white/10 border border-white/50 backdrop-blur-sm shadow-[inset_0_1px_0px_rgba(255,255,255,0.75),0_0_9px_rgba(0,0,0,0.2),0_3px_8px_rgba(0,0,0,0.15)] hover:bg-white/30 transition-all duration-300 before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-br before:from-white/60 before:via-transparent before:to-transparent before:opacity-70 before:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:bg-gradient-to-tl after:from-white/30 after:via-transparent after:to-transparent after:opacity-50 after:pointer-events-none antialiased disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden"
                 >
-                  Register
+                  <div className={`absolute inset-0 bg-gradient-to-b from-white/30 to-white/20 transform transition-transform duration-500 ${isSubmitting ? 'translate-y-0' : 'translate-y-full'}`}></div>
+                  <div className="relative z-10 flex items-center justify-center">
+                    {isSubmitting ? (
+                      <Send className="w-5 h-5" />
+                    ) : (
+                      "Register"
+                    )}
+                  </div>
                 </button>
               </div>
             </form>

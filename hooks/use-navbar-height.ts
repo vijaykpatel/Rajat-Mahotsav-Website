@@ -13,7 +13,7 @@ export function useNavbarHeight() {
         const rect = navbar.getBoundingClientRect()
         const navbarBottom = rect.bottom // This includes the top-6 offset
         const viewportHeight = window.innerHeight
-        const additionalPadding = viewportHeight * 0.015 // 2% of viewport height
+        const additionalPadding = viewportHeight * 0.03 // 4% of viewport height
         const totalPadding = navbarBottom + additionalPadding
         
         setNavbarHeight(rect.height)

@@ -3,17 +3,14 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import ShaderBackground from "./shader-background"
+import { useLoading } from "@/hooks/use-loading"
 
 export default function LoadingScreen() {
-  const [isLoading, setIsLoading] = useState(false)
+  const { isLoading, setIsLoading } = useLoading()
   const [canSkip, setCanSkip] = useState(false)
 
   useEffect(() => {
-    const isExternal = !document.referrer || !document.referrer.includes(window.location.hostname)
-    
-    if (isExternal) {
-      setIsLoading(true)
-      
+    if (isLoading) {
       const skipTimer = setTimeout(() => {
         setCanSkip(true)
       }, 1000)
@@ -27,7 +24,7 @@ export default function LoadingScreen() {
         clearTimeout(autoTimer)
       }
     }
-  }, [])
+  }, [isLoading, setIsLoading])
 
   const handleSkip = () => {
     if (canSkip) {
