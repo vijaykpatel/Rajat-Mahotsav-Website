@@ -114,7 +114,7 @@ export default function StickyFooter() {
               src="/youtube_red_icon.png" 
               alt="YouTube" 
               width={44} 
-              height={44} 
+              height={38} 
             />
           </a>
           <a 

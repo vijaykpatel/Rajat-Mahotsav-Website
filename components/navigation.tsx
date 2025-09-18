@@ -74,7 +74,7 @@ export function Navigation() {
     <>
       <div 
         data-navbar
-        className="absolute top-0 left-0 right-0 z-50 pt-3"
+        className={`absolute top-0 left-0 right-0 z-50 pt-3 transition-opacity duration-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}
         style={{ 
           paddingLeft: 'var(--nav-padding)', 
           paddingRight: 'var(--nav-padding)' 

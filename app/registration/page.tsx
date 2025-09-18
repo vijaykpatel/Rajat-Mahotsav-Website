@@ -165,9 +165,10 @@ export default function RegistrationPage() {
     return mandalOptions[country as keyof typeof mandalOptions] || []
   }
 
-  // Set loaded after component mounts
+  // Set loaded after component mounts with delay for mobile optimization
   useEffect(() => {
-    setIsLoaded(true)
+    const timer = setTimeout(() => setIsLoaded(true), 300)
+    return () => clearTimeout(timer)
   }, [])
 
   return (
@@ -186,7 +187,7 @@ export default function RegistrationPage() {
           <div className="flex justify-center">
             <Typewriter 
               text="Register yourself for the Rajat Mahotsav!"
-              speed={isLoaded ? 80 : 0}
+              speed={80}
               className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 drop-shadow-2xl md:whitespace-nowrap"
             />
           </div>
@@ -194,11 +195,13 @@ export default function RegistrationPage() {
         </div>
 
         {/* Registration Form */}
-        <div className={`relative transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-          <div className="absolute -inset-8 bg-gradient-to-r from-red-500/20 via-white/30 to-blue-600/20 rounded-[3rem] blur-2xl opacity-60"></div>
-          <Card className="backdrop-blur-xl bg-white/10 border-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-3xl overflow-hidden relative">
+        <div className="relative">
+          {/* Preloaded glow effect - always visible */}
+          <div className="absolute -inset-8 bg-gradient-to-r from-red-500/20 via-white/30 to-blue-600/20 rounded-[3rem] blur-2xl opacity-60 will-change-transform"></div>
+          <div className={`relative transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
+            <Card className="backdrop-blur-xl bg-white/10 border-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-3xl overflow-hidden relative">
 
-            <CardHeader className={`text-center pb-8 transition-all duration-500 delay-200 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+            <CardHeader className="text-center pb-8">
               <CardTitle className="text-3xl font-semibold text-white">Registration Form</CardTitle>
               <CardDescription className="text-gray-300">Please fill in your details to register</CardDescription>
             </CardHeader>
@@ -207,7 +210,7 @@ export default function RegistrationPage() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* First Name */}
-                <div className={`space-y-2 transition-all duration-500 delay-300 ${isLoaded ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>
+                <div className="space-y-2">
                   <Label htmlFor="firstName" className="text-base font-medium text-white">First Name *</Label>
                   <Controller
                     name="firstName"
@@ -228,7 +231,7 @@ export default function RegistrationPage() {
                 </div>
 
                 {/* Middle Name */}
-                <div className={`space-y-2 transition-all duration-500 delay-400 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                <div className="space-y-2">
                   <Label htmlFor="middleName" className="text-base font-medium text-white">Middle Name</Label>
                   <Controller
                     name="middleName"
@@ -246,7 +249,7 @@ export default function RegistrationPage() {
                 </div>
 
                 {/* Last Name */}
-                <div className={`space-y-2 transition-all duration-500 delay-500 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}>
+                <div className="space-y-2">
                   <Label htmlFor="lastName" className="text-base font-medium text-white">Last Name *</Label>
                   <Controller
                     name="lastName"
@@ -269,7 +272,7 @@ export default function RegistrationPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Age */}
-                <div className={`space-y-2 transition-all duration-500 delay-600 ${isLoaded ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>
+                <div className="space-y-2">
                   <Label htmlFor="age" className="text-base font-medium text-white">Age *</Label>
                   <Controller
                     name="age"
@@ -290,7 +293,7 @@ export default function RegistrationPage() {
                 </div>
 
                 {/* Ghaam */}
-                <div className={`space-y-2 transition-all duration-500 delay-700 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}>
+                <div className="space-y-2">
                   <Label htmlFor="ghaam" className="text-base font-medium text-white">Ghaam *</Label>
                   <Controller
                     name="ghaam"
@@ -313,7 +316,7 @@ export default function RegistrationPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Country */}
-                <div className={`space-y-2 transition-all duration-500 delay-800 ${isLoaded ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>
+                <div className="space-y-2">
                   <Label htmlFor="country" className="text-base font-medium text-white">Country *</Label>
                   <Controller
                     name="country"
@@ -360,7 +363,7 @@ export default function RegistrationPage() {
                 </div>
 
                 {/* Mandal */}
-                <div className={`space-y-2 transition-all duration-500 delay-900 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}>
+                <div className="space-y-2">
                   <Label htmlFor="mandal" className="text-base font-medium text-white">Mandal *</Label>
                   <Controller
                     name="mandal"
@@ -395,7 +398,7 @@ export default function RegistrationPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Email */}
-                <div className={`space-y-2 transition-all duration-500 delay-1000 ${isLoaded ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>
+                <div className="space-y-2">
                   <Label htmlFor="email" className="text-base font-medium text-white">Email Address *</Label>
                   <Controller
                     name="email"
@@ -416,7 +419,7 @@ export default function RegistrationPage() {
                 </div>
 
                 {/* Phone */}
-                <div className={`space-y-2 transition-all duration-500 delay-1100 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}>
+                <div className="space-y-2">
                   <Label htmlFor="phone" className="text-base font-medium text-white">Phone Number *</Label>
                   <Controller
                     name="phone"
@@ -451,7 +454,7 @@ export default function RegistrationPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Arrival Date */}
-                <div className={`space-y-2 transition-all duration-500 delay-1200 ${isLoaded ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>
+                <div className="space-y-2">
                   <Label htmlFor="arrivalDate" className="text-base font-medium text-white">Arrival Date *</Label>
                   <Controller
                     name="arrivalDate"
@@ -473,7 +476,7 @@ export default function RegistrationPage() {
                 </div>
 
                 {/* Departure Date */}
-                <div className={`space-y-2 transition-all duration-500 delay-1300 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}>
+                <div className="space-y-2">
                   <Label htmlFor="departureDate" className="text-base font-medium text-white">Departure Date *</Label>
                   <Controller
                     name="departureDate"
@@ -494,7 +497,7 @@ export default function RegistrationPage() {
                 </div>
               </div>
 
-              <div className={`pt-6 space-y-4 transition-all duration-500 delay-1400 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+              <div className="pt-6 space-y-4">
                 {/* Test Toast Button */}
                 {/* <button 
                   type="button"
@@ -527,7 +530,8 @@ export default function RegistrationPage() {
               </div>
             </form>
             </CardContent>
-          </Card>
+            </Card>
+          </div>
         </div>
         </div>
       </div>
