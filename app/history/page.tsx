@@ -85,6 +85,7 @@ export default function HistoryPage() {
     },
   ];
 
+  
   return (
     <ShaderBackground>
       <div className="min-h-screen w-full" style={{ paddingTop: dynamicPadding }}>
