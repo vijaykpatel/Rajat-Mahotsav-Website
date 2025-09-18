@@ -167,13 +167,13 @@ export default function RegistrationPage() {
   return (
     <>
       {/* Non-sticky Background */}
-      <div className="absolute inset-0 z-0 min-h-full" style={{backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 via-white-300/2 to-purple-400/5"></div>
+      <div className="fixed inset-0 z-0" style={{backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/15 via-red-300/15 to-blue-400/15"></div>
         <BackgroundPaths />
       </div>
       
       {/* Scrollable Content */}
-      <div className="relative z-10 min-h-screen" style={{paddingTop: dynamicPadding}}>
+      <div className="relative z-10 min-h-screen pb-20" style={{paddingTop: dynamicPadding}}>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-0">
         {/* Title with Typewriter Animation */}
         <div className="text-center mb-8">
@@ -189,8 +189,8 @@ export default function RegistrationPage() {
 
         {/* Registration Form */}
         <div className="relative">
-          <Card className="backdrop-blur-xl bg-white/5 border-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-3xl overflow-hidden relative">
-            <div className="absolute -inset-8 bg-gradient-to-r from-red-500/20 via-white/30 to-blue-600/20 rounded-[3rem] blur-2xl opacity-60 h-full w-full"></div>
+          <div className="absolute -inset-8 bg-gradient-to-r from-red-500/20 via-white/30 to-blue-600/20 rounded-[3rem] blur-2xl opacity-60"></div>
+          <Card className="backdrop-blur-xl bg-white/10 border-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-3xl overflow-hidden relative">
 
             <CardHeader className="text-center pb-8">
               <CardTitle className="text-3xl font-semibold text-white">Registration Form</CardTitle>
