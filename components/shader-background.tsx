@@ -13,7 +13,12 @@ interface ShaderBackgroundProps {
 export default function ShaderBackground({ children }: ShaderBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isActive, setIsActive] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const deviceType = useDeviceType()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const handleMouseEnter = () => setIsActive(true)
@@ -48,7 +53,7 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
   return (
     <div ref={containerRef} className="min-h-screen bg-black relative overflow-hidden">
       {/* Simplified SVG Filters for mobile/tablet */}
-      {deviceType === 'desktop' && (
+      {mounted && deviceType === 'desktop' && (
         <svg className="absolute inset-0 w-0 h-0">
           <defs>
             <filter id="glass-effect" x="-50%" y="-50%" width="200%" height="200%">
@@ -92,7 +97,7 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
       />
       
       {/* Secondary Shader - Hidden on mobile for performance */}
-      {showSecondaryShader && (
+      {mounted && showSecondaryShader && (
         <MeshGradient
           className="absolute inset-0 w-full h-full opacity-50"
           colors={["#FFA500", "#E5E5E5", "#B22222","#4682B4"]}
