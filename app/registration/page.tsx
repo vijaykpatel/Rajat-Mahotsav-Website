@@ -5,10 +5,12 @@ import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { isValidPhoneNumber, parsePhoneNumber } from "react-phone-number-input"
+import { CalendarDate } from "@internationalized/date"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Send } from "lucide-react"
+import RegistrationDatePicker from "@/components/registration-date-picker"
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -37,16 +39,17 @@ const FormSchema = z.object({
     .refine((value) => value && isValidPhoneNumber(value), {
       message: "Invalid phone number",
     }),
-  arrivalDate: z.string().min(1, "Arrival date is required"),
-  departureDate: z.string().min(1, "Departure date is required"),
-}).refine((data) => {
-  if (data.arrivalDate && data.departureDate) {
-    return new Date(data.departureDate) >= new Date(data.arrivalDate)
-  }
-  return true
-}, {
-  message: "Departure date must be on or after arrival date",
-  path: ["departureDate"]
+  dateRange: z.object({
+    start: z.any().refine((val) => val !== null, "Arrival date is required"),
+    end: z.any().refine((val) => val !== null, "Departure date is required"),
+  }).refine((data) => {
+    if (data.start && data.end) {
+      return data.end.compare(data.start) >= 0
+    }
+    return true
+  }, {
+    message: "Departure date must be on or after arrival date",
+  }),
 })
 
 type FormData = z.infer<typeof FormSchema>
@@ -80,8 +83,7 @@ export default function RegistrationPage() {
       email: "",
       phoneCountryCode: "",
       phone: "",
-      arrivalDate: "",
-      departureDate: ""
+      dateRange: { start: null, end: null }
     }
   })
 
@@ -116,8 +118,8 @@ export default function RegistrationPage() {
         email: data.email,
         phone_country_code: data.phoneCountryCode,
         mobile_number: nationalNumber,
-        arrival_date: data.arrivalDate,
-        departure_date: data.departureDate
+        arrival_date: data.dateRange.start?.toString(),
+        departure_date: data.dateRange.end?.toString()
       }
       
       console.log('Attempting to insert:', dbData)
@@ -452,50 +454,18 @@ export default function RegistrationPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Arrival Date */}
-                <div className="space-y-2">
-                  <Label htmlFor="arrivalDate" className="text-base font-medium text-white">Arrival Date *</Label>
-                  <Controller
-                    name="arrivalDate"
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        id="arrivalDate"
-                        type="date"
-                        min="2026-07-01"
-                        max={watch("departureDate")}
-                        className="h-14 text-base bg-white/20 border-white/30 text-white backdrop-blur-sm [&::-webkit-calendar-picker-indicator]:invert [&:invalid]:text-white [&:out-of-range]:text-white"
-                      />
-                    )}
+              {/* Date Range Picker */}
+              <Controller
+                name="dateRange"
+                control={control}
+                render={({ field }) => (
+                  <RegistrationDatePicker
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={errors.dateRange?.message}
                   />
-                  {errors.arrivalDate && (
-                    <p className="text-red-400 text-sm">{errors.arrivalDate.message}</p>
-                  )}
-                </div>
-
-                {/* Departure Date */}
-                <div className="space-y-2">
-                  <Label htmlFor="departureDate" className="text-base font-medium text-white">Departure Date *</Label>
-                  <Controller
-                    name="departureDate"
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        id="departureDate"
-                        type="date"
-                        min={watch("arrivalDate") || "2026-07-01"}
-                        className="h-14 text-base bg-white/20 border-white/30 text-white backdrop-blur-sm [&::-webkit-calendar-picker-indicator]:invert"
-                      />
-                    )}
-                  />
-                  {errors.departureDate && (
-                    <p className="text-red-400 text-sm">{errors.departureDate.message}</p>
-                  )}
-                </div>
-              </div>
+                )}
+              />
 
               <div className="pt-6 space-y-4">
                 {/* Test Toast Button */}
