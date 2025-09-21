@@ -11,7 +11,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Send } from "lucide-react"
 import RegistrationDatePicker from "@/components/registration-date-picker"
-
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { PhoneInput } from "@/components/ui/phone-input"
@@ -169,7 +168,7 @@ export default function RegistrationPage() {
 
   // Set loaded after component mounts with delay for mobile optimization
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 300)
+    const timer = setTimeout(() => setIsLoaded(true), 200)
     return () => clearTimeout(timer)
   }, [])
 

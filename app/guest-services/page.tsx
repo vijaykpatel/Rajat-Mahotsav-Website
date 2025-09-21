@@ -1,0 +1,301 @@
+"use client"
+
+import { motion } from "framer-motion"
+import { useState } from "react"
+import { useNavbarHeight } from '@/hooks/use-navbar-height'
+import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight } from "lucide-react"
+
+export default function GuestServicesPage() {
+  const { dynamicPadding } = useNavbarHeight()
+  const [isStreetView, setIsStreetView] = useState(false)
+
+  const hotels = [
+    {
+      name: "Hyatt House Jersey City",
+      address: "3 Second St, Jersey City, NJ 07302",
+      phone: "(201) 626-9000",
+      hotelCode: "HYT-JC",
+      bookingLink: "https://hyatt.com/book",
+      blockDates: "July 28 - Aug 3, 2026",
+      travelTime: "15 min drive",
+      walkable: false,
+      amenities: ["Free WiFi", "Fitness Center", "Pet Friendly"]
+    },
+    {
+      name: "DoubleTree by Hilton Fort Lee",
+      address: "2117 Route 4 E, Fort Lee, NJ 07024", 
+      phone: "(201) 461-9000",
+      hotelCode: "DT-FL",
+      bookingLink: "https://hilton.com/book",
+      blockDates: "July 28 - Aug 3, 2026",
+      travelTime: "20 min drive",
+      walkable: false,
+      amenities: ["Pool", "Restaurant", "Business Center"]
+    },
+    {
+      name: "Hampton Inn & Suites Secaucus Meadowlands",
+      address: "300 Harmon Cove Tower, Secaucus, NJ 07094",
+      phone: "(201) 348-2000", 
+      hotelCode: "HI-SEC",
+      bookingLink: "https://hilton.com/hampton",
+      blockDates: "July 28 - Aug 3, 2026",
+      travelTime: "5 min drive",
+      walkable: true,
+      amenities: ["Free Breakfast", "Pool", "Shuttle Service"]
+    }
+  ]
+
+  const transportation = [
+    {
+      type: "NJ Transit Bus",
+      routes: "Route 3, 85, 89",
+      info: "Direct service to NYC and local areas"
+    },
+    {
+      type: "NYC Subway Access", 
+      routes: "Port Authority (42nd St)",
+      info: "30 min via NJ Transit bus"
+    },
+    {
+      type: "Parking",
+      routes: "Temple Parking Lot",
+      info: "Free parking available on-site"
+    }
+  ]
+
+  const attractions = [
+    {
+      name: "Statue of Liberty & Ellis Island",
+      distance: "45 min",
+      description: "Iconic NYC landmarks accessible by ferry"
+    },
+    {
+      name: "Times Square",
+      distance: "35 min", 
+      description: "Heart of NYC entertainment district"
+    },
+    {
+      name: "Central Park",
+      distance: "40 min",
+      description: "NYC's premier urban park"
+    },
+    {
+      name: "9/11 Memorial & Museum", 
+      distance: "50 min",
+      description: "Moving tribute to September 11th victims"
+    }
+  ]
+
+  return (
+    <div className="min-h-screen w-full bg-[#f5f5f5] relative text-gray-900" style={{ paddingTop: dynamicPadding }}>
+      {/* Complex Multiplier Pattern (Enhanced) */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundImage: `
+            repeating-linear-gradient(0deg, rgba(0,0,0,0.04) 0, rgba(0,0,0,0.04) 1px, transparent 1px, transparent 40px),
+            repeating-linear-gradient(45deg, rgba(168,85,247,0.04) 0, rgba(168,85,247,0.04) 1px, transparent 1px, transparent 20px),
+            repeating-linear-gradient(-45deg, rgba(249,115,22,0.05) 0, rgba(249,115,22,0.05) 1px, transparent 1px, transparent 30px),
+            repeating-linear-gradient(90deg, rgba(0,0,0,0.03) 0, rgba(0,0,0,0.03) 1px, transparent 1px, transparent 80px),
+            radial-gradient(circle at 60% 40%, rgba(34,197,94,0.025) 0, transparent 60%)
+          `,
+          backgroundSize: "80px 80px, 40px 40px, 60px 60px, 80px 80px, 100% 100%",
+          backgroundPosition: "0 0, 0 0, 0 0, 40px 40px, center"
+        }}
+      />
+      <div className="container mx-auto px-4 py-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-4">
+            Guest Services
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Everything you need for your stay during the Rajat Mahotsav celebration
+          </p>
+        </motion.div>
+
+        {/* Venue Location Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-3 mb-8">
+            <Navigation className="h-8 w-8 text-orange-500" />
+            <h2 className="text-3xl font-bold">Event Venue</h2>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200">
+                <div className="mb-4 relative">
+                  <div className="absolute top-0 right-0 flex items-center gap-2">
+                    <button
+                      onClick={() => setIsStreetView(!isStreetView)}
+                      className="flex items-center gap-2 p-2 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 transition-colors"
+                      title={isStreetView ? "Switch to Map View" : "Switch to Satellite View"}
+                    >
+                      {isStreetView ? <ToggleRight className="h-4 w-4 text-orange-500" /> : <ToggleLeft className="h-4 w-4 text-orange-500" />}
+                      <span className="text-xs text-orange-500">{isStreetView ? "Satellite" : "Map"}</span>
+                    </button>
+                    <button
+                      onClick={() => navigator.clipboard.writeText('200 Swamibapa Way, Secaucus, NJ 07094')}
+                      className="p-2 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 transition-colors"
+                      title="Copy address"
+                    >
+                      <Copy className="h-4 w-4 text-orange-500" />
+                    </button>
+                  </div>
+                  <h3 className="text-2xl font-bold text-orange-400 mb-2 pr-32">Shree Swaminarayan Temple Secaucaus, NJ</h3>
+                  <p className="text-gray-600 flex items-center gap-2">
+                    <MapPin className="h-4 w-4 text-orange-400" />
+                    200 Swamibapa Way, Secaucus, NJ 07094
+                  </p>
+                </div>
+                <div className="relative overflow-hidden rounded-lg">
+                  <iframe
+                    src={isStreetView 
+                      ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1510.9!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f15.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e1!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
+                      : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1510.9!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f15.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                    }
+                    width="100%"
+                    height="500"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Hotels Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-3 mb-8">
+            <Hotel className="h-8 w-8 text-purple-500" />
+            <h2 className="text-3xl font-bold">Recommended Hotels</h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {hotels.map((hotel, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 * index }}
+                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200"
+              >
+                <h3 className="text-xl font-bold mb-3">{hotel.name}</h3>
+                <div className="space-y-2 text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <Hash className="h-4 w-4 text-purple-400" />
+                    <span className="text-sm font-medium">{hotel.hotelCode}</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <MapPin className="h-4 w-4 mt-1 text-purple-400" />
+                    <span className="text-sm">{hotel.address}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="h-4 w-4 text-purple-400" />
+                    <span className="text-sm">{hotel.phone}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4 text-purple-400" />
+                    <span className="text-sm font-medium">{hotel.travelTime}</span>
+                    {hotel.walkable && <span className="text-xs bg-green-500/20 text-green-600 px-2 py-1 rounded">Walkable</span>}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4 text-purple-400" />
+                    <span className="text-sm">{hotel.blockDates}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <ExternalLink className="h-4 w-4 text-purple-400" />
+                    <a href={hotel.bookingLink} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">Book Now</a>
+                  </div>
+                  <div className="mt-3">
+                    <div className="flex flex-wrap gap-1">
+                      {hotel.amenities.map((amenity, i) => (
+                        <span key={i} className="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded">
+                          {amenity}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Transportation Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-3 mb-8">
+            <Car className="h-8 w-8 text-blue-500" />
+            <h2 className="text-3xl font-bold">Transportation</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {transportation.map((transport, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 * index }}
+                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200"
+              >
+                <h3 className="text-xl font-bold mb-3 text-blue-400">{transport.type}</h3>
+                <p className="text-gray-600 mb-2"><strong>Routes:</strong> {transport.routes}</p>
+                <p className="text-gray-500 text-sm">{transport.info}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Sightseeing Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <div className="flex items-center gap-3 mb-8">
+            <MapPin className="h-8 w-8 text-green-500" />
+            <h2 className="text-3xl font-bold">NYC Attractions</h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {attractions.map((attraction, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 * index }}
+                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200"
+              >
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="text-xl font-bold text-green-400">{attraction.name}</h3>
+                  <span className="text-sm bg-green-500/20 text-green-300 px-2 py-1 rounded">
+                    {attraction.distance}
+                  </span>
+                </div>
+                <p className="text-gray-600">{attraction.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+      </div>
+    </div>
+  )
+}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
-import { Home, ScrollText, ClipboardPen, CalendarDays, Menu, X } from "lucide-react"
+import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Menu, X } from "lucide-react"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
@@ -39,6 +39,14 @@ const menuItems = [
     gradient:
       "radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(220,38,38,0.06) 50%, rgba(185,28,28,0) 100%)",
     iconColor: "text-red-500",
+  },
+  {
+    icon: Hotel,
+    label: "Guest Services",
+    href: "/guest-services",
+    gradient:
+      "radial-gradient(circle, rgba(168,85,247,0.15) 0%, rgba(147,51,234,0.06) 50%, rgba(126,34,206,0) 100%)",
+    iconColor: "text-purple-500",
   },
 ]
 
@@ -127,7 +135,7 @@ export function Navigation() {
               className="h-16 w-auto sm:h-20 md:h-30 lg:h-40 object-contain"
               priority
             />
-            <div className="h-10 w-px bg-white/40 sm:h-14 md:h-24 lg:h-34 "></div>
+            <div className="h-10 w-px bg-white/40 sm:h-14 md:h-24 lg:h-30 "></div>
             <Image
               src="/maninagar_logo.png"
               alt="Maninagar Logo"

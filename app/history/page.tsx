@@ -1,13 +1,19 @@
 "use client"
 
 import Image from "next/image";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Timeline } from "@/components/ui/timeline";
 import { useNavbarHeight } from "@/hooks/use-navbar-height";
 import ShaderBackground from "@/components/shader-background";
 
 export default function HistoryPage() {
   const { dynamicPadding } = useNavbarHeight()
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100)
+    return () => clearTimeout(timer)
+  }, [])
   const data = [
     {
       title: "2026",
@@ -87,10 +93,14 @@ export default function HistoryPage() {
 
   
   return (
-    <ShaderBackground>
-      <div className="min-h-screen w-full" style={{ paddingTop: dynamicPadding }}>
-        <Timeline data={data} />
-      </div>
-    </ShaderBackground>
+    <>
+      <ShaderBackground>
+        <div className="min-h-screen w-full" style={{ paddingTop: dynamicPadding }}>
+          <div className={`relative transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
+            <Timeline data={data} />
+          </div>
+        </div>
+      </ShaderBackground>
+    </>
   );
 }

@@ -4,16 +4,23 @@ import { useState, useEffect } from "react"
 
 export function useNavbarHeight() {
   const [navbarHeight, setNavbarHeight] = useState(0)
-  const [dynamicPadding, setDynamicPadding] = useState("120px") // Reasonable default
+  const [dynamicPadding, setDynamicPadding] = useState("120px")
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+    
     const updateNavbarHeight = () => {
       const navbar = document.querySelector('[data-navbar]')
       if (navbar) {
         const rect = navbar.getBoundingClientRect()
-        const navbarBottom = rect.bottom // This includes the top-6 offset
+        const navbarBottom = rect.bottom
         const viewportHeight = window.innerHeight
-        const additionalPadding = viewportHeight * 0.03 // 3% of viewport height
+        const additionalPadding = viewportHeight * 0.03
         const totalPadding = navbarBottom + additionalPadding
         
         setNavbarHeight(rect.height)
@@ -21,13 +28,9 @@ export function useNavbarHeight() {
       }
     }
 
-    // Initial calculation
     updateNavbarHeight()
-
-    // Update on resize
     window.addEventListener('resize', updateNavbarHeight)
     
-    // Update when navbar content changes (logo loads, etc.)
     const observer = new MutationObserver(updateNavbarHeight)
     const navbar = document.querySelector('[data-navbar]')
     if (navbar) {
@@ -38,7 +41,7 @@ export function useNavbarHeight() {
       window.removeEventListener('resize', updateNavbarHeight)
       observer.disconnect()
     }
-  }, [])
+  }, [mounted])
 
-  return { navbarHeight, dynamicPadding }
+  return { navbarHeight, dynamicPadding: mounted ? dynamicPadding : "120px" }
 }

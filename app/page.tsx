@@ -1,42 +1,54 @@
 "use client"
 
-import ShaderBackground from "@/components/shader-background"
+import { useState, useEffect } from "react"
 import Countdown from "@/components/countdown"
 import RegularLogo from "@/components/regular_logo"
 import LoadingScreen from "@/components/loading-screen"
-import { ChevronRight } from "lucide-react"
+import VideoSection from "@/components/video-section"
+import TitleSection from "@/components/title-section"
+import ShaderBackground from "@/components/shader-background"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { useNavbarHeight } from "@/hooks/use-navbar-height"
 import { useLoading } from "@/hooks/use-loading"
 
 export default function ShaderShowcase() {
-  // Set target date to July 28, 2026 at 5 PM EST
   const targetDate = '2026-07-28T17:00:00-05:00';
   const deviceType = useDeviceType();
   const { dynamicPadding } = useNavbarHeight();
   const { isLoading } = useLoading();
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <>
       <LoadingScreen />
       {!isLoading && (
-        <ShaderBackground>
-          <div className="h-screen w-screen flex flex-col items-center justify-center p-4 relative z-20 overflow-hidden" style={{ paddingTop: dynamicPadding }}>
-            <div className="flex-1 flex flex-col items-center justify-center relative z-30 max-h-[80vh] portrait:max-h-[60vh]">
+        <>
+          {/* First page with shader background - countdown */}
+          <ShaderBackground>
+            <div className="h-screen w-screen flex flex-col items-center justify-center p-4 relative z-20 overflow-hidden" style={{ paddingTop: dynamicPadding }}>
+              <div className={`flex-1 flex flex-col items-center justify-center relative z-30 max-h-[80vh] portrait:max-h-[60vh] transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
               <div className="max-h-[45vh] landscape:max-h-[45vh] flex items-center justify-start mb-[2vh]">
                 <RegularLogo />
               </div>
               <div className="h-[25vh] landscape:h-[20vh] landscape:max-w-[80vw] flex items-center justify-center">
                 <Countdown targetDate={targetDate} />
               </div>
-              <div className="mt-8 flex justify-center z-30">
-                <p className="text-white/80 text-[2.2vw] md:text-[2vw] lg:text-[1.8vw] xl:text-xl font-lato text-center max-w-4xl leading-tight px-4">
-                  Inspired By: His Divine Holiness Acharya Shree Jitendriyapriyadasji Swamiji Maharaj
-                </p>
+
               </div>
             </div>
-          </div>
-        </ShaderBackground>
+          </ShaderBackground>
+          
+          {/* Title section */}
+          {/* <TitleSection /> */}
+          
+          {/* Video section */}
+          <VideoSection />
+        </>
       )}
     </>
   )
