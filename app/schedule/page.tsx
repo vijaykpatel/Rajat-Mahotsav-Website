@@ -106,22 +106,56 @@ export default function SchedulePage() {
   const { dynamicPadding } = useNavbarHeight()
   const [isLoaded, setIsLoaded] = useState(false)
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
+  const [wordIndex, setWordIndex] = useState(0)
+  const [showTitle, setShowTitle] = useState(false)
+
+  const titleWords = "Calendar of Events".split(" ")
+  const descriptionWords = "Come celebrate 25 years of community, faith, and fellowship! Join us for this special milestone event designed for all ages.".split(" ")
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 300)
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+      setShowTitle(true)
+    }, 300)
     return () => clearTimeout(timer)
   }, [])
+
+  useEffect(() => {
+    if (isLoaded && wordIndex < titleWords.length + descriptionWords.length) {
+      const timer = setTimeout(() => {
+        setWordIndex(prev => prev + 1)
+      }, wordIndex < titleWords.length ? 100 : 20)
+      return () => clearTimeout(timer)
+    }
+  }, [isLoaded, wordIndex, titleWords.length, descriptionWords.length])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50" style={{ paddingTop: dynamicPadding }}>
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className={`text-center mb-12 transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-4">
-            Calendar of Events: July 25 - August 2, 2026
+        <div className="text-center mb-12">
+          <h1 className={`text-4xl md:text-6xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-2 leading-tight transition-all duration-1000 ease-out ${
+            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+          }`}>
+            Calendar of Events
           </h1>
-          <p className="text-gray-600 text-lg md:text-xl">
-            Please join us and don't miss out on any of the fun. We are organizing events for everyone and people of all ages.
+          <div className={`text-2xl md:text-3xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent mb-6 leading-relaxed transition-all duration-1000 ease-out ${
+            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+          }`} style={{ transitionDelay: '200ms' }}>
+            July 25 - August 2, 2026
+          </div>
+          <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-4xl mx-auto">
+            {descriptionWords.map((word, index) => (
+              <span
+                key={index}
+                className={`inline-block mr-2 transition-all duration-500 ease-out ${
+                  index < wordIndex - titleWords.length ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                }`}
+                style={{ transitionDelay: `${400 + index * 20}ms` }}
+              >
+                {word}
+              </span>
+            ))}
           </p>
         </div>
 
@@ -136,7 +170,7 @@ export default function SchedulePage() {
                 isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
               }`}
               style={{ 
-                transitionDelay: `${index * 100}ms`,
+                transitionDelay: `${800 + index * 100}ms`,
                 transform: hoveredCard === index ? 'translateY(-8px) scale(1.02)' : undefined
               }}
               onMouseEnter={() => setHoveredCard(index)}

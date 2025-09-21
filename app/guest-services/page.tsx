@@ -68,28 +68,90 @@ export default function GuestServicesPage() {
     // }
   ]
 
-  const attractions = [
-    {
-      name: "Statue of Liberty & Ellis Island",
-      distance: "45 min",
-      description: "Iconic NYC landmarks accessible by ferry"
-    },
-    {
-      name: "Times Square",
-      distance: "35 min", 
-      description: "Heart of NYC entertainment district"
-    },
-    {
-      name: "Central Park",
-      distance: "40 min",
-      description: "NYC's premier urban park"
-    },
-    {
-      name: "9/11 Memorial & Museum", 
-      distance: "50 min",
-      description: "Moving tribute to September 11th victims"
-    }
-  ]
+  const [activeTab, setActiveTab] = useState('nyc')
+
+  const sightseeingData = {
+    nyc: [
+      {
+        name: "Statue of Liberty & Ellis Island",
+        distance: "45 min",
+        description: "Iconic NYC landmarks accessible by ferry"
+      },
+      {
+        name: "Times Square",
+        distance: "35 min", 
+        description: "Heart of NYC entertainment district"
+      },
+      {
+        name: "Central Park",
+        distance: "40 min",
+        description: "NYC's premier urban park"
+      },
+      {
+        name: "9/11 Memorial & Museum", 
+        distance: "50 min",
+        description: "Moving tribute to September 11th victims"
+      }
+    ],
+    hoboken: [
+      {
+        name: "Hoboken Waterfront Walkway",
+        distance: "20 min",
+        description: "Beautiful views of Manhattan skyline"
+      },
+      {
+        name: "Frank Sinatra Park",
+        distance: "25 min",
+        description: "Waterfront park with stunning city views"
+      },
+      {
+        name: "Washington Street",
+        distance: "22 min",
+        description: "Historic shopping and dining district"
+      }
+    ],
+    dc: [
+      {
+        name: "National Mall",
+        distance: "4 hours",
+        description: "Iconic monuments and museums"
+      },
+      {
+        name: "Smithsonian Museums",
+        distance: "4 hours",
+        description: "World-class museum complex"
+      },
+      {
+        name: "Capitol Building",
+        distance: "4 hours",
+        description: "Historic seat of US government"
+      }
+    ],
+    niagara: [
+      {
+        name: "Niagara Falls State Park",
+        distance: "5 hours",
+        description: "Breathtaking waterfalls and scenic views"
+      },
+      {
+        name: "Maid of the Mist",
+        distance: "5 hours",
+        description: "Boat tour to the base of the falls"
+      },
+      {
+        name: "Cave of the Winds",
+        distance: "5 hours",
+        description: "Walk behind the falls experience"
+      }
+    ]
+  }
+
+  const tabLabels = {
+    nyc: 'NYC',
+    hoboken: 'Hoboken',
+    dc: 'Washington D.C.',
+    niagara: 'Niagara Falls'
+  }
 
   return (
     <div className="min-h-screen w-full bg-[#f5f5f5] relative text-gray-900" style={{ paddingTop: dynamicPadding }}>
@@ -278,26 +340,68 @@ export default function GuestServicesPage() {
         >
           <div className="flex items-center gap-3 mb-8">
             <MapPin className="h-8 w-8 text-green-500" />
-            <h2 className="text-3xl font-bold">NYC Attractions</h2>
+            <h2 className="text-3xl font-bold">Sight-seeing</h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {attractions.map((attraction, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 * index }}
-                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200"
+          
+          {/* Tab Navigation */}
+          <div className="flex flex-wrap gap-2 mb-8 justify-center">
+            {Object.entries(tabLabels).map(([key, label]) => (
+              <button
+                key={key}
+                onClick={() => setActiveTab(key)}
+                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
+                  activeTab === key
+                    ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg shadow-green-500/25'
+                    : 'bg-white/60 backdrop-blur-sm text-gray-700 hover:bg-white/80 border border-gray-200'
+                }`}
               >
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-bold text-green-400">{attraction.name}</h3>
-                  <span className="text-sm bg-green-500/20 text-green-300 px-2 py-1 rounded">
-                    {attraction.distance}
-                  </span>
-                </div>
-                <p className="text-gray-600">{attraction.description}</p>
-              </motion.div>
+                {label}
+              </button>
             ))}
+          </div>
+
+          {/* Content Container */}
+          <div className="relative">
+            {/* Travel Time Info */}
+            <div className="mb-6 text-center">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 px-4 py-2 rounded-full border border-green-200">
+                <Clock className="h-4 w-4 text-green-600" />
+                <span className="text-sm font-medium text-green-700">
+                  From Secaucus, NJ: {activeTab === 'nyc' ? 'Train 15 min | Drive 20 min - 1 hour' : 
+                    activeTab === 'hoboken' ? 'Drive 20-30 min' :
+                    activeTab === 'dc' ? 'Drive 4-5 hours' :
+                    'Drive 5-6 hours'}
+                </span>
+              </div>
+            </div>
+            
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="bg-gradient-to-br from-white/90 to-green-50/80 backdrop-blur-lg rounded-2xl p-8 border border-green-200/50 shadow-xl shadow-green-500/10"
+            >
+              <div className="grid md:grid-cols-2 gap-6">
+                {sightseeingData[activeTab as keyof typeof sightseeingData].map((attraction, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 * index }}
+                    className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-green-100 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300 hover:scale-105"
+                  >
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="text-xl font-bold text-green-600">{attraction.name}</h3>
+                      <span className="text-sm bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-700 px-3 py-1 rounded-full font-medium">
+                        {attraction.distance}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 leading-relaxed">{attraction.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </motion.section>
       </div>
