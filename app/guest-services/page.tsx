@@ -19,7 +19,7 @@ export default function GuestServicesPage() {
       blockDates: "July 28 - Aug 3, 2026",
       travelTime: "15 min drive",
       walkable: false,
-      amenities: ["Free WiFi", "Fitness Center", "Pet Friendly"]
+      amenities: ["Free WiFi", "Fitness Center"]
     },
     {
       name: "DoubleTree by Hilton Fort Lee",
@@ -30,7 +30,7 @@ export default function GuestServicesPage() {
       blockDates: "July 28 - Aug 3, 2026",
       travelTime: "20 min drive",
       walkable: false,
-      amenities: ["Pool", "Restaurant", "Business Center"]
+      amenities: ["Business Center"]
     },
     {
       name: "Hampton Inn & Suites Secaucus Meadowlands",
@@ -41,7 +41,7 @@ export default function GuestServicesPage() {
       blockDates: "July 28 - Aug 3, 2026",
       travelTime: "5 min drive",
       walkable: true,
-      amenities: ["Free Breakfast", "Pool", "Shuttle Service"]
+      amenities: ["Free Breakfast", "Pool", "Shuttle Service to New York"]
     }
   ]
 
@@ -52,15 +52,20 @@ export default function GuestServicesPage() {
       info: "Direct service to NYC and local areas"
     },
     {
-      type: "NYC Subway Access", 
-      routes: "Port Authority (42nd St)",
-      info: "30 min via NJ Transit bus"
+      type: "NJ Transit Train", 
+      routes: "Secaucus directly to Penn Station",
+      info: "10 minute train ride. Secaucus station is a 5 minute drive from mandir!"
     },
     {
-      type: "Parking",
-      routes: "Temple Parking Lot",
-      info: "Free parking available on-site"
-    }
+      type: "NYC Subway Access", 
+      routes: "Penn Station or Port Authority has access to local NYC subway",
+      info: "30 min via NJ Transit bus"
+    },
+    // {
+    //   type: "Parking",
+    //   routes: "Temple Parking Lot",
+    //   info: "Free parking available on-site"
+    // }
   ]
 
   const attractions = [
