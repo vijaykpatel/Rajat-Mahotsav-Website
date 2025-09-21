@@ -18,8 +18,8 @@ const menuItems = [
   },
   {
     icon: ScrollText,
-    label: "History",
-    href: "/history",
+    label: "Timeline",
+    href: "/timeline",
     gradient:
       "radial-gradient(circle, rgba(249,115,22,0.15) 0%, rgba(234,88,12,0.06) 50%, rgba(194,65,12,0) 100%)",
     iconColor: "text-orange-500",
@@ -33,20 +33,20 @@ const menuItems = [
     iconColor: "text-green-500",
   },
   {
-    icon: CalendarDays,
-    label: "Schedule",
-    href: "/schedule",
-    gradient:
-      "radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(220,38,38,0.06) 50%, rgba(185,28,28,0) 100%)",
-    iconColor: "text-red-500",
-  },
-  {
     icon: Hotel,
     label: "Guest Services",
     href: "/guest-services",
     gradient:
       "radial-gradient(circle, rgba(168,85,247,0.15) 0%, rgba(147,51,234,0.06) 50%, rgba(126,34,206,0) 100%)",
     iconColor: "text-purple-500",
+  },
+  {
+    icon: CalendarDays,
+    label: "Schedule",
+    href: "/schedule",
+    gradient:
+      "radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(220,38,38,0.06) 50%, rgba(185,28,28,0) 100%)",
+    iconColor: "text-red-500",
   },
 ]
 

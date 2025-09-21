@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Navigation } from "@/components/navigation"
 import { Toaster } from "@/components/ui/toaster"
 import StickyFooter from "@/components/sticky-footer"
+import { ScrollToTop } from "@/components/scroll-to-top"
 import "./globals.css"
 
 const figtree = Figtree({
@@ -87,6 +88,7 @@ html {
             </div>
             <StickyFooter />
           </div>
+          <ScrollToTop />
           <Toaster />
         </ThemeProvider>
       </body>

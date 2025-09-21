@@ -6,7 +6,7 @@ import { Timeline } from "@/components/ui/timeline";
 import { useNavbarHeight } from "@/hooks/use-navbar-height";
 import ShaderBackground from "@/components/shader-background";
 
-export default function HistoryPage() {
+export default function TimelinePage() {
   const { dynamicPadding } = useNavbarHeight()
   const [isLoaded, setIsLoaded] = useState(false)
 
