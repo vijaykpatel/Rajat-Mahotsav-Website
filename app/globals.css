@@ -158,6 +158,11 @@
   .h-dvh {
     height: 100dvh;
   }
+
+    /* Dynamic viewport height utility */
+  .h-vh {
+    height: 100vh;
+  }
   
   /* Safe area inset utilities */
   .pt-safe {
@@ -213,13 +218,8 @@
     /* Ensure minimum padding on devices without safe areas */
     padding-top: max(env(safe-area-inset-top), 0px);
     padding-bottom: max(env(safe-area-inset-bottom), 0px);
-    /* Prevent independent scrolling */
-    overscroll-behavior: none;
     /* Ensure unified scroll behavior */
     -webkit-overflow-scrolling: touch;
-    /* Fix mobile height issues */
-    min-height: 100vh;
-    min-height: 100dvh;
     /* Extend footer color to bottom safe area */
     background: linear-gradient(to bottom, transparent 0%, transparent calc(100% - env(safe-area-inset-bottom)), var(--footer-color) calc(100% - env(safe-area-inset-bottom)));
   }
