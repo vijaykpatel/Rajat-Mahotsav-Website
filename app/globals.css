@@ -4,9 +4,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Music&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 
+/* Mobile scroll behavior fixes */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific fixes */
+  html {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+  }
+  
+  body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+    position: relative;
+  }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Footer color variable */
+  --footer-color: rgba(248, 248, 248, 0.85);
   /* Updated color tokens to match dramatic lighting design brief */
   --background: #000000; /* Pure black background */
   --foreground: oklch(1 0 0); /* Pure white for text and highlights */
@@ -133,6 +150,8 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    /* Prevent independent scrolling on all elements */
+    overscroll-behavior: none;
   }
   html {
     /* Enable smooth scrolling for better scroll-to-top experience */
@@ -143,7 +162,13 @@
     overflow-x: hidden;
     width: 100%;
     /* Fill safe area with light grey/silver color matching footer */
-    background: rgba(248, 248, 248, 0.85);
+    background: var(--footer-color);
+    /* Ensure consistent scroll behavior */
+    -webkit-overflow-scrolling: touch;
+    /* Fix mobile viewport height */
+    height: 100%;
+    /* Extend background to safe areas */
+    /* padding-bottom: env(safe-area-inset-bottom); */
   }
   body {
     @apply bg-background text-foreground;
@@ -161,6 +186,15 @@
     /* Ensure minimum padding on devices without safe areas */
     padding-top: max(env(safe-area-inset-top), 0px);
     padding-bottom: max(env(safe-area-inset-bottom), 0px);
+    /* Prevent independent scrolling */
+    overscroll-behavior: none;
+    /* Ensure unified scroll behavior */
+    -webkit-overflow-scrolling: touch;
+    /* Fix mobile height issues */
+    min-height: 100vh;
+    min-height: 100dvh;
+    /* Extend footer color to bottom safe area */
+    background: linear-gradient(to bottom, transparent 0%, transparent calc(100% - env(safe-area-inset-bottom)), var(--footer-color) calc(100% - env(safe-area-inset-bottom)));
   }
   
   /* Mobile-specific optimizations */
@@ -168,22 +202,89 @@
     html {
       /* Prevent zoom on input focus on iOS */
       -webkit-text-size-adjust: 100%;
+      /* Fix mobile scroll momentum */
+      -webkit-overflow-scrolling: touch;
+      /* Prevent elastic scrolling */
+      overscroll-behavior-y: none;
     }
     
     body {
       /* Improve touch scrolling on mobile */
       -webkit-overflow-scrolling: touch;
-      /* Fix mobile scroll behavior */
+      /* Fix mobile scroll behavior - only allow vertical scrolling */
       touch-action: pan-y;
+      /* Prevent independent scrolling */
+      overscroll-behavior: none;
+      /* Ensure body takes full height */
+      min-height: 100vh;
+      min-height: 100dvh;
     }
     
     /* Prevent content from scrolling independently on mobile */
     * {
       overscroll-behavior: contain;
+      /* Prevent momentum scrolling on individual elements */
+      -webkit-overflow-scrolling: auto;
+    }
+    
+    /* Fix for all page containers scrolling issues */
+    .unified-scroll-container, .registration-container {
+      /* Ensure unified scrolling behavior */
+      overscroll-behavior: none;
+      -webkit-overflow-scrolling: touch;
+      /* Prevent independent element scrolling */
+      transform: translateZ(0);
+      will-change: scroll-position;
+    }
+    
+    /* Prevent form elements from creating independent scroll contexts */
+    form, .form-container {
+      overscroll-behavior: none;
+      -webkit-overflow-scrolling: auto;
     }
   }
 }
 
 .instrument {
   font-family: var(--font-instrument-serif);
+}
+
+/* Additional mobile scroll fixes */
+@media (max-width: 768px) {
+  /* Prevent iOS Safari bounce scrolling */
+  html, body {
+    position: relative;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+  }
+  
+  /* Extend footer color to browser UI */
+  html {
+    background: var(--footer-color) !important;
+  }
+  
+  body {
+    /* Ensure footer color extends to bottom */
+    background: linear-gradient(to bottom, transparent 0%, transparent 90%, var(--footer-color) 90%) !important;
+  }
+  
+  /* Fix for all page containers */
+  .unified-scroll-container, .registration-container, [data-page] {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+    transform: translateZ(0);
+  }
+  
+  /* Prevent form containers from creating scroll contexts */
+  .card, .form-container, form {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
+  }
+  
+  /* Ensure footer extends to safe areas */
+  footer {
+    padding-bottom: env(safe-area-inset-bottom);
+    margin-bottom: calc(-1 * env(safe-area-inset-bottom));
+  }
 }
