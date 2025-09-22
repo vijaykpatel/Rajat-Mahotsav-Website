@@ -191,14 +191,10 @@ export default function RegistrationPage() {
 
   return (
     <>
-      {/* Full-height Background */}
-      <div className="fixed inset-0 z-0 h-full" style={{backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh', minHeight: '100vh'}}>
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/15 via-purple-300/15 to-blue-400/15 h-full min-h-screen"></div>
+      {/* Scrollable Background and Content */}
+      <div className={`relative min-h-screen transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{paddingTop: dynamicPadding, minHeight: '100vh', backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/15 via-purple-300/15 to-blue-400/15"></div>
         <BackgroundPaths />
-      </div>
-      
-      {/* Scrollable Content */}
-      <div className={`relative z-10 min-h-screen transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{paddingTop: dynamicPadding, minHeight: '100vh'}}>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         {/* Title with Typewriter Animation */}
         <div className="text-center mb-8">
