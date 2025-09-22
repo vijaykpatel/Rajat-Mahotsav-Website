@@ -47,11 +47,8 @@ export default function TitleSection() {
         className="text-center mb-8"
       >
         <h1 className="w-full font-black text-white uppercase leading-none text-center">
-          <div className="text-[10vw] sm:text-6xl md:text-7xl lg:text-8xl xl:text-[8rem] tracking-tight">Maninagar Shree</div>
-          <div className="text-[11vw] sm:text-6xl md:text-8xl lg:text-9xl xl:text-[9rem] tracking-tight">Swaminarayan</div>
-          <div className="text-[11vw] sm:text-6xl md:text-8xl lg:text-9xl xl:text-[9rem] tracking-tight">Gadi Sansthan</div>
+          <div className="text-[14vw] sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] tracking-tight">Rajat Mahotsav</div>
           <div className="text-[11vw] sm:text-6xl md:text-8xl lg:text-9xl xl:text-[9rem] tracking-tight">Secaucus, NJ</div>
-          <div className="text-[13vw] sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] tracking-tight">Rajat Mahotsav</div>
         </h1>
         {/* <h1 className="text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black text-white uppercase tracking-wider leading-none">
           Suvarana Tula Murti<br />

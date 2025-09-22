@@ -23,11 +23,14 @@ import { supabase } from "@/utils/supabase/client"
 
 
 const FormSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  middleName: z.string().optional(),
-  lastName: z.string().min(1, "Last name is required"),
-  age: z.string().min(1, "Age is required"),
-  ghaam: z.string().min(1, "Ghaam is required"),
+  firstName: z.string().min(1, "First name is required").regex(/^[A-Za-z]+$/, "First name must contain only letters"),
+  middleName: z.string().optional().refine((val) => !val || /^[A-Za-z]+$/.test(val), "Middle name must contain only letters"),
+  lastName: z.string().min(1, "Last name is required").regex(/^[A-Za-z]+$/, "Last name must contain only letters"),
+  age: z.string().min(1, "Age is required").refine((val) => {
+    const num = parseInt(val)
+    return !isNaN(num) && num >= 1 && num <= 99
+  }, "Age must be a number between 1 and 99"),
+  ghaam: z.string().min(1, "Ghaam is required").regex(/^[A-Za-z]+$/, "Ghaam must contain only letters"),
   country: z.string().min(1, "Country is required"),
   mandal: z.string().min(1, "Mandal is required"),
   email: z.string().email("Invalid email address"),
@@ -60,6 +63,19 @@ export default function RegistrationPage() {
     country: "",
     mandal: ""
   })
+  const [phoneCountry, setPhoneCountry] = useState<string>("US")
+
+  const getPhoneCountryFromCountry = (country: string) => {
+    const countryMap: { [key: string]: string } = {
+      "australia": "AU",
+      "canada": "CA", 
+      "england": "GB",
+      "india": "IN",
+      "kenya": "KE",
+      "usa": "US"
+    }
+    return countryMap[country] || "US"
+  }
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -71,6 +87,7 @@ export default function RegistrationPage() {
     watch
   } = useForm<FormData>({
     resolver: zodResolver(FormSchema),
+    mode: "onChange",
     defaultValues: {
       firstName: "",
       middleName: "",
@@ -247,6 +264,9 @@ export default function RegistrationPage() {
                       />
                     )}
                   />
+                  {errors.middleName && (
+                    <p className="text-red-400 text-sm">{errors.middleName.message}</p>
+                  )}
                 </div>
 
                 {/* Last Name */}
@@ -326,6 +346,10 @@ export default function RegistrationPage() {
                       <Select value={field.value} onValueChange={(value) => {
                         field.onChange(value)
                         updateFormData("country", value)
+                        
+                        // Set phone country based on selected country
+                        const newPhoneCountry = getPhoneCountryFromCountry(value)
+                        setPhoneCountry(newPhoneCountry)
                         
                         if (value === "india") {
                           updateFormData("mandal", "Maninagar")
@@ -430,7 +454,8 @@ export default function RegistrationPage() {
                         {...field}
                         id="phone"
                         placeholder="Enter a phone number"
-                        defaultCountry="US"
+                        defaultCountry={phoneCountry as any}
+                        key={phoneCountry}
                         onChange={(value) => {
                           field.onChange(value)
                           if (value && isValidPhoneNumber(value)) {

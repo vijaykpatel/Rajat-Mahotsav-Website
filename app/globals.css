@@ -135,6 +135,8 @@
     @apply border-border outline-ring/50;
   }
   html {
+    /* Enable smooth scrolling for better scroll-to-top experience */
+    scroll-behavior: smooth;
     /* Prevent bounce effect when scrolling to top/bottom */
     overscroll-behavior: none;
     /* Prevent horizontal scrolling */

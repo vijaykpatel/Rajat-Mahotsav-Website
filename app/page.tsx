@@ -44,7 +44,7 @@ export default function ShaderShowcase() {
           </ShaderBackground>
           
           {/* Title section */}
-          {/* <TitleSection /> */}
+          <TitleSection />
           
           {/* Video section */}
           <VideoSection />

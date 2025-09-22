@@ -1,39 +1,55 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { ArrowUp } from "lucide-react"
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false)
   const [isDarkBackground, setIsDarkBackground] = useState(true)
+  const rafRef = useRef<number>()
 
   useEffect(() => {
+    let ticking = false
+    
     const handleScroll = () => {
-      setIsVisible(window.scrollY > 300)
-      
-      // Sample background color at button position
-      const element = document.elementFromPoint(window.innerWidth - 50, window.innerHeight - 100)
-      if (element) {
-        const styles = window.getComputedStyle(element)
-        const bgColor = styles.backgroundColor
-        
-        // Check if background is light or dark
-        if (bgColor && bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {
-          const rgb = bgColor.match(/\d+/g)
-          if (rgb) {
-            const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000
-            setIsDarkBackground(brightness < 128)
-          }
-        }
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          // Fast visibility check
+          setIsVisible(window.scrollY > 300)
+          
+          // Throttle expensive background sampling
+          if (rafRef.current) cancelAnimationFrame(rafRef.current)
+          rafRef.current = requestAnimationFrame(() => {
+            const element = document.elementFromPoint(window.innerWidth - 50, window.innerHeight - 100)
+            if (element) {
+              const styles = window.getComputedStyle(element)
+              const bgColor = styles.backgroundColor
+              
+              if (bgColor && bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {
+                const rgb = bgColor.match(/\d+/g)
+                if (rgb) {
+                  const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000
+                  setIsDarkBackground(brightness < 128)
+                }
+              }
+            }
+          })
+          
+          ticking = false
+        })
+        ticking = true
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
   }, [])
 
   const scrollToTop = () => {
-    window.scrollTo({
+    document.documentElement.scrollTo({
       top: 0,
       behavior: 'smooth'
     })

@@ -3,11 +3,11 @@
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { useNavbarHeight } from '@/hooks/use-navbar-height'
-import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight } from "lucide-react"
+import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane } from "lucide-react"
 
 export default function GuestServicesPage() {
   const { dynamicPadding } = useNavbarHeight()
-  const [isStreetView, setIsStreetView] = useState(false)
+  const [isStreetView, setIsStreetView] = useState(true)
 
   const hotels = [
     {
@@ -19,6 +19,7 @@ export default function GuestServicesPage() {
       blockDates: "July 28 - Aug 3, 2026",
       travelTime: "15 min drive",
       walkable: false,
+      pricePerNight: "$189",
       amenities: ["Free WiFi", "Fitness Center"]
     },
     {
@@ -30,6 +31,7 @@ export default function GuestServicesPage() {
       blockDates: "July 28 - Aug 3, 2026",
       travelTime: "20 min drive",
       walkable: false,
+      pricePerNight: "$159",
       amenities: ["Business Center"]
     },
     {
@@ -41,6 +43,7 @@ export default function GuestServicesPage() {
       blockDates: "July 28 - Aug 3, 2026",
       travelTime: "5 min drive",
       walkable: true,
+      pricePerNight: "$149",
       amenities: ["Free Breakfast", "Pool", "Shuttle Service to New York"]
     }
   ]
@@ -170,7 +173,7 @@ export default function GuestServicesPage() {
           backgroundPosition: "0 0, 0 0, 0 0, 40px 40px, center"
         }}
       />
-      <div className="container mx-auto px-4 py-8 relative z-10">
+      <div className="container mx-auto px-4 pb-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -226,8 +229,8 @@ export default function GuestServicesPage() {
                 <div className="relative overflow-hidden rounded-lg">
                   <iframe
                     src={isStreetView 
-                      ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1510.9!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f15.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e1!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
-                      : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1510.9!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f15.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                      ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e1!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
+                      : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
                     }
                     width="100%"
                     height="500"
@@ -239,6 +242,65 @@ export default function GuestServicesPage() {
                 </div>
               </div>
             </div>
+          </div>
+        </motion.section>
+
+        {/* Airport Transportation Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.15 }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-3 mb-8">
+            <Plane className="h-8 w-8 text-blue-500" />
+            <h2 className="text-3xl font-bold">Airport Transportation</h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200"
+            >
+              <h3 className="text-xl font-bold mb-3 text-blue-400">Newark Liberty International (EWR)</h3>
+              <div className="space-y-2 text-gray-600">
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-blue-400" />
+                  <span className="text-sm font-medium">25-35 min drive</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Car className="h-4 w-4 text-blue-400" />
+                  <span className="text-sm">Uber/Lyft: $35-50</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Navigation className="h-4 w-4 text-blue-400" />
+                  <span className="text-sm">Taxi: $45-60</span>
+                </div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200"
+            >
+              <h3 className="text-xl font-bold mb-3 text-blue-400">LaGuardia Airport (LGA)</h3>
+              <div className="space-y-2 text-gray-600">
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-blue-400" />
+                  <span className="text-sm font-medium">35-45 min drive</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Car className="h-4 w-4 text-blue-400" />
+                  <span className="text-sm">Uber/Lyft: $45-65</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Navigation className="h-4 w-4 text-blue-400" />
+                  <span className="text-sm">Taxi: $55-75</span>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </motion.section>
 
@@ -284,6 +346,10 @@ export default function GuestServicesPage() {
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-purple-400" />
                     <span className="text-sm">{hotel.blockDates}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <DollarSign className="h-4 w-4 text-purple-400" />
+                    <span className="text-sm font-semibold">{hotel.pricePerNight}/night</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <ExternalLink className="h-4 w-4 text-purple-400" />
@@ -391,11 +457,8 @@ export default function GuestServicesPage() {
                     transition={{ duration: 0.6, delay: 0.1 * index }}
                     className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-green-100 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300 hover:scale-105"
                   >
-                    <div className="flex justify-between items-start mb-3">
+                    <div className="mb-3">
                       <h3 className="text-xl font-bold text-green-600">{attraction.name}</h3>
-                      <span className="text-sm bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-700 px-3 py-1 rounded-full font-medium">
-                        {attraction.distance}
-                      </span>
                     </div>
                     <p className="text-gray-600 leading-relaxed">{attraction.description}</p>
                   </motion.div>

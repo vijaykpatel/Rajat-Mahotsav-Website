@@ -61,9 +61,9 @@ const scheduleData: ScheduleDay[] = [
     dayName: "Thursday", 
     month: "July",
     events: [
-      { time: "Morning", title: "Statue of Liberty", description: "Planning phase" },
+      { time: "Morning", title: "Patriotic Ceremony" },
       { time: "2pm - 4pm", title: "Mahila Program" },
-      { time: "4pm - 6pm", title: "Program" },
+      { time: "4pm - 6pm", title: "Afternoon Katha" },
       { time: "Evening", title: "Samuh Raas" }
     ],
     isHighlight: true
@@ -73,9 +73,9 @@ const scheduleData: ScheduleDay[] = [
     dayName: "Friday",
     month: "July", 
     events: [
-      { time: "Morning", title: "Katha Varta and Ashiwaad", description: "at mandir" },
+      { time: "Morning", title: "Katha Varta and Ashiwaad" },
       { time: "2pm - 4pm", title: "Mahila Program" },
-      { time: "4pm - 6pm", title: "Program" },
+      { time: "4pm - 6pm", title: "Afternoon Katha" },
       { time: "Evening", title: "Bhakti Nrutya" }
     ],
     isHighlight: true
@@ -86,7 +86,7 @@ const scheduleData: ScheduleDay[] = [
     month: "August",
     events: [
       { time: "Morning", title: "Nagaryatra" },
-      { time: "4pm - 6pm", title: "Program" },
+      { time: "4pm - 6pm", title: "Afternoon Katha" },
       { time: "Evening", title: "Naatika" }
     ],
     isHighlight: true
@@ -131,7 +131,7 @@ export default function SchedulePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50" style={{ paddingTop: dynamicPadding }}>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 pb-8">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className={`text-4xl md:text-6xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-2 leading-tight transition-all duration-1000 ease-out ${
@@ -184,18 +184,18 @@ export default function SchedulePage() {
               {/* Date Header */}
               <div className="relative p-6 pb-4">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="text-right">
-                    <div className={`text-4xl font-bold transition-colors duration-300 ${
+                  <div className="text-center">
+                    <div className={`text-5xl font-bold transition-colors duration-300 ${
                       day.isHighlight ? 'text-orange-600' : 'text-gray-800'
                     }`}>
                       {day.date}
                     </div>
-                    <div className="text-sm text-gray-500 font-medium">
+                    <div className="text-base text-gray-500 font-medium">
                       {day.month}
                     </div>
                   </div>
-                  <div className="text-left">
-                    <div className="text-lg font-semibold text-gray-800">
+                  <div className="text-right">
+                    <div className="text-xl font-semibold text-gray-800">
                       {day.dayName}
                     </div>
                   </div>
@@ -220,16 +220,16 @@ export default function SchedulePage() {
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <div className={`text-xs font-medium mb-1 ${
+                          <div className={`text-sm font-medium mb-1 ${
                             day.isHighlight ? 'text-orange-600' : 'text-gray-500'
                           }`}>
                             {event.time}
                           </div>
-                          <div className="text-sm font-semibold text-gray-800 leading-tight">
+                          <div className="text-base font-semibold text-gray-800 leading-tight">
                             {event.title}
                           </div>
                           {event.description && (
-                            <div className="text-xs text-gray-600 mt-1 italic">
+                            <div className="text-sm text-gray-600 mt-1 italic">
                               {event.description}
                             </div>
                           )}
@@ -258,8 +258,8 @@ export default function SchedulePage() {
         </div>
 
         {/* Footer note */}
-        <div className={`text-center mt-12 transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: '800ms' }}>
-          <p className="text-gray-500 text-sm">
+        <div className={`text-center mt-8 transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: '800ms' }}>
+          <p className="text-gray-500 text-md">
             * Highlighted days indicate major ceremony events
           </p>
         </div>

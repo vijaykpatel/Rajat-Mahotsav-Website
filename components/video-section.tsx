@@ -226,22 +226,6 @@ export default function VideoSection() {
               <VideoCard {...getCurrentVideo()} />
             </motion.div>
           </div>
-          
-          <div className="flex justify-center gap-6">
-            <button
-              onClick={prevVideos}
-              className="p-3 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white transition-colors"
-            >
-              <ChevronLeft className="w-6 h-6 text-gray-700" />
-            </button>
-            
-            <button
-              onClick={nextVideos}
-              className="p-3 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white transition-colors"
-            >
-              <ChevronRight className="w-6 h-6 text-gray-700" />
-            </button>
-          </div>
         </div>
       </div>
     </div>
