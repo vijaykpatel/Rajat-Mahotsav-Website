@@ -164,15 +164,15 @@ export default function VideoSection() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-blue-50 pt-48 pb-20 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-blue-50 pt-30 md:pt-50 pb-20 px-4">
       <div className="max-w-[90rem] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 md:mb-32"
+          className="text-center mb-16 md:mb-46"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-8">
             Rajat Mahotsav Celebrations have already begun!
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
