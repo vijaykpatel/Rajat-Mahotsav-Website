@@ -168,47 +168,18 @@
     html {
       /* Prevent zoom on input focus on iOS */
       -webkit-text-size-adjust: 100%;
-      /* Ensure only the page scrolls */
-      position: fixed;
-      width: 100%;
-      height: 100%;
     }
     
     body {
       /* Improve touch scrolling on mobile */
       -webkit-overflow-scrolling: touch;
-      /* Fix mobile scroll behavior - only allow vertical scrolling */
+      /* Fix mobile scroll behavior */
       touch-action: pan-y;
-      /* Ensure body takes full height and scrolls properly */
-      position: relative;
-      height: 100vh;
-      overflow-y: auto;
-      overflow-x: hidden;
     }
     
-    /* Prevent all child elements from scrolling independently */
+    /* Prevent content from scrolling independently on mobile */
     * {
-      overscroll-behavior: none;
-      /* Prevent independent transforms that cause wiggling */
-      transform: translateZ(0);
-      -webkit-transform: translateZ(0);
-    }
-    
-    /* Ensure main content containers don't scroll independently */
-    main, section, div, header, nav {
-      position: relative;
-      overflow: visible;
-      /* Prevent any independent scrolling */
-      overscroll-behavior: none;
-    }
-    
-    /* Fix for navigation and fixed elements */
-    nav, header {
-      position: fixed;
-      z-index: 50;
-      /* Prevent nav from moving during scroll */
-      transform: translate3d(0, 0, 0);
-      -webkit-transform: translate3d(0, 0, 0);
+      overscroll-behavior: contain;
     }
   }
 }
