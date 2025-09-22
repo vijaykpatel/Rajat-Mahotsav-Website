@@ -58,6 +58,8 @@ export function Navigation() {
   const router = useRouter()
   const pathname = usePathname()
 
+
+
   useEffect(() => {
     setMounted(true)
     const currentItem = menuItems.find(item => item.href === pathname)
