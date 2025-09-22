@@ -39,7 +39,7 @@ export default function TitleSection() {
   }, [targetDate]);
 
   return (
-    <div className="h-dvh bg-[#4B9CD3] flex flex-col items-center justify-center px-4 py-safe" style={{ paddingTop: dynamicPadding }}>
+    <div className="h-dvh bg-[#4B9CD3] flex flex-col items-center justify-center px-4" style={{ paddingTop: dynamicPadding }}>
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
