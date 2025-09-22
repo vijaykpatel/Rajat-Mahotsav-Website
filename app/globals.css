@@ -173,6 +173,13 @@
     body {
       /* Improve touch scrolling on mobile */
       -webkit-overflow-scrolling: touch;
+      /* Fix mobile scroll behavior */
+      touch-action: pan-y;
+    }
+    
+    /* Prevent content from scrolling independently on mobile */
+    * {
+      overscroll-behavior: contain;
     }
   }
 }

@@ -51,7 +51,7 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
   const showSecondaryShader = deviceType !== 'mobile' // Remove secondary shader on mobile
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-black relative overflow-hidden">
+    <div ref={containerRef} className="min-h-screen bg-black relative">
       {/* Simplified SVG Filters for mobile/tablet */}
       {mounted && deviceType === 'desktop' && (
         <svg className="absolute inset-0 w-0 h-0">
