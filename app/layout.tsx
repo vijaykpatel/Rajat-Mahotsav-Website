@@ -83,7 +83,7 @@ html {
       <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoMusic.variable} ${lato.variable} ${antonio.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Navigation />
-          <div className="min-h-screen flex flex-col">
+          <div className="unified-scroll-container min-h-screen flex flex-col">
             <div className="flex-1">
               {children}
             </div>
