@@ -226,6 +226,38 @@ export default function VideoSection() {
               <VideoCard {...getCurrentVideo()} />
             </motion.div>
           </div>
+          
+          {/* Mobile navigation arrows */}
+          <div className="flex justify-center items-center gap-6 mt-8">
+            <button
+              onClick={prevVideos}
+              className="p-3 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6 text-gray-700" />
+            </button>
+            
+            <div className="flex gap-2">
+              {videos.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setDirection(index > currentIndex ? 1 : -1)
+                    setCurrentIndex(index)
+                  }}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    index === currentIndex ? 'bg-orange-500' : 'bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+            
+            <button
+              onClick={nextVideos}
+              className="p-3 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white transition-colors"
+            >
+              <ChevronRight className="w-6 h-6 text-gray-700" />
+            </button>
+          </div>
         </div>
       </div>
     </div>

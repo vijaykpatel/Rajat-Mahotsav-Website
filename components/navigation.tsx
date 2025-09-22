@@ -90,7 +90,7 @@ export function Navigation() {
       >
         <style jsx>{`
           div[data-navbar] {
-            --nav-padding: 3vw;
+            --nav-padding: 2vw;
           }
           @media (min-width: 1024px) {
             div[data-navbar] {
@@ -128,20 +128,20 @@ export function Navigation() {
           {/* Right Side - Both Logos */}
           <div className="flex items-center gap-3">
             <Image
-              src="/main_logo.png"
+              src="/main_logo_no_text.png"
               alt="Main Logo"
               width={80}
               height={80}
-              className="h-16 w-auto sm:h-20 md:h-30 lg:h-40 object-contain"
+              className="h-22 w-auto sm:h-26 md:h-30 lg:h-36 object-contain"
               priority
             />
-            <div className="h-10 w-px bg-white/40 sm:h-14 md:h-24 lg:h-30 "></div>
+            <div className="h-16 w-px bg-white/40 sm:h-20 md:h-24 lg:h-30 "></div>
             <Image
               src="/maninagar_logo.png"
               alt="Maninagar Logo"
               width={80}
               height={80}
-              className="h-16 w-auto sm:h-20 md:h-30 lg:h-40 object-contain"
+              className="h-22 w-auto sm:h-26 md:h-30 lg:h-36 object-contain"
               priority
             />
           </div>
