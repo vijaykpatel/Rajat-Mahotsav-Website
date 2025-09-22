@@ -170,7 +170,7 @@ export default function VideoSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 md:mb-46"
+          className="text-center mb-16 md:mb-26 lg:mb-36 xl:mb-46"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-8">
             Rajat Mahotsav Celebrations have already begun!
@@ -181,7 +181,7 @@ export default function VideoSection() {
         </motion.div>
 
         {/* Desktop: 2-card layout with side arrows */}
-        <div className="hidden lg:block relative">
+        <div className="hidden xl:block relative">
           <div className="grid grid-cols-2 gap-12 w-full max-w-5xl scale-130 mx-auto">
             {getVisibleVideos().map((video, index) => (
               <motion.div
@@ -212,9 +212,24 @@ export default function VideoSection() {
           </button>
         </div>
 
-        {/* Tablet & Mobile: Single card layout with arrows below */}
-        <div className="lg:hidden">
-          <div className="w-full max-w-2xl mx-auto mb-8">
+        {/* Mobile & Tablet: Single card layout with swipe */}
+        <div className="xl:hidden">
+          <div 
+            className="w-full max-w-2xl md:max-w-3xl mx-auto mb-8 cursor-grab active:cursor-grabbing"
+            onTouchStart={(e) => {
+              const startX = e.touches[0].clientX
+              const handleTouchEnd = (endEvent: TouchEvent) => {
+                const endX = endEvent.changedTouches[0].clientX
+                const diff = startX - endX
+                if (Math.abs(diff) > 50) {
+                  if (diff > 0) nextVideos()
+                  else prevVideos()
+                }
+                document.removeEventListener('touchend', handleTouchEnd)
+              }
+              document.addEventListener('touchend', handleTouchEnd)
+            }}
+          >
             <motion.div
               key={`${getCurrentVideo().videoId}-${currentIndex}`}
               initial={{ opacity: 0, x: direction * 100 }}
@@ -227,36 +242,20 @@ export default function VideoSection() {
             </motion.div>
           </div>
           
-          {/* Mobile navigation arrows */}
-          <div className="flex justify-center items-center gap-6 mt-8">
-            <button
-              onClick={prevVideos}
-              className="p-3 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white transition-colors"
-            >
-              <ChevronLeft className="w-6 h-6 text-gray-700" />
-            </button>
-            
-            <div className="flex gap-2">
-              {videos.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setDirection(index > currentIndex ? 1 : -1)
-                    setCurrentIndex(index)
-                  }}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    index === currentIndex ? 'bg-orange-500' : 'bg-gray-300'
-                  }`}
-                />
-              ))}
-            </div>
-            
-            <button
-              onClick={nextVideos}
-              className="p-3 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white transition-colors"
-            >
-              <ChevronRight className="w-6 h-6 text-gray-700" />
-            </button>
+          {/* Mobile dots navigation */}
+          <div className="flex justify-center gap-2 mt-8">
+            {videos.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setDirection(index > currentIndex ? 1 : -1)
+                  setCurrentIndex(index)
+                }}
+                className={`w-3 h-3 rounded-full transition-colors ${
+                  index === currentIndex ? 'bg-orange-500' : 'bg-gray-300'
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>
