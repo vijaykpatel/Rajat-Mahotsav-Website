@@ -76,15 +76,10 @@ html {
   --font-noto-music: ${notoMusic.variable};
   --font-lato: ${lato.variable};
   --font-antonio: ${antonio.variable};
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(196, 181, 253, 0.15), rgba(96, 165, 250, 0.15));
 }
         `}</style>
       </head>
       <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoMusic.variable} ${lato.variable} ${antonio.variable}`}>
-        {/* Global background that extends to all safe areas */}
-        <div className="fixed inset-0 -z-10" style={{backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', top: 'calc(-1 * env(safe-area-inset-top))', bottom: 'calc(-1 * env(safe-area-inset-bottom))', left: 'calc(-1 * env(safe-area-inset-left))', right: 'calc(-1 * env(safe-area-inset-right))'}}>
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/15 via-purple-300/15 to-blue-400/15"></div>
-        </div>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Navigation />
           <div className="min-h-screen flex flex-col">
