@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export default function StickyFooter() {
   return (
-    <footer className="backdrop-blur-xl border-t-4 border-white/40 md:shadow-[0_0_40px_rgba(255,255,255,0.3)]" style={{backgroundColor: 'rgba(248, 248, 248, 0.85)'}}>
+    <footer className="backdrop-blur-xl border-t-4 border-white/40 md:shadow-[0_0_40px_rgba(255,255,255,0.3)]" style={{backgroundColor: 'var(--footer-color)'}}>
       {/* Desktop Layout */}
       <div className="hidden md:grid grid-cols-3 items-start py-1 px-6 gap-4">
         {/* Left Column */}

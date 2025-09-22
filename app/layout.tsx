@@ -67,7 +67,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-        <meta name="theme-color" content="transparent" />
+        <meta name="theme-color" content="rgba(248, 248, 248, 0.85)" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="msapplication-navbutton-color" content="rgba(248, 248, 248, 0.85)" />
         <style>{`
 html {
   font-family: ${figtree.style.fontFamily};
@@ -81,7 +83,7 @@ html {
         `}</style>
       </head>
       <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoMusic.variable} ${lato.variable} ${antonio.variable}`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Navigation />
           <div className="unified-scroll-container min-h-screen flex flex-col">
             <div className="flex-1">
