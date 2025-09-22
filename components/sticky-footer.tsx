@@ -69,7 +69,7 @@ export default function StickyFooter() {
       </div>
 
       {/* Mobile Layout */}
-      <div className="md:hidden flex flex-col items-center py-4 px-6 pb-8 space-y-6">
+      <div className="md:hidden flex flex-col items-center py-4 px-6 space-y-6">
         {/* Inspired By Text */}
         <div className="text-center">
           <span className="text-sm text-gray-800">
