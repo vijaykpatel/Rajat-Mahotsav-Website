@@ -167,7 +167,7 @@ export function Navigation() {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 left-0 h-full backdrop-blur-xl bg-white/10 border-r-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] z-50 p-6"
+              className="fixed top-0 left-0 h-full backdrop-blur-xl bg-white/10 border-r-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] z-50 p-6 overflow-y-auto"
             >
               {/* Close Button */}
               <div className="flex justify-start mb-8">
