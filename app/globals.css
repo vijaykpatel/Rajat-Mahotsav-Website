@@ -287,4 +287,13 @@
     padding-bottom: env(safe-area-inset-bottom);
     margin-bottom: calc(-1 * env(safe-area-inset-bottom));
   }
+  
+  /* Make page sections extend to full viewport including safe areas */
+  .h-screen {
+    height: calc(100vh + env(safe-area-inset-bottom)) !important;
+  }
+  
+  .min-h-screen {
+    min-height: calc(100vh + env(safe-area-inset-bottom)) !important;
+  }
 }
