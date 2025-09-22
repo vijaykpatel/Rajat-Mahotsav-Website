@@ -39,7 +39,7 @@ export default function TitleSection() {
   }, [targetDate]);
 
   return (
-    <div className="h-screen bg-[#4B9CD3] flex flex-col items-center justify-center px-4" style={{ paddingTop: dynamicPadding, height: 'calc(100vh + env(safe-area-inset-bottom))', minHeight: 'calc(100vh + env(safe-area-inset-bottom))' }}>
+    <div className="h-screen bg-[#4B9CD3] flex flex-col items-center justify-center px-4" style={{ paddingTop: dynamicPadding }}>
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}

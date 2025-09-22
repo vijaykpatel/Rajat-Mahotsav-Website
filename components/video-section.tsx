@@ -164,7 +164,7 @@ export default function VideoSection() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-blue-50 pt-48 pb-20 px-4" style={{ minHeight: 'calc(100vh + env(safe-area-inset-bottom))' }}>
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-blue-50 pt-48 pb-20 px-4">
       <div className="max-w-[90rem] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
