@@ -164,7 +164,7 @@ export default function VideoSection() {
   }
 
   return (
-    <div className="min-h-dvh bg-gradient-to-br from-orange-50 via-white to-blue-50 pt-30 md:pt-50 pb-20 px-4">
+    <div className="min-h-dvh bg-gradient-to-br from-orange-50 via-white to-blue-50 pt-30 md:pt-50 pb-20 px-4 px-safe pb-safe">
       <div className="max-w-[90rem] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
