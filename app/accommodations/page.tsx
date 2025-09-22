@@ -5,7 +5,7 @@ import { useState } from "react"
 import { useNavbarHeight } from '@/hooks/use-navbar-height'
 import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane } from "lucide-react"
 
-export default function GuestServicesPage() {
+export default function AccommodationsPage() {
   const { dynamicPadding } = useNavbarHeight()
   const [isStreetView, setIsStreetView] = useState(true)
 
@@ -181,7 +181,7 @@ export default function GuestServicesPage() {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-4">
-            Guest Services
+            Accommodations
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Everything you need for your stay during the Rajat Mahotsav celebration
@@ -446,7 +446,7 @@ export default function GuestServicesPage() {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="bg-gradient-to-br from-white/90 to-green-50/80 backdrop-blur-lg rounded-2xl p-8 border border-green-200/50 shadow-xl shadow-green-500/10"
+              className="bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-gray-200"
             >
               <div className="grid md:grid-cols-2 gap-6">
                 {sightseeingData[activeTab as keyof typeof sightseeingData].map((attraction, index) => (
@@ -455,7 +455,7 @@ export default function GuestServicesPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 * index }}
-                    className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-green-100 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300 hover:scale-105"
+                    className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200"
                   >
                     <div className="mb-3">
                       <h3 className="text-xl font-bold text-green-600">{attraction.name}</h3>
