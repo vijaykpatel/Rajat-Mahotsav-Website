@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-// import ShaderBackground from "./shader-background"
+import ShaderBackground from "./shader-background"
 import { useLoading } from "@/hooks/use-loading"
 
 export default function LoadingScreen() {
@@ -54,7 +54,8 @@ export default function LoadingScreen() {
           className="fixed inset-0 z-50 overflow-hidden cursor-pointer"
           onClick={handleSkip}
         >
-          <div className="h-screen w-screen bg-[#4B9CD3] flex items-center justify-center p-4">
+          <ShaderBackground>
+            <div className="h-screen w-screen flex items-center justify-center p-4">
               {canSkip && (
                 <div className="absolute top-4 right-4 text-white/60 text-sm animate-pulse">
                   Tap to skip
@@ -157,7 +158,8 @@ export default function LoadingScreen() {
                   </h4>
                 </div>
               </motion.div>
-          </div>
+            </div>
+          </ShaderBackground>
         </motion.div>
       )}
     </AnimatePresence>
