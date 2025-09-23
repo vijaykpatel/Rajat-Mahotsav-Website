@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { ArrowRight } from "lucide-react"
 import ShaderBackground from "./shader-background"
 import { useLoading } from "@/hooks/use-loading"
 
@@ -51,15 +52,28 @@ export default function LoadingScreen() {
             filter: { duration: 0.5 },
             rotateY: { duration: 0.8 }
           }}
-          className="fixed inset-0 z-[60] overflow-hidden cursor-pointer"
+          className="fixed cursor-pointer"
+          style={{
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            zIndex: 60
+          }}
           onClick={handleSkip}
         >
           <ShaderBackground>
             <div className="h-screen w-screen flex items-center justify-center p-4">
               {canSkip && (
-                <div className="absolute top-4 right-4 text-white/60 text-sm animate-pulse">
-                  Tap to skip
-                </div>
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="absolute bottom-6 right-6 p-3 rounded-full backdrop-blur-sm bg-white/20 hover:bg-white/30 text-white/90 hover:text-white transition-all duration-300 animate-pulse"
+                  onClick={handleSkip}
+                  aria-label="Skip loading"
+                >
+                  <ArrowRight size={20} />
+                </motion.button>
               )}
               {/* Beige Rectangle with Text Cutout */}
               <motion.div
