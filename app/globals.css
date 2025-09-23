@@ -145,7 +145,6 @@
     overflow-x: hidden;
     width: 100%;
     /* Fill safe area with light grey/silver color matching footer */
-<<<<<<< HEAD
     background: var(--footer-color);
     /* Ensure consistent scroll behavior */
     -webkit-overflow-scrolling: touch;
@@ -153,9 +152,6 @@
     height: 100%;
     /* Extend background to safe areas */
     /* padding-bottom: env(safe-area-inset-bottom); */
-=======
-    background: rgba(248, 248, 248, 0.85);
->>>>>>> parent of a684eb1 (try to fix body scrolling)
   }
   body {
     @apply bg-background text-foreground;
