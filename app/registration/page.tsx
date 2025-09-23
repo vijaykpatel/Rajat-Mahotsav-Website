@@ -65,6 +65,7 @@ export default function RegistrationPage() {
   })
   const [phoneCountry, setPhoneCountry] = useState<string>("US")
 
+
   const getPhoneCountryFromCountry = (country: string) => {
     const countryMap: { [key: string]: string } = {
       "australia": "AU",
@@ -150,20 +151,20 @@ export default function RegistrationPage() {
         toast({
           title: `Successfully registered, ${data.firstName}!`,
           description: "Jay Shree Swaminarayan",
-          className: "bg-green-500/10 text-white border-green-300 shadow-xl backdrop-blur-md",
+          className: "bg-green-600/90 text-white border-green-400/50 shadow-2xl backdrop-blur-lg font-medium",
         })
       } else {
         toast({
           title: "Registration failed",
           description: error.message,
-          className: "bg-red-500/10 text-white border-red-300 shadow-xl backdrop-blur-md",
+          className: "bg-red-600/90 text-white border-red-400/50 shadow-2xl backdrop-blur-lg font-medium",
         })
       }
     } catch (error) {
       toast({
         title: "Registration failed",
         description: "Please check your connection and try again.",
-        className: "bg-red-500/10 text-white border-red-300 shadow-xl backdrop-blur-md",
+        className: "bg-red-600/90 text-white border-red-400/50 shadow-2xl backdrop-blur-lg font-medium",
       })
     } finally {
       setTimeout(() => setIsSubmitting(false), 2000)
@@ -193,25 +194,31 @@ export default function RegistrationPage() {
     <>
       {/* Scrollable Background and Content */}
       <div className={`registration-container relative min-h-screen transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} data-page="registration" style={{paddingTop: dynamicPadding, minHeight: '100vh', backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/15 via-purple-300/15 to-blue-400/15"></div>
-        <BackgroundPaths />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-300/15 via-blue-200/15 to-blue-300/10"></div>
+        <div className="hidden md:block">
+          <BackgroundPaths />
+        </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         {/* Title with Typewriter Animation */}
         <div className="text-center mb-8">
           <div className="flex justify-center">
             <Typewriter 
               text="Register yourself for the Rajat Mahotsav!"
-              speed={80}
+              speed={70}
               className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 drop-shadow-2xl md:whitespace-nowrap"
             />
           </div>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mt-2 drop-shadow-lg px-4 leading-relaxed">Please register yourself and share with everyone you know is coming!</p>
+          <p className={`text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mt-2 drop-shadow-lg px-4 leading-relaxed transition-all duration-1000 ease-out ${
+            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+          }`} style={{ transitionDelay: '400ms' }}>
+            Please register yourself and share with everyone you know is coming!
+          </p>
         </div>
 
         {/* Registration Form */}
         <div className="relative">
           {/* Preloaded glow effect - always visible */}
-          <div className="absolute -inset-8 bg-gradient-to-r from-red-500/20 via-white/30 to-blue-600/20 rounded-[3rem] blur-2xl opacity-60 will-change-transform"></div>
+          <div className="absolute -inset-8 bg-gradient-to-r from-red-500/30 via-white/30 to-blue-600/30 rounded-[3rem] blur-2xl opacity-60 will-change-transform"></div>
           <div className={`relative transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
             <Card className="backdrop-blur-xl bg-white/10 border-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-3xl overflow-hidden relative">
 

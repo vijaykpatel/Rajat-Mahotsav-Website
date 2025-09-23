@@ -88,34 +88,19 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
         Primary: ["#644a40", "#582d1d", "#202020", "#e8e8e8"]
         Secondary: ["#ffdfb5", "#644a40", "#582d1d", "#ffffff"]
       */}
-
-      {/* <MeshGradient
-        className="absolute inset-0 w-full h-full"
-        colors={["#FFD700", "#C0C0C0", "#DC143C", "#72b8d3ff"]}
-        speed={speeds.primary}
-      />
-      
-      {mounted && showSecondaryShader && (
-        <MeshGradient
-          className="absolute inset-0 w-full h-full opacity-50"
-          colors={["#FFA500", "#E5E5E5", "#B22222","#4682B4"]}
-          speed={speeds.secondary}
-          wireframe="true"
-        />
-      )} */}
       
       {/* Primary Background Shader - Elegant Red/Blue/White/Silver Theme */}
       <MeshGradient
         className="absolute inset-0 w-full h-full"
-        colors={["#8B1538", "#2E4A8B", "#F8F9FA", "#B8BCC8"]}
+        colors={["#FFD700", "#C0C0C0", "#DC143C", "#72b8d3ff"]}
         speed={speeds.primary}
       />
       
       {/* Secondary Shader - Hidden on mobile for performance */}
       {mounted && showSecondaryShader && (
         <MeshGradient
-          className="absolute inset-0 w-full h-full opacity-35"
-          colors={["#A0304E", "#4A6FA5", "#FEFEFE", "#D1D5DB"]}
+          className="absolute inset-0 w-full h-full opacity-50"
+          colors={["#FFA500", "#E5E5E5", "#B22222","#4682B4"]}
           speed={speeds.secondary}
           wireframe="true"
         />

@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useNavbarHeight } from "@/hooks/use-navbar-height"
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
 
 interface Event {
   time: string
@@ -106,8 +107,11 @@ export default function SchedulePage() {
   const { dynamicPadding } = useNavbarHeight()
   const [isLoaded, setIsLoaded] = useState(false)
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
+  const [isMobile, setIsMobile] = useState(false)
   const [wordIndex, setWordIndex] = useState(0)
   const [showTitle, setShowTitle] = useState(false)
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
 
   const titleWords = "Calendar of Events".split(" ")
   const descriptionWords = "Come celebrate 25 years of community, faith, and fellowship! Join us for this special milestone event designed for all ages.".split(" ")
@@ -119,6 +123,39 @@ export default function SchedulePage() {
     }, 300)
     return () => clearTimeout(timer)
   }, [])
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  useEffect(() => {
+    if (!isMobile) return
+
+    const observers = cardRefs.current.map((ref, index) => {
+      if (!ref) return null
+      
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisibleCards(prev => new Set([...prev, index]))
+          }
+        },
+        { threshold: 0.3, rootMargin: '0px 0px -10% 0px' }
+      )
+      
+      observer.observe(ref)
+      return observer
+    })
+
+    return () => {
+      observers.forEach(observer => observer?.disconnect())
+    }
+  }, [isMobile, isLoaded])
 
   useEffect(() => {
     if (isLoaded && wordIndex < titleWords.length + descriptionWords.length) {
@@ -161,24 +198,31 @@ export default function SchedulePage() {
 
         {/* Calendar Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {scheduleData.map((day, index) => (
+          {scheduleData.map((day, index) => {
+            const isCardVisible = isMobile ? visibleCards.has(index) : false
+            const shouldAnimate = !isMobile ? hoveredCard === index : isCardVisible
+            
+            return (
             <div
               key={`${day.month}-${day.date}`}
-              className={`group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 ease-out cursor-pointer overflow-hidden ${
+              ref={el => cardRefs.current[index] = el}
+              className={`group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer overflow-hidden ${
                 day.isHighlight ? 'ring-2 ring-orange-200' : ''
               } ${
                 isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
               }`}
               style={{ 
                 transitionDelay: `${800 + index * 100}ms`,
-                transform: hoveredCard === index ? 'translateY(-8px) scale(1.02)' : undefined
+                transform: shouldAnimate ? 'translateY(-8px) scale(1.02)' : undefined
               }}
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
+              onMouseEnter={() => !isMobile && setHoveredCard(index)}
+              onMouseLeave={() => !isMobile && setHoveredCard(null)}
             >
               {/* Gradient overlay for highlight days */}
               {day.isHighlight && (
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-100/50 to-red-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className={`absolute inset-0 bg-gradient-to-br from-orange-100/50 to-red-100/50 transition-opacity duration-200 ${
+                  shouldAnimate ? 'opacity-100' : 'opacity-0'
+                }`} />
               )}
               
               {/* Date Header */}
@@ -208,14 +252,18 @@ export default function SchedulePage() {
                   {day.events.map((event, eventIndex) => (
                     <div
                       key={eventIndex}
-                      className={`p-3 rounded-lg transition-all duration-300 ${
+                      className={`p-3 rounded-lg transition-all duration-200 ${
                         day.isHighlight 
-                          ? 'bg-gradient-to-r from-orange-50 to-red-50 group-hover:from-orange-100 group-hover:to-red-100' 
-                          : 'bg-gray-50 group-hover:bg-gray-100'
+                          ? shouldAnimate
+                            ? 'bg-gradient-to-r from-orange-100 to-red-100'
+                            : 'bg-gradient-to-r from-orange-50 to-red-50'
+                          : shouldAnimate
+                            ? 'bg-gray-100'
+                            : 'bg-gray-50'
                       }`}
                       style={{
-                        transform: hoveredCard === index ? `translateX(${eventIndex * 2}px)` : undefined,
-                        transitionDelay: `${eventIndex * 50}ms`
+                        transform: shouldAnimate ? `translateX(${eventIndex * 2}px)` : undefined,
+                        transitionDelay: `${eventIndex * 30}ms`
                       }}
                     >
                       <div className="flex items-start justify-between">
@@ -234,10 +282,10 @@ export default function SchedulePage() {
                             </div>
                           )}
                         </div>
-                        <div className={`w-2 h-2 rounded-full ml-3 mt-1 transition-all duration-300 ${
+                        <div className={`w-2 h-2 rounded-full ml-3 mt-1 transition-all duration-200 ${
                           day.isHighlight 
-                            ? 'bg-orange-400 group-hover:bg-orange-500' 
-                            : 'bg-gray-300 group-hover:bg-gray-400'
+                            ? shouldAnimate ? 'bg-orange-500' : 'bg-orange-400'
+                            : shouldAnimate ? 'bg-gray-400' : 'bg-gray-300'
                         }`} />
                       </div>
                     </div>
@@ -246,15 +294,15 @@ export default function SchedulePage() {
               </div>
 
               {/* Hover effect border */}
-              <div className={`absolute inset-0 rounded-2xl border-2 transition-all duration-300 pointer-events-none ${
-                hoveredCard === index 
+              <div className={`absolute inset-0 rounded-2xl border-2 transition-all duration-200 pointer-events-none ${
+                shouldAnimate
                   ? day.isHighlight 
                     ? 'border-orange-300' 
                     : 'border-gray-300'
                   : 'border-transparent'
               }`} />
             </div>
-          ))}
+          )})}
         </div>
 
         {/* Footer note */}
