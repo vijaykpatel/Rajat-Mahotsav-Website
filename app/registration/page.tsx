@@ -10,10 +10,10 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Send } from "lucide-react"
-import RegistrationDatePicker from "@/components/registration-date-picker"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { PhoneInput } from "@/components/ui/phone-input"
+import LazyPhoneInput from "@/components/lazy-phone-input"
+import LazyDatePicker from "@/components/lazy-date-picker"
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/hooks/use-toast"
 import { useNavbarHeight } from "@/hooks/use-navbar-height"
@@ -453,12 +453,11 @@ export default function RegistrationPage() {
                     name="phone"
                     control={control}
                     render={({ field }) => (
-                      <PhoneInput
-                        {...field}
+                      <LazyPhoneInput
+                        value={field.value}
                         id="phone"
                         placeholder="Enter a phone number"
                         defaultCountry={phoneCountry as any}
-                        key={phoneCountry}
                         onChange={(value) => {
                           field.onChange(value)
                           if (value && isValidPhoneNumber(value)) {
@@ -486,7 +485,7 @@ export default function RegistrationPage() {
                 name="dateRange"
                 control={control}
                 render={({ field }) => (
-                  <RegistrationDatePicker
+                  <LazyDatePicker
                     value={field.value}
                     onChange={field.onChange}
                     error={errors.dateRange?.message}
