@@ -51,7 +51,7 @@ export default function LoadingScreen() {
             filter: { duration: 0.5 },
             rotateY: { duration: 0.8 }
           }}
-          className="fixed inset-0 z-50 overflow-hidden cursor-pointer"
+          className="fixed inset-0 z-[60] overflow-hidden cursor-pointer"
           onClick={handleSkip}
         >
           <ShaderBackground>
