@@ -88,7 +88,7 @@ export default function RegistrationPage() {
     watch
   } = useForm<FormData>({
     resolver: zodResolver(FormSchema),
-    mode: "onChange",
+    mode: "onBlur",
     defaultValues: {
       firstName: "",
       middleName: "",
