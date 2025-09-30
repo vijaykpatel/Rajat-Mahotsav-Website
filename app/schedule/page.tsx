@@ -116,6 +116,23 @@ export default function SchedulePage() {
   const titleWords = "Calendar of Events".split(" ")
   const descriptionWords = "Come celebrate 25 years of community, faith, and fellowship! Join us for this special milestone event designed for all ages.".split(" ")
 
+  // Theme constants for easy customization
+  const theme = {
+    gradients: {
+      title: 'bg-gradient-to-r from-orange-600 to-red-600',
+      subtitle: 'bg-gradient-to-r from-orange-500 to-red-500',
+      background: 'bg-gradient-to-br from-orange-50 via-white to-red-50',
+      cardOverlay: 'bg-gradient-to-br from-orange-100/50 to-red-100/50',
+      eventHighlight: 'bg-gradient-to-r from-orange-100 to-red-100',
+      eventHighlightStatic: 'bg-gradient-to-r from-orange-50 to-red-50'
+    },
+    colors: {
+      highlight: 'text-orange-600',
+      ring: 'ring-orange-200',
+      border: 'border-orange-300'
+    }
+  }
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoaded(true)
@@ -167,21 +184,21 @@ export default function SchedulePage() {
   }, [isLoaded, wordIndex, titleWords.length, descriptionWords.length])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50" style={{ paddingTop: dynamicPadding }}>
-      <div className="container mx-auto px-4 pb-8">
+    <div className={`min-h-screen ${theme.gradients.background}`} style={{ paddingTop: dynamicPadding }}>
+      <div className="container mx-auto px-4 page-bottom-spacing">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className={`text-4xl md:text-6xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-2 leading-tight transition-all duration-1000 ease-out ${
+        <div className="text-center page-header-spacing">
+          <h1 className={`page-title-size font-bold ${theme.gradients.title} bg-clip-text text-transparent mb-2 leading-tight transition-all duration-1000 ease-out ${
             isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}>
             Calendar of Events
           </h1>
-          <div className={`text-2xl md:text-3xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent mb-6 leading-relaxed transition-all duration-1000 ease-out ${
+          <div className={`text-2xl md:text-3xl font-semibold ${theme.gradients.subtitle} bg-clip-text text-transparent mb-6 leading-relaxed transition-all duration-1000 ease-out ${
             isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`} style={{ transitionDelay: '200ms' }}>
             July 25 - August 2, 2026
           </div>
-          <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-4xl mx-auto">
+          <p className="text-gray-600 page-description-size leading-relaxed max-w-4xl mx-auto">
             {descriptionWords.map((word, index) => (
               <span
                 key={index}
@@ -207,7 +224,7 @@ export default function SchedulePage() {
               key={`${day.month}-${day.date}`}
               ref={el => cardRefs.current[index] = el}
               className={`group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer overflow-hidden ${
-                day.isHighlight ? 'ring-2 ring-orange-200' : ''
+                day.isHighlight ? `ring-2 ${theme.colors.ring}` : ''
               } ${
                 isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
               }`}
@@ -220,7 +237,7 @@ export default function SchedulePage() {
             >
               {/* Gradient overlay for highlight days */}
               {day.isHighlight && (
-                <div className={`absolute inset-0 bg-gradient-to-br from-orange-100/50 to-red-100/50 transition-opacity duration-200 ${
+                <div className={`absolute inset-0 ${theme.gradients.cardOverlay} transition-opacity duration-200 ${
                   shouldAnimate ? 'opacity-100' : 'opacity-0'
                 }`} />
               )}
@@ -230,7 +247,7 @@ export default function SchedulePage() {
                 <div className="flex items-center justify-between mb-4">
                   <div className="text-center">
                     <div className={`text-5xl font-bold transition-colors duration-300 ${
-                      day.isHighlight ? 'text-orange-600' : 'text-gray-800'
+                      day.isHighlight ? theme.colors.highlight : 'text-gray-800'
                     }`}>
                       {day.date}
                     </div>
@@ -255,8 +272,8 @@ export default function SchedulePage() {
                       className={`p-3 rounded-lg transition-all duration-200 ${
                         day.isHighlight 
                           ? shouldAnimate
-                            ? 'bg-gradient-to-r from-orange-100 to-red-100'
-                            : 'bg-gradient-to-r from-orange-50 to-red-50'
+                            ? theme.gradients.eventHighlight
+                            : theme.gradients.eventHighlightStatic
                           : shouldAnimate
                             ? 'bg-gray-100'
                             : 'bg-gray-50'
@@ -269,7 +286,7 @@ export default function SchedulePage() {
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className={`text-sm font-medium mb-1 ${
-                            day.isHighlight ? 'text-orange-600' : 'text-gray-500'
+                            day.isHighlight ? theme.colors.highlight : 'text-gray-500'
                           }`}>
                             {event.time}
                           </div>
@@ -297,7 +314,7 @@ export default function SchedulePage() {
               <div className={`absolute inset-0 rounded-2xl border-2 transition-all duration-200 pointer-events-none ${
                 shouldAnimate
                   ? day.isHighlight 
-                    ? 'border-orange-300' 
+                    ? theme.colors.border 
                     : 'border-gray-300'
                   : 'border-transparent'
               }`} />

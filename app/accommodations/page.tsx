@@ -157,9 +157,9 @@ export default function AccommodationsPage() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-[#f5f5f5] relative text-gray-900" style={{ paddingTop: dynamicPadding }}>
+    <div className="min-h-screen w-full bg-gradient-to-br from-orange-50 via-white to-red-50 relative text-gray-900" style={{ paddingTop: dynamicPadding }}>
       {/* Complex Multiplier Pattern (Enhanced) */}
-      <div
+      {/* <div
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
           backgroundImage: `
@@ -172,18 +172,18 @@ export default function AccommodationsPage() {
           backgroundSize: "80px 80px, 40px 40px, 60px 60px, 80px 80px, 100% 100%",
           backgroundPosition: "0 0, 0 0, 0 0, 40px 40px, center"
         }}
-      />
-      <div className="container mx-auto px-4 pb-16 relative z-10">
+      /> */}
+      <div className="container mx-auto px-4 page-bottom-spacing relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center page-header-spacing"
         >
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-4">
+          <h1 className="page-title-size font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-4 leading-tight">
             Accommodations
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="page-description-size text-gray-600 max-w-2xl mx-auto">
             Everything you need for your stay during the Rajat Mahotsav celebration
           </p>
         </motion.div>
@@ -201,7 +201,7 @@ export default function AccommodationsPage() {
           </div>
           <div className="max-w-4xl mx-auto">
             <div className="relative">
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200">
+              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 ring-2 ring-orange-200 hover:-translate-y-2 hover:scale-[1.02]">
                 <div className="mb-4 relative">
                   <div className="absolute top-0 right-0 flex items-center gap-2">
                     <button
@@ -261,7 +261,7 @@ export default function AccommodationsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200"
+              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
             >
               <h3 className="text-xl font-bold mb-3 text-blue-400">Newark Liberty International (EWR)</h3>
               <div className="space-y-2 text-gray-600">
@@ -283,7 +283,7 @@ export default function AccommodationsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200"
+              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
             >
               <h3 className="text-xl font-bold mb-3 text-blue-400">LaGuardia Airport (LGA)</h3>
               <div className="space-y-2 text-gray-600">
@@ -322,7 +322,7 @@ export default function AccommodationsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
-                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200"
+                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
               >
                 <h3 className="text-xl font-bold mb-3">{hotel.name}</h3>
                 <div className="space-y-2 text-gray-600">
@@ -388,7 +388,7 @@ export default function AccommodationsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
-                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200"
+                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
               >
                 <h3 className="text-xl font-bold mb-3 text-blue-400">{transport.type}</h3>
                 <p className="text-gray-600 mb-2"><strong>Routes:</strong> {transport.routes}</p>
@@ -446,7 +446,7 @@ export default function AccommodationsPage() {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-gray-200"
+              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-8 hover:-translate-y-2 hover:scale-[1.02]"
             >
               <div className="grid md:grid-cols-2 gap-6">
                 {sightseeingData[activeTab as keyof typeof sightseeingData].map((attraction, index) => (
@@ -455,7 +455,7 @@ export default function AccommodationsPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 * index }}
-                    className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200"
+                    className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
                   >
                     <div className="mb-3">
                       <h3 className="text-xl font-bold text-green-600">{attraction.name}</h3>

@@ -17,6 +17,7 @@ import LazyDatePicker from "@/components/lazy-date-picker"
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/hooks/use-toast"
 import { useNavbarHeight } from "@/hooks/use-navbar-height"
+import { useDeviceType } from "@/hooks/use-device-type"
 import Typewriter from "@/components/typewriter"
 import BackgroundPaths from "@/components/floating-paths"
 import { supabase } from "@/utils/supabase/client"
@@ -59,6 +60,7 @@ type FormData = z.infer<typeof FormSchema>
 export default function RegistrationPage() {
   const { toast } = useToast()
   const { dynamicPadding } = useNavbarHeight()
+  const deviceType = useDeviceType()
   const [formData, setFormData] = useState({
     country: "",
     mandal: ""
@@ -193,22 +195,41 @@ export default function RegistrationPage() {
   return (
     <>
       {/* Scrollable Background and Content */}
-      <div className={`relative min-h-screen transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} data-page="registration" style={{paddingTop: dynamicPadding, minHeight: '100vh', backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-300/15 via-blue-200/15 to-blue-300/10"></div>
-        <div className="hidden md:block">
-          <BackgroundPaths />
-        </div>
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+      <div className={`min-h-screen w-full bg-slate-900 relative transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} data-page="registration" style={{paddingTop: dynamicPadding, minHeight: '100vh'}}>
+        {/* Commented out image background */}
+        {/* style={{backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}} */}
+        
+        {/* Navy Grid Background with Fade */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #475569 1px, transparent 1px),
+              linear-gradient(to bottom, #475569 1px, transparent 1px)
+            `,
+            backgroundSize: "20px 30px",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
+            maskImage:
+              "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
+          }}
+        />
+        
+        {/* Light gradients for polish */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-800/30 via-slate-700/20 to-slate-900/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-slate-800/30"></div>
+        {deviceType !== 'mobile' && <BackgroundPaths />}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 page-bottom-spacing">
         {/* Title with Typewriter Animation */}
-        <div className="text-center mb-8">
+        <div className="text-center page-header-spacing">
           <div className="flex justify-center">
             <Typewriter 
               text="Register yourself for the Rajat Mahotsav!"
-              speed={70}
-              className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 drop-shadow-2xl md:whitespace-nowrap"
+              speed={50}
+              className="page-title-size font-bold text-white page-title-desc-spacing drop-shadow-2xl md:whitespace-nowrap"
             />
           </div>
-          <p className={`text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mt-2 drop-shadow-lg px-4 leading-relaxed transition-all duration-1000 ease-out ${
+          <p className={`page-description-size text-white/90 drop-shadow-lg px-4 leading-relaxed transition-all duration-1000 ease-out ${
             isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
           }`} style={{ transitionDelay: '400ms' }}>
             Please register yourself and share with everyone you know is coming!
@@ -494,21 +515,6 @@ export default function RegistrationPage() {
               />
 
               <div className="pt-6 space-y-4">
-                {/* Test Toast Button */}
-                {/* <button 
-                  type="button"
-                  onClick={() => {
-                    toast({
-                      title: "Test Toast - Success!",
-                      description: "This is how your registration confirmation will look with the improved design and larger fonts.",
-                      className: "bg-green-600 text-white border-green-700 shadow-xl backdrop-blur-sm",
-                    })
-                  }}
-                  className="relative w-full h-12 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center px-4 py-2 text-white text-sm rounded-lg bg-blue-600/80 border border-blue-500/50 backdrop-blur-sm shadow-lg hover:bg-blue-600 transition-all duration-300"
-                >
-                  🧪 Test Toast Preview
-                </button> */}
-                
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
