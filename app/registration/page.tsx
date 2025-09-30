@@ -243,7 +243,7 @@ export default function RegistrationPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-slate-800/30 via-slate-700/20 to-slate-900/40"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-slate-800/30"></div>
         {deviceType !== 'mobile' && <BackgroundPaths />}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 page-bottom-spacing">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 page-bottom-spacing">
         {/* Title with Typewriter Animation */}
         <div className="text-center page-header-spacing">
           <div className="flex justify-center min-h-[8rem] lg:min-h-[6rem] xl:min-h-[6rem]">
@@ -258,42 +258,42 @@ export default function RegistrationPage() {
           }`} style={{ transitionDelay: '400ms' }}>
             Please register yourself and share with everyone you know is coming!
           </p>
-          
-          {/* Important Instructions */}
-          <div className={`mt-8 px-4 transition-all duration-1000 ease-out ${
-            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-          }`} style={{ transitionDelay: '400ms' }}>
-            <div className="bg-white/10 border-2 border-white/20 rounded-xl p-3 relative">
-            {/* Reduced background opacity: bg-white/10 -> bg-white/5, border-white/30 -> border-white/20 */}
+        </div>
 
-              {/* <h3 className="text-center text-white font-semibold text-3xl mb-6">Important</h3> */}
+        {/* Desktop Layout: Side by side, Mobile: Stacked */}
+        <div className="lg:grid lg:grid-cols-3 lg:gap-8 lg:items-start">
+          {/* Important Instructions - Left Third on Desktop */}
+          <div className={`lg:col-span-1 transition-all duration-1000 ease-out ${
+            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+          } mt-8 lg:mt-0 px-4 lg:px-0`} style={{ transitionDelay: '400ms' }}>
+            <div className="bg-white/10 border-2 border-white/20 rounded-xl p-4 lg:p-6 relative lg:sticky lg:top-8">
+              <h3 className="text-center text-white font-semibold text-xl lg:text-2xl mb-4">Important</h3>
               <div className="space-y-3 text-justify">
-                <p className="text-white/90 leading-relaxed text-base md:text-lg lg:text-xl">
+                <p className="text-white/90 leading-relaxed text-sm lg:text-base">
                   If you are registering a family member or friend, please ensure <span className="font-bold underline">the combination of first name, age, phone number, and email are unique</span>.
                 </p>
-                <p className="text-white/80 leading-relaxed text-base md:text-lg lg:text-xl">
+                <p className="text-white/80 leading-relaxed text-sm lg:text-base">
                   Registering with the same combination of the above 4 fields will overwrite any previous registrations with matching fields.
                 </p>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Registration Form */}
-        <div className="relative">
-          {/* Preloaded glow effect - always visible */}
-          <div className="absolute -inset-8 bg-gradient-to-r from-red-500/30 via-white/30 to-blue-600/30 rounded-[3rem] blur-2xl opacity-60 will-change-transform"></div>
-          <div className={`relative transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
-            <Card className="backdrop-blur-xl bg-white/10 border-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-3xl overflow-hidden relative">
+          {/* Registration Form - Right Two-Thirds on Desktop */}
+          <div className="lg:col-span-2 relative mt-8 lg:mt-0">
+            {/* Preloaded glow effect - always visible */}
+            <div className="absolute -inset-8 bg-gradient-to-r from-red-500/30 via-white/30 to-blue-600/30 rounded-[3rem] blur-2xl opacity-60 will-change-transform"></div>
+            <div className={`relative transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
+              <Card className="backdrop-blur-xl bg-white/10 border-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-3xl overflow-hidden relative">
 
-            <CardHeader className="text-center pb-8">
-              <CardTitle className="text-3xl font-semibold text-white">Registration Form</CardTitle>
-              <CardDescription className="text-gray-300">Please fill in your details to register</CardDescription>
-            </CardHeader>
-            
-            <CardContent>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <CardHeader className="text-center pb-6 lg:pb-8">
+                  <CardTitle className="text-2xl lg:text-3xl font-semibold text-white">Registration Form</CardTitle>
+                  <CardDescription className="text-gray-300">Please fill in your details to register</CardDescription>
+                </CardHeader>
+                
+                <CardContent>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* First Name */}
                 <div className="space-y-2">
                   <Label htmlFor="firstName" className="text-base font-medium text-white">First Name *</Label>
@@ -358,7 +358,7 @@ export default function RegistrationPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Age */}
                 <div className="space-y-2">
                   <Label htmlFor="age" className="text-base font-medium text-white">Age *</Label>
@@ -402,7 +402,7 @@ export default function RegistrationPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Country */}
                 <div className="space-y-2">
                   <Label htmlFor="country" className="text-base font-medium text-white">Country *</Label>
@@ -488,7 +488,7 @@ export default function RegistrationPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Email */}
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-base font-medium text-white">Email Address *</Label>
@@ -557,7 +557,7 @@ export default function RegistrationPage() {
                 )}
               />
 
-              <div className="pt-6 space-y-4">
+              <div className="pt-4 space-y-4">
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
@@ -574,8 +574,9 @@ export default function RegistrationPage() {
                 </button>
               </div>
             </form>
-            </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
         </div>
