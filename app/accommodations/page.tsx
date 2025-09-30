@@ -3,11 +3,12 @@
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { useNavbarHeight } from '@/hooks/use-navbar-height'
-import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane } from "lucide-react"
+import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane, Check } from "lucide-react"
 
 export default function AccommodationsPage() {
   const { dynamicPadding } = useNavbarHeight()
   const [isStreetView, setIsStreetView] = useState(true)
+  const [isCopied, setIsCopied] = useState(false)
 
   const hotels = [
     {
@@ -213,11 +214,25 @@ export default function AccommodationsPage() {
                       <span className="text-xs text-orange-500">{isStreetView ? "Satellite" : "Map"}</span>
                     </button>
                     <button
-                      onClick={() => navigator.clipboard.writeText('200 Swamibapa Way, Secaucus, NJ 07094')}
+                      onClick={() => {
+                        navigator.clipboard.writeText('200 Swamibapa Way, Secaucus, NJ 07094')
+                        setIsCopied(true)
+                        setTimeout(() => setIsCopied(false), 1000)
+                      }}
                       className="p-2 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 transition-colors"
                       title="Copy address"
                     >
-                      <Copy className="h-4 w-4 text-orange-500" />
+                      <motion.div
+                        initial={false}
+                        animate={isCopied ? { scale: [1, 1.2, 1] } : { scale: 1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {isCopied ? (
+                          <Check className="h-4 w-4 text-orange-500" />
+                        ) : (
+                          <Copy className="h-4 w-4 text-orange-500" />
+                        )}
+                      </motion.div>
                     </button>
                   </div>
                   <h3 className="text-2xl font-bold text-orange-400 mb-2 pr-32">Shree Swaminarayan Temple Secaucaus, NJ</h3>
