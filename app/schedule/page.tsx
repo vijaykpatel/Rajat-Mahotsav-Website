@@ -122,7 +122,7 @@ export default function SchedulePage() {
       title: 'bg-gradient-to-r from-orange-600 to-red-600',
       subtitle: 'bg-gradient-to-r from-orange-500 to-red-500',
       background: 'bg-gradient-to-br from-orange-50 via-white to-red-50',
-      cardOverlay: 'bg-gradient-to-br from-orange-100/50 to-red-100/50',
+      cardOverlay: 'bg-gradient-to-br from-orange-100/20 to-red-100/20',
       eventHighlight: 'bg-gradient-to-r from-orange-100 to-red-100',
       eventHighlightStatic: 'bg-gradient-to-r from-orange-50 to-red-50'
     },
@@ -230,7 +230,7 @@ export default function SchedulePage() {
               }`}
               style={{ 
                 transitionDelay: `${800 + index * 100}ms`,
-                transform: shouldAnimate ? 'translateY(-8px) scale(1.02)' : undefined
+                transform: shouldAnimate ? 'translateY(-8px)' : undefined
               }}
               onMouseEnter={() => !isMobile && setHoveredCard(index)}
               onMouseLeave={() => !isMobile && setHoveredCard(null)}

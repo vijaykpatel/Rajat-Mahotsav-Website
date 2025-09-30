@@ -221,7 +221,7 @@
   }
   
   .page-title-desc-spacing {
-    @apply mb-10;
+    @apply mb-2;
   }
   
   .page-bottom-spacing {

@@ -9,7 +9,7 @@ import { CalendarDate } from "@internationalized/date"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Send } from "lucide-react"
+import { Send, Loader2 } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import LazyPhoneInput from "@/components/lazy-phone-input"
@@ -223,21 +223,7 @@ export default function RegistrationPage() {
         {/* Commented out image background */}
         {/* style={{backgroundImage: 'url(/blackpad.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}} */}
         
-        {/* Navy Grid Background with Fade */}
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, #334155 1px, transparent 1px),
-              linear-gradient(to bottom, #334155 1px, transparent 1px)
-            `,
-            backgroundSize: "20px 30px",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
-            maskImage:
-              "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
-          }}
-        />
+        {/* Navy Grid Background with Fade - Commented Out */}
         
         {/* Light gradients for polish */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-800/30 via-slate-700/20 to-slate-900/40"></div>
@@ -246,18 +232,13 @@ export default function RegistrationPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 page-bottom-spacing">
         {/* Title with Typewriter Animation */}
         <div className="text-center page-header-spacing">
-          <div className="flex justify-center min-h-[8rem] lg:min-h-[6rem] xl:min-h-[6rem]">
+          <div className="flex justify-center min-h-[6rem] lg:min-h-[6rem] xl:min-h-[6rem]">
             <Typewriter 
               text="Register yourself for the Rajat Mahotsav!"
               speed={50}
-              className="page-title-size font-bold text-white page-title-desc-spacing drop-shadow-2xl xl:whitespace-nowrap"
+              className="page-title-size font-bold text-white drop-shadow-2xl xl:whitespace-nowrap"
             />
           </div>
-          <p className={`page-description-size text-white/90 drop-shadow-lg px-4 leading-relaxed transition-all duration-1000 ease-out ${
-            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-          }`} style={{ transitionDelay: '400ms' }}>
-            Please register yourself and share with everyone you know is coming!
-          </p>
         </div>
 
         {/* Desktop Layout: Side by side, Mobile: Stacked */}
@@ -269,6 +250,9 @@ export default function RegistrationPage() {
             <div className="bg-white/10 border-2 border-white/20 rounded-xl p-4 lg:p-6 relative lg:sticky lg:top-8">
               <h3 className="text-center text-white font-semibold text-xl lg:text-2xl mb-4">Important</h3>
               <div className="space-y-3 text-justify">
+                <p className="text-white/90 leading-relaxed text-sm lg:text-base">
+                  Please register yourself and share with everyone you know is coming!
+                </p>
                 <p className="text-white/90 leading-relaxed text-sm lg:text-base">
                   If you are registering a family member or friend, please ensure <span className="font-bold underline">the combination of first name, age, phone number, and email are unique</span>.
                 </p>
@@ -564,11 +548,17 @@ export default function RegistrationPage() {
                   className="relative w-full h-14 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center px-4 py-2 text-white text-base rounded-lg bg-white/10 border border-white/50 backdrop-blur-sm shadow-[inset_0_1px_0px_rgba(255,255,255,0.75),0_0_9px_rgba(0,0,0,0.2),0_3px_8px_rgba(0,0,0,0.15)] hover:bg-white/30 transition-all duration-300 before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-br before:from-white/60 before:via-transparent before:to-transparent before:opacity-70 before:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:bg-gradient-to-tl after:from-white/30 after:via-transparent after:to-transparent after:opacity-50 after:pointer-events-none antialiased disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-b from-white/30 to-white/20 transform transition-transform duration-500 ${isSubmitting ? 'translate-y-0' : 'translate-y-full'}`}></div>
-                  <div className="relative z-10 flex items-center justify-center">
+                  <div className="relative z-10 flex items-center justify-center gap-2">
                     {isSubmitting ? (
-                      <Send className="w-5 h-5" />
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Please wait
+                      </>
                     ) : (
-                      "Register"
+                      <>
+                        <Send className="w-5 h-5" />
+                        Register
+                      </>
                     )}
                   </div>
                 </button>
