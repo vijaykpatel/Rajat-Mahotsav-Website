@@ -141,17 +141,41 @@ export default function RegistrationPage() {
         departure_date: data.dateRange.end?.toString()
       }
       
-      console.log('Attempting to insert:', dbData)
+      console.log('Attempting to upsert:', dbData)
       
-      const { error } = await supabase
+      // First, check if record exists
+      const { data: existingRecord } = await supabase
         .from('registrations_dev')
-        .insert([dbData])
+        .select('id')
+        .eq('first_name', dbData.first_name)
+        .eq('age', dbData.age)
+        .eq('email', dbData.email)
+        .eq('mobile_number', dbData.mobile_number)
+        .maybeSingle()
+      
+      let error = null
+      
+      if (existingRecord) {
+        // Update existing record
+        const { error: updateError } = await supabase
+          .from('registrations_dev')
+          .update(dbData)
+          .eq('id', existingRecord.id)
+        error = updateError
+      } else {
+        // Insert new record
+        const { error: insertError } = await supabase
+          .from('registrations_dev')
+          .insert([dbData])
+        error = insertError
+      }
         
       console.log('Supabase response:', { error })
       
       if (!error) {
+        const isUpdate = existingRecord !== null
         toast({
-          title: `Successfully registered, ${data.firstName}!`,
+          title: isUpdate ? `Updated existing registration, ${data.firstName}!` : `Successfully registered, ${data.firstName}!`,
           description: "Jay Shree Swaminarayan",
           className: "bg-green-600/90 text-white border-green-400/50 shadow-2xl backdrop-blur-lg font-medium",
         })
