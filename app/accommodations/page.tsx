@@ -183,7 +183,7 @@ export default function AccommodationsPage() {
           <h1 className="page-title-size font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-4 leading-tight">
             Accommodations
           </h1>
-          <p className="page-description-size text-gray-600 max-w-2xl mx-auto">
+          <p className="page-description-size text-gray-600 mx-auto">
             Everything you need for your stay during the Rajat Mahotsav celebration
           </p>
         </motion.div>

@@ -204,8 +204,8 @@ export default function RegistrationPage() {
           className="absolute inset-0 z-0"
           style={{
             backgroundImage: `
-              linear-gradient(to right, #475569 1px, transparent 1px),
-              linear-gradient(to bottom, #475569 1px, transparent 1px)
+              linear-gradient(to right, #334155 1px, transparent 1px),
+              linear-gradient(to bottom, #334155 1px, transparent 1px)
             `,
             backgroundSize: "20px 30px",
             WebkitMaskImage:
@@ -222,11 +222,11 @@ export default function RegistrationPage() {
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 page-bottom-spacing">
         {/* Title with Typewriter Animation */}
         <div className="text-center page-header-spacing">
-          <div className="flex justify-center">
+          <div className="flex justify-center min-h-[8rem] lg:min-h-[6rem] xl:min-h-[6rem]">
             <Typewriter 
               text="Register yourself for the Rajat Mahotsav!"
               speed={50}
-              className="page-title-size font-bold text-white page-title-desc-spacing drop-shadow-2xl md:whitespace-nowrap"
+              className="page-title-size font-bold text-white page-title-desc-spacing drop-shadow-2xl xl:whitespace-nowrap"
             />
           </div>
           <p className={`page-description-size text-white/90 drop-shadow-lg px-4 leading-relaxed transition-all duration-1000 ease-out ${
@@ -234,6 +234,25 @@ export default function RegistrationPage() {
           }`} style={{ transitionDelay: '400ms' }}>
             Please register yourself and share with everyone you know is coming!
           </p>
+          
+          {/* Important Instructions */}
+          <div className={`mt-8 px-4 transition-all duration-1000 ease-out ${
+            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+          }`} style={{ transitionDelay: '400ms' }}>
+            <div className="bg-white/10 border-2 border-white/20 rounded-xl p-3 relative">
+            {/* Reduced background opacity: bg-white/10 -> bg-white/5, border-white/30 -> border-white/20 */}
+
+              {/* <h3 className="text-center text-white font-semibold text-3xl mb-6">Important</h3> */}
+              <div className="space-y-3 text-justify">
+                <p className="text-white/90 leading-relaxed text-base md:text-lg lg:text-xl">
+                  If you are registering a family member or friend, please ensure <span className="font-bold underline">the combination of first name, age, phone number, and email are unique</span>.
+                </p>
+                <p className="text-white/80 leading-relaxed text-base md:text-lg lg:text-xl">
+                  Registering with the same combination of the above 4 fields will overwrite any previous registrations with matching fields.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Registration Form */}

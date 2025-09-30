@@ -47,13 +47,6 @@
   /* Added Figtree as the primary font variable */
   --font-figtree: "Figtree", sans-serif; /* Figtree font family configuration */
   --font-noto-music: "Noto Music", sans-serif; /* Noto Music font family configuration */
-  
-  /* Page Layout Variables */
-  --page-title-size: theme(fontSize.4xl) theme(fontSize.6xl); /* text-4xl md:text-6xl */
-  --page-description-size: theme(fontSize.lg) theme(fontSize.xl); /* text-lg md:text-xl */
-  --page-header-spacing: theme(spacing.12); /* mb-12 */
-  --page-title-description-spacing: theme(spacing.6); /* mb-6 */
-  --page-bottom-spacing: theme(spacing.8); /* pb-8 */
 }
 
 .dark {
@@ -216,11 +209,11 @@
 /* Page Layout Utility Classes */
 @layer utilities {
   .page-title-size {
-    @apply text-4xl md:text-6xl;
+    @apply text-4xl md:text-4xl lg:text-5xl xl:text-6xl;
   }
   
   .page-description-size {
-    @apply text-lg md:text-xl;
+    @apply text-lg md:text-xl lg:text-2xl;
   }
   
   .page-header-spacing {
@@ -228,7 +221,7 @@
   }
   
   .page-title-desc-spacing {
-    @apply mb-6;
+    @apply mb-2;
   }
   
   .page-bottom-spacing {
