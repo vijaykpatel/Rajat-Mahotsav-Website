@@ -74,7 +74,7 @@ export function CountrySelector({
         <Button
           type='button'
           className={cn(
-            'flex justify-between items-center gap-2 h-14 w-full px-3 text-base bg-white/60 border-2 border-orange-200 text-gray-800 backdrop-blur-sm hover:bg-orange-50 focus:ring-2 focus:ring-orange-200',
+            'reg-input flex justify-between items-center gap-2 w-full px-3 rounded-md hover:bg-orange-50',
             className
           )}
           disabled={disabled}
@@ -92,18 +92,18 @@ export function CountrySelector({
           <ChevronsUpDown className="h-4 w-4 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='w-[300px] p-0 bg-white border-2 border-orange-200 shadow-xl rounded-xl z-50'>
+      <PopoverContent className='w-[300px] p-0 reg-popover rounded-xl z-50'>
         <div className='p-3'>
           <input 
             placeholder='Search country...' 
-            className='w-full p-3 bg-gray-50 border border-orange-200 text-gray-800 placeholder:text-gray-500 rounded-lg mb-3 outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-300'
+            className='w-full p-3 reg-popover-search rounded-lg mb-3 outline-none'
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
           />
           <div className='max-h-72 overflow-y-auto'>
             {filteredCountries.map((country) => (
               <div
-                className='flex items-center gap-3 p-3 text-gray-800 hover:bg-orange-100 cursor-pointer rounded-lg transition-all duration-200'
+                className='flex items-center gap-3 p-3 reg-popover-item cursor-pointer rounded-lg'
                 key={country.value}
                 onClick={() => handleSelect(country.value)}
               >

@@ -22,6 +22,7 @@ import { useDeviceType } from "@/hooks/use-device-type"
 import Typewriter from "@/components/typewriter"
 import BackgroundPaths from "@/components/floating-paths"
 import { supabase } from "@/utils/supabase/client"
+import "@/styles/registration-theme.css"
 
 
 const FormSchema = z.object({
@@ -68,23 +69,7 @@ export default function RegistrationPage() {
   })
   const [phoneCountry, setPhoneCountry] = useState<string>("US")
 
-  // Theme constants matching schedule page
-  const theme = {
-    gradients: {
-      background: 'bg-gradient-to-br from-orange-50 via-white to-red-50',
-      cardBackground: 'bg-gradient-to-br from-white/80 to-orange-50/80',
-      importantCard: 'bg-gradient-to-br from-orange-100/90 to-red-100/90',
-      button: 'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600'
-    },
-    colors: {
-      text: 'text-gray-800',
-      textSecondary: 'text-gray-600',
-      label: 'text-gray-700',
-      placeholder: 'placeholder:text-gray-400',
-      border: 'border-orange-200',
-      ring: 'ring-orange-200'
-    }
-  }
+
 
 
   const getPhoneCountryFromCountry = (country: string) => {
@@ -238,9 +223,7 @@ export default function RegistrationPage() {
   return (
     <>
       {/* Scrollable Background and Content */}
-      <div className={`min-h-screen w-full ${theme.gradients.background} relative transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} data-page="registration" style={{paddingTop: dynamicPadding, minHeight: '100vh'}}>
-        {/* Subtle overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-100/20 via-transparent to-red-100/20"></div>
+      <div className={`min-h-screen w-full reg-page-bg transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} data-page="registration" style={{paddingTop: dynamicPadding, minHeight: '100vh'}}>
         {deviceType !== 'mobile' && <BackgroundPaths />}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 page-bottom-spacing">
         {/* Title with Typewriter Animation */}
@@ -249,7 +232,7 @@ export default function RegistrationPage() {
             <Typewriter 
               text="Register yourself for the Rajat Mahotsav!"
               speed={50}
-              className="page-title-size font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent xl:whitespace-nowrap"
+              className="page-title-size font-bold reg-title xl:whitespace-nowrap"
             />
           </div>
         </div>
@@ -260,16 +243,16 @@ export default function RegistrationPage() {
           <div className={`lg:col-span-1 transition-all duration-1000 ease-out ${
             isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
           } mt-8 lg:mt-0 px-4 lg:px-0`} style={{ transitionDelay: '400ms' }}>
-            <div className={`${theme.gradients.importantCard} border-2 ${theme.colors.border} rounded-xl p-4 lg:p-6 relative lg:sticky lg:top-8 shadow-lg`}>
-              <h3 className={`text-center ${theme.colors.text} font-semibold text-xl lg:text-2xl mb-4`}>Important</h3>
+            <div className="reg-important-card rounded-xl p-4 lg:p-6 relative lg:sticky lg:top-8">
+              <h3 className="text-center reg-text-primary font-semibold text-xl lg:text-2xl mb-4">Important</h3>
               <div className="space-y-3 text-justify">
-                <p className={`${theme.colors.textSecondary} leading-relaxed text-sm lg:text-base`}>
+                <p className="reg-text-secondary leading-relaxed text-sm lg:text-base">
                   Please register yourself and share with everyone you know is coming!
                 </p>
-                <p className={`${theme.colors.textSecondary} leading-relaxed text-sm lg:text-base`}>
-                  If you are registering a family member or friend, please ensure <span className="font-bold underline text-orange-700">the combination of first name, age, phone number, and email are unique</span>.
+                <p className="reg-text-secondary leading-relaxed text-sm lg:text-base">
+                  If you are registering a family member or friend, please ensure <span className="reg-text-highlight underline">the combination of first name, age, phone number, and email are unique</span>.
                 </p>
-                <p className={`${theme.colors.textSecondary} leading-relaxed text-sm lg:text-base`}>
+                <p className="reg-text-secondary leading-relaxed text-sm lg:text-base">
                   Registering with the same combination of the above 4 fields will overwrite any previous registrations with matching fields.
                 </p>
               </div>
@@ -281,11 +264,11 @@ export default function RegistrationPage() {
             {/* Subtle glow effect */}
             <div className="absolute -inset-4 bg-gradient-to-r from-orange-200/30 via-white/20 to-red-200/30 rounded-[2rem] blur-xl opacity-40 will-change-transform"></div>
             <div className={`relative transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
-              <Card className={`${theme.gradients.cardBackground} border-2 ${theme.colors.border} shadow-xl rounded-3xl overflow-hidden relative backdrop-blur-sm`}>
+              <Card className="reg-card rounded-3xl overflow-hidden relative">
 
                 <CardHeader className="text-center pb-6 lg:pb-8">
-                  <CardTitle className={`text-2xl lg:text-3xl font-semibold ${theme.colors.text}`}>Registration Form</CardTitle>
-                  <CardDescription className={theme.colors.textSecondary}>Please fill in your details to register</CardDescription>
+                  <CardTitle className="text-2xl lg:text-3xl font-semibold reg-text-primary">Registration Form</CardTitle>
+                  <CardDescription className="reg-text-secondary">Please fill in your details to register</CardDescription>
                 </CardHeader>
                 
                 <CardContent>
@@ -293,7 +276,7 @@ export default function RegistrationPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* First Name */}
                 <div className="space-y-2">
-                  <Label htmlFor="firstName" className={`text-base font-medium ${theme.colors.label}`}>First Name *</Label>
+                  <Label htmlFor="firstName" className="reg-label">First Name *</Label>
                   <Controller
                     name="firstName"
                     control={control}
@@ -303,18 +286,18 @@ export default function RegistrationPage() {
                         id="firstName"
                         type="text"
                         placeholder="First name"
-                        className={`h-14 text-base bg-white/60 ${theme.colors.border} ${theme.colors.text} ${theme.colors.placeholder} backdrop-blur-sm focus:${theme.colors.ring}`}
+                        className="reg-input rounded-md"
                       />
                     )}
                   />
                   {errors.firstName && (
-                    <p className="text-red-500 text-sm">{errors.firstName.message}</p>
+                    <p className="reg-error-text">{errors.firstName.message}</p>
                   )}
                 </div>
 
                 {/* Middle Name */}
                 <div className="space-y-2">
-                  <Label htmlFor="middleName" className={`text-base font-medium ${theme.colors.label}`}>Middle Name</Label>
+                  <Label htmlFor="middleName" className="reg-label">Middle Name</Label>
                   <Controller
                     name="middleName"
                     control={control}
@@ -324,18 +307,18 @@ export default function RegistrationPage() {
                         id="middleName"
                         type="text"
                         placeholder="Middle name"
-                        className={`h-14 text-base bg-white/60 ${theme.colors.border} ${theme.colors.text} ${theme.colors.placeholder} backdrop-blur-sm focus:${theme.colors.ring}`}
+                        className="reg-input rounded-md"
                       />
                     )}
                   />
                   {errors.middleName && (
-                    <p className="text-red-500 text-sm">{errors.middleName.message}</p>
+                    <p className="reg-error-text">{errors.middleName.message}</p>
                   )}
                 </div>
 
                 {/* Last Name */}
                 <div className="space-y-2">
-                  <Label htmlFor="lastName" className={`text-base font-medium ${theme.colors.label}`}>Last Name *</Label>
+                  <Label htmlFor="lastName" className="reg-label">Last Name *</Label>
                   <Controller
                     name="lastName"
                     control={control}
@@ -345,12 +328,12 @@ export default function RegistrationPage() {
                         id="lastName"
                         type="text"
                         placeholder="Last name"
-                        className={`h-14 text-base bg-white/60 ${theme.colors.border} ${theme.colors.text} ${theme.colors.placeholder} backdrop-blur-sm focus:${theme.colors.ring}`}
+                        className="reg-input rounded-md"
                       />
                     )}
                   />
                   {errors.lastName && (
-                    <p className="text-red-500 text-sm">{errors.lastName.message}</p>
+                    <p className="reg-error-text">{errors.lastName.message}</p>
                   )}
                 </div>
               </div>
@@ -358,7 +341,7 @@ export default function RegistrationPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Age */}
                 <div className="space-y-2">
-                  <Label htmlFor="age" className={`text-base font-medium ${theme.colors.label}`}>Age *</Label>
+                  <Label htmlFor="age" className="reg-label">Age *</Label>
                   <Controller
                     name="age"
                     control={control}
@@ -368,18 +351,18 @@ export default function RegistrationPage() {
                         id="age"
                         type="number"
                         placeholder="Enter your age"
-                        className={`h-14 text-base bg-white/60 ${theme.colors.border} ${theme.colors.text} ${theme.colors.placeholder} backdrop-blur-sm focus:${theme.colors.ring}`}
+                        className="reg-input rounded-md"
                       />
                     )}
                   />
                   {errors.age && (
-                    <p className="text-red-500 text-sm">{errors.age.message}</p>
+                    <p className="reg-error-text">{errors.age.message}</p>
                   )}
                 </div>
 
                 {/* Ghaam */}
                 <div className="space-y-2">
-                  <Label htmlFor="ghaam" className={`text-base font-medium ${theme.colors.label}`}>Ghaam *</Label>
+                  <Label htmlFor="ghaam" className="reg-label">Ghaam *</Label>
                   <Controller
                     name="ghaam"
                     control={control}
@@ -389,12 +372,12 @@ export default function RegistrationPage() {
                         id="ghaam"
                         type="text"
                         placeholder="Enter your ghaam"
-                        className={`h-14 text-base bg-white/60 ${theme.colors.border} ${theme.colors.text} ${theme.colors.placeholder} backdrop-blur-sm focus:${theme.colors.ring}`}
+                        className="reg-input rounded-md"
                       />
                     )}
                   />
                   {errors.ghaam && (
-                    <p className="text-red-500 text-sm">{errors.ghaam.message}</p>
+                    <p className="reg-error-text">{errors.ghaam.message}</p>
                   )}
                 </div>
               </div>
@@ -402,7 +385,7 @@ export default function RegistrationPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Country */}
                 <div className="space-y-2">
-                  <Label htmlFor="country" className={`text-base font-medium ${theme.colors.label}`}>Country *</Label>
+                  <Label htmlFor="country" className="reg-label">Country *</Label>
                   <Controller
                     name="country"
                     control={control}
@@ -439,13 +422,13 @@ export default function RegistrationPage() {
                     )}
                   />
                   {errors.country && (
-                    <p className="text-red-500 text-sm">{errors.country.message}</p>
+                    <p className="reg-error-text">{errors.country.message}</p>
                   )}
                 </div>
 
                 {/* Mandal */}
                 <div className="space-y-2">
-                  <Label htmlFor="mandal" className={`text-base font-medium ${theme.colors.label}`}>Mandal *</Label>
+                  <Label htmlFor="mandal" className="reg-label">Mandal *</Label>
                   <Controller
                     name="mandal"
                     control={control}
@@ -455,16 +438,16 @@ export default function RegistrationPage() {
                           {...field}
                           value={formData.mandal}
                           disabled
-                          className={`h-14 text-base bg-gray-100 ${theme.colors.border} text-gray-500 backdrop-blur-sm cursor-not-allowed`}
+                          className="reg-input rounded-md"
                         />
                       ) : (
                         <Select value={field.value} onValueChange={field.onChange} disabled={!formData.country}>
-                          <SelectTrigger className={`h-14 text-base bg-white/60 ${theme.colors.border} ${theme.colors.text} backdrop-blur-sm focus:${theme.colors.ring}`}>
+                          <SelectTrigger className="reg-input rounded-md">
                             <SelectValue placeholder={formData.country ? "Select mandal" : "Select country first"} />
                           </SelectTrigger>
-                          <SelectContent className={`bg-white/95 ${theme.colors.border} shadow-xl rounded-xl backdrop-blur-sm`}>
+                          <SelectContent className="reg-popover rounded-xl">
                             {getMandals(formData.country).map((mandal) => (
-                              <SelectItem key={mandal} value={mandal.toLowerCase().replace(/ /g, '-')} className={`${theme.colors.text} hover:bg-orange-50 focus:bg-orange-50 transition-all duration-200`}>{mandal}</SelectItem>
+                              <SelectItem key={mandal} value={mandal.toLowerCase().replace(/ /g, '-')} className="reg-popover-item rounded-lg">{mandal}</SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
@@ -472,7 +455,7 @@ export default function RegistrationPage() {
                     )}
                   />
                   {errors.mandal && (
-                    <p className="text-red-500 text-sm">{errors.mandal.message}</p>
+                    <p className="reg-error-text">{errors.mandal.message}</p>
                   )}
                 </div>
               </div>
@@ -480,7 +463,7 @@ export default function RegistrationPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Email */}
                 <div className="space-y-2">
-                  <Label htmlFor="email" className={`text-base font-medium ${theme.colors.label}`}>Email Address *</Label>
+                  <Label htmlFor="email" className="reg-label">Email Address *</Label>
                   <Controller
                     name="email"
                     control={control}
@@ -490,18 +473,18 @@ export default function RegistrationPage() {
                         id="email"
                         type="email"
                         placeholder="your@email.com"
-                        className={`h-14 text-base bg-white/60 ${theme.colors.border} ${theme.colors.text} ${theme.colors.placeholder} backdrop-blur-sm focus:${theme.colors.ring}`}
+                        className="reg-input rounded-md"
                       />
                     )}
                   />
                   {errors.email && (
-                    <p className="text-red-500 text-sm">{errors.email.message}</p>
+                    <p className="reg-error-text">{errors.email.message}</p>
                   )}
                 </div>
 
                 {/* Phone */}
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className={`text-base font-medium ${theme.colors.label}`}>Phone Number *</Label>
+                  <Label htmlFor="phone" className="reg-label">Phone Number *</Label>
                   <Controller
                     name="phone"
                     control={control}
@@ -528,7 +511,7 @@ export default function RegistrationPage() {
                     )}
                   />
                   {errors.phone && (
-                    <p className="text-red-500 text-sm">{errors.phone.message}</p>
+                    <p className="reg-error-text">{errors.phone.message}</p>
                   )}
                 </div>
               </div>
@@ -550,7 +533,7 @@ export default function RegistrationPage() {
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className={`relative w-full h-14 inline-flex items-center justify-center font-medium text-center px-4 py-2 text-white text-base rounded-lg ${theme.gradients.button} shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden`}
+                  className="reg-button relative w-full h-14 inline-flex items-center justify-center text-center px-4 py-2 text-base rounded-lg overflow-hidden"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-b from-white/20 to-transparent transform transition-transform duration-500 ${isSubmitting ? 'translate-y-0' : 'translate-y-full'}`}></div>
                   <div className="relative z-10 flex items-center justify-center gap-2">
