@@ -204,22 +204,14 @@ export default function AccommodationsPage() {
             <div className="relative">
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 ring-2 ring-orange-200 hover:-translate-y-2 hover:scale-[1.02]">
                 <div className="mb-4 relative">
-                  <div className="absolute top-0 right-0 flex items-center gap-2">
-                    <button
-                      onClick={() => setIsStreetView(!isStreetView)}
-                      className="flex items-center gap-2 p-2 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 transition-colors"
-                      title={isStreetView ? "Switch to Map View" : "Switch to Satellite View"}
-                    >
-                      {isStreetView ? <ToggleRight className="h-4 w-4 text-orange-500" /> : <ToggleLeft className="h-4 w-4 text-orange-500" />}
-                      <span className="text-xs text-orange-500">{isStreetView ? "Satellite" : "Map"}</span>
-                    </button>
+                  <div className="absolute top-0 right-0 flex flex-col md:flex-row items-end md:items-center gap-1 md:gap-2">
                     <button
                       onClick={() => {
                         navigator.clipboard.writeText('200 Swamibapa Way, Secaucus, NJ 07094')
                         setIsCopied(true)
                         setTimeout(() => setIsCopied(false), 1000)
                       }}
-                      className="p-2 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 transition-colors"
+                      className="p-1.5 md:p-2 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 transition-colors"
                       title="Copy address"
                     >
                       <motion.div
@@ -234,9 +226,17 @@ export default function AccommodationsPage() {
                         )}
                       </motion.div>
                     </button>
+                    <button
+                      onClick={() => setIsStreetView(!isStreetView)}
+                      className="flex items-center gap-2 p-1.5 md:p-2 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 transition-colors"
+                      title={isStreetView ? "Switch to Map View" : "Switch to Satellite View"}
+                    >
+                      {isStreetView ? <ToggleRight className="h-4 w-4 text-orange-500" /> : <ToggleLeft className="h-4 w-4 text-orange-500" />}
+                      <span className="text-xs text-orange-500">{isStreetView ? "Satellite" : "Map"}</span>
+                    </button>
                   </div>
-                  <h3 className="text-2xl font-bold text-orange-400 mb-2 pr-32">Shree Swaminarayan Temple Secaucaus, NJ</h3>
-                  <p className="text-gray-600 flex items-center gap-2">
+                  <h3 className="text-xl md:text-2xl font-bold text-orange-400 mb-2 pr-20 md:pr-32">Shree Swaminarayan Temple Secaucaus, NJ</h3>
+                  <p className="text-gray-600 flex items-center gap-2 mt-5 md:mt-0">
                     <MapPin className="h-4 w-4 text-orange-400" />
                     200 Swamibapa Way, Secaucus, NJ 07094
                   </p>
