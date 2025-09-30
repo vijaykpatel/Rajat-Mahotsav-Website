@@ -51,12 +51,11 @@ function DateSegment({ className, ...props }: DateSegmentProps) {
     <DateSegmentRac
       className={composeRenderProps(className, (className) =>
         cn(
-          "text-foreground data-focused:bg-accent data-invalid:data-focused:bg-destructive data-focused:data-placeholder:text-foreground data-focused:text-foreground data-invalid:data-placeholder:text-destructive data-invalid:text-destructive data-placeholder:text-muted-foreground/70 data-[type=literal]:text-muted-foreground/70 inline rounded p-0.5 caret-transparent outline-hidden data-disabled:cursor-not-allowed data-disabled:opacity-50 data-invalid:data-focused:text-white data-invalid:data-focused:data-placeholder:text-white data-[type=literal]:px-0",
+          "text-gray-800 data-focused:bg-orange-50 data-invalid:data-focused:bg-red-50 data-focused:data-placeholder:text-gray-800 data-focused:text-gray-800 data-invalid:data-placeholder:text-red-500 data-invalid:text-red-500 data-placeholder:text-gray-400 data-[type=literal]:text-gray-600 inline rounded p-0.5 caret-transparent outline-hidden data-disabled:cursor-not-allowed data-disabled:opacity-50 data-invalid:data-focused:text-red-600 data-invalid:data-focused:data-placeholder:text-red-600 data-[type=literal]:px-0",
           className
         )
       )}
       {...props}
-      data-invalid
     />
   )
 }

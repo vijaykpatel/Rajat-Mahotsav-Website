@@ -49,7 +49,7 @@ const InputComponent = React.forwardRef<HTMLInputElement, any>(
   ({ className, ...props }, ref) => (
     <input
       className={cn(
-        'rounded-e-lg rounded-s-none px-3 py-2 h-14 text-base bg-white/20 border-white/30 text-white placeholder:text-gray-300 backdrop-blur-sm outline-none border-l-0 flex-1 w-full border border-t-white/30 border-r-white/30 border-b-white/30',
+        'rounded-e-lg rounded-s-none px-3 py-2 h-14 text-base bg-white/60 border-orange-200 text-gray-800 placeholder:text-gray-400 backdrop-blur-sm outline-none border-l-0 flex-1 w-full border border-t-orange-200 border-r-orange-200 border-b-orange-200 focus:ring-2 focus:ring-orange-200',
         className
       )}
       {...props}
@@ -95,7 +95,7 @@ const CountrySelect = ({
       <PopoverTrigger asChild>
         <Button
           type='button'
-          className='flex gap-1 rounded-e-none rounded-s-lg px-3 h-14 bg-white/20 border border-white/30 text-white backdrop-blur-sm hover:bg-white/30 border-r-0'
+          className='flex gap-1 rounded-e-none rounded-s-lg px-3 h-14 bg-white/60 border border-orange-200 text-gray-800 backdrop-blur-sm hover:bg-orange-50 border-r-0'
           disabled={disabled}
         >
           <FlagComponent country={value} countryName={value} />
@@ -107,11 +107,11 @@ const CountrySelect = ({
           />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='w-[300px] p-0 backdrop-blur-xl bg-white/10 border-4 border-white/40 shadow-[0_0_40px_rgba(255,255,255,0.3)] rounded-xl z-50'>
+      <PopoverContent className='w-[300px] p-0 bg-white border-2 border-orange-200 shadow-xl rounded-xl z-50'>
         <div className='p-3'>
           <input 
             placeholder='Search country...' 
-            className='w-full p-3 bg-white/20 border border-white/30 text-white placeholder:text-gray-300 backdrop-blur-sm rounded-lg mb-3 outline-none focus:ring-2 focus:ring-white/50'
+            className='w-full p-3 bg-gray-50 border border-orange-200 text-gray-800 placeholder:text-gray-500 rounded-lg mb-3 outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-300'
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
           />
@@ -120,7 +120,7 @@ const CountrySelect = ({
               .filter((x) => x.value)
               .map((option) => (
                 <div
-                  className='flex items-center gap-3 p-3 text-white hover:bg-white/20 cursor-pointer rounded-lg transition-all duration-200'
+                  className='flex items-center gap-3 p-3 text-gray-800 hover:bg-orange-100 cursor-pointer rounded-lg transition-all duration-200'
                   key={option.value}
                   onClick={() => handleSelect(option.value)}
                 >
@@ -130,13 +130,13 @@ const CountrySelect = ({
                   />
                   <span className='flex-1 text-sm font-medium'>{option.label}</span>
                   {option.value && (
-                    <span className='text-white/70 text-sm'>
+                    <span className='text-gray-700 text-sm font-medium'>
                       {`+${RPNInput.getCountryCallingCode(option.value)}`}
                     </span>
                   )}
                   <CheckIcon
                     className={cn(
-                      'ml-auto h-4 w-4 text-white',
+                      'ml-auto h-4 w-4 text-gray-800',
                       option.value === value ? 'opacity-100' : 'opacity-0'
                     )}
                   />

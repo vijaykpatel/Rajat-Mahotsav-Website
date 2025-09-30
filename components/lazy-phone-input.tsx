@@ -27,7 +27,7 @@ export default function LazyPhoneInput({ value, onChange, placeholder, defaultCo
         id={id}
         type="tel"
         placeholder={placeholder}
-        className="h-14 text-base bg-white/20 border-white/30 text-white placeholder:text-gray-300 backdrop-blur-sm"
+        className="h-14 text-base bg-white/60 border-orange-200 text-gray-800 placeholder:text-gray-400 backdrop-blur-sm focus:ring-orange-200"
       />
     )
   }
@@ -38,7 +38,7 @@ export default function LazyPhoneInput({ value, onChange, placeholder, defaultCo
         id={id}
         type="tel"
         placeholder={placeholder}
-        className="h-14 text-base bg-white/20 border-white/30 text-white placeholder:text-gray-300 backdrop-blur-sm"
+        className="h-14 text-base bg-white/60 border-orange-200 text-gray-800 placeholder:text-gray-400 backdrop-blur-sm focus:ring-orange-200"
       />
     }>
       <PhoneInput

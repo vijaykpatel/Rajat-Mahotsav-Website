@@ -23,26 +23,26 @@ export default function LazyDatePicker({ value, onChange, error }: LazyDatePicke
   if (!isLoaded) {
     return (
       <div className="space-y-2">
-        <Label className="text-base font-medium text-white">Travel Dates *</Label>
+        <Label className="text-base font-medium text-gray-700">Travel Dates *</Label>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label className="text-sm text-white/80">Arrival Date</Label>
+            <Label className="text-sm text-gray-600">Arrival Date</Label>
             <Input
               type="text"
               placeholder="Select arrival date"
-              className="h-14 text-base bg-white/20 border-white/30 text-white placeholder:text-gray-300 backdrop-blur-sm"
+              className="h-14 text-base bg-white/60 border-orange-200 text-gray-800 placeholder:text-gray-400 backdrop-blur-sm focus:ring-orange-200"
             />
           </div>
           <div className="space-y-2">
-            <Label className="text-sm text-white/80">Departure Date</Label>
+            <Label className="text-sm text-gray-600">Departure Date</Label>
             <Input
               type="text"
               placeholder="Select departure date"
-              className="h-14 text-base bg-white/20 border-white/30 text-white placeholder:text-gray-300 backdrop-blur-sm"
+              className="h-14 text-base bg-white/60 border-orange-200 text-gray-800 placeholder:text-gray-400 backdrop-blur-sm focus:ring-orange-200"
             />
           </div>
         </div>
-        {error && <p className="text-red-400 text-sm">{error}</p>}
+        {error && <p className="text-red-500 text-sm">{error}</p>}
       </div>
     )
   }
@@ -50,22 +50,22 @@ export default function LazyDatePicker({ value, onChange, error }: LazyDatePicke
   return (
     <Suspense fallback={
       <div className="space-y-2">
-        <Label className="text-base font-medium text-white">Travel Dates *</Label>
+        <Label className="text-base font-medium text-gray-700">Travel Dates *</Label>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label className="text-sm text-white/80">Arrival Date</Label>
+            <Label className="text-sm text-gray-600">Arrival Date</Label>
             <Input
               type="text"
               placeholder="Loading..."
-              className="h-14 text-base bg-white/20 border-white/30 text-white placeholder:text-gray-300 backdrop-blur-sm"
+              className="h-14 text-base bg-white/60 border-orange-200 text-gray-800 placeholder:text-gray-400 backdrop-blur-sm focus:ring-orange-200"
             />
           </div>
           <div className="space-y-2">
-            <Label className="text-sm text-white/80">Departure Date</Label>
+            <Label className="text-sm text-gray-600">Departure Date</Label>
             <Input
               type="text"
               placeholder="Loading..."
-              className="h-14 text-base bg-white/20 border-white/30 text-white placeholder:text-gray-300 backdrop-blur-sm"
+              className="h-14 text-base bg-white/60 border-orange-200 text-gray-800 placeholder:text-gray-400 backdrop-blur-sm focus:ring-orange-200"
             />
           </div>
         </div>
