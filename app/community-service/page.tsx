@@ -148,6 +148,7 @@ export default function CommunityServicePage() {
               </p>
             </motion.div>
           </div>
+          
 
           {/* Image Marquee - Full Width */}
           <motion.div
