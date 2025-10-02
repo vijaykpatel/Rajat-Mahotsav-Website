@@ -1,0 +1,16 @@
+/* Universal Card Hover Behavior */
+.card-hover {
+  transition: transform 100ms ease-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  transition: transform 50ms ease-out;
+}
+
+/* Mobile-friendly version - no hover effects on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .card-hover:hover {
+    transform: none;
+  }
+}
