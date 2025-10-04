@@ -243,4 +243,21 @@
       padding-top: calc(var(--navbar-height) + 5rem);
     }
   }
+  
+  /* Standard Page Header Component Styles */
+  .standard-page-title {
+    @apply text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-2 leading-tight transition-all duration-1000 ease-out;
+  }
+  
+  .standard-page-subtitle {
+    @apply text-2xl md:text-3xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent mb-6 leading-relaxed transition-all duration-1000 ease-out;
+  }
+  
+  .standard-page-description {
+    @apply text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-4xl mx-auto;
+  }
+  
+  .animated-word {
+    @apply inline-block mr-2 transition-all duration-500 ease-out;
+  }
 }

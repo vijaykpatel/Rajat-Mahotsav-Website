@@ -19,6 +19,7 @@ import { ProgressCounter } from "@/components/progress-counter"
 import { BentoInitiatives } from "@/components/bento-initiatives"
 import { AnimatedTextSection } from "@/components/animated-text-section"
 import { useToast } from "@/hooks/use-toast"
+import { StandardPageHeader } from "@/components/standard-page-header"
 import "@/styles/community-service-theme.css"
 
 const communityStats = [
@@ -129,24 +130,13 @@ export default function CommunityServicePage() {
       <section className="min-h-screen">
         <div className="relative z-10">
           {/* Hero Content */}
-          <div className="pt-8 md:pt-12 lg:pt-16 text-center px-4 sm:px-6 lg:px-8 page-header-spacing">
-            <h1 className={`page-title-size font-bold community-title mb-6 leading-tight transition-all duration-1000 ease-out ${
-              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-            }`}>
-              Community Service - Seva in Action
-            </h1>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="mb-36 max-w-4xl mx-auto"
-            >
-              <p className="page-description-size community-text-secondary leading-relaxed">
-                Service to humanity is service to God. Through our community initiatives, we embody the teachings of compassion, 
-                selflessness, and unity that form the foundation of our faith.
-              </p>
-            </motion.div>
+          <div className="mb-36">
+            <StandardPageHeader
+              title="Community Service"
+              subtitle="Seva in Action"
+              description="Service to humanity is service to God. Through our community initiatives, we embody the teachings of compassion, selflessness, and unity that form the foundation of our faith."
+              isLoaded={isLoaded}
+            />
           </div>
           
 

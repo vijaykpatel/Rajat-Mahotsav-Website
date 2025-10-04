@@ -2,13 +2,14 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-
+import { StandardPageHeader } from "@/components/standard-page-header"
 import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane, Check } from "lucide-react"
 
 export default function AccommodationsPage() {
 
   const [isStreetView, setIsStreetView] = useState(true)
   const [isCopied, setIsCopied] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(true)
 
   const hotels = [
     {
@@ -160,25 +161,19 @@ export default function AccommodationsPage() {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-orange-50 via-white to-red-50 relative text-gray-900 page-bg-extend">
       <div className="container mx-auto px-4 page-bottom-spacing relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center page-header-spacing"
-        >
-          <h1 className="page-title-size font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-4 leading-tight">
-            Accommodations
-          </h1>
-          <p className="page-description-size text-gray-600 mx-auto">
-            Everything you need for your stay during the Rajat Mahotsav celebration
-          </p>
-        </motion.div>
+        <StandardPageHeader
+          title="Accommodations"
+          subtitle="Your Home Away From Home"
+          description="Everything you need for your stay during the Rajat Mahotsav celebration"
+          isLoaded={isLoaded}
+        />
 
         {/* Venue Location Section */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
           className="mb-16"
         >
           <div className="flex items-center gap-3 mb-8">
@@ -248,8 +243,9 @@ export default function AccommodationsPage() {
         {/* Airport Transportation Section */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
           className="mb-16"
         >
           <div className="flex items-center gap-3 mb-8">
@@ -259,7 +255,8 @@ export default function AccommodationsPage() {
           <div className="grid md:grid-cols-2 gap-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
             >
@@ -281,7 +278,8 @@ export default function AccommodationsPage() {
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
             >
@@ -307,8 +305,9 @@ export default function AccommodationsPage() {
         {/* Hotels Section */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
           className="mb-16"
         >
           <div className="flex items-center gap-3 mb-8">
@@ -320,7 +319,8 @@ export default function AccommodationsPage() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
               >
@@ -373,8 +373,9 @@ export default function AccommodationsPage() {
         {/* Transportation Section */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
           className="mb-16"
         >
           <div className="flex items-center gap-3 mb-8">
@@ -386,7 +387,8 @@ export default function AccommodationsPage() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
               >
@@ -401,8 +403,9 @@ export default function AccommodationsPage() {
         {/* Sightseeing Section */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
           <div className="flex items-center gap-3 mb-8">
             <MapPin className="h-8 w-8 text-green-500" />
@@ -453,7 +456,8 @@ export default function AccommodationsPage() {
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.1 * index }}
                     className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
                   >

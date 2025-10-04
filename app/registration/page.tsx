@@ -232,7 +232,7 @@ export default function RegistrationPage() {
             <Typewriter 
               text="Register yourself for the Rajat Mahotsav!"
               speed={50}
-              className="page-title-size font-bold reg-title xl:whitespace-nowrap"
+              className="standard-page-title reg-title xl:whitespace-nowrap"
             />
           </div>
         </div>

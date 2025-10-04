@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-
+import { StandardPageHeader } from "@/components/standard-page-header"
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
 
 interface Event {
@@ -109,12 +109,7 @@ export default function SchedulePage() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
   const [isMobile, setIsMobile] = useState(false)
-  const [wordIndex, setWordIndex] = useState(0)
-  const [showTitle, setShowTitle] = useState(false)
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
-
-  const titleWords = "Calendar of Events".split(" ")
-  const descriptionWords = "Come celebrate 25 years of community, faith, and fellowship! Join us for this special milestone event designed for all ages.".split(" ")
 
   // Theme constants for easy customization
   const theme = {
@@ -134,10 +129,7 @@ export default function SchedulePage() {
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoaded(true)
-      setShowTitle(true)
-    }, 300)
+    const timer = setTimeout(() => setIsLoaded(true), 300)
     return () => clearTimeout(timer)
   }, [])
 
@@ -174,44 +166,16 @@ export default function SchedulePage() {
     }
   }, [isMobile, isLoaded])
 
-  useEffect(() => {
-    if (isLoaded && wordIndex < titleWords.length + descriptionWords.length) {
-      const timer = setTimeout(() => {
-        setWordIndex(prev => prev + 1)
-      }, wordIndex < titleWords.length ? 100 : 20)
-      return () => clearTimeout(timer)
-    }
-  }, [isLoaded, wordIndex, titleWords.length, descriptionWords.length])
-
   return (
     <div className={`min-h-screen ${theme.gradients.background} page-bg-extend`}>
       <div className="container mx-auto px-4 page-bottom-spacing">
         {/* Header */}
-        <div className="text-center page-header-spacing">
-          <h1 className={`page-title-size font-bold ${theme.gradients.title} bg-clip-text text-transparent mb-2 leading-tight transition-all duration-1000 ease-out ${
-            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`}>
-            Calendar of Events
-          </h1>
-          <div className={`text-2xl md:text-3xl font-semibold ${theme.gradients.subtitle} bg-clip-text text-transparent mb-6 leading-relaxed transition-all duration-1000 ease-out ${
-            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`} style={{ transitionDelay: '200ms' }}>
-            July 25 - August 2, 2026
-          </div>
-          <p className="text-gray-600 page-description-size leading-relaxed max-w-4xl mx-auto">
-            {descriptionWords.map((word, index) => (
-              <span
-                key={index}
-                className={`inline-block mr-2 transition-all duration-500 ease-out ${
-                  index < wordIndex - titleWords.length ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-                }`}
-                style={{ transitionDelay: `${400 + index * 20}ms` }}
-              >
-                {word}
-              </span>
-            ))}
-          </p>
-        </div>
+        <StandardPageHeader
+          title="Calendar of Events"
+          subtitle="July 25 - August 2, 2026"
+          description="Come celebrate 25 years of community, faith, and fellowship! Join us for this special milestone event designed for all ages."
+          isLoaded={isLoaded}
+        />
 
         {/* Calendar Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
