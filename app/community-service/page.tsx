@@ -130,16 +130,16 @@ export default function CommunityServicePage() {
         <div className="relative z-10">
           {/* Hero Content */}
           <div className="text-center px-4 sm:px-6 lg:px-8 page-header-spacing">
-            <Typewriter 
-              text="Community Service - Seva in Action"
-              speed={50}
-              className="page-title-size font-bold community-title mb-6 leading-tight xl:whitespace-nowrap"
-            />
+            <h1 className={`page-title-size font-bold community-title mb-6 leading-tight transition-all duration-1000 ease-out ${
+              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+            }`}>
+              Community Service - Seva in Action
+            </h1>
             
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2, duration: 0.8 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
               className="mb-36 max-w-4xl mx-auto"
             >
               <p className="page-description-size community-text-secondary leading-relaxed">
@@ -154,7 +154,7 @@ export default function CommunityServicePage() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 2.5, duration: 1 }}
+            transition={{ delay: 0.6, duration: 1 }}
             className="w-full"
           >
             <ImageMarquee />

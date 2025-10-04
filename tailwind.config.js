@@ -16,6 +16,14 @@ module.exports = {
         'page-title-desc': 'var(--page-title-description-spacing)',
         'page-bottom': 'var(--page-bottom-spacing)',
       },
+      colors: {
+        'schedule': {
+          'primary': '#ea580c', // orange-600
+          'secondary': '#dc2626', // red-600
+          'light': '#f97316', // orange-500
+          'light-secondary': '#ef4444', // red-500
+        },
+      },
     },
   },
   plugins: [],
