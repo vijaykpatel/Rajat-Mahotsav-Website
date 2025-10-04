@@ -6,6 +6,7 @@ import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Menu, X } f
 import { useDeviceType } from "@/hooks/use-device-type"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
+import { NavBar } from "@/components/ui/tubelight-navbar"
 
 const menuItems = [
   {
@@ -110,7 +111,13 @@ export function Navigation() {
         `}</style>
         <div className="flex items-center justify-between w-full">
 
-          {/* Left Side - Hamburger Menu */}
+          {/* Left Side - Tubelight Navbar */}
+          <NavBar items={menuItems.map(item => ({ name: item.label, url: item.href, icon: item.icon }))} />
+
+          {/* Center - Empty space for better balance */}
+          <div className="flex-1"></div>
+          
+          {/* Old Hamburger Menu - Commented Out
           <motion.button
             onClick={() => setIsMobileMenuOpen(true)}
             className="p-3 rounded-xl bg-black/20 backdrop-blur-md border-2 border-white/40 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
@@ -119,9 +126,7 @@ export function Navigation() {
           >
             <Menu className="h-6 w-6 text-white" />
           </motion.button>
-
-          {/* Center - Empty space for better balance */}
-          <div className="flex-1"></div>
+          */}
 
                   {/* oild Center - Main Logo */}
           {/* <div className="flex justify-center px-4">

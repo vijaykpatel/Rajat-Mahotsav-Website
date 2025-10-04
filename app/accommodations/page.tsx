@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { StandardPageHeader } from "@/components/standard-page-header"
 import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane, Check } from "lucide-react"
 
@@ -9,7 +9,12 @@ export default function AccommodationsPage() {
 
   const [isStreetView, setIsStreetView] = useState(true)
   const [isCopied, setIsCopied] = useState(false)
-  const [isLoaded, setIsLoaded] = useState(true)
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 300)
+    return () => clearTimeout(timer)
+  }, [])
 
   const hotels = [
     {
