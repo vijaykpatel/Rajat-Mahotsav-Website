@@ -42,15 +42,6 @@
 /* Registration page specific classes */
 .reg-page-bg {
   background: var(--reg-bg-main);
-  position: relative;
-}
-
-.reg-page-bg::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--reg-bg-overlay);
-  pointer-events: none;
 }
 
 .reg-title {

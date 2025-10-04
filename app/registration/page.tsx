@@ -223,7 +223,7 @@ export default function RegistrationPage() {
   return (
     <>
       {/* Scrollable Background and Content */}
-      <div className={`min-h-screen w-full reg-page-bg page-bg-extend transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} data-page="registration">
+      <div className={`min-h-[calc(100vh+200px)] w-full reg-page-bg page-bg-extend transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} data-page="registration">
         {deviceType !== 'mobile' && <BackgroundPaths />}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 page-bottom-spacing">
         {/* Title with Typewriter Animation */}
