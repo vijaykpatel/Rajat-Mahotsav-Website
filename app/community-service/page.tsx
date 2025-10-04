@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Heart, Users, Clock, MapPin, Mail, Phone, Send } from "lucide-react"
-import { useNavbarHeight } from "@/hooks/use-navbar-height"
+
 import { useDeviceType } from "@/hooks/use-device-type"
 import Typewriter from "@/components/typewriter"
 import BackgroundPaths from "@/components/floating-paths"
@@ -54,7 +54,7 @@ const communityStats = [
 
 export default function CommunityServicePage() {
   const { toast } = useToast()
-  const { dynamicPadding } = useNavbarHeight()
+
   const deviceType = useDeviceType()
   const [isLoaded, setIsLoaded] = useState(false)
   const [navbarVisible, setNavbarVisible] = useState(true)
@@ -115,7 +115,7 @@ export default function CommunityServicePage() {
 
   return (
     <div 
-      className={`w-full community-page-bg community-scroll-container transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} 
+      className={`w-full community-page-bg community-scroll-container page-bg-extend transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} 
       data-page="community-service"
     >
       <style jsx>{`
@@ -126,10 +126,10 @@ export default function CommunityServicePage() {
       {deviceType !== 'mobile' && <BackgroundPaths />}
       
       {/* Section 1: Hero + Our Community in Action */}
-      <section className="min-h-screen" style={{ paddingTop: dynamicPadding }}>
+      <section className="min-h-screen">
         <div className="relative z-10">
           {/* Hero Content */}
-          <div className="text-center px-4 sm:px-6 lg:px-8 page-header-spacing">
+          <div className="pt-8 md:pt-12 lg:pt-16 text-center px-4 sm:px-6 lg:px-8 page-header-spacing">
             <h1 className={`page-title-size font-bold community-title mb-6 leading-tight transition-all duration-1000 ease-out ${
               isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
             }`}>

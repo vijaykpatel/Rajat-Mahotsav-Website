@@ -8,13 +8,13 @@ import VideoSection from "@/components/video-section"
 import TitleSection from "@/components/title-section"
 import ShaderBackground from "@/components/shader-background"
 import { useDeviceType } from "@/hooks/use-device-type"
-import { useNavbarHeight } from "@/hooks/use-navbar-height"
+
 import { useLoading } from "@/hooks/use-loading"
 
 export default function ShaderShowcase() {
   const targetDate = '2026-07-28T17:00:00-05:00';
   const deviceType = useDeviceType();
-  const { dynamicPadding } = useNavbarHeight();
+
   const { isLoading } = useLoading();
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -30,7 +30,7 @@ export default function ShaderShowcase() {
         <>
           {/* First page with shader background - countdown */}
           <ShaderBackground>
-            <div className="h-screen w-screen flex flex-col items-center justify-center p-4 relative z-20" style={{ paddingTop: dynamicPadding }}>
+            <div className="h-screen w-screen flex flex-col items-center justify-center p-4 relative z-20 pt-8 md:pt-12 lg:pt-16">
               <div className={`flex-1 flex flex-col items-center justify-center relative z-30 max-h-[80vh] portrait:max-h-[60vh] transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
               <div className="max-h-[45vh] landscape:max-h-[45vh] flex items-center justify-start mb-[2vh]">
                 <RegularLogo />

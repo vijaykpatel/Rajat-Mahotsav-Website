@@ -90,20 +90,20 @@ export function Navigation() {
 
   return (
     <>
-      <div 
+      <nav 
         data-navbar
-        className={`absolute top-0 left-0 right-0 z-50 pt-3 transition-opacity duration-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}
+        className={`relative w-full z-50 py-3 transition-opacity duration-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}
         style={{ 
           paddingLeft: 'var(--nav-padding)', 
           paddingRight: 'var(--nav-padding)' 
         }}
       >
         <style jsx>{`
-          div[data-navbar] {
+          nav[data-navbar] {
             --nav-padding: 2vw;
           }
           @media (min-width: 1024px) {
-            div[data-navbar] {
+            nav[data-navbar] {
               --nav-padding: 2vw;
             }
           }
@@ -156,7 +156,7 @@ export function Navigation() {
             />
           </div>
         </div>
-      </div>
+      </nav>
 
       {/* Mobile Sidebar */}
       <AnimatePresence>

@@ -2,11 +2,11 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { useNavbarHeight } from '@/hooks/use-navbar-height'
+
 import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane, Check } from "lucide-react"
 
 export default function AccommodationsPage() {
-  const { dynamicPadding } = useNavbarHeight()
+
   const [isStreetView, setIsStreetView] = useState(true)
   const [isCopied, setIsCopied] = useState(false)
 
@@ -158,7 +158,7 @@ export default function AccommodationsPage() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-orange-50 via-white to-red-50 relative text-gray-900" style={{ paddingTop: dynamicPadding }}>
+    <div className="min-h-screen w-full bg-gradient-to-br from-orange-50 via-white to-red-50 relative text-gray-900 page-bg-extend">
       <div className="container mx-auto px-4 page-bottom-spacing relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

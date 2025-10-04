@@ -3,11 +3,11 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { Timeline } from "@/components/ui/timeline";
-import { useNavbarHeight } from "@/hooks/use-navbar-height";
+
 import ShaderBackground from "@/components/shader-background";
 
 export default function TimelinePage() {
-  const { dynamicPadding } = useNavbarHeight()
+
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
@@ -95,7 +95,7 @@ export default function TimelinePage() {
   return (
     <>
       <ShaderBackground>
-        <div className="min-h-screen w-full" style={{ paddingTop: dynamicPadding }}>
+        <div className="min-h-screen w-full pt-8 md:pt-12 lg:pt-16">
           <div className={`relative transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
             <Timeline data={data} />
           </div>

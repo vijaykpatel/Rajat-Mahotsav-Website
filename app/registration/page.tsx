@@ -17,7 +17,7 @@ import LazyPhoneInput from "@/components/lazy-phone-input"
 import LazyDatePicker from "@/components/lazy-date-picker"
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/hooks/use-toast"
-import { useNavbarHeight } from "@/hooks/use-navbar-height"
+
 import { useDeviceType } from "@/hooks/use-device-type"
 import Typewriter from "@/components/typewriter"
 import BackgroundPaths from "@/components/floating-paths"
@@ -61,7 +61,7 @@ type FormData = z.infer<typeof FormSchema>
 
 export default function RegistrationPage() {
   const { toast } = useToast()
-  const { dynamicPadding } = useNavbarHeight()
+
   const deviceType = useDeviceType()
   const [formData, setFormData] = useState({
     country: "",
@@ -223,7 +223,7 @@ export default function RegistrationPage() {
   return (
     <>
       {/* Scrollable Background and Content */}
-      <div className={`min-h-screen w-full reg-page-bg transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} data-page="registration" style={{paddingTop: dynamicPadding, minHeight: '100vh'}}>
+      <div className={`min-h-screen w-full reg-page-bg page-bg-extend transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} data-page="registration">
         {deviceType !== 'mobile' && <BackgroundPaths />}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 page-bottom-spacing">
         {/* Title with Typewriter Animation */}

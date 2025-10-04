@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { useNavbarHeight } from "@/hooks/use-navbar-height"
+
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
 
 interface Event {
@@ -104,7 +104,7 @@ const scheduleData: ScheduleDay[] = [
 ]
 
 export default function SchedulePage() {
-  const { dynamicPadding } = useNavbarHeight()
+
   const [isLoaded, setIsLoaded] = useState(false)
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
@@ -184,7 +184,7 @@ export default function SchedulePage() {
   }, [isLoaded, wordIndex, titleWords.length, descriptionWords.length])
 
   return (
-    <div className={`min-h-screen ${theme.gradients.background}`} style={{ paddingTop: dynamicPadding }}>
+    <div className={`min-h-screen ${theme.gradients.background} page-bg-extend`}>
       <div className="container mx-auto px-4 page-bottom-spacing">
         {/* Header */}
         <div className="text-center page-header-spacing">

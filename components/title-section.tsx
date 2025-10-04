@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useState, useEffect } from 'react'
-import { useNavbarHeight } from '@/hooks/use-navbar-height'
+
 
 interface TimeLeft {
   days: number;
@@ -14,7 +14,7 @@ interface TimeLeft {
 export default function TitleSection() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const targetDate = '2026-07-28T17:00:00-05:00';
-  const { dynamicPadding } = useNavbarHeight();
+
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -39,7 +39,7 @@ export default function TitleSection() {
   }, [targetDate]);
 
   return (
-    <div className="h-screen bg-[#4B9CD3] flex flex-col items-center justify-center px-4" style={{ paddingTop: dynamicPadding }}>
+    <div className="h-screen bg-[#4B9CD3] flex flex-col items-center justify-center px-4 pt-8 md:pt-12 lg:pt-16">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
