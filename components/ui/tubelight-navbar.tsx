@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { LucideIcon, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -18,10 +19,27 @@ interface NavBarProps {
 }
 
 export function NavBar({ items, className }: NavBarProps) {
+  const pathname = usePathname()
   const [activeTab, setActiveTab] = useState(items[0].name)
   const [hoveredTab, setHoveredTab] = useState<string | null>(null)
   const [isExpanded, setIsExpanded] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [hasAnimated, setHasAnimated] = useState(false)
+
+  useEffect(() => {
+    const currentItem = items.find(item => item.url === pathname)
+    if (currentItem) setActiveTab(currentItem.name)
+  }, [pathname, items])
+
+  useEffect(() => {
+    const saved = localStorage.getItem("navbar-expanded")
+    if (saved !== null) setIsExpanded(saved === "true")
+    setTimeout(() => setHasAnimated(true), 400)
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("navbar-expanded", String(isExpanded))
+  }, [isExpanded])
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024)
@@ -91,8 +109,11 @@ export function NavBar({ items, className }: NavBarProps) {
                 <span>{item.name}</span>
                 {(isActive || (!isMobile && isHovered)) && (
                   <motion.div
-                    layoutId={isActive ? "lamp" : "hover-lamp"}
-                    className="absolute inset-0 w-full bg-red-500/20 rounded-full -z-10"
+                    layoutId="lamp"
+                    className={cn(
+                      "absolute inset-0 w-full rounded-full -z-10",
+                      isActive ? "bg-red-500/20" : "bg-red-500/10"
+                    )}
                     initial={false}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   >
@@ -150,26 +171,13 @@ export function NavBar({ items, className }: NavBarProps) {
                     >
                       <Icon size={20} strokeWidth={2.5} className="mr-2" />
                       <span>{item.name}</span>
-                      {isActive && (
+                      {(isHovered || (!hoveredTab && isActive)) && (
                         <motion.div
                           layoutId="lamp"
-                          className="absolute inset-0 w-full bg-red-500 rounded-full -z-10"
-                          initial={false}
-                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                        >
-                          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-10 h-1.5 bg-red-500 rounded-t-full shadow-[0_0_10px_rgba(239,68,68,0.8)]">
-                            <div className="absolute w-16 h-8 bg-red-500/50 rounded-full blur-lg -top-3 -left-3" />
-                            <div className="absolute w-12 h-8 bg-red-500/50 rounded-full blur-lg -top-2" />
-                            <div className="absolute w-6 h-6 bg-red-500/60 rounded-full blur-md top-0 left-2" />
-                          </div>
-                        </motion.div>
-                      )}
-                      {isHovered && !isActive && (
-                        <motion.div
-                          layoutId="hover-lamp"
                           className="absolute inset-0 w-full bg-red-500/35 rounded-full -z-10"
-                          initial={false}
-                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={hasAnimated ? { type: "spring", stiffness: 300, damping: 30 } : { delay: 0.15, duration: 0.2 }}
                         >
                           <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-10 h-1.5 bg-red-500 rounded-t-full shadow-[0_0_10px_rgba(239,68,68,0.8)]">
                             <div className="absolute w-16 h-8 bg-red-500/50 rounded-full blur-lg -top-3 -left-3" />
