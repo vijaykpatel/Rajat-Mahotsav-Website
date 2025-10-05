@@ -11,6 +11,7 @@ import { Navigation } from "@/components/navigation"
 import { Toaster } from "@/components/ui/toaster"
 import StickyFooter from "@/components/sticky-footer"
 import { ScrollToTop } from "@/components/scroll-to-top"
+import { FloatingMenuButton } from "@/components/floating-menu-button"
 import "./globals.css"
 
 const figtree = Figtree({
@@ -92,6 +93,7 @@ html {
             <StickyFooter />
           </div>
           <ScrollToTop />
+          <FloatingMenuButton />
           <Toaster />
         </ThemeProvider>
       </body>
