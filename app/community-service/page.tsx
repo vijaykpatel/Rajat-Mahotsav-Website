@@ -155,24 +155,63 @@ export default function CommunityServicePage() {
       {/* Sections 2 & 3: Why We Serve + Our 25-Year Mission - With snap */}
       <AnimatedTextSection />
       
-      {/* Section 4: Community Initiatives */}
+      {/* Section 4: Community Initiatives + Impact Statistics */}
       <section className="min-h-screen">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center py-20 space-y-20">
           <BentoInitiatives />
+          
+          {/* Progress Statistics */}
+          <motion.div
+            ref={statsRef}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+          >
+            <div className="text-center mb-12">
+              <motion.h2 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="text-3xl lg:text-4xl font-bold community-text-primary mb-4"
+              >
+                Our Impact This Year
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-lg community-text-secondary"
+              >
+                Together, we're making a difference in our community
+              </motion.p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {communityStats.map((stat, index) => (
+                <ProgressCounter
+                  key={stat.label}
+                  {...stat}
+                  delay={index * 0.2}
+                  inView={isStatsInView}
+                />
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
-      
-      {/* Normal scrolling content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        {/* Progress Statistics */}
-        <motion.div
-          ref={statsRef}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1 }}
-          className="mb-20"
-        >
+
+      {/* Section 5: Mission in Action - YouTube Shorts */}
+      <section className="min-h-screen">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
           <div className="text-center mb-12">
             <motion.h2 
               initial={{ opacity: 0, y: 30 }}
@@ -181,7 +220,7 @@ export default function CommunityServicePage() {
               transition={{ duration: 0.8 }}
               className="text-3xl lg:text-4xl font-bold community-text-primary mb-4"
             >
-              Our Impact This Year
+              Our Mission in Action
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -190,23 +229,38 @@ export default function CommunityServicePage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-lg community-text-secondary"
             >
-              Together, we're making a difference in our community
+              Highlights from our recent community service events
             </motion.p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {communityStats.map((stat, index) => (
-              <ProgressCounter
-                key={stat.label}
-                {...stat}
-                delay={index * 0.2}
-                inView={isStatsInView}
-              />
-            ))}
+          <div className="flex justify-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-gradient-to-br from-orange-50 via-white to-blue-50 rounded-3xl shadow-xl p-6 max-w-sm flex flex-col items-center border-2 border-gray-200 hover:border-orange-500/30 hover:-translate-y-1 transition-all duration-300"
+            >
+              <div className="rounded-2xl overflow-hidden shadow-lg mb-4 aspect-[9/16] max-h-[560px] w-full max-w-[315px]">
+                <iframe
+                  src="https://www.youtube.com/embed/_sRpl5rM-M8?rel=0&modestbranding=1"
+                  title="Community Service Event"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+              <p className="text-center text-sm community-text-secondary leading-relaxed">
+                Shree Swaminarayan Gadi Secaucus Temple celebrates 25 years while supporting the local Secaucus PD fundraiser for Special Olympics NJ with a 5k run.
+              </p>
+            </motion.div>
           </div>
-        </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Get Involved Section */}
+      {/* Section 6: Get Involved - COMMENTED OUT FOR NOW */}
+      {/* <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -215,7 +269,6 @@ export default function CommunityServicePage() {
         >
               <div className="grid lg:grid-cols-2 gap-8 items-start">
                 
-                {/* Information Card */}
                 <Card className="community-card rounded-3xl overflow-hidden">
                   <CardHeader className="text-center pb-6">
                     <CardTitle className="text-2xl lg:text-3xl font-semibold community-text-primary">
@@ -243,7 +296,6 @@ export default function CommunityServicePage() {
                   </CardContent>
                 </Card>
 
-                {/* Contact Form */}
                 <Card className="community-card rounded-3xl overflow-hidden">
                   <CardHeader className="text-center pb-6">
                     <CardTitle className="text-2xl font-semibold community-text-primary">
@@ -317,7 +369,7 @@ export default function CommunityServicePage() {
                 </Card>
           </div>
         </motion.div>
-      </div>
+      </div> */}
     </div>
   )
 }

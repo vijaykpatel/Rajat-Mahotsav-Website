@@ -26,24 +26,6 @@ const initiatives = [
   },
   {
     id: 2,
-    title: "Education Support",
-    icon: GraduationCap,
-    description: "Tutoring and educational resources",
-    color: "from-blue-400 to-indigo-500",
-    bgColor: "bg-blue-50",
-    details: {
-      overview: "Our education initiative provides free tutoring, school supplies, and scholarship opportunities to underprivileged students in our community.",
-      achievements: [
-        "150+ students tutored monthly",
-        "95% improvement in grades",
-        "$50,000 in scholarships awarded",
-        "25 volunteer tutors active"
-      ],
-      impact: "Students in our program show an average grade improvement of 1.5 letter grades and 90% graduate high school successfully."
-    }
-  },
-  {
-    id: 3,
     title: "Healthcare Outreach",
     icon: Heart,
     description: "Free health checkups and awareness",
@@ -61,43 +43,7 @@ const initiatives = [
     }
   },
   {
-    id: 4,
-    title: "Elderly Care",
-    icon: Users,
-    description: "Support for senior community members",
-    color: "from-purple-400 to-violet-500",
-    bgColor: "bg-purple-50",
-    details: {
-      overview: "Our elderly care program provides companionship, assistance with daily activities, and social engagement for senior citizens in our community.",
-      achievements: [
-        "100+ seniors supported monthly",
-        "500+ volunteer hours weekly",
-        "Daily meal delivery service",
-        "Weekly social activities organized"
-      ],
-      impact: "We've significantly reduced isolation among elderly community members and improved their quality of life through regular engagement and support."
-    }
-  },
-  {
-    id: 5,
-    title: "Housing Assistance",
-    icon: Home,
-    description: "Helping families find stable housing",
-    color: "from-green-400 to-emerald-500",
-    bgColor: "bg-green-50",
-    details: {
-      overview: "Our housing program assists families in finding affordable housing, provides temporary shelter, and helps with housing-related expenses.",
-      achievements: [
-        "75 families housed this year",
-        "Emergency shelter for 200+ nights",
-        "$100,000 in rental assistance",
-        "Partnership with 10 housing agencies"
-      ],
-      impact: "We've helped reduce homelessness in our area by 25% and provided stable housing solutions for vulnerable families."
-    }
-  },
-  {
-    id: 6,
+    id: 3,
     title: "Environmental Care",
     icon: TreePine,
     description: "Community cleanup and tree planting",
