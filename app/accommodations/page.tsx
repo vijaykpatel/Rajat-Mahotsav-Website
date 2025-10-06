@@ -187,7 +187,7 @@ export default function AccommodationsPage() {
           </div>
           <div className="max-w-4xl mx-auto">
             <div className="relative">
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 ring-2 ring-orange-200 hover:-translate-y-2 hover:scale-[1.02]">
+              <div className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-orange-200">
                 <div className="mb-4 relative">
                   <div className="absolute top-0 right-0 flex flex-col md:flex-row items-end md:items-center gap-1 md:gap-2">
                     <button
@@ -257,15 +257,15 @@ export default function AccommodationsPage() {
             <Plane className="h-8 w-8 text-blue-500" />
             <h2 className="text-3xl font-bold">Airport Transportation</h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
+              className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
             >
-              <h3 className="text-xl font-bold mb-3 text-blue-400">Newark Liberty International (EWR)</h3>
+              <h3 className="text-xl font-bold mb-3">Newark Liberty International (EWR)</h3>
               <div className="space-y-2 text-gray-600">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-blue-400" />
@@ -282,13 +282,13 @@ export default function AccommodationsPage() {
               </div>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
+              className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
             >
-              <h3 className="text-xl font-bold mb-3 text-blue-400">LaGuardia Airport (LGA)</h3>
+              <h3 className="text-xl font-bold mb-3">LaGuardia Airport (LGA)</h3>
               <div className="space-y-2 text-gray-600">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-blue-400" />
@@ -304,7 +304,42 @@ export default function AccommodationsPage() {
                 </div>
               </div>
             </motion.div>
+            <motion.div
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
+            >
+              <h3 className="text-xl font-bold mb-3">John F. Kennedy International (JFK)</h3>
+              <div className="space-y-2 text-gray-600">
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-blue-400" />
+                  <span className="text-sm font-medium">45-60 min drive</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Car className="h-4 w-4 text-blue-400" />
+                  <span className="text-sm">Uber/Lyft: $60-85</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Navigation className="h-4 w-4 text-blue-400" />
+                  <span className="text-sm">Taxi: $70-95</span>
+                </div>
+              </div>
+            </motion.div>
           </div>
+          <motion.div
+            initial={{ y: 20 }}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-6"
+          >
+            <p className="text-gray-700 leading-relaxed">
+              <span className="font-semibold">Note:</span> The Temple is currently exploring transportation options from airports for our guests. 
+              We will update this page with detailed information as arrangements are finalized.
+            </p>
+          </motion.div>
         </motion.section>
 
         {/* Hotels Section */}
@@ -323,11 +358,11 @@ export default function AccommodationsPage() {
             {hotels.map((hotel, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 20 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
+                className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-purple-200"
               >
                 <h3 className="text-xl font-bold mb-3">{hotel.name}</h3>
                 <div className="space-y-2 text-gray-600">
@@ -384,20 +419,20 @@ export default function AccommodationsPage() {
           className="mb-16"
         >
           <div className="flex items-center gap-3 mb-8">
-            <Car className="h-8 w-8 text-blue-500" />
+            <Car className="h-8 w-8 text-yellow-500" />
             <h2 className="text-3xl font-bold">Transportation</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {transportation.map((transport, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 20 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
+                className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-yellow-200"
               >
-                <h3 className="text-xl font-bold mb-3 text-blue-400">{transport.type}</h3>
+                <h3 className="text-xl font-bold mb-3">{transport.type}</h3>
                 <p className="text-gray-600 mb-2"><strong>Routes:</strong> {transport.routes}</p>
                 <p className="text-gray-500 text-sm">{transport.info}</p>
               </motion.div>
@@ -451,23 +486,23 @@ export default function AccommodationsPage() {
             
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
+              initial={{ y: 20 }}
+              animate={{ y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-8 hover:-translate-y-2 hover:scale-[1.02]"
+              className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-8 border-2 border-green-200"
             >
               <div className="grid md:grid-cols-2 gap-6">
                 {sightseeingData[activeTab as keyof typeof sightseeingData].map((attraction, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ y: 20 }}
+                    whileInView={{ y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.1 * index }}
-                    className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]"
+                    className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-green-200"
                   >
                     <div className="mb-3">
-                      <h3 className="text-xl font-bold text-green-600">{attraction.name}</h3>
+                      <h3 className="text-xl font-bold">{attraction.name}</h3>
                     </div>
                     <p className="text-gray-600 leading-relaxed">{attraction.description}</p>
                   </motion.div>
