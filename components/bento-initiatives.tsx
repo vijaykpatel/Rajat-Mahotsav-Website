@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Heart, Users, Utensils, GraduationCap, Home, TreePine } from "lucide-react"
+import { Heart, Users, Utensils, Home, TreePine, Calendar } from "lucide-react"
 
 const initiatives = [
   {
@@ -13,6 +13,7 @@ const initiatives = [
     description: "Providing meals to those in need",
     color: "from-orange-400 to-red-500",
     bgColor: "bg-orange-50",
+    className: "md:col-span-1",
     details: {
       overview: "Our food distribution program serves over 500 families weekly, providing nutritious meals and groceries to those facing food insecurity in our community.",
       achievements: [
@@ -31,6 +32,7 @@ const initiatives = [
     description: "Free health checkups and awareness",
     color: "from-pink-400 to-rose-500",
     bgColor: "bg-pink-50",
+    className: "md:col-span-1",
     details: {
       overview: "We organize monthly health camps providing free medical checkups, health screenings, and wellness education to underserved communities.",
       achievements: [
@@ -49,6 +51,7 @@ const initiatives = [
     description: "Community cleanup and tree planting",
     color: "from-teal-400 to-cyan-500",
     bgColor: "bg-teal-50",
+    className: "md:col-span-1",
     details: {
       overview: "Our environmental initiative focuses on community beautification, tree planting, and promoting sustainable practices among community members.",
       achievements: [
@@ -58,6 +61,25 @@ const initiatives = [
         "10 parks adopted and maintained"
       ],
       impact: "We've improved air quality in our neighborhoods and created more green spaces for community enjoyment and environmental health."
+    }
+  },
+  {
+    id: 4,
+    title: "Community Events",
+    icon: Calendar,
+    description: "Supporting local 5Ks and service events",
+    color: "from-blue-400 to-indigo-500",
+    bgColor: "bg-blue-50",
+    className: "md:col-span-1",
+    details: {
+      overview: "We actively support and organize community events including charity 5K runs, neighborhood gatherings, and ongoing service opportunities that bring people together.",
+      achievements: [
+        "15+ community events hosted annually",
+        "8 charity 5K runs organized",
+        "3,000+ participants engaged",
+        "$50,000+ raised for local causes"
+      ],
+      impact: "Our events have strengthened community bonds and raised significant funds for local charities while promoting health and wellness."
     }
   }
 ]
@@ -82,7 +104,7 @@ export function BentoInitiatives() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:auto-rows-[20rem] max-w-7xl mx-auto">
         {initiatives.map((initiative, index) => {
           const Icon = initiative.icon
           return (
@@ -92,11 +114,12 @@ export function BentoInitiatives() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
+              className={initiative.className}
             >
               <Dialog>
                 <DialogTrigger asChild>
-                  <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02]">
-                    <div className="text-center space-y-4">
+                  <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer p-6 hover:-translate-y-2 hover:scale-[1.02] h-full">
+                    <div className="text-center space-y-4 h-full flex flex-col justify-center">
                       <div className="flex justify-center">
                         <div className={`p-4 rounded-full bg-gradient-to-br ${initiative.color}`}>
                           <Icon className="h-8 w-8 text-white" />

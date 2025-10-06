@@ -46,9 +46,9 @@ const communityStats = [
   },
   {
     icon: Heart,
-    label: "Lives Touched",
-    current: 1850,
-    target: 2000,
+    label: "Community Events",
+    current: 14,
+    target: 15,
     suffix: ""
   }
 ]
