@@ -3,13 +3,15 @@
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import { StandardPageHeader } from "@/components/standard-page-header"
-import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane, Check } from "lucide-react"
+import { ImageCarouselModal } from "@/components/image-carousel-modal"
+import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane, Check, ArrowRight } from "lucide-react"
 
 export default function AccommodationsPage() {
 
   const [isStreetView, setIsStreetView] = useState(true)
   const [isCopied, setIsCopied] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [selectedHotel, setSelectedHotel] = useState<number | null>(null)
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 300)
@@ -18,40 +20,57 @@ export default function AccommodationsPage() {
 
   const hotels = [
     {
-      name: "Hyatt House Jersey City",
-      address: "3 Second St, Jersey City, NJ 07302",
-      phone: "(201) 626-9000",
-      hotelCode: "HYT-JC",
-      bookingLink: "https://hyatt.com/book",
+      name: "Aloft Secaucus Meadowlands",
+      address: "460 Harmon Meadow Blvd., Secaucus, NJ 07094",
+      phone: "(201) 809-1000",
+      hotelCode: "ALF-SEC",
+      bookingLink: "https://www.marriott.com/hotels/travel/ewral-aloft-secaucus-meadowlands/",
       blockDates: "July 28 - Aug 3, 2026",
-      travelTime: "15 min drive",
+      travelTime: "8 min drive",
+      directionsLink: "https://maps.app.goo.gl/CVaAykRG1HQRv9hA9",
+      walkable: false,
+      pricePerNight: "$169",
+      amenities: ["Free WiFi", "Fitness Center", "Pool"],
+      images: [
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
+        "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800"
+      ]
+    },
+    {
+      name: "Residence Inn by Marriott Secaucus Meadowlands",
+      address: "800 Plaza Dr, Secaucus, NJ 07094", 
+      phone: "(201) 223-9901",
+      hotelCode: "RI-SEC",
+      bookingLink: "https://www.marriott.com/hotels/travel/ewrrs-residence-inn-secaucus-meadowlands/",
+      blockDates: "July 28 - Aug 3, 2026",
+      travelTime: "8 min drive",
+      directionsLink: "https://maps.app.goo.gl/Rjs8h1mmprAywhrM8",
+      walkable: false,
+      pricePerNight: "$179",
+      amenities: ["Free Breakfast", "Kitchen"],
+      images: [
+        "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800"
+      ]
+    },
+    {
+      name: "Renaissance Meadowlands Hotel",
+      address: "801 Rutherford Ave, Rutherford, NJ 07070",
+      phone: "(201) 231-3100", 
+      hotelCode: "REN-MDW",
+      bookingLink: "https://www.marriott.com/hotels/travel/ewrrn-renaissance-meadowlands-hotel/",
+      blockDates: "July 28 - Aug 3, 2026",
+      travelTime: "13 min drive",
+      directionsLink: "https://maps.app.goo.gl/kB48Wc8kxTHA61ns9",
       walkable: false,
       pricePerNight: "$189",
-      amenities: ["Free WiFi", "Fitness Center"]
-    },
-    {
-      name: "DoubleTree by Hilton Fort Lee",
-      address: "2117 Route 4 E, Fort Lee, NJ 07024", 
-      phone: "(201) 461-9000",
-      hotelCode: "DT-FL",
-      bookingLink: "https://hilton.com/book",
-      blockDates: "July 28 - Aug 3, 2026",
-      travelTime: "20 min drive",
-      walkable: false,
-      pricePerNight: "$159",
-      amenities: ["Business Center"]
-    },
-    {
-      name: "Hampton Inn & Suites Secaucus Meadowlands",
-      address: "300 Harmon Cove Tower, Secaucus, NJ 07094",
-      phone: "(201) 348-2000", 
-      hotelCode: "HI-SEC",
-      bookingLink: "https://hilton.com/hampton",
-      blockDates: "July 28 - Aug 3, 2026",
-      travelTime: "5 min drive",
-      walkable: true,
-      pricePerNight: "$149",
-      amenities: ["Free Breakfast", "Pool", "Shuttle Service to New York"]
+      amenities: ["Restaurant", "Fitness Center", "Business Center"],
+      images: [
+        "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800",
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800",
+        "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800"
+      ]
     }
   ]
 
@@ -362,9 +381,9 @@ export default function AccommodationsPage() {
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
-                className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-purple-200"
+                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out p-6 border-2 border-purple-200 hover:-translate-y-1 relative"
               >
-                <h3 className="text-xl font-bold mb-3">{hotel.name}</h3>
+                <h3 className="text-xl font-bold mb-3 min-h-[3.5rem]">{hotel.name}</h3>
                 <div className="space-y-2 text-gray-600">
                   <div className="flex items-center gap-2">
                     <Hash className="h-4 w-4 text-purple-400" />
@@ -381,6 +400,15 @@ export default function AccommodationsPage() {
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4 text-purple-400" />
                     <span className="text-sm font-medium">{hotel.travelTime}</span>
+                    <a 
+                      href={hotel.directionsLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-xs text-blue-600 hover:underline"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      (Directions)
+                    </a>
                     {hotel.walkable && <span className="text-xs bg-green-500/20 text-green-600 px-2 py-1 rounded">Walkable</span>}
                   </div>
                   <div className="flex items-center gap-2">
@@ -393,21 +421,45 @@ export default function AccommodationsPage() {
                   </div>
                   <div className="flex items-center gap-2">
                     <ExternalLink className="h-4 w-4 text-purple-400" />
-                    <a href={hotel.bookingLink} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">Book Now</a>
+                    <a 
+                      href={hotel.bookingLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-sm text-blue-600 hover:underline"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Book Now
+                    </a>
                   </div>
                   <div className="mt-3">
                     <div className="flex flex-wrap gap-1">
                       {hotel.amenities.map((amenity, i) => (
-                        <span key={i} className="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded">
+                        <span key={i} className="text-xs bg-purple-500/20 text-black px-2 py-1 rounded">
                           {amenity}
                         </span>
                       ))}
                     </div>
                   </div>
                 </div>
+                <button
+                  onClick={() => setSelectedHotel(index)}
+                  className="absolute bottom-4 right-4 flex items-center gap-1 bg-gradient-to-r from-purple-400 to-purple-500 hover:from-purple-500 hover:to-purple-600 text-white px-3 py-1.5 rounded-full text-sm font-medium transition-all border-2 border-purple-300 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-400/50"
+                >
+                  <span>View Photos</span>
+                  <ArrowRight className="h-4 w-4" />
+                </button>
               </motion.div>
             ))}
           </div>
+          
+          {selectedHotel !== null && (
+            <ImageCarouselModal
+              images={hotels[selectedHotel].images}
+              title={hotels[selectedHotel].name}
+              open={selectedHotel !== null}
+              onOpenChange={(open) => !open && setSelectedHotel(null)}
+            />
+          )}
         </motion.section>
 
         {/* Transportation Section */}
