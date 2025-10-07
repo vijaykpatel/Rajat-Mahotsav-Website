@@ -157,11 +157,11 @@ export default function CommunityServicePage() {
             transition={{ delay: 0.8, duration: 0.8 }}
             className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 mb-20 space-y-6 text-center"
           >
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+            <p className="text-xl lg:text-2xl community-text-secondary leading-relaxed">
               Inspired by the core teachings of the Swaminarayan Faith, the countless examples of compassion and selflessness from <span className="font-semibold text-orange-600">Acharya Shree Purushottampriyadasji Swamishree Maharaj</span>, and the guiding vision of unity from <span className="font-semibold text-orange-600">Acharya Shree Jitendriyapriyadasji Swamiji Maharaj</span>, we celebrate our 25th Anniversary; our <span className="font-bold text-orange-600">Rajat Mahotsav</span>.
             </p>
             
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+            <p className="text-xl lg:text-2xl community-text-secondary leading-relaxed">
               <span className="font-semibold text-gray-900">Service to humanity is service to God.</span> This year, through 2,500 collective volunteer hours and heartfelt commitments, we will feed the hungry, shelter the homeless, heal the suffering, and care for our environment. From our hands to theirs, from our hearts to the divine, every meal we share, every life we touch, every step we take together is both a prayer and a promise.
             </p>
           </motion.div>

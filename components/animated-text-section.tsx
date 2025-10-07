@@ -101,48 +101,6 @@ export function AnimatedTextSection() {
                 >
                   Service to humanity is service to God. As we celebrate 25 years together, we've learned that true spiritual growth happens when we open our hearts and extend our hands to those in need. It's in these moments of giving that we find ourselves most deeply connected—to each other, to our faith, and to something greater than ourselves.
                 </motion.p>
-                
-                <motion.div
-                  variants={textVariants}
-                  custom={2}
-                  className="grid md:grid-cols-2 gap-12 pt-8 max-w-4xl mx-auto"
-                >
-                  <div className="space-y-4">
-                    <h4 className="text-2xl font-semibold community-text-primary">Our Foundation</h4>
-                    <ul className="space-y-3 community-text-secondary text-lg">
-                      <li className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-gradient-to-r from-orange-400 to-red-500"></div>
-                        Divine Teachings
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-gradient-to-r from-orange-400 to-red-500"></div>
-                        Community Unity
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-gradient-to-r from-orange-400 to-red-500"></div>
-                        Spiritual Growth
-                      </li>
-                    </ul>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <h4 className="text-2xl font-semibold community-text-primary">Our Calling</h4>
-                    <ul className="space-y-3 community-text-secondary text-lg">
-                      <li className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-gradient-to-r from-orange-400 to-red-500"></div>
-                        Serve the Needy
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-gradient-to-r from-orange-400 to-red-500"></div>
-                        Spread Compassion
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-gradient-to-r from-orange-400 to-red-500"></div>
-                        Build Bridges
-                      </li>
-                    </ul>
-                  </div>
-                </motion.div>
               </motion.div>
             </div>
           </div>
@@ -184,48 +142,6 @@ export function AnimatedTextSection() {
                 >
                   Service to humanity is service to God. As we celebrate 25 years together, we've learned that true spiritual growth happens when we open our hearts and extend our hands to those in need. It's in these moments of giving that we find ourselves most deeply connected—to each other, to our faith, and to something greater than ourselves.
                 </motion.p>
-                
-                <motion.div
-                  variants={textVariants}
-                  custom={2}
-                  className="grid grid-cols-2 gap-4 pt-4 text-xs"
-                >
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-semibold community-text-primary">Our Foundation</h4>
-                    <ul className="space-y-1 community-text-secondary">
-                      <li className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-orange-400 to-red-500"></div>
-                        Divine Teachings
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-orange-400 to-red-500"></div>
-                        Community Unity
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-orange-400 to-red-500"></div>
-                        Spiritual Growth
-                      </li>
-                    </ul>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-semibold community-text-primary">Our Calling</h4>
-                    <ul className="space-y-1 community-text-secondary">
-                      <li className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-orange-400 to-red-500"></div>
-                        Serve the Needy
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-orange-400 to-red-500"></div>
-                        Spread Compassion
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-orange-400 to-red-500"></div>
-                        Build Bridges
-                      </li>
-                    </ul>
-                  </div>
-                </motion.div>
               </motion.div>
             </div>
           </div>
