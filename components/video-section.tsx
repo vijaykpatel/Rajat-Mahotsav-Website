@@ -197,19 +197,31 @@ export default function VideoSection() {
             ))}
           </div>
           
-          <button
+          <motion.button
             onClick={prevVideos}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-20 p-4 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white transition-colors scale-130"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-20 p-4 rounded-full bg-white/80 backdrop-blur-sm shadow-lg scale-130"
+            whileHover={{ 
+              backgroundColor: "rgba(255, 255, 255, 1)",
+              boxShadow: "0 0 15px rgba(200, 200, 200, 0.4), 0 0 25px rgba(200, 200, 200, 0.2)"
+            }}
+            whileTap={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
           >
             <ChevronLeft className="w-8 h-8 text-gray-700" />
-          </button>
+          </motion.button>
           
-          <button
+          <motion.button
             onClick={nextVideos}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-20 p-4 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white transition-colors scale-130"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-20 p-4 rounded-full bg-white/80 backdrop-blur-sm shadow-lg scale-130"
+            whileHover={{ 
+              backgroundColor: "rgba(255, 255, 255, 1)",
+              boxShadow: "0 0 15px rgba(200, 200, 200, 0.4), 0 0 25px rgba(200, 200, 200, 0.2)"
+            }}
+            whileTap={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
           >
             <ChevronRight className="w-8 h-8 text-gray-700" />
-          </button>
+          </motion.button>
         </div>
 
         {/* Mobile & Tablet: Single card layout with swipe */}
