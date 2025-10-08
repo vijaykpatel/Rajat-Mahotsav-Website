@@ -39,22 +39,17 @@ export default function TitleSection() {
   }, [targetDate]);
 
   return (
-    <div className="h-screen bg-[#4B9CD3] flex flex-col items-center justify-center px-4 pt-8 md:pt-12 lg:pt-16">
+    <div className="h-screen flex flex-col items-center justify-center px-4 pt-8 md:pt-12 lg:pt-16">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, ease: "easeOut" }}
         className="text-center mb-8"
       >
-        <h1 className="w-full font-black text-white uppercase leading-none text-center">
+        <h1 className="w-full font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent uppercase leading-none text-center">
           <div className="text-[14vw] sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] tracking-tight">Rajat Mahotsav</div>
           <div className="text-[11vw] sm:text-6xl md:text-8xl lg:text-9xl xl:text-[9rem] tracking-tight">Secaucus, NJ</div>
         </h1>
-        {/* <h1 className="text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black text-white uppercase tracking-wider leading-none">
-          Suvarana Tula Murti<br />
-          Pratishta Rajat<br />
-          Mahotosav
-        </h1> */}
       </motion.div>
       
       <motion.div
@@ -67,25 +62,25 @@ export default function TitleSection() {
           {/* Mobile: Two lines */}
           <div className="flex flex-col gap-2 sm:hidden">
             <div className="flex items-center justify-center gap-4">
-              <span className="text-6xl font-black text-white tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
-              <span className="text-5xl font-black text-white tracking-tight">-</span>
-              <span className="text-6xl font-black text-white tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
+              <span className="text-6xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
+              <span className="text-5xl font-black text-gray-800 tracking-tight">-</span>
+              <span className="text-6xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
             </div>
             <div className="flex items-center justify-center gap-4">
-              <span className="text-6xl font-black text-white tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
-              <span className="text-5xl font-black text-white tracking-tight">-</span>
-              <span className="text-6xl font-black text-white tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
+              <span className="text-6xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
+              <span className="text-5xl font-black text-gray-800 tracking-tight">-</span>
+              <span className="text-6xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
             </div>
           </div>
           {/* Desktop: Single line */}
           <div className="hidden sm:flex items-center justify-center gap-4">
-            <span className="text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
-            <span className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight">-</span>
-            <span className="text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
-            <span className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight">-</span>
-            <span className="text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
-            <span className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight">-</span>
-            <span className="text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
+            <span className="text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
+            <span className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-gray-800 tracking-tight">-</span>
+            <span className="text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
+            <span className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-gray-800 tracking-tight">-</span>
+            <span className="text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
+            <span className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-gray-800 tracking-tight">-</span>
+            <span className="text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
           </div>
         </div>
       </motion.div>

@@ -27,28 +27,28 @@ export default function ShaderShowcase() {
     <>
       <LoadingScreen />
       {!isLoading && (
-        <>
-          {/* First page with shader background - countdown */}
-          <ShaderBackground>
-            <div className="h-screen w-screen flex flex-col items-center justify-center p-4 relative z-20 pt-8 md:pt-12 lg:pt-16">
-              <div className={`flex-1 flex flex-col items-center justify-center relative z-30 max-h-[80vh] portrait:max-h-[60vh] transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
-              <div className="max-h-[45vh] landscape:max-h-[45vh] flex items-center justify-start mb-[2vh]">
-                <RegularLogo />
-              </div>
-              <div className="h-[25vh] landscape:h-[20vh] landscape:max-w-[80vw] flex items-center justify-center">
-                <Countdown targetDate={targetDate} />
-              </div>
-
-              </div>
-            </div>
-          </ShaderBackground>
+        <div className="bg-gradient-to-br from-orange-50 via-white to-red-50">
+          {/* Full background image section */}
+          <div className="h-screen w-screen relative overflow-hidden">
+            <picture>
+              <source
+                media="(min-width: 768px)"
+                srcSet="https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/5aeb6c7e-f6ea-45b1-da4a-823279172400/public?format=auto&width=1920&quality=90"
+              />
+              <img
+                src="https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/5aeb6c7e-f6ea-45b1-da4a-823279172400/public?format=auto&width=768&quality=85"
+                alt="Background"
+                className="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-90"
+              />
+            </picture>
+          </div>
           
           {/* Title section */}
           <TitleSection />
           
           {/* Video section */}
           <VideoSection />
-        </>
+        </div>
       )}
     </>
   )

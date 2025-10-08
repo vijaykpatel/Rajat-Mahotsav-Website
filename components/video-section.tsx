@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Play, ChevronLeft, ChevronRight } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 interface VideoCardProps {
   videoId: string
@@ -46,7 +46,7 @@ function VideoCard({ videoId, title, thumbnail }: VideoCardProps) {
 
   return (
     <motion.div
-      className="relative cursor-pointer group"
+      className="relative cursor-pointer group bg-gradient-to-br from-orange-50 via-white to-blue-50 rounded-3xl shadow-xl p-6 border-2 border-gray-200 hover:border-orange-500/30 transition-all duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
@@ -58,16 +58,6 @@ function VideoCard({ videoId, title, thumbnail }: VideoCardProps) {
     >
       <motion.div
         className="relative bg-white rounded-2xl overflow-hidden"
-        style={{
-          boxShadow: isHovered 
-            ? "0 25px 50px rgba(0, 0, 0, 0.25), 0 10px 30px rgba(0, 0, 0, 0.15)"
-            : "0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05)"
-        }}
-        animate={{
-          boxShadow: isHovered 
-            ? "0 25px 50px rgba(0, 0, 0, 0.25), 0 10px 30px rgba(0, 0, 0, 0.15)"
-            : "0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05)"
-        }}
         transition={{ duration: 0.3 }}
       >
         <div className="aspect-video relative overflow-hidden">
@@ -97,26 +87,10 @@ function VideoCard({ videoId, title, thumbnail }: VideoCardProps) {
             <Play className="w-8 h-8 text-white fill-white ml-0.5 drop-shadow-lg" style={{ filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.6))' }} />
           </motion.div>
         </div>
-        <motion.div 
-          className="p-6 relative overflow-hidden"
-          animate={{
-            background: isHovered 
-              ? "linear-gradient(135deg, rgba(251, 146, 60, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%)"
-              : "rgba(255, 255, 255, 1)"
-          }}
-          transition={{ duration: 0.3 }}
-        >
-          <motion.h3 
-            className="text-lg font-semibold text-gray-800 line-clamp-2 relative z-10"
-            animate={{
-              color: isHovered ? "rgb(55, 65, 81)" : "rgb(31, 41, 55)"
-            }}
-            transition={{ duration: 0.3 }}
-          >
-            {title}
-          </motion.h3>
-        </motion.div>
       </motion.div>
+      <p className="text-center text-sm text-gray-600 leading-relaxed mt-4">
+        {title}
+      </p>
     </motion.div>
   )
 }
@@ -142,6 +116,18 @@ export default function VideoSection() {
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const [direction, setDirection] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+
+  useEffect(() => {
+    if (isPaused) return
+    
+    const interval = setInterval(() => {
+      setDirection(1)
+      setCurrentIndex((prev) => (prev + 1) % videos.length)
+    }, 4500)
+
+    return () => clearInterval(interval)
+  }, [isPaused])
 
   const nextVideos = () => {
     setDirection(1)
@@ -164,7 +150,7 @@ export default function VideoSection() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-blue-50 pt-30 md:pt-50 pb-20 px-4">
+    <div className="min-h-screen pt-30 md:pt-50 pb-20 px-4">
       <div className="max-w-[90rem] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -181,15 +167,19 @@ export default function VideoSection() {
         </motion.div>
 
         {/* Desktop: 2-card layout with side arrows */}
-        <div className="hidden xl:block relative">
+        <div 
+          className="hidden xl:block relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <div className="grid grid-cols-2 gap-12 w-full max-w-5xl scale-130 mx-auto">
             {getVisibleVideos().map((video, index) => (
               <motion.div
                 key={`${video.videoId}-${currentIndex}`}
-                initial={{ opacity: 0, x: direction * 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: direction * -100 }}
-                transition={{ duration: 0.4 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
                 className="w-full"
               >
                 <VideoCard {...video} />
@@ -225,7 +215,11 @@ export default function VideoSection() {
         </div>
 
         {/* Mobile & Tablet: Single card layout with swipe */}
-        <div className="xl:hidden">
+        <div 
+          className="xl:hidden"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <div 
             className="w-full max-w-2xl md:max-w-3xl mx-auto mb-8 cursor-grab active:cursor-grabbing"
             onTouchStart={(e) => {
@@ -244,10 +238,10 @@ export default function VideoSection() {
           >
             <motion.div
               key={`${getCurrentVideo().videoId}-${currentIndex}`}
-              initial={{ opacity: 0, x: direction * 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: direction * -100 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
               className="w-full"
             >
               <VideoCard {...getCurrentVideo()} />
