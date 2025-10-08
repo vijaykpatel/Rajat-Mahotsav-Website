@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart } from "lucide-react"
+import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image } from "lucide-react"
 import { useRouter, usePathname } from "next/navigation"
 
 const menuItems = [
@@ -13,6 +13,7 @@ const menuItems = [
   { icon: Hotel, label: "Accommodations", href: "/accommodations" },
   { icon: CalendarDays, label: "Schedule", href: "/schedule" },
   { icon: Heart, label: "Community Service", href: "/community-service" },
+  { icon: Image, label: "Media", href: "/media" },
 ]
 
 export function FloatingMenuButton() {

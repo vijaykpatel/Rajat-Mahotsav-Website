@@ -33,10 +33,10 @@ export default function ShaderShowcase() {
             <picture>
               <source
                 media="(min-width: 768px)"
-                srcSet="https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/5aeb6c7e-f6ea-45b1-da4a-823279172400/public?format=auto&width=1920&quality=90"
+                srcSet="https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/5aeb6c7e-f6ea-45b1-da4a-823279172400/biggest?format=auto&width=1920&quality=90"
               />
               <img
-                src="https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/5aeb6c7e-f6ea-45b1-da4a-823279172400/public?format=auto&width=768&quality=85"
+                src="https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/5aeb6c7e-f6ea-45b1-da4a-823279172400/biggest?format=auto&width=768&quality=85"
                 alt="Background"
                 className="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-90"
               />

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
-import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Menu, X } from "lucide-react"
+import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image as ImageIcon, Menu, X } from "lucide-react"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
@@ -56,6 +56,14 @@ const menuItems = [
     gradient:
       "radial-gradient(circle, rgba(251,146,60,0.15) 0%, rgba(249,115,22,0.06) 50%, rgba(234,88,12,0) 100%)",
     iconColor: "text-orange-500",
+  },
+  {
+    icon: ImageIcon,
+    label: "Media",
+    href: "/media",
+    gradient:
+      "radial-gradient(circle, rgba(236,72,153,0.15) 0%, rgba(219,39,119,0.06) 50%, rgba(190,24,93,0) 100%)",
+    iconColor: "text-pink-500",
   },
 ]
 
