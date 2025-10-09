@@ -264,6 +264,7 @@
   .animated-word {
     @apply inline-block mr-2 transition-all duration-500 ease-out;
   }
+  
 }
 
 @keyframes pan-right {
