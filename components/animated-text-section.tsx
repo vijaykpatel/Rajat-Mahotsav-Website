@@ -183,7 +183,7 @@ export function AnimatedTextSection() {
             </div>
             
             {/* Bottom Half - Text Content */}
-            <div className="h-[50vh] flex items-center justify-center px-8">
+            <div className="h-[50vh] flex items-center justify-center px-4">
               <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -218,8 +218,8 @@ export function AnimatedTextSection() {
           </div>
           
           {/* Mobile Layout - Carousel top, text bottom */}
-          <div className="md:hidden min-h-screen">
-            {/* Top Half - Image Carousel */}
+          <div className="md:hidden">
+            {/* Image Carousel */}
             <div className="h-[50vh] px-4 py-4">
               <motion.div
                 initial={{ opacity: 0 }}
@@ -231,8 +231,8 @@ export function AnimatedTextSection() {
               </motion.div>
             </div>
             
-            {/* Bottom Half - Text Content */}
-            <div className="h-[50vh] flex items-center justify-center px-4">
+            {/* Text Content */}
+            <div className="px-4 pt-16">
               <motion.div
                 initial="hidden"
                 whileInView="visible"
