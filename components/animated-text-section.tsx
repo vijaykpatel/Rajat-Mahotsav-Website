@@ -138,7 +138,7 @@ export function AnimatedTextSection() {
                 <motion.p
                   variants={textVariants}
                   custom={1}
-                  className="text-sm community-text-secondary leading-relaxed"
+                  className="text-xl community-text-secondary leading-relaxed"
                 >
                   Service to humanity is service to God. As we celebrate 25 years together, we've learned that true spiritual growth happens when we open our hearts and extend our hands to those in need. It's in these moments of giving that we find ourselves most deeply connected—to each other, to our faith, and to something greater than ourselves.
                 </motion.p>
@@ -250,7 +250,7 @@ export function AnimatedTextSection() {
                 <motion.p
                   variants={textVariants}
                   custom={1}
-                  className="text-sm community-text-secondary leading-relaxed"
+                  className="text-xl community-text-secondary leading-relaxed"
                 >
                   As we reach this milestone of 25 years, we look back with gratitude and forward with hope. We've set meaningful goals—not because we have all the answers, but because we believe in the power of trying, of showing up, and of doing what we can. These commitments honor the journey we've shared and invite us to grow even deeper in our faith and service to others.
                 </motion.p>
@@ -258,7 +258,7 @@ export function AnimatedTextSection() {
                 <motion.p
                   variants={textVariants}
                   custom={2}
-                  className="text-sm font-bold text-orange-600 pt-4"
+                  className="text-xl font-bold text-orange-600 pt-4"
                 >
                   This is our Silver Jubilee. This is seva in action. This is who we are, and this is how we build our tomorrow, together.
                 </motion.p>
