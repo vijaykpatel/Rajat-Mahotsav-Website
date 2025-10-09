@@ -265,3 +265,19 @@
     @apply inline-block mr-2 transition-all duration-500 ease-out;
   }
 }
+
+@keyframes pan-right {
+  0% {
+    object-position: left center;
+  }
+  100% {
+    object-position: right center;
+  }
+}
+
+.animate-pan-right {
+  animation: pan-right 10s ease-in-out infinite alternate;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

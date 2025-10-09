@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Countdown from "@/components/countdown"
 import RegularLogo from "@/components/regular_logo"
 import LoadingScreen from "@/components/loading-screen"
@@ -30,17 +30,19 @@ export default function ShaderShowcase() {
         <div className="bg-gradient-to-br from-orange-50 via-white to-red-50">
           {/* Full background image section */}
           <div className="h-screen w-screen relative overflow-hidden">
-            <picture>
-              <source
-                media="(min-width: 768px)"
-                srcSet="https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/5aeb6c7e-f6ea-45b1-da4a-823279172400/biggest?format=auto&width=1920&quality=90"
-              />
-              <img
-                src="https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/5aeb6c7e-f6ea-45b1-da4a-823279172400/biggest?format=auto&width=768&quality=85"
-                alt="Background"
-                className="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-90"
-              />
-            </picture>
+            {/* Desktop: Static Image */}
+            <img
+              src="https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/5aeb6c7e-f6ea-45b1-da4a-823279172400/biggest?format=auto&width=1920&quality=90"
+              alt="Background"
+              className="hidden md:block absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-90"
+            />
+            
+            {/* Mobile: Panning Image */}
+            <img
+              src="https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/5aeb6c7e-f6ea-45b1-da4a-823279172400/biggest?format=auto&width=1920&quality=90"
+              alt="Background"
+              className="md:hidden absolute inset-0 mix-blend-multiply opacity-90 animate-pan-right"
+            />
           </div>
           
           {/* Title section */}
