@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+import { CDN_ASSETS } from "@/lib/cdn-assets"
 
 export default function StickyFooter() {
   return (
@@ -31,11 +31,10 @@ export default function StickyFooter() {
               rel="noopener noreferrer"
               className="hover:opacity-75 transition-opacity"
             >
-              <Image 
-                src="/maninagar_logo.png" 
+              <img 
+                src={CDN_ASSETS.maningarLogo} 
                 alt="Maninagar Logo" 
-                width={38} 
-                height={38} 
+                className="w-[38px] h-[38px]"
               />
             </a>
             <a 
@@ -44,11 +43,10 @@ export default function StickyFooter() {
               rel="noopener noreferrer"
               className="hover:opacity-75 transition-opacity"
             >
-              <Image 
-                src="/youtube_red_icon.png" 
+              <img 
+                src={CDN_ASSETS.youtubeIcon} 
                 alt="YouTube" 
-                width={44} 
-                height={44} 
+                className="w-[44px] h-[44px]"
               />
             </a>
             <a 
@@ -57,11 +55,10 @@ export default function StickyFooter() {
               rel="noopener noreferrer"
               className="hover:opacity-75 transition-opacity"
             >
-              <Image 
-                src="/Instagram_Glyph_Gradient.png" 
+              <img 
+                src={CDN_ASSETS.instagramIcon} 
                 alt="Instagram" 
-                width={38} 
-                height={38} 
+                className="w-[38px] h-[38px]"
               />
             </a>
           </div>
@@ -97,11 +94,10 @@ export default function StickyFooter() {
             rel="noopener noreferrer"
             className="hover:opacity-75 transition-opacity"
           >
-            <Image 
-              src="/maninagar_logo.png" 
+            <img 
+              src={CDN_ASSETS.maningarLogo} 
               alt="Maninagar Logo" 
-              width={38} 
-              height={38} 
+              className="w-[38px] h-[38px]"
             />
           </a>
           <a 
@@ -110,11 +106,10 @@ export default function StickyFooter() {
             rel="noopener noreferrer"
             className="hover:opacity-75 transition-opacity"
           >
-            <Image 
-              src="/youtube_red_icon.png" 
+            <img 
+              src={CDN_ASSETS.youtubeIcon} 
               alt="YouTube" 
-              width={44} 
-              height={38} 
+              className="w-[44px] h-[38px]"
             />
           </a>
           <a 
@@ -123,11 +118,10 @@ export default function StickyFooter() {
             rel="noopener noreferrer"
             className="hover:opacity-75 transition-opacity"
           >
-            <Image 
-              src="/Instagram_Glyph_Gradient.png" 
+            <img 
+              src={CDN_ASSETS.instagramIcon} 
               alt="Instagram" 
-              width={38} 
-              height={38} 
+              className="w-[38px] h-[38px]"
             />
           </a>
         </div>

@@ -5,8 +5,8 @@ import { useRouter, usePathname } from "next/navigation"
 import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image as ImageIcon, Menu, X } from "lucide-react"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
 import { NavBar } from "@/components/ui/tubelight-navbar"
+import { CDN_ASSETS } from "@/lib/cdn-assets"
 
 const menuItems = [
   {
@@ -150,22 +150,16 @@ export function Navigation() {
 
           {/* Right Side - Both Logos */}
           <div className="flex items-center gap-3">
-            <Image
-              src="/main_logo_no_text.png"
+            <img
+              src={CDN_ASSETS.mainLogoNoText}
               alt="Main Logo"
-              width={80}
-              height={80}
               className="h-22 w-auto sm:h-26 md:h-30 lg:h-36 object-contain"
-              priority
             />
             <div className="h-16 w-px bg-white/40 sm:h-20 md:h-24 lg:h-30 "></div>
-            <Image
-              src="/maninagar_logo.png"
+            <img
+              src={CDN_ASSETS.maningarLogo}
               alt="Maninagar Logo"
-              width={80}
-              height={80}
               className="h-22 w-auto sm:h-26 md:h-30 lg:h-36 object-contain"
-              priority
             />
           </div>
         </div>
