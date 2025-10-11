@@ -28,7 +28,7 @@ export function ImageMarquee() {
   return (
     <div className="w-full overflow-hidden space-y-3 md:space-y-6">
       {/* First Row - Left to Right */}
-      <div className="relative h-[30vh] md:h-[40vh] overflow-hidden">
+      <div className="relative h-[30vh] md:h-[30vh] overflow-hidden">
         <motion.div
           className="flex gap-3 md:gap-6 absolute"
           animate={{
@@ -46,7 +46,7 @@ export function ImageMarquee() {
           {firstRowImages.map((image, index) => (
             <div
               key={`first-${index}`}
-              className="flex-shrink-0 w-[20rem] md:w-[40rem] h-[30vh] md:h-[40vh] relative rounded-lg overflow-hidden shadow-xl"
+              className="flex-shrink-0 w-[20rem] md:w-[30rem] h-[30vh] md:h-[30vh] relative rounded-lg overflow-hidden shadow-xl"
             >
               <img
                 src={image.src}
@@ -58,7 +58,7 @@ export function ImageMarquee() {
           {firstRowImages.map((image, index) => (
             <div
               key={`first-dup-${index}`}
-              className="flex-shrink-0 w-[20rem] md:w-[40rem] h-[30vh] md:h-[40vh] relative rounded-lg overflow-hidden shadow-xl"
+              className="flex-shrink-0 w-[20rem] md:w-[30rem] h-[30vh] md:h-[30vh] relative rounded-lg overflow-hidden shadow-xl"
             >
               <img
                 src={image.src}
@@ -71,7 +71,7 @@ export function ImageMarquee() {
       </div>
 
       {/* Second Row - Right to Left */}
-      <div className="relative h-[30vh] md:h-[40vh] overflow-hidden">
+      <div className="relative h-[30vh] md:h-[30vh] overflow-hidden">
         <motion.div
           className="flex gap-3 md:gap-6 absolute"
           animate={{
@@ -89,7 +89,7 @@ export function ImageMarquee() {
           {secondRowImages.map((image, index) => (
             <div
               key={`second-${index}`}
-              className="flex-shrink-0 w-[20rem] md:w-[40rem] h-[30vh] md:h-[40vh] relative rounded-lg overflow-hidden shadow-xl"
+              className="flex-shrink-0 w-[20rem] md:w-[30rem] h-[30vh] md:h-[30vh] relative rounded-lg overflow-hidden shadow-xl"
             >
               <img
                 src={image.src}
@@ -101,7 +101,7 @@ export function ImageMarquee() {
           {secondRowImages.map((image, index) => (
             <div
               key={`second-dup-${index}`}
-              className="flex-shrink-0 w-[20rem] md:w-[40rem] h-[30vh] md:h-[40vh] relative rounded-lg overflow-hidden shadow-xl"
+              className="flex-shrink-0 w-[20rem] md:w-[30rem] h-[30vh] md:h-[30vh] relative rounded-lg overflow-hidden shadow-xl"
             >
               <img
                 src={image.src}

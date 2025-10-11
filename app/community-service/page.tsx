@@ -159,7 +159,7 @@ export default function CommunityServicePage() {
           </motion.div>
 
           {/* Path of Service Story - Sticky Scroll Sections */}
-          <div className="mt-20">
+          <div>
             <PathOfServiceStory />
           </div>
         </div>
