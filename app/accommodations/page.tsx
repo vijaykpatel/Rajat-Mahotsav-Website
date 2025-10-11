@@ -431,7 +431,7 @@ export default function AccommodationsPage() {
                       Book Now
                     </a>
                   </div>
-                  <div className="mt-3">
+                  <div className="mt-3 pr-28">
                     <div className="flex flex-wrap gap-1">
                       {hotel.amenities.map((amenity, i) => (
                         <span key={i} className="text-xs bg-purple-500/20 text-black px-2 py-1 rounded">
