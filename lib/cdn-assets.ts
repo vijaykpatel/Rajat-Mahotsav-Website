@@ -16,5 +16,10 @@ export const CDN_ASSETS = {
   tilak: `${CDN_BASE_URL}/Tilak.png`,
 }
 
+const CLOUDFLARE_IMAGES_BASE = 'https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/'
+
 export const getCommunityServiceImage = (filename: string) => 
   `${CDN_BASE_URL}/community_service/${filename}`
+
+export const getCloudflareImage = (imageId: string) => 
+  `${CLOUDFLARE_IMAGES_BASE}${imageId}/bigger?format=auto&quality=90`

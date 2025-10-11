@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { MobileSectionCarousel } from "@/components/mobile-section-carousel"
-import { getCommunityServiceImage } from "@/lib/cdn-assets"
+import { getCommunityServiceImage, getCloudflareImage } from "@/lib/cdn-assets"
 
 const textVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -31,15 +31,15 @@ const imageVariants = {
 }
 
 const whyWeServeImages = [
-  { id: 1, src: getCommunityServiceImage("swamibapa_feeding.jpg"), alt: "Swamibapa Feeding the Community" },
+  { id: 1, src: getCloudflareImage("2ac2c4ad-0b7b-47ff-80fd-a16fc5559900"), alt: "Swamibapa Feeding the Community" },
   { id: 2, src: getCommunityServiceImage("swamibapa_school_opening.jpeg"), alt: "Swamibapa School Opening Ceremony" },
   { id: 3, src: getCommunityServiceImage("swamiji_blessing_sick.jpeg"), alt: "Swamiji Blessing the Sick" }
 ]
 
 const missionImages = [
-  { id: 1, title: "Impact Image 1", subtitle: "Upload your image here", bgColor: "bg-gradient-to-br from-blue-200 to-purple-200" },
-  { id: 2, title: "Impact Image 2", subtitle: "Upload your image here", bgColor: "bg-gradient-to-br from-blue-200 to-purple-200" },
-  { id: 3, title: "Impact Image 3", subtitle: "Upload your image here", bgColor: "bg-gradient-to-br from-blue-200 to-purple-200" }
+  { id: 1, src: getCloudflareImage("5e3b21b6-aadb-434e-4d86-4905b7bffb00"), alt: "Impact Image 1" },
+  { id: 2, src: getCloudflareImage("50b7856b-1a5a-4663-64db-29bd69a35300"), alt: "Impact Image 2" },
+  { id: 3, src: getCloudflareImage("0d8fe1b3-c4ed-4486-2950-163ba08ff100"), alt: "Impact Image 3" }
 ]
 
 export function AnimatedTextSection() {
@@ -148,29 +148,21 @@ export function AnimatedTextSection() {
           <div className="hidden md:block">
             {/* Top Half - Images */}
             <div className="h-[50vh] grid grid-cols-3 gap-0">
-              {[4, 5, 6].map((index) => (
+              {missionImages.map((image, index) => (
                 <motion.div
-                  key={index}
+                  key={image.id}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={imageVariants}
-                  custom={index - 4}
+                  custom={index}
                   className="relative overflow-hidden group cursor-pointer"
                 >
-                  <div className="w-full h-full bg-gradient-to-br from-blue-200 to-purple-200 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-2">
-                    <div className="text-center p-8">
-                      <div className="w-20 h-20 bg-white/30 rounded-full mx-auto mb-6 flex items-center justify-center">
-                        <span className="text-4xl">📸</span>
-                      </div>
-                      <p className="text-lg font-medium text-gray-700">
-                        Impact Image {index - 3}
-                      </p>
-                      <p className="text-sm text-gray-600 mt-2">
-                        Upload your image here
-                      </p>
-                    </div>
-                  </div>
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
                 </motion.div>
               ))}
             </div>
