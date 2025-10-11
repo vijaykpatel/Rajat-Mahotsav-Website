@@ -1,74 +1,75 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Play, ChevronLeft, ChevronRight } from "lucide-react"
+import { Play } from "lucide-react"
 import { useState, useEffect } from "react"
+import useEmblaCarousel from 'embla-carousel-react'
+import { NextButton, PrevButton, usePrevNextButtons } from './video-carousel-buttons'
+import { DotButton, useDotButton } from './video-carousel-dots'
 
 interface VideoCardProps {
   videoId: string
   title: string
   thumbnail: string
+  onPlay?: () => void
+  isPlaying?: boolean
+  onPause?: () => void
 }
 
-function VideoCard({ videoId, title, thumbnail }: VideoCardProps) {
+function VideoCard({ videoId, title, thumbnail, onPlay, isPlaying: externalIsPlaying, onPause }: VideoCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
 
+  useEffect(() => {
+    if (externalIsPlaying === false && isPlaying) {
+      setIsPlaying(false)
+    }
+  }, [externalIsPlaying, isPlaying])
+
   const handleClick = () => {
     setIsPlaying(true)
+    onPlay?.()
   }
 
   if (isPlaying) {
     return (
-      <motion.div
-        className="relative bg-white rounded-2xl overflow-hidden shadow-2xl"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="aspect-video relative">
-          <iframe
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
-            title={title}
-            className="w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+      <div className="relative bg-gradient-to-br from-orange-50 via-white to-blue-50 rounded-3xl p-2 border-2 border-gray-200">
+        <div className="bg-white rounded-2xl overflow-hidden">
+          <div className="aspect-video relative">
+            <iframe
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
+              title={title}
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
         </div>
-        <div className="p-6">
-          <h3 className="text-lg font-semibold text-gray-800 line-clamp-2">
-            {title}
-          </h3>
-        </div>
-      </motion.div>
+        <p className="text-center text-[10px] text-gray-600 mt-2 line-clamp-1">
+          {title}
+        </p>
+      </div>
     )
   }
 
   return (
-    <motion.div
-      className="relative cursor-pointer group bg-gradient-to-br from-orange-50 via-white to-blue-50 rounded-3xl shadow-xl p-6 border-2 border-gray-200 hover:border-orange-500/30 transition-all duration-300"
+    <div
+      className="relative cursor-pointer group bg-gradient-to-br from-orange-50 via-white to-blue-50 rounded-3xl p-4 border-2 border-gray-200 hover:border-orange-500/30 transition-all duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
-      whileHover={{ 
-        y: -8,
-        transition: { duration: 0.3, ease: "easeOut" }
-      }}
-      whileTap={{ scale: 0.98 }}
     >
       <motion.div
         className="relative bg-white rounded-2xl overflow-hidden"
         transition={{ duration: 0.3 }}
       >
-        <div className="aspect-video relative overflow-hidden">
+        <div className="aspect-video relative overflow-hidden rounded-2xl">
           <img
             src={thumbnail}
             alt={title}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
-
           
-          {/* Play triangle in bottom right */}
           <motion.div
             className="absolute bottom-4 right-4"
             animate={{
@@ -91,63 +92,75 @@ function VideoCard({ videoId, title, thumbnail }: VideoCardProps) {
       <p className="text-center text-sm text-gray-600 leading-relaxed mt-4">
         {title}
       </p>
-    </motion.div>
+    </div>
   )
 }
 
-export default function VideoSection() {
-  const videos = [
-    {
-      videoId: "6rvGcN4wQCU",
-      title: "Rajat Mahotsav Trailer #1",
-      thumbnail: "https://img.youtube.com/vi/6rvGcN4wQCU/maxresdefault.jpg"
-    },
-    {
-      videoId: "d0vT6cSVeCY",
-      title: "Rajat Mahotsav Trailer #2",
-      thumbnail: "https://img.youtube.com/vi/d0vT6cSVeCY/maxresdefault.jpg"
-    },
-    {
-      videoId: "Jq_mvCRivaE",
-      title: "Secaucus Temple Drone Footage",
-      thumbnail: "https://img.youtube.com/vi/Jq_mvCRivaE/maxresdefault.jpg"
-    }
-  ]
+const videos = [
+  {
+    videoId: "6rvGcN4wQCU",
+    title: "Rajat Mahotsav Trailer #1",
+    thumbnail: "https://img.youtube.com/vi/6rvGcN4wQCU/maxresdefault.jpg"
+  },
+  {
+    videoId: "d0vT6cSVeCY",
+    title: "Rajat Mahotsav Trailer #2",
+    thumbnail: "https://img.youtube.com/vi/d0vT6cSVeCY/maxresdefault.jpg"
+  },
+  {
+    videoId: "Jq_mvCRivaE",
+    title: "Secaucus Temple Drone Footage",
+    thumbnail: "https://img.youtube.com/vi/Jq_mvCRivaE/maxresdefault.jpg"
+  }
+]
 
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [direction, setDirection] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
+export default function VideoSection() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, slidesToScroll: 1 })
+  const [emblaRefMobile, emblaApiMobile] = useEmblaCarousel({ loop: true })
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+  const [playingVideoIndex, setPlayingVideoIndex] = useState<number | null>(null)
+  const [resetKey, setResetKey] = useState(0)
+  
+  const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(emblaApi)
+  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApiMobile)
 
   useEffect(() => {
-    if (isPaused) return
-    
+    if (!emblaApi || isVideoPlaying) return
     const interval = setInterval(() => {
-      setDirection(1)
-      setCurrentIndex((prev) => (prev + 1) % videos.length)
+      emblaApi.scrollNext()
     }, 4500)
-
     return () => clearInterval(interval)
-  }, [isPaused])
+  }, [emblaApi, isVideoPlaying, resetKey])
 
-  const nextVideos = () => {
-    setDirection(1)
-    setCurrentIndex((prev) => (prev + 1) % videos.length)
-  }
+  useEffect(() => {
+    if (!emblaApiMobile || isVideoPlaying) return
+    const interval = setInterval(() => {
+      emblaApiMobile.scrollNext()
+    }, 4500)
+    return () => clearInterval(interval)
+  }, [emblaApiMobile, isVideoPlaying, resetKey])
 
-  const prevVideos = () => {
-    setDirection(-1)
-    setCurrentIndex((prev) => (prev - 1 + videos.length) % videos.length)
-  }
+  useEffect(() => {
+    if (!emblaApi) return
+    const onSelect = () => {
+      setPlayingVideoIndex(null)
+      setIsVideoPlaying(false)
+    }
+    const onPointerDown = () => setResetKey(k => k + 1)
+    emblaApi.on('select', onSelect).on('pointerDown', onPointerDown)
+    return () => { emblaApi.off('select', onSelect).off('pointerDown', onPointerDown) }
+  }, [emblaApi])
 
-  const getVisibleVideos = () => {
-    const firstVideo = videos[currentIndex]
-    const secondVideo = videos[(currentIndex + 1) % videos.length]
-    return [firstVideo, secondVideo]
-  }
-
-  const getCurrentVideo = () => {
-    return videos[currentIndex]
-  }
+  useEffect(() => {
+    if (!emblaApiMobile) return
+    const onSelect = () => {
+      setPlayingVideoIndex(null)
+      setIsVideoPlaying(false)
+    }
+    const onPointerDown = () => setResetKey(k => k + 1)
+    emblaApiMobile.on('select', onSelect).on('pointerDown', onPointerDown)
+    return () => { emblaApiMobile.off('select', onSelect).off('pointerDown', onPointerDown) }
+  }, [emblaApiMobile])
 
   return (
     <div className="min-h-screen pt-30 md:pt-50 pb-20 px-4">
@@ -166,99 +179,57 @@ export default function VideoSection() {
           </p>
         </motion.div>
 
-        {/* Desktop: 2-card layout with side arrows */}
-        <div 
-          className="hidden xl:block relative"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <div className="grid grid-cols-2 gap-12 w-full max-w-5xl scale-130 mx-auto">
-            {getVisibleVideos().map((video, index) => (
-              <motion.div
-                key={`${video.videoId}-${currentIndex}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="w-full"
-              >
-                <VideoCard {...video} />
-              </motion.div>
-            ))}
+        {/* Desktop: 2-card layout with arrows below */}
+        <div className="hidden xl:block">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex">
+              {videos.map((video, index) => (
+                <div key={video.videoId} className="flex-[0_0_50%] min-w-0 px-6">
+                  <VideoCard 
+                    {...video} 
+                    onPlay={() => {
+                      setIsVideoPlaying(true)
+                      setPlayingVideoIndex(index)
+                    }}
+                    isPlaying={playingVideoIndex === index}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-          
-          <motion.button
-            onClick={prevVideos}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-20 p-4 rounded-full bg-white/80 backdrop-blur-sm shadow-lg scale-130"
-            whileHover={{ 
-              backgroundColor: "rgba(255, 255, 255, 1)",
-              boxShadow: "0 0 15px rgba(200, 200, 200, 0.4), 0 0 25px rgba(200, 200, 200, 0.2)"
-            }}
-            whileTap={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
-          >
-            <ChevronLeft className="w-8 h-8 text-gray-700" />
-          </motion.button>
-          
-          <motion.button
-            onClick={nextVideos}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-20 p-4 rounded-full bg-white/80 backdrop-blur-sm shadow-lg scale-130"
-            whileHover={{ 
-              backgroundColor: "rgba(255, 255, 255, 1)",
-              boxShadow: "0 0 15px rgba(200, 200, 200, 0.4), 0 0 25px rgba(200, 200, 200, 0.2)"
-            }}
-            whileTap={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
-          >
-            <ChevronRight className="w-8 h-8 text-gray-700" />
-          </motion.button>
+          <div className="flex justify-center gap-4 mt-8">
+            <PrevButton onClick={() => { onPrevButtonClick(); setResetKey(k => k + 1) }} disabled={prevBtnDisabled} />
+            <NextButton onClick={() => { onNextButtonClick(); setResetKey(k => k + 1) }} disabled={nextBtnDisabled} />
+          </div>
         </div>
 
         {/* Mobile & Tablet: Single card layout with swipe */}
-        <div 
-          className="xl:hidden"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <div 
-            className="w-full max-w-2xl md:max-w-3xl mx-auto mb-8 cursor-grab active:cursor-grabbing"
-            onTouchStart={(e) => {
-              const startX = e.touches[0].clientX
-              const handleTouchEnd = (endEvent: TouchEvent) => {
-                const endX = endEvent.changedTouches[0].clientX
-                const diff = startX - endX
-                if (Math.abs(diff) > 50) {
-                  if (diff > 0) nextVideos()
-                  else prevVideos()
-                }
-                document.removeEventListener('touchend', handleTouchEnd)
-              }
-              document.addEventListener('touchend', handleTouchEnd)
-            }}
-          >
-            <motion.div
-              key={`${getCurrentVideo().videoId}-${currentIndex}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="w-full"
-            >
-              <VideoCard {...getCurrentVideo()} />
-            </motion.div>
+        <div className="xl:hidden">
+          <div className="overflow-hidden w-full max-w-2xl md:max-w-3xl mx-auto mb-8" ref={emblaRefMobile}>
+            <div className="flex">
+              {videos.map((video, index) => (
+                <div key={video.videoId} className="flex-[0_0_100%] min-w-0">
+                  <VideoCard 
+                    {...video} 
+                    onPlay={() => {
+                      setIsVideoPlaying(true)
+                      setPlayingVideoIndex(index)
+                    }}
+                    isPlaying={playingVideoIndex === index}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
           
           {/* Mobile dots navigation */}
           <div className="flex justify-center gap-2 mt-8">
-            {videos.map((_, index) => (
-              <button
+            {scrollSnaps.map((_, index) => (
+              <DotButton
                 key={index}
-                onClick={() => {
-                  setDirection(index > currentIndex ? 1 : -1)
-                  setCurrentIndex(index)
-                }}
+                onClick={() => { onDotButtonClick(index); setResetKey(k => k + 1) }}
                 className={`w-3 h-3 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-orange-500' : 'bg-gray-300'
+                  index === selectedIndex ? 'bg-orange-500' : 'bg-gray-300'
                 }`}
               />
             ))}
