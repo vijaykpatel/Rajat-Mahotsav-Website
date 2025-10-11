@@ -30,9 +30,9 @@ const imageVariants = {
 }
 
 const whyWeServeImages = [
-  { id: 1, title: "Mission Image 1", subtitle: "Upload your image here", bgColor: "bg-gradient-to-br from-orange-200 to-red-200" },
-  { id: 2, title: "Mission Image 2", subtitle: "Upload your image here", bgColor: "bg-gradient-to-br from-orange-200 to-red-200" },
-  { id: 3, title: "Mission Image 3", subtitle: "Upload your image here", bgColor: "bg-gradient-to-br from-orange-200 to-red-200" }
+  { id: 1, src: "https://cdn.njrajatmahotsav.com/community_service/swamibapa_feeding.jpg", alt: "Swamibapa Feeding the Community" },
+  { id: 2, src: "https://cdn.njrajatmahotsav.com/community_service/swamibapa_school_opening.jpeg", alt: "Swamibapa School Opening Ceremony" },
+  { id: 3, src: "https://cdn.njrajatmahotsav.com/community_service/swamiji_blessing_sick.jpeg", alt: "Swamiji Blessing the Sick" }
 ]
 
 const missionImages = [
@@ -51,29 +51,21 @@ export function AnimatedTextSection() {
           <div className="hidden md:block">
             {/* Top Half - Images */}
             <div className="h-[50vh] grid grid-cols-3 gap-0">
-              {[1, 2, 3].map((index) => (
+              {whyWeServeImages.map((image, index) => (
                 <motion.div
-                  key={index}
+                  key={image.id}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={imageVariants}
-                  custom={index - 1}
+                  custom={index}
                   className="relative overflow-hidden group cursor-pointer"
                 >
-                  <div className="w-full h-full bg-gradient-to-br from-orange-200 to-red-200 flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-2">
-                    <div className="text-center p-8">
-                      <div className="w-20 h-20 bg-white/30 rounded-full mx-auto mb-6 flex items-center justify-center">
-                        <span className="text-4xl">📸</span>
-                      </div>
-                      <p className="text-lg font-medium text-gray-700">
-                        Mission Image {index}
-                      </p>
-                      <p className="text-sm text-gray-600 mt-2">
-                        Upload your image here
-                      </p>
-                    </div>
-                  </div>
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
                 </motion.div>
               ))}
             </div>
