@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Heart, Users, Clock, MapPin, Mail, Phone, Send } from "lucide-react"
+import { Heart, Users, Clock, MapPin, DollarSign, Mail, Phone, Send } from "lucide-react"
 
 import { useDeviceType } from "@/hooks/use-device-type"
 import Typewriter from "@/components/typewriter"
@@ -48,8 +48,15 @@ const communityStats = [
   {
     icon: Heart,
     label: "Community Events",
-    current: 14,
-    target: 15,
+    current: 5,
+    target: 25,
+    suffix: ""
+  },
+  {
+    icon: DollarSign,
+    label: "Funds Raised",
+    current: 1200,
+    target: 25000,
     suffix: ""
   }
 ]
@@ -195,7 +202,7 @@ export default function CommunityServicePage() {
               </motion.p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
               {communityStats.map((stat, index) => (
                 <ProgressCounter
                   key={stat.label}
