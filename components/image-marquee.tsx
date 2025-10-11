@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { getCloudflareImage } from "@/lib/cdn-assets"
+import { useDeviceType } from "@/hooks/use-device-type"
 
 const firstRowImages = [
   { src: getCloudflareImage("001591ef-616d-40ae-7102-30f4bad78b00"), alt: "Community Service Event 1" },
@@ -21,6 +22,9 @@ const secondRowImages = [
 ]
 
 export function ImageMarquee() {
+  const deviceType = useDeviceType()
+  const duration = deviceType === 'mobile' ? 45 : 35
+  
   return (
     <div className="w-full overflow-hidden space-y-3 md:space-y-6">
       {/* First Row - Left to Right */}
@@ -34,7 +38,7 @@ export function ImageMarquee() {
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: 30,
+              duration,
               ease: "linear",
             },
           }}
@@ -77,7 +81,7 @@ export function ImageMarquee() {
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: 30,
+              duration,
               ease: "linear",
             },
           }}

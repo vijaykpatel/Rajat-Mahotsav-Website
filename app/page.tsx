@@ -35,7 +35,7 @@ export default function ShaderShowcase() {
               src="https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/5aeb6c7e-f6ea-45b1-da4a-823279172400/biggest?format=auto&width=1920&quality=90"
               alt="Background"
               className="hidden md:block absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-90"
-            />       
+            />
             
             {/* Mobile: Panning Image */}
             <img
