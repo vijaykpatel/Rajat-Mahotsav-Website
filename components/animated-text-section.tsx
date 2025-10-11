@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { MobileSectionCarousel } from "@/components/mobile-section-carousel"
+import { getCommunityServiceImage } from "@/lib/cdn-assets"
 
 const textVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -30,9 +31,9 @@ const imageVariants = {
 }
 
 const whyWeServeImages = [
-  { id: 1, src: "https://cdn.njrajatmahotsav.com/community_service/swamibapa_feeding.jpg", alt: "Swamibapa Feeding the Community" },
-  { id: 2, src: "https://cdn.njrajatmahotsav.com/community_service/swamibapa_school_opening.jpeg", alt: "Swamibapa School Opening Ceremony" },
-  { id: 3, src: "https://cdn.njrajatmahotsav.com/community_service/swamiji_blessing_sick.jpeg", alt: "Swamiji Blessing the Sick" }
+  { id: 1, src: getCommunityServiceImage("swamibapa_feeding.jpg"), alt: "Swamibapa Feeding the Community" },
+  { id: 2, src: getCommunityServiceImage("swamibapa_school_opening.jpeg"), alt: "Swamibapa School Opening Ceremony" },
+  { id: 3, src: getCommunityServiceImage("swamiji_blessing_sick.jpeg"), alt: "Swamiji Blessing the Sick" }
 ]
 
 const missionImages = [

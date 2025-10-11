@@ -16,14 +16,5 @@ export const CDN_ASSETS = {
   tilak: `${CDN_BASE_URL}/Tilak.png`,
 }
 
-// Legacy path mapping (for easy migration)
-export const ASSET_PATHS = {
-  '/main_logo.png': CDN_ASSETS.mainLogo,
-  '/main_logo_no_text.png': CDN_ASSETS.mainLogoNoText,
-  '/maninagar_logo.png': CDN_ASSETS.maningarLogo,
-  '/white_logo.png': CDN_ASSETS.whiteLogo,
-  '/LinenLogo.png': CDN_ASSETS.linenLogo,
-  '/Instagram_Glyph_Gradient.png': CDN_ASSETS.instagramIcon,
-  '/youtube_red_icon.png': CDN_ASSETS.youtubeIcon,
-  '/Tilak.png': CDN_ASSETS.tilak,
-}
+export const getCommunityServiceImage = (filename: string) => 
+  `${CDN_BASE_URL}/community_service/${filename}`

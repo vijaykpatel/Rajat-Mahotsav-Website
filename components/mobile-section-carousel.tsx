@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from "framer-motion"
 
 interface CarouselImage {
   id: number
-  title: string
-  subtitle: string
-  bgColor: string
+  src?: string
+  alt?: string
+  title?: string
+  subtitle?: string
+  bgColor?: string
 }
 
 interface MobileSectionCarouselProps {
@@ -36,19 +38,27 @@ export function MobileSectionCarousel({ images }: MobileSectionCarouselProps) {
           transition={{ duration: 0.5 }}
           className="absolute inset-0"
         >
-          <div className={`w-full h-full ${images[currentIndex].bgColor} flex items-center justify-center`}>
-            <div className="text-center p-6">
-              <div className="w-20 h-20 bg-white/30 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <span className="text-3xl">📸</span>
+          {images[currentIndex].src ? (
+            <img
+              src={images[currentIndex].src}
+              alt={images[currentIndex].alt || ''}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className={`w-full h-full ${images[currentIndex].bgColor} flex items-center justify-center`}>
+              <div className="text-center p-6">
+                <div className="w-20 h-20 bg-white/30 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <span className="text-3xl">📸</span>
+                </div>
+                <p className="text-lg font-medium text-gray-700">
+                  {images[currentIndex].title}
+                </p>
+                <p className="text-sm text-gray-600 mt-2">
+                  {images[currentIndex].subtitle}
+                </p>
               </div>
-              <p className="text-lg font-medium text-gray-700">
-                {images[currentIndex].title}
-              </p>
-              <p className="text-sm text-gray-600 mt-2">
-                {images[currentIndex].subtitle}
-              </p>
             </div>
-          </div>
+          )}
         </motion.div>
       </AnimatePresence>
 
