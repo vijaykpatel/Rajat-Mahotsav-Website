@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image } from "lucide-react"
+import { PiHandsPraying } from "react-icons/pi"
 import { useRouter, usePathname } from "next/navigation"
 
 const menuItems = [
@@ -13,6 +14,7 @@ const menuItems = [
   { icon: Hotel, label: "Accommodations", href: "/accommodations" },
   { icon: CalendarDays, label: "Schedule", href: "/schedule" },
   { icon: Heart, label: "Community Service", href: "/community-service" },
+  { icon: PiHandsPraying, label: "Spiritual Seva", href: "/spiritual-seva" },
   { icon: Image, label: "Media", href: "/media" },
 ]
 

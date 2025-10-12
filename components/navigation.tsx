@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image as ImageIcon, Menu, X } from "lucide-react"
+import { PiHandsPraying } from "react-icons/pi"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { motion, AnimatePresence } from "framer-motion"
 import { NavBar } from "@/components/ui/tubelight-navbar"
@@ -56,6 +57,14 @@ const menuItems = [
     gradient:
       "radial-gradient(circle, rgba(251,146,60,0.15) 0%, rgba(249,115,22,0.06) 50%, rgba(234,88,12,0) 100%)",
     iconColor: "text-orange-500",
+  },
+  {
+    icon: PiHandsPraying,
+    label: "Spiritual Seva",
+    href: "/spiritual-seva",
+    gradient:
+      "radial-gradient(circle, rgba(168,85,247,0.15) 0%, rgba(147,51,234,0.06) 50%, rgba(126,34,206,0) 100%)",
+    iconColor: "text-purple-500",
   },
   {
     icon: ImageIcon,

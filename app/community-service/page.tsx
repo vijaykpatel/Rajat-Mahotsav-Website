@@ -12,9 +12,9 @@ import { Heart, Users, Clock, MapPin, DollarSign, Mail, Phone, Send } from "luci
 
 import { useDeviceType } from "@/hooks/use-device-type"
 import Typewriter from "@/components/typewriter"
-import BackgroundPaths from "@/components/floating-paths"
 import { ImageMarquee } from "@/components/image-marquee"
 import { MobileImageCarousel } from "@/components/mobile-image-carousel"
+import { getCloudflareImage } from "@/lib/cdn-assets"
 import { ProgressCounter } from "@/components/progress-counter"
 import { BentoInitiatives } from "@/components/bento-initiatives"
 import { AnimatedTextSection } from "@/components/animated-text-section"
@@ -22,6 +22,22 @@ import { useToast } from "@/hooks/use-toast"
 import { StandardPageHeader } from "@/components/standard-page-header"
 import { PathOfServiceStory } from "@/components/path-of-service-story"
 import "@/styles/community-service-theme.css"
+
+const firstRowImages = [
+  { src: getCloudflareImage("001591ef-616d-40ae-7102-30f4bad78b00"), alt: "Community Service Event 1" },
+  { src: getCloudflareImage("944138d2-cc15-45f5-6eec-f4a6a3e30800"), alt: "Community Service Event 2" },
+  { src: getCloudflareImage("1a01f892-a3ab-4715-496c-bd570de83b00"), alt: "Community Service Event 3" },
+  { src: getCloudflareImage("428174c3-965c-4055-f941-381562cf8000"), alt: "Community Service Event 4" },
+  { src: getCloudflareImage("8711b5e8-0ce7-44e5-2f3f-6f5abdb6db00"), alt: "Community Service Event 5" },
+]
+
+const secondRowImages = [
+  { src: getCloudflareImage("c80899d2-8dcb-4420-90ea-bea0c4b7fa00"), alt: "Community Service Event 6" },
+  { src: getCloudflareImage("79fbc010-6b11-47be-e0af-e5d073711500"), alt: "Community Service Event 7" },
+  { src: getCloudflareImage("239db829-530a-4543-4a7d-4f795d8d9900"), alt: "Community Service Event 8" },
+  { src: getCloudflareImage("a1ec5573-6e43-4499-79be-2028ebce6200"), alt: "Community Service Event 9" },
+  { src: getCloudflareImage("2f2f3c0b-c371-41c5-3e94-043fad0da700"), alt: "Community Service Event 10" },
+]
 
 const communityStats = [
   {
@@ -132,7 +148,6 @@ export default function CommunityServicePage() {
           transition: opacity 0.5s ease-in-out;
         }
       `}</style>
-      {deviceType !== 'mobile' && <BackgroundPaths />}
       
       {/* Section 1: Hero + Our Community in Action */}
       <section className="min-h-screen">
@@ -155,7 +170,7 @@ export default function CommunityServicePage() {
             transition={{ delay: 0.6, duration: 1 }}
             className="w-full"
           >
-            <ImageMarquee />
+            <ImageMarquee firstRow={firstRowImages} secondRow={secondRowImages} />
           </motion.div>
 
           {/* Path of Service Story - Sticky Scroll Sections */}

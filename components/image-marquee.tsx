@@ -1,64 +1,53 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
-import { getCloudflareImage } from "@/lib/cdn-assets"
 import { useDeviceType } from "@/hooks/use-device-type"
 
-const firstRowImages = [
-  { src: getCloudflareImage("001591ef-616d-40ae-7102-30f4bad78b00"), alt: "Community Service Event 1" },
-  { src: getCloudflareImage("944138d2-cc15-45f5-6eec-f4a6a3e30800"), alt: "Community Service Event 2" },
-  { src: getCloudflareImage("1a01f892-a3ab-4715-496c-bd570de83b00"), alt: "Community Service Event 3" },
-  { src: getCloudflareImage("428174c3-965c-4055-f941-381562cf8000"), alt: "Community Service Event 4" },
-  { src: getCloudflareImage("8711b5e8-0ce7-44e5-2f3f-6f5abdb6db00"), alt: "Community Service Event 5" },
-]
+interface MarqueeImage {
+  src: string
+  alt: string
+}
 
-const secondRowImages = [
-  { src: getCloudflareImage("c80899d2-8dcb-4420-90ea-bea0c4b7fa00"), alt: "Community Service Event 6" },
-  { src: getCloudflareImage("79fbc010-6b11-47be-e0af-e5d073711500"), alt: "Community Service Event 7" },
-  { src: getCloudflareImage("239db829-530a-4543-4a7d-4f795d8d9900"), alt: "Community Service Event 8" },
-  { src: getCloudflareImage("a1ec5573-6e43-4499-79be-2028ebce6200"), alt: "Community Service Event 9" },
-  { src: getCloudflareImage("2f2f3c0b-c371-41c5-3e94-043fad0da700"), alt: "Community Service Event 10" },
-]
+interface ImageMarqueeProps {
+  firstRow: MarqueeImage[]
+  secondRow: MarqueeImage[]
+  imageWidth?: string
+  imageHeight?: string
+  gap?: string
+  duration?: { mobile: number; desktop: number }
+}
 
-export function ImageMarquee() {
+export function ImageMarquee({
+  firstRow,
+  secondRow,
+  imageWidth = "w-[20rem] md:w-[30rem]",
+  imageHeight = "h-[30vh] md:h-[30vh]",
+  gap = "gap-3 md:gap-6",
+  duration = { mobile: 45, desktop: 35 }
+}: ImageMarqueeProps) {
   const deviceType = useDeviceType()
-  const duration = deviceType === 'mobile' ? 45 : 35
+  const animationDuration = deviceType === 'mobile' ? duration.mobile : duration.desktop
   
   return (
     <div className="w-full overflow-hidden space-y-3 md:space-y-6">
       {/* First Row - Left to Right */}
-      <div className="relative h-[30vh] md:h-[30vh] overflow-hidden">
+      <div className={`relative ${imageHeight} overflow-hidden`}>
         <motion.div
-          className="flex gap-3 md:gap-6 absolute"
-          animate={{
-            x: ["-0%", "-50%"]
-          }}
+          className={`flex ${gap} absolute`}
+          animate={{ x: ["-0%", "-50%"] }}
           transition={{
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration,
+              duration: animationDuration,
               ease: "linear",
             },
           }}
         >
-          {firstRowImages.map((image, index) => (
+          {[...firstRow, ...firstRow].map((image, index) => (
             <div
               key={`first-${index}`}
-              className="flex-shrink-0 w-[20rem] md:w-[30rem] h-[30vh] md:h-[30vh] relative rounded-lg overflow-hidden shadow-xl"
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
-          {firstRowImages.map((image, index) => (
-            <div
-              key={`first-dup-${index}`}
-              className="flex-shrink-0 w-[20rem] md:w-[30rem] h-[30vh] md:h-[30vh] relative rounded-lg overflow-hidden shadow-xl"
+              className={`flex-shrink-0 ${imageWidth} ${imageHeight} relative rounded-lg overflow-hidden shadow-xl`}
             >
               <img
                 src={image.src}
@@ -71,37 +60,23 @@ export function ImageMarquee() {
       </div>
 
       {/* Second Row - Right to Left */}
-      <div className="relative h-[30vh] md:h-[30vh] overflow-hidden">
+      <div className={`relative ${imageHeight} overflow-hidden`}>
         <motion.div
-          className="flex gap-3 md:gap-6 absolute"
-          animate={{
-            x: ["-50%", "-0%"]
-          }}
+          className={`flex ${gap} absolute`}
+          animate={{ x: ["-50%", "-0%"] }}
           transition={{
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration,
+              duration: animationDuration,
               ease: "linear",
             },
           }}
         >
-          {secondRowImages.map((image, index) => (
+          {[...secondRow, ...secondRow].map((image, index) => (
             <div
               key={`second-${index}`}
-              className="flex-shrink-0 w-[20rem] md:w-[30rem] h-[30vh] md:h-[30vh] relative rounded-lg overflow-hidden shadow-xl"
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
-          {secondRowImages.map((image, index) => (
-            <div
-              key={`second-dup-${index}`}
-              className="flex-shrink-0 w-[20rem] md:w-[30rem] h-[30vh] md:h-[30vh] relative rounded-lg overflow-hidden shadow-xl"
+              className={`flex-shrink-0 ${imageWidth} ${imageHeight} relative rounded-lg overflow-hidden shadow-xl`}
             >
               <img
                 src={image.src}

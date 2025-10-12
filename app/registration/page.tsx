@@ -20,7 +20,6 @@ import { useToast } from "@/hooks/use-toast"
 
 import { useDeviceType } from "@/hooks/use-device-type"
 import Typewriter from "@/components/typewriter"
-import BackgroundPaths from "@/components/floating-paths"
 import { supabase } from "@/utils/supabase/client"
 import "@/styles/registration-theme.css"
 
@@ -224,7 +223,6 @@ export default function RegistrationPage() {
     <>
       {/* Scrollable Background and Content */}
       <div className={`min-h-[calc(100vh+200px)] w-full reg-page-bg page-bg-extend transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} data-page="registration">
-        {deviceType !== 'mobile' && <BackgroundPaths />}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 page-bottom-spacing">
         {/* Title with Typewriter Animation */}
         <div className="text-center page-header-spacing">

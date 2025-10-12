@@ -11,16 +11,21 @@ interface StandardPageHeaderProps {
 
 export function StandardPageHeader({ title, subtitle, description, isLoaded = true }: StandardPageHeaderProps) {
   const [wordIndex, setWordIndex] = useState(0)
+  const [mounted, setMounted] = useState(false)
   const descriptionWords = description?.split(" ") || []
 
   useEffect(() => {
-    if (description && isLoaded && wordIndex < descriptionWords.length) {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (description && isLoaded && wordIndex < descriptionWords.length && mounted) {
       const timer = setTimeout(() => {
         setWordIndex(prev => prev + 1)
       }, 20)
       return () => clearTimeout(timer)
     }
-  }, [isLoaded, wordIndex, descriptionWords.length, description])
+  }, [isLoaded, wordIndex, descriptionWords.length, description, mounted])
 
   return (
     <div className="container mx-auto px-4 text-center page-header-spacing">
@@ -36,7 +41,7 @@ export function StandardPageHeader({ title, subtitle, description, isLoaded = tr
           {subtitle}
         </div>
       )}
-      {description && (
+      {description && mounted && (
         <p className="standard-page-description">
           {descriptionWords.map((word, index) => (
             <span
@@ -45,9 +50,8 @@ export function StandardPageHeader({ title, subtitle, description, isLoaded = tr
                 index < wordIndex ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
               }`}
               style={{ transitionDelay: `${400 + index * 20}ms` }}
-            >
-              {word}
-            </span>
+              dangerouslySetInnerHTML={{ __html: word }}
+            />
           ))}
         </p>
       )}
