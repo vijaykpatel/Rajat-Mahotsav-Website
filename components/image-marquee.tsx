@@ -16,7 +16,7 @@ const firstRowImages = [
 const secondRowImages = [
   { src: getCloudflareImage("c80899d2-8dcb-4420-90ea-bea0c4b7fa00"), alt: "Community Service Event 6" },
   { src: getCloudflareImage("79fbc010-6b11-47be-e0af-e5d073711500"), alt: "Community Service Event 7" },
-  { src: getCloudflareImage("8f4a9f33-1626-4af6-9fa0-232fcaaf5400"), alt: "Community Service Event 8" },
+  { src: getCloudflareImage("239db829-530a-4543-4a7d-4f795d8d9900"), alt: "Community Service Event 8" },
   { src: getCloudflareImage("a1ec5573-6e43-4499-79be-2028ebce6200"), alt: "Community Service Event 9" },
   { src: getCloudflareImage("2f2f3c0b-c371-41c5-3e94-043fad0da700"), alt: "Community Service Event 10" },
 ]

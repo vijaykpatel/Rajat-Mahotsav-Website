@@ -37,7 +37,7 @@ const whyWeServeImages = [
 ]
 
 const missionImages = [
-  { id: 1, src: getCloudflareImage("5e3b21b6-aadb-434e-4d86-4905b7bffb00"), alt: "Impact Image 1" },
+  { id: 1, src: getCloudflareImage("383a1d37-90bd-4af2-bf75-90bdc5101f00"), alt: "Impact Image 1" },
   { id: 2, src: getCloudflareImage("50b7856b-1a5a-4663-64db-29bd69a35300"), alt: "Impact Image 2" },
   { id: 3, src: getCloudflareImage("0d8fe1b3-c4ed-4486-2950-163ba08ff100"), alt: "Impact Image 3" }
 ]
