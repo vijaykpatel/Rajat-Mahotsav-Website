@@ -6,36 +6,36 @@ import { FloatingMenuButton } from "@/components/floating-menu-button";
 import { ArrowLeft } from "lucide-react";
 
 const galleryData = [
-  { number: "1970", description: "The beginning of our spiritual journey and community foundation.", speed: 1 },
-  { number: "1987", description: "Growing together in faith and strengthening our bonds.", speed: -1 },
-  { number: "1992", description: "Dedicated service to the community and devotion to our values.", speed: 1 },
-  { number: "1995", description: "Celebrating our rich cultural heritage and traditions.", speed: -1 },
-  { number: "1998", description: "Coming together in joy and celebration of our unity.", speed: 1 },
-  { number: "2001", description: "Laying the foundation for our temple and spiritual home.", speed: -1 },
-  { number: "2002", description: "Moving forward with hope and progress in our mission.", speed: 1 },
-  { number: "2003", description: "Blessed with divine grace and spiritual growth.", speed: -1 },
-  { number: "2004", description: "United in strength and unwavering faith.", speed: 1 },
-  { number: "2005", description: "Continuing our devotion through selfless service.", speed: -1 },
-  { number: "2006", description: "Community growth and unity in our shared values.", speed: 1 },
-  { number: "2007", description: "Honoring our traditions and cultural heritage.", speed: -1 },
-  { number: "2008", description: "Celebrating together in joy and togetherness.", speed: 1 },
-  { number: "2009", description: "Building our foundation and spiritual home.", speed: -1 },
-  { number: "2010", description: "A decade of growth, seva, and community service.", speed: 1 },
-  { number: "2011", description: "Receiving divine blessings and grace.", speed: -1 },
-  { number: "2012", description: "Strengthened by unity and faith in our journey.", speed: 1 },
-  { number: "2013", description: "Devoted to service and love for our community.", speed: -1 },
-  { number: "2014", description: "Growing together as a united community.", speed: 1 },
-  { number: "2015", description: "Strengthening family bonds and community ties.", speed: -1 },
-  { number: "2016", description: "Celebrating our journey together with joy.", speed: 1 },
-  { number: "2017", description: "Our temple foundation and spiritual home.", speed: -1 },
-  { number: "2018", description: "Progress and hope guiding our path forward.", speed: 1 },
-  { number: "2019", description: "Blessed with divine grace and spiritual wisdom.", speed: -1 },
-  { number: "2020", description: "Resilience and hope through challenging times together.", speed: 1 },
-  { number: "2021", description: "United in strength and unwavering faith.", speed: -1 },
-  { number: "2022", description: "Devoted service and love for our community.", speed: 1 },
-  { number: "2023", description: "Growing together in unity and shared purpose.", speed: -1 },
-  { number: "2024", description: "Honoring our traditions, culture, and heritage.", speed: 1 },
-  { number: "2025", description: "Celebrating our Rajat Mahotsav - 25 years of silver jubilee.", speed: -1 },
+  { number: "1970", description: "The beginning of our spiritual journey and community foundation.", speed: 3 },
+  { number: "1987", description: "Growing together in faith and strengthening our bonds.", speed: -3 },
+  { number: "1992", description: "Dedicated service to the community and devotion to our values.", speed: 3 },
+  { number: "1995", description: "Celebrating our rich cultural heritage and traditions.", speed: -3 },
+  { number: "1998", description: "Coming together in joy and celebration of our unity.", speed: 3 },
+  { number: "2001", description: "Laying the foundation for our temple and spiritual home.", speed: -3 },
+  { number: "2002", description: "Moving forward with hope and progress in our mission.", speed: 3 },
+  { number: "2003", description: "Blessed with divine grace and spiritual growth.", speed: -3 },
+  { number: "2004", description: "United in strength and unwavering faith.", speed: 3 },
+  { number: "2005", description: "Continuing our devotion through selfless service.", speed: -3 },
+  { number: "2006", description: "Community growth and unity in our shared values.", speed: 3 },
+  { number: "2007", description: "Honoring our traditions and cultural heritage.", speed: -3 },
+  { number: "2008", description: "Celebrating together in joy and togetherness.", speed: 3 },
+  { number: "2009", description: "Building our foundation and spiritual home.", speed: -3 },
+  { number: "2010", description: "A decade of growth, seva, and community service.", speed: 3 },
+  { number: "2011", description: "Receiving divine blessings and grace.", speed: -3 },
+  { number: "2012", description: "Strengthened by unity and faith in our journey.", speed: 3 },
+  { number: "2013", description: "Devoted to service and love for our community.", speed: -3 },
+  { number: "2014", description: "Growing together as a united community.", speed: 3 },
+  { number: "2015", description: "Strengthening family bonds and community ties.", speed: -3 },
+  { number: "2016", description: "Celebrating our journey together with joy.", speed: 3 },
+  { number: "2017", description: "Our temple foundation and spiritual home.", speed: -3 },
+  { number: "2018", description: "Progress and hope guiding our path forward.", speed: 3 },
+  { number: "2019", description: "Blessed with divine grace and spiritual wisdom.", speed: -3 },
+  { number: "2020", description: "Resilience and hope through challenging times together.", speed: 3 },
+  { number: "2021", description: "United in strength and unwavering faith.", speed: -3 },
+  { number: "2022", description: "Devoted service and love for our community.", speed: 3 },
+  { number: "2023", description: "Growing together in unity and shared purpose.", speed: -3 },
+  { number: "2024", description: "Honoring our traditions, culture, and heritage.", speed: 3 },
+  { number: "2025", description: "Celebrating our Rajat Mahotsav - 25 years of silver jubilee.", speed: -3 },
 ];
 
 export default function TimelinePage() {
@@ -144,7 +144,7 @@ export default function TimelinePage() {
                 data-scroll-speed={item.speed}
                 data-scroll-direction="vertical"
               >
-                <div className="grid grid-cols-[8rem_21vmax] grid-rows-[8rem_28vmax_3rem] gap-0">
+                <div className="grid grid-cols-[8rem_28vmax] grid-rows-[8rem_28vmax_3rem] gap-0">
                   <div className="col-start-2 row-start-1 flex items-center">
                     <h2 className="text-[clamp(2rem,5vw,4rem)] font-serif font-extrabold italic text-orange-900" data-scroll data-scroll-speed="1">
                       {item.number}
