@@ -50,7 +50,7 @@ export default function MobileTimeline() {
               <span className="text-[14vw] leading-[1.2] font-serif font-extrabold italic lowercase bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent whitespace-nowrap">our journey</span>
             </div>
             {timelineData.map((item, index) => (
-              <div key={index} className={`flex-shrink-0 w-[70vw] flex items-center ${index % 2 === 0 ? 'pt-[15vh]' : 'pb-[15vh]'} ${index === 0 ? '' : 'ml-8'}`}>
+              <div key={index} className={`flex-shrink-0 w-[70vw] flex items-center ${index % 2 === 0 ? 'pt-[15vh]' : 'pb-[15vh]'} ${index === 0 ? '' : 'ml-16'}`}>
                 <div className="flex flex-col gap-2">
                   <h2 className="text-4xl font-serif font-extrabold italic text-orange-900">{item.number}</h2>
                   <div className="relative rounded-xl overflow-hidden aspect-[3/4]">
