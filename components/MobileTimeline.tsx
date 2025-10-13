@@ -41,16 +41,16 @@ export default function MobileTimeline() {
       </button>
       <div className="h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 page-bg-extend overflow-hidden">
         <div ref={scrollRef} className="h-full overflow-x-auto overflow-y-hidden">
-          <div className="flex h-full pr-8">
-            <div className="flex-shrink-0 w-[45vw] flex justify-start items-start pt-12 pl-6">
+          <div className="flex h-full pr-8 pt-4 pb-40">
+            <div className="flex-shrink-0 w-[65vw] flex justify-start items-start pl-6 pr-8 pt-2">
               <span className="text-[14vw] leading-[1.2] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent whitespace-nowrap">Our Journey</span>
             </div>
             {timelineData.map((item, index) => (
-              <div key={index} className={`flex-shrink-0 w-[70vw] flex items-center ${index % 2 === 0 ? 'pt-[15vh]' : 'pb-[15vh]'} ${index === 0 ? '' : 'ml-16'}`}>
+              <div key={index} className={`flex-shrink-0 w-[70vw] flex items-center ${index % 2 === 0 ? 'pt-[35vh]' : 'pb-[5vh]'} ml-10`}>
                 <TimelineGridTile item={item} variant="mobile" />
               </div>
             ))}
-            <div className="flex-shrink-0 w-screen flex flex-col justify-center items-center">
+            <div className="flex-shrink-0 w-screen flex flex-col justify-center items-center ml-96">
               <span className="block text-[11vw] leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">Let's continue</span>
               <span className="block text-[11vw] leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">making history</span>
             </div>
