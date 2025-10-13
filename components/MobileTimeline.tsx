@@ -1,59 +1,57 @@
 "use client"
 
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FloatingMenuButton } from "@/components/floating-menu-button";
-import { ArrowLeft } from "lucide-react";
 import { timelineData } from "@/lib/timeline-data";
 import { TimelineGridTile } from "@/components/TimelineGridTile";
 
 export default function MobileTimeline() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  const scrollToStart = () => {
-    scrollRef.current?.scrollTo({ left: 0, behavior: 'smooth' });
-  };
+  const [visibleItems, setVisibleItems] = useState<Set<number>>(new Set());
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (scrollRef.current) {
-        setIsScrolled(scrollRef.current.scrollLeft > 100);
-      }
-    };
-    scrollRef.current?.addEventListener('scroll', handleScroll);
-    return () => scrollRef.current?.removeEventListener('scroll', handleScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-index') || '0');
+            setVisibleItems((prev) => new Set(prev).add(index));
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    document.querySelectorAll('[data-timeline-item]').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
-
-
 
   return (
     <>
-
       <FloatingMenuButton />
-      <button
-        onClick={scrollToStart}
-        className={`fixed bottom-6 right-6 z-40 p-3 rounded-full backdrop-blur-sm transition-all duration-300 bg-white/20 hover:bg-white/30 text-black/90 hover:text-black ${
-          isScrolled ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
-        }`}
-        aria-label="Back to start"
-      >
-        <ArrowLeft size={24} />
-      </button>
-      <div className="h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 page-bg-extend overflow-hidden">
-        <div ref={scrollRef} className="h-full overflow-x-auto overflow-y-hidden">
-          <div className="flex h-full pr-8 pt-4 pb-40">
-            <div className="flex-shrink-0 w-[65vw] flex justify-start items-start pl-6 pr-8 pt-2">
-              <span className="text-[14vw] leading-[1.2] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent whitespace-nowrap">Our Journey</span>
-            </div>
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 page-bg-extend overflow-x-hidden">
+        <div className="px-6 py-12 pb-32">
+          <h1 className="text-6xl leading-[1.2] pl-4 font-serif italic font-extrabold bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent mb-16">
+            Our Journey
+          </h1>
+          <div className="space-y-12">
             {timelineData.map((item, index) => (
-              <div key={index} className={`flex-shrink-0 w-[70vw] flex items-center ${index % 2 === 0 ? 'pt-[35vh]' : 'pb-[5vh]'} ml-10`}>
+              <div
+                key={index}
+                data-timeline-item
+                data-index={index}
+                className={`transition-all duration-700 ${
+                  visibleItems.has(index)
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-8'
+                }`}
+              >
                 <TimelineGridTile item={item} variant="mobile" />
               </div>
             ))}
-            <div className="flex-shrink-0 w-screen flex flex-col justify-center items-center ml-96">
-              <span className="block text-[11vw] leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">Let's continue</span>
-              <span className="block text-[11vw] leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">making history</span>
-            </div>
+          </div>
+          <div className="mt-24 pl-4">
+            <span className="block text-5xl leading-[1.2] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">Let's continue</span>
+            <span className="block text-5xl leading-[1.2] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">making history</span>
           </div>
         </div>
       </div>

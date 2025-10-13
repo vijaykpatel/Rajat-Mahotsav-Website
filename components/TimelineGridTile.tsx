@@ -8,20 +8,22 @@ interface TimelineGridTileProps {
 export function TimelineGridTile({ item, variant = "mobile" }: TimelineGridTileProps) {
   if (variant === "mobile") {
     return (
-      <div className="flex flex-col gap-2">
-        <h2 className="text-4xl font-serif font-extrabold italic text-orange-900">{item.number}</h2>
-        <div className="relative rounded-xl overflow-hidden aspect-[3/4]">
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-full bg-orange-600 text-white flex items-center justify-center text-lg font-serif font-bold flex-shrink-0">
+            {item.number}
+          </div>
+          <h2 className="text-3xl font-serif font-extrabold italic text-orange-900">{item.number}</h2>
+        </div>
+        <div className="relative rounded-xl overflow-hidden aspect-[4/3] w-full">
           <img
             src={item.image}
             alt={item.description}
             className="w-full h-full object-cover"
           />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-            <p className="text-xs text-white font-medium">{item.description}</p>
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+            <p className="text-sm text-white font-medium leading-relaxed">{item.description}</p>
           </div>
-        </div>
-        <div className="w-16 h-16 rounded-full bg-orange-600 text-white flex items-center justify-center text-lg font-serif font-bold self-start mt-1">
-          {item.number}
         </div>
       </div>
     );

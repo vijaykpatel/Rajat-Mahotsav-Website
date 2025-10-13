@@ -45,6 +45,7 @@ export default function ShaderShowcase() {
     <>
       <LoadingScreen />
       {!isLoading && (
+        
         <>
           {/* Title section */}
           <TitleSection />
@@ -65,7 +66,7 @@ export default function ShaderShowcase() {
             <img
               src={backgroundImageUrl}
               alt="Background"
-              className="md:hidden absolute inset-0 mix-blend-multiply opacity-90"
+              className="md:hidden absolute inset-0 mix-blend-multiply opacity-90 animate-pan-right"
             />
           </div>
           
