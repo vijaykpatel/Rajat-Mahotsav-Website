@@ -33,24 +33,12 @@ export default function ShaderShowcase() {
 
   const { isLoading } = useLoading();
   const [isLoaded, setIsLoaded] = useState(false)
-  const [isImageVisible, setIsImageVisible] = useState(false)
-  const imageRef = useRef<HTMLImageElement>(null)
   
   const backgroundImageUrl = `${getCloudflareImageBiggest("5aeb6c7e-f6ea-45b1-da4a-823279172400")}&width=1920`
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
     return () => clearTimeout(timer)
-  }, [])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsImageVisible(entry.isIntersecting),
-      { threshold: 0.1 }
-    )
-    
-    if (imageRef.current) observer.observe(imageRef.current)
-    return () => observer.disconnect()
   }, [])
 
   return (
@@ -75,10 +63,9 @@ export default function ShaderShowcase() {
             
             {/* Mobile: Panning Sihasan Image */}
             <img
-              ref={imageRef}
               src={backgroundImageUrl}
               alt="Background"
-              className={`md:hidden absolute inset-0 mix-blend-multiply opacity-90 ${isImageVisible ? 'animate-pan-right' : ''}`}
+              className="md:hidden absolute inset-0 mix-blend-multiply opacity-90"
             />
           </div>
           
