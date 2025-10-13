@@ -78,8 +78,8 @@ export default function ShaderShowcase() {
           <div className="reg-page-bg page-bg-extend">
           
           {/* Staggered Image Cards */}
-          <div className="w-full pb-40 px-4 flex flex-col items-center mt-40">
-            <h2 className="text-7xl md:text-7xl text-5xl font-bold mb-12 md:mb-24 relative z-10 reg-title">Our Beloved Gurus</h2>
+          <div className="w-full pb-40 px-4 flex flex-col items-center mt-16 md:mt-34">
+            <h2 className="text-6xl md:text-7xl font-bold mb-12 md:mb-24 relative z-10 reg-title">Our Beloved Gurus</h2>
             
             {/* Desktop: Staggered layout */}
             <div className="hidden md:flex gap-12 items-end">
