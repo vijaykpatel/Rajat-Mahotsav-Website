@@ -1,87 +1,66 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState, useEffect } from 'react'
-
-
-interface TimeLeft {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-}
 
 export default function TitleSection() {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const targetDate = '2026-07-28T17:00:00-05:00';
-
-
-  useEffect(() => {
-    const calculateTimeLeft = () => {
-      const difference = +new Date(targetDate) - +new Date();
-      
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60)
-        });
-      } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      }
-    };
-
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
-
-    return () => clearInterval(timer);
-  }, [targetDate]);
-
   return (
-    <div className="h-screen flex flex-col items-center justify-center px-4 pt-8 md:pt-12 lg:pt-16 bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden">
+    <div className="fixed inset-0 h-screen flex flex-col items-center justify-center px-4 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 overflow-hidden z-0">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%),radial-gradient(circle_at_70%_80%,rgba(30,58,138,0.1),transparent_50%)] pointer-events-none" />
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, ease: "easeOut" }}
-        className="text-center mb-8"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="text-center space-y-8 w-full relative z-10"
       >
-        <h1 className="w-full font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent uppercase leading-none text-center">
-          <div className="text-[14vw] sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] tracking-tight">Rajat Mahotsav</div>
-          <div className="text-[11vw] sm:text-6xl md:text-8xl lg:text-9xl xl:text-[9rem] tracking-tight">Secaucus, NJ</div>
+        {/* Desktop */}
+        <h1 className="hidden md:block font-serif italic font-bold text-white leading-tight drop-shadow-2xl space-y-6">
+          <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-wide whitespace-nowrap">
+            Suvarna Yug no
+          </div>
+          <div className="w-80 h-[3px] bg-white/30 mx-auto" />
+          <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-wider whitespace-nowrap">
+            Rajat Mahotsav
+          </div>
+        </h1>
+        
+        {/* Mobile */}
+        <h1 className="md:hidden font-serif italic font-bold text-white leading-tight drop-shadow-2xl space-y-3">
+          <div className="text-7xl tracking-wide">Suvarna</div>
+          <div className="text-7xl tracking-wide">Yug no</div>
+          <div className="w-64 h-[3px] bg-white/30 mx-auto" />
+          <div className="text-7xl tracking-wider">Rajat</div>
+          <div className="text-7xl tracking-wider">Mahotsav</div>
         </h1>
       </motion.div>
       
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-        className="text-center"
+        transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
+        className="text-center mt-12 max-w-4xl relative z-10"
       >
-        <div className="font-noto-music">
-          {/* Mobile: Two lines */}
-          <div className="flex flex-col gap-2 sm:hidden">
-            <div className="flex items-center justify-center gap-4">
-              <span className="text-6xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
-              <span className="text-5xl font-black text-gray-800 tracking-tight">-</span>
-              <span className="text-6xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
-            </div>
-            <div className="flex items-center justify-center gap-4">
-              <span className="text-6xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
-              <span className="text-5xl font-black text-gray-800 tracking-tight">-</span>
-              <span className="text-6xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
-            </div>
-          </div>
-          {/* Desktop: Single line */}
-          <div className="hidden sm:flex items-center justify-center gap-4">
-            <span className="text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.days.toString().padStart(3, '0')}d</span>
-            <span className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-gray-800 tracking-tight">-</span>
-            <span className="text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.hours.toString().padStart(2, '0')}h</span>
-            <span className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-gray-800 tracking-tight">-</span>
-            <span className="text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
-            <span className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-gray-800 tracking-tight">-</span>
-            <span className="text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent tracking-tight">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
-          </div>
+        {/* Desktop */}
+        <div className="hidden md:block">
+          <div className="w-80 h-[3px] bg-white/30 mx-auto mb-8" />
+          <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white/90 font-light tracking-wide leading-relaxed">
+            A silver celebration for a golden era.
+          </p>
+          <div className="w-80 h-[3px] bg-white/30 mx-auto my-6" />
+          <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white/80 font-light tracking-wide">
+            Secaucus Temple celebrates 25 years.
+          </p>
+        </div>
+        
+        {/* Mobile */}
+        <div className="md:hidden space-y-4">
+          <div className="w-64 h-[3px] bg-white/30 mx-auto" />
+          <p className="text-3xl text-white/90 font-medium tracking-wide leading-relaxed">
+            A silver celebration<br/>for a golden era
+          </p>
+          <div className="w-64 h-[3px] bg-white/30 mx-auto" />
+          <p className="text-xl text-white/80 font-medium tracking-wide leading-relaxed">
+            Shree Swaminarayan Temple<br/>New Jersey Celebrates 25 years
+          </p>
         </div>
       </motion.div>
     </div>

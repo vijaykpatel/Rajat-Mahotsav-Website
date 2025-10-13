@@ -33,6 +33,8 @@ export default function ShaderShowcase() {
 
   const { isLoading } = useLoading();
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isImageVisible, setIsImageVisible] = useState(false)
+  const imageRef = useRef<HTMLImageElement>(null)
   
   const backgroundImageUrl = `${getCloudflareImageBiggest("5aeb6c7e-f6ea-45b1-da4a-823279172400")}&width=1920`
 
@@ -41,13 +43,26 @@ export default function ShaderShowcase() {
     return () => clearTimeout(timer)
   }, [])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsImageVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    )
+    
+    if (imageRef.current) observer.observe(imageRef.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <>
       <LoadingScreen />
       {!isLoading && (
-        <div className="reg-page-bg page-bg-extend">
+        <>
           {/* Title section */}
           <TitleSection />
+          <div className="relative z-10">
+          <div className="h-screen" />
+          <div className="reg-page-bg page-bg-extend">
           
           {/* Full background Sihasan image section */}
           <div className="h-screen w-screen relative overflow-hidden">
@@ -60,9 +75,10 @@ export default function ShaderShowcase() {
             
             {/* Mobile: Panning Sihasan Image */}
             <img
+              ref={imageRef}
               src={backgroundImageUrl}
               alt="Background"
-              className="md:hidden absolute inset-0 mix-blend-multiply opacity-90 animate-pan-right"
+              className={`md:hidden absolute inset-0 mix-blend-multiply opacity-90 ${isImageVisible ? 'animate-pan-right' : ''}`}
             />
           </div>
           
@@ -85,7 +101,9 @@ export default function ShaderShowcase() {
           
           {/* Video section */}
           <VideoSection />
-        </div>
+          </div>
+          </div>
+        </>
       )}
     </>
   )
