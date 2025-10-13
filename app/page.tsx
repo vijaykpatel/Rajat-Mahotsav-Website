@@ -51,24 +51,31 @@ export default function ShaderShowcase() {
           <TitleSection />
           <div className="relative z-10">
           <div className="h-screen" />
-          <div className="reg-page-bg page-bg-extend">
           
-          {/* Full background Sihasan image section */}
+          {/* Full background Sihasan image section with fade transition */}
           <div className="h-screen w-screen relative overflow-hidden">
+            {/* Top gradient overlay for smooth transition from title */}
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%' }} />
+            
+            {/* Bottom gradient overlay for smooth transition to next section */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%', top: 'auto', bottom: 0 }} />
+            
             {/* Desktop: Static Image */}
             <img
               src={backgroundImageUrl}
               alt="Background"
-              className="hidden md:block absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-90"
+              className="hidden md:block absolute inset-0 w-full h-full object-cover brightness-115"
             />
             
             {/* Mobile: Panning Sihasan Image */}
             <img
               src={backgroundImageUrl}
               alt="Background"
-              className="md:hidden absolute inset-0 mix-blend-multiply opacity-90 animate-pan-right"
+              className="md:hidden absolute inset-0 animate-pan-right brightness-110"
             />
           </div>
+          
+          <div className="reg-page-bg page-bg-extend">
           
           {/* Staggered Image Cards */}
           <div className="w-full pb-40 px-4 flex flex-col items-center mt-40">
