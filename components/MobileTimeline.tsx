@@ -43,7 +43,7 @@ export default function MobileTimeline() {
         <div ref={scrollRef} className="h-full overflow-x-auto overflow-y-hidden">
           <div className="flex h-full pr-8">
             <div className="flex-shrink-0 w-[45vw] flex justify-start items-start pt-12 pl-6">
-              <span className="text-[14vw] leading-[1.2] font-serif font-extrabold italic lowercase bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent whitespace-nowrap">our journey</span>
+              <span className="text-[14vw] leading-[1.2] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent whitespace-nowrap">Our Journey</span>
             </div>
             {timelineData.map((item, index) => (
               <div key={index} className={`flex-shrink-0 w-[70vw] flex items-center ${index % 2 === 0 ? 'pt-[15vh]' : 'pb-[15vh]'} ${index === 0 ? '' : 'ml-16'}`}>
@@ -51,8 +51,8 @@ export default function MobileTimeline() {
               </div>
             ))}
             <div className="flex-shrink-0 w-screen flex flex-col justify-center items-center">
-              <span className="block text-[11vw] leading-[1.5] font-serif font-extrabold italic lowercase bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">Let's continue</span>
-              <span className="block text-[11vw] leading-[1.5] font-serif font-extrabold italic lowercase bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">making history</span>
+              <span className="block text-[11vw] leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">Let's continue</span>
+              <span className="block text-[11vw] leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">making history</span>
             </div>
           </div>
         </div>

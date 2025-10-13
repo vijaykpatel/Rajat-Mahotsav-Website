@@ -12,7 +12,6 @@ import { Heart, Users, Clock, MapPin, DollarSign, Mail, Phone, Send } from "luci
 
 import { useDeviceType } from "@/hooks/use-device-type"
 import { ImageMarquee } from "@/components/image-marquee"
-import { MobileImageCarousel } from "@/components/mobile-image-carousel"
 import { getCloudflareImage } from "@/lib/cdn-assets"
 import { ProgressCounter } from "@/components/progress-counter"
 import { BentoInitiatives } from "@/components/bento-initiatives"
@@ -73,7 +72,8 @@ const communityStats = [
     current: 1200,
     target: 25000,
     prefix: "$",
-    suffix: ""
+    suffix: "",
+    formatWithComma: true
   }
 ]
 

@@ -107,8 +107,8 @@ export default function TimelinePage() {
         <div data-scroll-container ref={scrollRef}>
           <div className="flex ml-[12vw] pr-[12vw]">
             <div className="flex-shrink-0 mx-[10vw] ml-[2vw]">
-              <span className="block text-[10vw] pl-12 leading-[1.5] font-serif font-extrabold italic lowercase bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="-1" data-scroll-direction="vertical">our</span>
-              <span className="block text-[10vw] pl-12 leading-[1.5] font-serif font-extrabold italic lowercase bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="2" data-scroll-direction="vertical"> journey</span>
+              <span className="block text-[10vw] pl-12 leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="-1" data-scroll-direction="vertical">Our</span>
+              <span className="block text-[10vw] pl-12 leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="2" data-scroll-direction="vertical"> Journey</span>
             </div>
             {timelineData.map((item, index) => (
               <figure
@@ -122,8 +122,8 @@ export default function TimelinePage() {
               </figure>
             ))}
             <div className="flex-shrink-0 mx-[10vw]">
-              <span className="block text-[10vw] pl-12 leading-[1.5] font-serif font-extrabold italic lowercase bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="-4" data-scroll-direction="vertical">Let's continue</span>
-              <span className="block text-[10vw] pl-12 leading-[1.5] font-serif font-extrabold italic lowercase bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="3" data-scroll-direction="vertical">making history</span>
+              <span className="block text-[10vw] pl-12 leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="-4" data-scroll-direction="vertical">Let's continue</span>
+              <span className="block text-[10vw] pl-12 leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="3" data-scroll-direction="vertical">making history</span>
             </div>
           </div>
         </div>

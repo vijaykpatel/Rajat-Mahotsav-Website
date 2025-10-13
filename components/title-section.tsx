@@ -39,7 +39,7 @@ export default function TitleSection() {
   }, [targetDate]);
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center px-4 pt-8 md:pt-12 lg:pt-16">
+    <div className="h-screen flex flex-col items-center justify-center px-4 pt-8 md:pt-12 lg:pt-16 bg-gradient-to-br from-orange-50 via-white to-red-50 overflow-hidden">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}

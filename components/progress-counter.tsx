@@ -27,6 +27,7 @@ export function ProgressCounter({
 }: ProgressCounterProps) {
   const count = useMotionValue(0)
   const rounded = useTransform(count, (latest) => Math.round(latest))
+  const formatted = useTransform(rounded, (latest) => latest.toLocaleString())
   const progress = (current / target) * 100
 
   useEffect(() => {
@@ -58,7 +59,7 @@ export function ProgressCounter({
             <div className="flex flex-col items-center gap-2">
               <div className="text-2xl lg:text-3xl font-medium text-gray-500">
                 <span>{prefix}</span>
-                <motion.span>{rounded}</motion.span>
+                <motion.span>{formatted}</motion.span>
                 <span className="text-base">{suffix}</span>
               </div>
               <div className="w-20 h-0.5 bg-gradient-to-r from-orange-400 to-red-400"></div>

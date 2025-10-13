@@ -21,14 +21,6 @@ export const HorizontalTimeline = ({ data }: { data: TimelineEntry[] }) => {
   return (
     <div ref={containerRef} className="relative" style={{ height: `${data.length * 100}vh` }}>
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col">
-        <div className="px-4 md:px-8 lg:px-10 pt-8 pb-4">
-          <h2 className="text-2xl md:text-4xl font-bold text-gray-800 mb-2">
-            Temple History
-          </h2>
-          <p className="text-gray-600 text-sm md:text-base">
-            Scroll to explore our journey
-          </p>
-        </div>
 
         <motion.div
           style={{ x }}

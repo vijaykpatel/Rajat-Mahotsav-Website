@@ -133,29 +133,6 @@ export function Navigation() {
 
           {/* Center - Empty space for better balance */}
           <div className="flex-1"></div>
-          
-          {/* Old Hamburger Menu - Commented Out
-          <motion.button
-            onClick={() => setIsMobileMenuOpen(true)}
-            className="p-3 rounded-xl bg-black/20 backdrop-blur-md border-2 border-white/40 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Menu className="h-6 w-6 text-white" />
-          </motion.button>
-          */}
-
-                  {/* oild Center - Main Logo */}
-          {/* <div className="flex justify-center px-4">
-            <Image
-              src="/main_logo.png"
-              alt="Main Logo"
-              width={200}
-              height={200}
-              className="max-h-30 max-w-full w-auto h-auto sm:max-h-36 md:max-h-42 lg:max-h-48 xl:max-h-54 object-contain"
-              priority
-            />
-          </div> */}
 
           {/* Right Side - Both Logos */}
           <div className="flex items-center gap-3">
