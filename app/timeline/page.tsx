@@ -5,6 +5,7 @@ import { FloatingMenuButton } from "@/components/floating-menu-button";
 import { ArrowLeft } from "lucide-react";
 import MobileTimeline from "@/components/MobileTimeline";
 import { timelineData } from "@/lib/timeline-data";
+import { TimelineGridTile } from "@/components/TimelineGridTile";
 
 export default function TimelinePage() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -117,32 +118,7 @@ export default function TimelinePage() {
                 data-scroll-speed={item.speed}
                 data-scroll-direction="vertical"
               >
-                <div className="grid grid-cols-[8rem_28vmax] grid-rows-[8rem_28vmax_3rem] gap-0">
-                  <div className="col-start-2 row-start-1 flex items-center">
-                    <h2 className="text-[clamp(2rem,5vw,4rem)] font-serif font-extrabold italic text-orange-900" data-scroll data-scroll-speed="1">
-                      {item.number}
-                    </h2>
-                  </div>
-                  <div className="col-start-2 row-start-2 overflow-hidden relative rounded-2xl">
-                    <div className="gallery__item-imginner w-full h-[calc(100%+14vh)] -mt-[7vh]" data-scroll data-scroll-speed="1" data-scroll-direction="vertical">
-                      <img
-                        src={item.image}
-                        alt={item.description}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 h-[15%] bg-gradient-to-t from-black/40 from-10% via-black/10 via-50% to-transparent backdrop-blur-sm flex items-center justify-center px-4">
-                      <p className="text-sm text-white text-center line-clamp-2 font-medium drop-shadow-lg">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-start-1 row-start-3 flex items-end">
-                    <a className="w-[120px] h-[120px] rounded-full bg-orange-600 text-white flex items-center justify-center text-3xl font-serif font-bold hover:bg-orange-400 transition-colors cursor-pointer">
-                      {item.number}
-                    </a>
-                  </div>
-                </div>
+                <TimelineGridTile item={item} variant="desktop" />
               </figure>
             ))}
             <div className="flex-shrink-0 mx-[10vw]">

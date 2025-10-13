@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { FloatingMenuButton } from "@/components/floating-menu-button";
 import { ArrowLeft } from "lucide-react";
 import { timelineData } from "@/lib/timeline-data";
+import { TimelineGridTile } from "@/components/TimelineGridTile";
 
 export default function MobileTimeline() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -38,11 +39,6 @@ export default function MobileTimeline() {
       >
         <ArrowLeft size={24} />
       </button>
-      <div className={`fixed bottom-6 left-6 z-40 text-xs text-orange-900/60 font-medium transition-all duration-300 ${
-        isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'
-      }`}>
-        Swipe right →
-      </div>
       <div className="h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 page-bg-extend overflow-hidden">
         <div ref={scrollRef} className="h-full overflow-x-auto overflow-y-hidden">
           <div className="flex h-full pr-8">
@@ -51,22 +47,7 @@ export default function MobileTimeline() {
             </div>
             {timelineData.map((item, index) => (
               <div key={index} className={`flex-shrink-0 w-[70vw] flex items-center ${index % 2 === 0 ? 'pt-[15vh]' : 'pb-[15vh]'} ${index === 0 ? '' : 'ml-16'}`}>
-                <div className="flex flex-col gap-2">
-                  <h2 className="text-4xl font-serif font-extrabold italic text-orange-900">{item.number}</h2>
-                  <div className="relative rounded-xl overflow-hidden aspect-[3/4]">
-                    <img
-                      src={item.image}
-                      alt={item.description}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-                      <p className="text-xs text-white font-medium">{item.description}</p>
-                    </div>
-                  </div>
-                  <div className="w-16 h-16 rounded-full bg-orange-600 text-white flex items-center justify-center text-lg font-serif font-bold self-start mt-1">
-                    {item.number}
-                  </div>
-                </div>
+                <TimelineGridTile item={item} variant="mobile" />
               </div>
             ))}
             <div className="flex-shrink-0 w-screen flex flex-col justify-center items-center">

@@ -355,8 +355,8 @@ export default function AccommodationsPage() {
             className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-6"
           >
             <p className="text-gray-700 leading-relaxed">
-              <span className="font-semibold">Note:</span> The Temple is currently exploring transportation options from airports for our guests. 
-              We will update this page with detailed information as arrangements are finalized.
+              <span className="font-semibold">Note:</span> The Temple is currently exploring transportation options from Newark airport for our international guests. 
+              We will update this page with detailed information as arrangements are finalized. Travelling to/from Newark airport is the preferred method due it's proximity to the temple.
             </p>
           </motion.div>
         </motion.section>
