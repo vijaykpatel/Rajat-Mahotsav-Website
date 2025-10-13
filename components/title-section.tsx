@@ -46,7 +46,7 @@ export default function TitleSection() {
             A silver celebration for a golden era
           </p>
           <div className="w-80 h-1 bg-white mx-auto my-6" />
-          <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white font-serif italic font-medium tracking-wider">
+          <p className="sm:text-2xl md:text-3xl lg:text-4xl text-white font-serif italic font-medium tracking-wider">
             Shree Swaminarayan Temple New Jersey Celebrates 25 years
           </p>
         </div>
