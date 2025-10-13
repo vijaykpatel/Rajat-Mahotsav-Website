@@ -199,11 +199,6 @@
   }
 }
 
-/* Smooth Scroll */
-.community-scroll-container {
-  scroll-behavior: smooth;
-}
-
 /* Match schedule page theme */
 .community-page-bg {
   background: linear-gradient(to bottom right, 

@@ -11,7 +11,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Heart, Users, Clock, MapPin, DollarSign, Mail, Phone, Send } from "lucide-react"
 
 import { useDeviceType } from "@/hooks/use-device-type"
-import Typewriter from "@/components/typewriter"
 import { ImageMarquee } from "@/components/image-marquee"
 import { MobileImageCarousel } from "@/components/mobile-image-carousel"
 import { getCloudflareImage } from "@/lib/cdn-assets"
@@ -140,7 +139,7 @@ export default function CommunityServicePage() {
 
   return (
     <div 
-      className={`w-full community-page-bg community-scroll-container page-bg-extend transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} 
+      className={`w-full community-page-bg page-bg-extend transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} 
       data-page="community-service"
     >
       <style jsx>{`
@@ -157,9 +156,36 @@ export default function CommunityServicePage() {
             <StandardPageHeader
               title="Community Service"
               subtitle="Seva in Action"
-              description="Twenty-five years of service. Twenty-five years of compassion in action. Twenty-five years of showing that when a community comes together, beautiful things happen."
+              description=""
               isLoaded={isLoaded}
             />
+            
+            {/* Custom Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="flex justify-center px-4"
+            >
+              <div className="text-left text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed space-y-1">
+                <p><span className="underline decoration-2 decoration-orange-600 text-orange-600 font-semibold">Twenty-Five Years</span> of Devotion.</p>
+                <p><span className="underline decoration-2 decoration-orange-600 text-orange-600 font-semibold">Twenty-Five Years</span> of Compassion.</p>
+                <p><span className="underline decoration-2 decoration-orange-600 text-orange-600 font-semibold">Twenty-Five Years</span> of Community.</p>
+                <p><span className="underline decoration-2 decoration-orange-600 text-orange-600 font-semibold">Twenty-Five Years</span> of Selfless Service.</p>
+              </div>
+            </motion.div>
+            
+            {/* Additional Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="flex justify-center px-4 mt-8"
+            >
+              <p className="text-center text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-5xl">
+                Inspired by the core teachings of Swaminarayan Bhagwan, the countless examples of compassion and selflessness from Acharya Shree Purushottampriyadasji Swamishree Maharaj, and the guiding vision of unity from Acharya Shree Jitendriyapriyadasji Swamiji Maharaj, we celebrate our Rajat Mahotsav (25th Anniversary) by doing what Swaminarayan Bhagwan held near and dear; "seva" or selfless service.
+              </p>
+            </motion.div>
           </div>
           
 
@@ -186,7 +212,7 @@ export default function CommunityServicePage() {
       {/* Section 4: Community Initiatives + Impact Statistics + Mission in Action */}
       <section className="min-h-screen">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center py-20 space-y-20">
-          <BentoInitiatives />
+          {/* <BentoInitiatives /> */}
           
           {/* Progress Statistics */}
           <motion.div
@@ -226,6 +252,104 @@ export default function CommunityServicePage() {
                   inView={isStatsInView}
                 />
               ))}
+            </div>
+          </motion.div>
+
+          {/* Support Our Mission - Donations */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="text-center mb-12">
+              <motion.h2 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="text-3xl lg:text-4xl font-bold community-text-primary mb-4"
+              >
+                Support Our Mission
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-2xl font-bold text-orange-600"
+              >
+                Your Gift, Doubled
+              </motion.p>
+            </div>
+            
+            <div className="max-w-4xl mx-auto space-y-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-gradient-to-br from-orange-50 to-red-50 rounded-3xl shadow-xl p-8 border-2 border-orange-200"
+              >
+                <div className="space-y-6 text-lg community-text-secondary leading-relaxed">
+                  <p>
+                    A few generous donors have stepped forward to match every dollar donated, up to $10,000. That means your $50 becomes $100. Your $250 becomes $500. Every contribution you make will have twice the impact in feeding the hungry, sheltering the homeless, and caring for our community.
+                  </p>
+                  <p className="font-semibold text-orange-600">
+                    Together, we can turn $10,000 into $20,000—and reach our full goal of $25,000 to fund a year of transformative service.
+                  </p>
+                  <p>
+                    Your financial support helps us purchase supplies, organize events, and reach more people in need. Every dollar goes directly toward feeding, sheltering, and caring for our community.
+                  </p>
+                  <p className="font-semibold">
+                    This is your chance to double your impact. Will you help us unlock this match?
+                  </p>
+                </div>
+                
+                <div className="flex justify-center mt-8">
+                  <a
+                    href="https://ssssmusa.breezechms.com/give/online"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-orange-600 to-red-600 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 hover:from-orange-700 hover:to-red-700"
+                  >
+                    <Heart className="w-6 h-6 mr-3" />
+                    DONATE NOW - DOUBLE YOUR IMPACT
+                  </a>
+                </div>
+                
+                <div className="mt-8 pt-8 border-t-2 border-orange-200">
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-6 text-center">
+                    Where Your Support Goes
+                  </h3>
+                  <ul className="space-y-2 text-lg community-text-secondary">
+                    <li className="flex items-center gap-3">
+                      <Heart className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                      <span>Homeless shelter care kits with essential hygiene items</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <Users className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                      <span>Hot meals for families facing food insecurity</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <Heart className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                      <span>Health camps and wellness programs</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <MapPin className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                      <span>Environmental restoration projects</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <Users className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                      <span>Educational support for underserved youth</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <p className="text-base community-text-secondary text-center mt-8 italic">
+                  All donations are tax-deductible. The matching gift is available on a first-come, first-served basis until we reach the $10,000 match limit. We're grateful for any amount you can share.
+                </p>
+              </motion.div>
             </div>
           </motion.div>
 

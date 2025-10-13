@@ -30,13 +30,16 @@ export const StickyScroll = ({ content }: { content: any[] }) => {
       <Card className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 hover:-translate-y-1">
         <CardHeader>
           {firstItem?.subtitle && (
-            <CardTitle className="text-xl font-semibold text-gray-900">
+            <CardTitle className="text-xl font-semibold text-gray-900 flex items-center gap-3">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-orange-100 to-red-100 flex items-center justify-center">
+                <span className="text-orange-600 font-bold text-lg">1</span>
+              </div>
               {firstItem.subtitle}
             </CardTitle>
           )}
         </CardHeader>
         <CardContent>
-          <p className="text-base text-gray-600 leading-relaxed">
+          <p className="text-base text-gray-600 leading-relaxed whitespace-pre-line">
             {firstItem?.description}
           </p>
         </CardContent>
@@ -50,24 +53,27 @@ export const StickyScroll = ({ content }: { content: any[] }) => {
         >
           <CardHeader>
             {item.subtitle && (
-              <CardTitle className="text-xl font-semibold text-gray-900">
+              <CardTitle className="text-xl font-semibold text-gray-900 flex items-center gap-3">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-orange-100 to-red-100 flex items-center justify-center">
+                  <span className="text-orange-600 font-bold text-lg">{index + 2}</span>
+                </div>
                 {item.subtitle}
               </CardTitle>
             )}
           </CardHeader>
           <CardContent className="space-y-4">
-            <p className="text-base text-gray-600 leading-relaxed">
+            <p className="text-base text-gray-600 leading-relaxed whitespace-pre-line">
               {item.description}
             </p>
 
             {item.quote && (
-              <blockquote className="border-l-4 border-orange-500 pl-4 italic text-gray-700 text-base">
+              <blockquote className="border-l-4 border-orange-500 pl-4 py-3 italic text-gray-700 text-base bg-gradient-to-r from-orange-50 to-red-50 rounded-r-lg">
                 &quot;{item.quote}&quot;
               </blockquote>
             )}
 
             {item.additionalContent && (
-              <p className="text-base text-gray-600 leading-relaxed pt-4 border-t border-gray-200">
+              <p className="text-base text-gray-600 leading-relaxed whitespace-pre-line pt-4 border-t border-gray-200">
                 {item.additionalContent}
               </p>
             )}

@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Download } from "lucide-react"
 import { IPhoneMock } from "@/components/iphone-mock"
 import { StandardPageHeader } from "@/components/standard-page-header"
+import "@/styles/community-service-theme.css"
 
 const wallpapers = [
   {
@@ -62,7 +63,7 @@ export default function MediaPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 page-bg-extend">
+    <div className="min-h-screen community-page-bg page-bg-extend">
       <div className="container mx-auto px-4 page-bottom-spacing">
         <StandardPageHeader
           title="Media"

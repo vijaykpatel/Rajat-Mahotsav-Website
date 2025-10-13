@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import { StandardPageHeader } from "@/components/standard-page-header"
 import { ImageCarouselModal } from "@/components/image-carousel-modal"
 import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane, Check, ArrowRight } from "lucide-react"
+import "@/styles/community-service-theme.css"
 
 export default function AccommodationsPage() {
 
@@ -183,7 +184,7 @@ export default function AccommodationsPage() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-orange-50 via-white to-red-50 relative text-gray-900 page-bg-extend">
+    <div className="min-h-screen w-full community-page-bg relative text-gray-900 page-bg-extend">
       <div className="container mx-auto px-4 page-bottom-spacing relative z-10">
         <StandardPageHeader
           title="Accommodations"
