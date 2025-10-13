@@ -83,7 +83,7 @@ html {
         `}</style>
       </head>
       <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoMusic.variable} ${lato.variable} ${antonio.variable}`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
           <Navigation />
           <div className="min-h-screen flex flex-col">
             <div className="flex-1">
