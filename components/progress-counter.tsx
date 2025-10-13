@@ -9,6 +9,7 @@ interface ProgressCounterProps {
   label: string
   current: number
   target: number
+  prefix?: string
   suffix?: string
   delay?: number
   inView: boolean
@@ -19,6 +20,7 @@ export function ProgressCounter({
   label, 
   current, 
   target, 
+  prefix = "",
   suffix = "", 
   delay = 0,
   inView 
@@ -53,9 +55,16 @@ export function ProgressCounter({
           </div>
           
           <div className="space-y-3">
-            <div className="text-3xl lg:text-4xl font-bold community-text-primary">
-              <motion.span>{rounded}</motion.span>
-              <span className="text-lg">{suffix}</span>
+            <div className="flex flex-col items-center gap-2">
+              <div className="text-2xl lg:text-3xl font-medium text-gray-500">
+                <span>{prefix}</span>
+                <motion.span>{rounded}</motion.span>
+                <span className="text-base">{suffix}</span>
+              </div>
+              <div className="w-20 h-0.5 bg-gradient-to-r from-orange-400 to-red-400"></div>
+              <div className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+                {prefix}{target.toLocaleString()}{suffix}
+              </div>
             </div>
             
             <h3 className="text-lg font-semibold community-text-primary">
@@ -75,7 +84,7 @@ export function ProgressCounter({
             <div className="flex justify-between text-sm community-text-secondary">
               <span>Current</span>
               <span className="font-medium">
-                {Math.round(progress)}% of {target.toLocaleString()}{suffix}
+                {Math.round(progress)}%
               </span>
             </div>
           </div>

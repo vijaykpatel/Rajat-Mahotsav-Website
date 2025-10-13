@@ -47,7 +47,7 @@ const whyWeServeContent = {
   title: "Why We Serve",
   text: (
     <>
-      In the Swaminarayan faith, "seva" or selfless service is central to spiritual development and the path to liberation (moksha). Seva is more than a simple act of charity, as it is performed without any expectation of personal gain, reward, or recognition, with the sole intention of pleasing Swaminarayan Bhagwan and our Guru.<br/><br/>
+      In the Swaminarayan faith, seva is central to spiritual development and the path to liberation (moksha). Seva is more than a simple act of charity, as it is performed without any expectation of personal gain, reward, or recognition, with the sole intention of pleasing Swaminarayan Bhagwan and our Guru.<br/><br/>
       <span className="underline decoration-2 decoration-orange-600 text-orange-600 font-semibold">Swaminarayan Bhagwan teaches that when service is performed with this pure intent, it purifies the soul and helps to transcend ego, anger, and other negative emotions.</span> This makes seva an essential form of devotion (bhakti) and is considered a powerful spiritual practice (sadhana). By serving humanity, and particularly the devotees of Swaminarayan Bhagwan, one is serving Swaminarayan Bhagwan directly, bringing one closer to the divine.
     </>
   )
@@ -55,11 +55,11 @@ const whyWeServeContent = {
 
 const missionContent = {
   title: "Our 25-Year Mission",
-  text1: "As we reach this milestone of 25 years, we look back with gratitude and forward with hope. We've set meaningful goals—not because we have all the answers, but because we believe in the power of trying, of showing up, and of doing what we can. These commitments honor the journey we've shared and invite us to grow even deeper in our faith and service to others.",
-  text2: "This is our Silver Jubilee. This is seva in action. This is who we are, and this is how we build our tomorrow, together."
+  text1: "On the occasion of our 25th anniversary, we reflect with deep gratitude on a quarter-century of selfless service in and outside our Mandir, a journey defined by the hands and hearts of dedicated volunteers committed to embodying their faith through action. The past years have established a rich legacy of community engagement, providing hope and assistance to numerous individuals, families, and communities, and demonstrating how spiritual principles can be translated into tangible, positive change.",
+  text2: "Looking ahead, we are committed to building upon this solid foundation, aspiring to expand our reach by serving more people, addressing more diverse community needs, and championing more impactful causes. In doing so, we aim to create new avenues for volunteers to deepen their own spiritual journeys."
 }
 
-export function AnimatedTextSection({ progressCounters }: { progressCounters?: React.ReactNode }) {
+export function AnimatedTextSection() {
   const statsRef = useRef(null)
   const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" })
 
@@ -152,24 +152,11 @@ export function AnimatedTextSection({ progressCounters }: { progressCounters?: R
               <motion.p variants={textVariants} custom={1} className="text-xl md:text-xl lg:text-2xl community-text-secondary leading-relaxed">
                 {missionContent.text1}
               </motion.p>
-              <motion.p variants={textVariants} custom={2} className="text-xl md:text-xl lg:text-2xl font-bold text-orange-600 pt-4">
+              <motion.p variants={textVariants} custom={2} className="text-xl md:text-xl lg:text-2xl community-text-secondary leading-relaxed">
                 {missionContent.text2}
               </motion.p>
             </motion.div>
           </div>
-          
-          {/* Progress Statistics */}
-          {progressCounters && (
-            <div className="px-4 md:px-8 pb-16 mt-8">
-              <div ref={statsRef} className="max-w-7xl mx-auto">
-                <motion.div initial={{ opacity: 0 }} animate={isStatsInView ? { opacity: 1 } : { opacity: 0 }} transition={{ duration: 1 }}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-                    {progressCounters}
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          )}
         </div>
       </section>
     </>

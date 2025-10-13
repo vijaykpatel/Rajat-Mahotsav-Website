@@ -42,22 +42,22 @@ const communityStats = [
   {
     icon: Clock,
     label: "Volunteer Hours",
-    current: 2350,
+    current: 50,
     target: 2500,
     suffix: "hrs"
   },
   {
     icon: Users,
     label: "Meals Served",
-    current: 23500,
+    current: 0,
     target: 25000,
     suffix: ""
   },
   {
     icon: MapPin,
     label: "Distance Walked",
-    current: 24200,
-    target: 25000,
+    current: 80,
+    target: 2500,
     suffix: "km"
   },
   {
@@ -72,6 +72,7 @@ const communityStats = [
     label: "Funds Raised",
     current: 1200,
     target: 25000,
+    prefix: "$",
     suffix: ""
   }
 ]
@@ -183,7 +184,7 @@ export default function CommunityServicePage() {
               className="flex justify-center px-4 mt-8"
             >
               <p className="text-center text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-5xl">
-                Inspired by the core teachings of Swaminarayan Bhagwan, the countless examples of compassion and selflessness from Acharya Shree Purushottampriyadasji Swamishree Maharaj, and the guiding vision of unity from Acharya Shree Jitendriyapriyadasji Swamiji Maharaj, we celebrate our Rajat Mahotsav (25th Anniversary) by doing what Swaminarayan Bhagwan held near and dear; "seva" or selfless service.
+                Inspired by the core teachings of Swaminarayan Bhagwan, the countless examples of compassion and selflessness from Acharya Shree Purushottampriyadasji Swamishree Maharaj, and the guiding vision of unity from Acharya Shree Jitendriyapriyadasji Swamiji Maharaj, we celebrate our Rajat Mahotsav (25th Anniversary) by doing what Swaminarayan Bhagwan held near and dear; seva, selfless service.
               </p>
             </motion.div>
           </div>
@@ -211,7 +212,7 @@ export default function CommunityServicePage() {
       
       {/* Section 4: Community Initiatives + Impact Statistics + Mission in Action */}
       <section className="min-h-screen">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center py-20 space-y-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center pb-20 space-y-20">
           {/* <BentoInitiatives /> */}
           
           {/* Progress Statistics */}
@@ -230,7 +231,7 @@ export default function CommunityServicePage() {
                 transition={{ duration: 0.8 }}
                 className="text-3xl lg:text-4xl font-bold community-text-primary mb-4"
               >
-                Our Impact This Year
+                Our Impact So Far
               </motion.h2>
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
@@ -239,7 +240,7 @@ export default function CommunityServicePage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-lg community-text-secondary"
               >
-                Together, we're making a difference in our community
+                Together, we're making a difference in our community. Here's a live tracker of us on our way to meeting our Rajat Mahotsav Community Service Goals!
               </motion.p>
             </div>
             
