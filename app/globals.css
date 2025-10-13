@@ -31,20 +31,22 @@
   --border: oklch(1 0 0); /* White borders for contrast */
   --input: oklch(0.95 0 0); /* Light gray for inputs */
   --ring: oklch(0.65 0.2 270); /* Violet for focus rings */
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  /* UNUSED - Chart variables */
+  /* --chart-1: oklch(0.646 0.222 41.116); */
+  /* --chart-2: oklch(0.6 0.118 184.704); */
+  /* --chart-3: oklch(0.398 0.07 227.392); */
+  /* --chart-4: oklch(0.828 0.189 84.429); */
+  /* --chart-5: oklch(0.769 0.188 70.08); */
   --radius: 0.5rem; /* Softer rounded corners */
-  --sidebar: oklch(0 0 0); /* Black sidebar */
-  --sidebar-foreground: oklch(1 0 0); /* White sidebar text */
-  --sidebar-primary: oklch(0.65 0 0); /* Violet for primary sidebar */
-  --sidebar-primary-foreground: oklch(1 0 0); /* White text on sidebar primary */
-  --sidebar-accent: oklch(0.95 0 0); /* Light gray for sidebar accent */
-  --sidebar-accent-foreground: oklch(0 0 0); /* Black text on sidebar accent */
-  --sidebar-border: oklch(1 0 0); /* White sidebar borders */
-  --sidebar-ring: oklch(0.65 0.2 270); /* Violet for sidebar focus */
+  /* UNUSED - Sidebar variables */
+  /* --sidebar: oklch(0 0 0); */
+  /* --sidebar-foreground: oklch(1 0 0); */
+  /* --sidebar-primary: oklch(0.65 0 0); */
+  /* --sidebar-primary-foreground: oklch(1 0 0); */
+  /* --sidebar-accent: oklch(0.95 0 0); */
+  /* --sidebar-accent-foreground: oklch(0 0 0); */
+  /* --sidebar-border: oklch(1 0 0); */
+  /* --sidebar-ring: oklch(0.65 0.2 270); */
   --font-instrument-serif: "Instrument Serif", serif; /* Instrument Serif font family configuration */
   /* Added Figtree as the primary font variable */
   --font-figtree: "Figtree", sans-serif; /* Figtree font family configuration */
@@ -72,19 +74,21 @@
   --border: oklch(0.3 0 0);
   --input: oklch(0.15 0 0);
   --ring: oklch(0.7 0.25 270);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.05 0 0);
-  --sidebar-foreground: oklch(1 0 0);
-  --sidebar-primary: oklch(0.7 0.25 270);
-  --sidebar-primary-foreground: oklch(0 0 0);
-  --sidebar-accent: oklch(0.15 0 0);
-  --sidebar-accent-foreground: oklch(1 0 0);
-  --sidebar-border: oklch(0.3 0 0);
-  --sidebar-ring: oklch(0.7 0.25 270);
+  /* UNUSED - Chart variables */
+  /* --chart-1: oklch(0.488 0.243 264.376); */
+  /* --chart-2: oklch(0.696 0.17 162.48); */
+  /* --chart-3: oklch(0.769 0.188 70.08); */
+  /* --chart-4: oklch(0.627 0.265 303.9); */
+  /* --chart-5: oklch(0.645 0.246 16.439); */
+  /* UNUSED - Sidebar variables */
+  /* --sidebar: oklch(0.05 0 0); */
+  /* --sidebar-foreground: oklch(1 0 0); */
+  /* --sidebar-primary: oklch(0.7 0.25 270); */
+  /* --sidebar-primary-foreground: oklch(0 0 0); */
+  /* --sidebar-accent: oklch(0.15 0 0); */
+  /* --sidebar-accent-foreground: oklch(1 0 0); */
+  /* --sidebar-border: oklch(0.3 0 0); */
+  /* --sidebar-ring: oklch(0.7 0.25 270); */
   --font-instrument-serif: "Instrument Serif", serif; /* Instrument Serif font family configuration */
   /* Added Figtree font variable for dark mode consistency */
   --font-figtree: "Figtree", sans-serif; /* Figtree font family configuration */
@@ -92,10 +96,11 @@
 
 
 @theme inline {
-  --shadow-input:
+  /* UNUSED - Shadow input */
+  /* --shadow-input:
     0px 2px 3px -1px rgba(0, 0, 0, 0.1),
     0px 1px 0px 0px rgba(25, 28, 33, 0.02),
-    0px 0px 0px 1px rgba(25, 28, 33, 0.08);
+    0px 0px 0px 1px rgba(25, 28, 33, 0.08); */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -115,23 +120,25 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+  /* UNUSED - Chart color variables */
+  /* --color-chart-1: var(--chart-1); */
+  /* --color-chart-2: var(--chart-2); */
+  /* --color-chart-3: var(--chart-3); */
+  /* --color-chart-4: var(--chart-4); */
+  /* --color-chart-5: var(--chart-5); */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  /* UNUSED - Sidebar color variables */
+  /* --color-sidebar: var(--sidebar); */
+  /* --color-sidebar-foreground: var(--sidebar-foreground); */
+  /* --color-sidebar-primary: var(--sidebar-primary); */
+  /* --color-sidebar-primary-foreground: var(--sidebar-primary-foreground); */
+  /* --color-sidebar-accent: var(--sidebar-accent); */
+  /* --color-sidebar-accent-foreground: var(--sidebar-accent-foreground); */
+  /* --color-sidebar-border: var(--sidebar-border); */
+  /* --color-sidebar-ring: var(--sidebar-ring); */
   --font-instrument-serif: var(--font-instrument-serif);
   /* Added Figtree font to theme configuration */
   --font-sans: var(--font-figtree);
@@ -210,21 +217,24 @@
 
 /* Page Layout Utility Classes */
 @layer utilities {
-  .page-title-size {
+  /* UNUSED - Page title size */
+  /* .page-title-size {
     @apply text-4xl md:text-4xl lg:text-5xl xl:text-6xl;
-  }
+  } */
   
-  .page-description-size {
+  /* UNUSED - Page description size */
+  /* .page-description-size {
     @apply text-lg md:text-xl lg:text-2xl;
-  }
+  } */
   
   .page-header-spacing {
     @apply mb-12;
   }
   
-  .page-title-desc-spacing {
+  /* UNUSED - Page title desc spacing */
+  /* .page-title-desc-spacing {
     @apply mb-2;
-  }
+  } */
   
   .page-bottom-spacing {
     @apply pb-8;
