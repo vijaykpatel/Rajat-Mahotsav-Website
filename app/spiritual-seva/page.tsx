@@ -9,7 +9,6 @@ import { GiPrayerBeads } from "react-icons/gi"
 import { PiHandsPraying } from "react-icons/pi"
 import { ImageMarquee } from "@/components/image-marquee"
 import { SevaSubmissionForm } from "@/components/seva-submission-form"
-import { Toaster } from "@/components/ui/toaster"
 import "@/styles/community-service-theme.css"
 
 const sevaGoals = [
@@ -287,7 +286,6 @@ export default function SpiritualSevaPage() {
           </div>
         </div>
       </section>
-      <Toaster />
     </div>
   )
 }

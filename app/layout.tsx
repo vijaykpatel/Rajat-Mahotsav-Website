@@ -8,7 +8,6 @@ import { Lato } from "next/font/google"
 import { Antonio } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Navigation } from "@/components/navigation"
-import { Toaster } from "@/components/ui/toaster"
 import StickyFooter from "@/components/sticky-footer"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { FloatingMenuButton } from "@/components/floating-menu-button"
@@ -94,7 +93,6 @@ html {
           </div>
           <ScrollToTop />
           <FloatingMenuButton />
-          <Toaster />
         </ThemeProvider>
       </body>
     </html>
