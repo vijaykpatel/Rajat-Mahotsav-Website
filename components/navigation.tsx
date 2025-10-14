@@ -139,12 +139,16 @@ export function Navigation() {
             <img
               src={CDN_ASSETS.mainLogoNoText}
               alt="Main Logo"
+              width="144"
+              height="144"
               className="h-22 w-auto sm:h-26 md:h-30 lg:h-36 object-contain"
             />
             <div className="h-16 w-px bg-white/40 sm:h-20 md:h-24 lg:h-30 "></div>
             <img
               src={CDN_ASSETS.maningarLogo}
               alt="Maninagar Logo"
+              width="144"
+              height="144"
               className="h-22 w-auto sm:h-26 md:h-30 lg:h-36 object-contain"
             />
           </div>

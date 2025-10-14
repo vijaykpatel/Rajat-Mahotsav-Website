@@ -228,6 +228,8 @@ export default function AccommodationsPage() {
           <img
             src={getCloudflareImageBiggest('05d7e7c8-ba90-476f-4881-0c1f0d190c00')}
             alt="Accommodations Hero"
+            width="672"
+            height="448"
             className="w-full max-w-2xl mx-auto h-auto object-cover rounded-2xl shadow-lg"
           />
         </motion.div>
@@ -248,6 +250,8 @@ export default function AccommodationsPage() {
             <motion.img
               src={getCloudflareImageBiggest('05d7e7c8-ba90-476f-4881-0c1f0d190c00')}
               alt="Accommodations Hero"
+              width="896"
+              height="597"
               className="max-w-4xl w-full h-auto object-cover shadow-lg rounded-2xl"
               style={{
                 scale

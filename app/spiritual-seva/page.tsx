@@ -84,8 +84,8 @@ export default function SpiritualSevaPage() {
           <div className="mb-36">
             <StandardPageHeader
               title="Rajat Mahotsav Spiritual Initiative"
-              subtitle="Bhakti, Dharma, Gnyan, Vairagya"
-              description="In celebration of our Temple's Rajat Mahotsav, devotees are coming together in a collective spiritual endeavor that extends far beyond a single event. We are transforming this momentous milestone into a year-round journey of spiritual growth, using this celebration as a catalyst to deepen our devotion and strengthen our eternal bond with God. Through dedicated niyams and seva, and by embracing the four pillars of Bhakti, Gnyan, Dharma, and Vairagya, we commit to sustaining this spiritual momentum throughout the year, ensuring that the divine inspiration of our Rajat Mahotsav becomes a lasting foundation for our path toward God."
+              subtitle="Dharma, Gnyan, Vairagya, and Bhakti"
+              description="In celebration of our Temple's Rajat Mahotsav, devotees are coming together in a collective spiritual endeavor that extends far beyond a single event. We are transforming this momentous milestone into a year-round journey of spiritual growth, using this celebration as a catalyst to deepen our devotion and strengthen our eternal bond with God. Through dedicated niyams and seva, and by embracing the four pillars of Dharma, Gnyan, Vairagya, and Bhakti, we commit to sustaining this spiritual momentum throughout the year, ensuring that the divine inspiration of our Rajat Mahotsav becomes a lasting foundation for our path toward God."
               isLoaded={isLoaded}
             />
           </div>

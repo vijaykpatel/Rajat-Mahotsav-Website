@@ -34,6 +34,8 @@ export default function StickyFooter() {
               <img 
                 src={CDN_ASSETS.maningarLogo} 
                 alt="Maninagar Logo" 
+                width="38"
+                height="38"
                 className="w-[38px] h-[38px]"
               />
             </a>
@@ -46,6 +48,8 @@ export default function StickyFooter() {
               <img 
                 src={CDN_ASSETS.youtubeIcon} 
                 alt="YouTube" 
+                width="44"
+                height="44"
                 className="w-[44px] h-[44px]"
               />
             </a>
@@ -58,6 +62,8 @@ export default function StickyFooter() {
               <img 
                 src={CDN_ASSETS.instagramIcon} 
                 alt="Instagram" 
+                width="38"
+                height="38"
                 className="w-[38px] h-[38px]"
               />
             </a>
@@ -97,6 +103,8 @@ export default function StickyFooter() {
             <img 
               src={CDN_ASSETS.maningarLogo} 
               alt="Maninagar Logo" 
+              width="38"
+              height="38"
               className="w-[38px] h-[38px]"
             />
           </a>
@@ -109,6 +117,8 @@ export default function StickyFooter() {
             <img 
               src={CDN_ASSETS.youtubeIcon} 
               alt="YouTube" 
+              width="44"
+              height="38"
               className="w-[44px] h-[38px]"
             />
           </a>
@@ -121,6 +131,8 @@ export default function StickyFooter() {
             <img 
               src={CDN_ASSETS.instagramIcon} 
               alt="Instagram" 
+              width="38"
+              height="38"
               className="w-[38px] h-[38px]"
             />
           </a>
