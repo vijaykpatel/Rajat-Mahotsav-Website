@@ -1,6 +1,6 @@
 "use client";
 
-import { StickyScroll } from "@/components/organisms/sticky-scroll-reveal";
+import { BhagwanSevaExamples } from "@/components/organisms/bhagwan-seva-examples";
 
 const content = [
     {
@@ -30,7 +30,7 @@ const content = [
 export function PathOfServiceStory() {
   return (
     <div className="w-full mx-auto py-20 px-4 sm:px-6 lg:px-8">
-      <StickyScroll content={content} />
+      <BhagwanSevaExamples content={content} />
     </div>
   );
 }
