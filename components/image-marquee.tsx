@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useDeviceType } from "@/hooks/use-device-type"
+import { useState, useEffect, useRef } from "react"
 
 interface MarqueeImage {
   src: string
@@ -27,14 +28,33 @@ export function ImageMarquee({
 }: ImageMarqueeProps) {
   const deviceType = useDeviceType()
   const animationDuration = deviceType === 'mobile' ? duration.mobile : duration.desktop
+  const [isVisible, setIsVisible] = useState(false)
+  const marqueeRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.4 }
+    )
+
+    if (marqueeRef.current) {
+      observer.observe(marqueeRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [isVisible])
   
   return (
-    <div className="w-full overflow-hidden space-y-3 md:space-y-6">
+    <div ref={marqueeRef} className="w-full overflow-hidden space-y-3 md:space-y-6">
       {/* First Row - Left to Right */}
       <div className={`relative ${imageHeight} overflow-hidden`}>
         <motion.div
           className={`flex ${gap} absolute`}
-          animate={{ x: ["-0%", "-50%"] }}
+          animate={isVisible ? { x: ["-0%", "-50%"] } : { x: "-0%" }}
           transition={{
             x: {
               repeat: Infinity,
@@ -63,7 +83,7 @@ export function ImageMarquee({
       <div className={`relative ${imageHeight} overflow-hidden`}>
         <motion.div
           className={`flex ${gap} absolute`}
-          animate={{ x: ["-50%", "-0%"] }}
+          animate={isVisible ? { x: ["-50%", "-0%"] } : { x: "-50%" }}
           transition={{
             x: {
               repeat: Infinity,

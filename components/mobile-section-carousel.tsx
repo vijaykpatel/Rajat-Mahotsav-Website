@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
 interface CarouselImage {
@@ -18,17 +18,66 @@ interface MobileSectionCarouselProps {
 
 export function MobileSectionCarousel({ images }: MobileSectionCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+  const [resetKey, setResetKey] = useState(0)
+  const carouselRef = useRef<HTMLDivElement>(null)
+  const [touchStart, setTouchStart] = useState(0)
+  const [touchEnd, setTouchEnd] = useState(0)
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.5 }
+    )
+
+    if (carouselRef.current) {
+      observer.observe(carouselRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [isVisible])
+
+  useEffect(() => {
+    if (!isVisible) return
+    
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length)
     }, 4000)
 
     return () => clearInterval(timer)
-  }, [images.length])
+  }, [images.length, isVisible, resetKey])
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 50) {
+      setCurrentIndex((prev) => (prev + 1) % images.length)
+      setResetKey(k => k + 1)
+    }
+    if (touchStart - touchEnd < -50) {
+      setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
+      setResetKey(k => k + 1)
+    }
+  }
 
   return (
-    <div className="relative w-full h-[50vh] overflow-hidden rounded-lg">
+    <div 
+      ref={carouselRef} 
+      className="relative w-full h-[50vh] overflow-hidden rounded-lg"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
