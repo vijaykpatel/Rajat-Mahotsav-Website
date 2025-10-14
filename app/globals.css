@@ -296,3 +296,11 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* Hide floating elements when video is playing on mobile */
+@media (max-width: 768px) {
+  body.hide-floating-elements .scroll-to-top,
+  body.hide-floating-elements .floating-menu-button {
+    display: none !important;
+  }
+}

@@ -43,7 +43,7 @@ export default function TitleSection() {
         <div className="hidden md:block">
           <div className="w-80 h-1 bg-white mx-auto mb-8" />
           <p className="sm:text-3xl md:text-4xl lg:text-5xl text-white font-serif italic font-medium tracking-wider leading-relaxed">
-            A silver celebration for a golden era
+            A silver celebration of a golden era
           </p>
           <div className="w-80 h-1 bg-white mx-auto my-6" />
           <p className="sm:text-2xl md:text-3xl lg:text-4xl text-white font-serif italic font-medium tracking-wider">
@@ -55,7 +55,7 @@ export default function TitleSection() {
         <div className="md:hidden space-y-4">
           <div className="w-64 h-1 bg-white mx-auto" />
           <p className="text-3xl text-white font-serif italic font-medium tracking-wide leading-relaxed">
-            A silver celebration<br/>for a golden era
+            A silver celebration<br/>of a golden era
           </p>
           <div className="w-64 h-1 bg-white mx-auto" />
           <p className="text-2xl text-white font-serif italic font-medium tracking-wide leading-relaxed">

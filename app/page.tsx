@@ -12,6 +12,7 @@ import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import "@/styles/registration-theme.css"
 
 import { useLoading } from "@/hooks/use-loading"
+import AashirwadVideoPlayer from "@/components/aashirwad-video-player"
 
 const gurus = [
   {
@@ -131,9 +132,12 @@ export default function ShaderShowcase() {
             />
           </div>
           
+          {/* Video Player Section */}
+          <AashirwadVideoPlayer />
+          
           <div className="reg-page-bg page-bg-extend">
           
-          {/* Staggered Image Cards */}
+          {/* Staggered Guru Cards */}
           <div ref={mobileGuruRef} className="min-h-screen w-full pb-40 px-4 flex flex-col items-center justify-start pt-28">
             <motion.h2
               initial={{ opacity: 0, y: 50 }}
