@@ -1,23 +1,49 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
 import { StandardPageHeader } from "@/components/standard-page-header"
 import { ImageCarouselModal } from "@/components/image-carousel-modal"
+import { PinContainer } from "@/components/ui/3d-pin"
 import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane, Check, ArrowRight } from "lucide-react"
+import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import "@/styles/community-service-theme.css"
 
 export default function AccommodationsPage() {
-
+  const containerRef = useRef<HTMLDivElement>(null)
+  const heroRef = useRef<HTMLDivElement>(null)
+  const venueRef = useRef<HTMLDivElement>(null)
+  
   const [isStreetView, setIsStreetView] = useState(true)
   const [isCopied, setIsCopied] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const [selectedHotel, setSelectedHotel] = useState<number | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const [activeTab, setActiveTab] = useState('nyc')
+  
+  const { scrollYProgress } = useScroll()
+  const scale = useTransform(scrollYProgress, [0, 0.7], [1, 2])
+  const blur = useTransform(scrollYProgress, [0.4, 0.65], [0, 15])
+  const blurFilter = useTransform(blur, (b) => `blur(${b}px)`)
+  const opacity = useTransform(scrollYProgress, [0.4, 0.65], [1, 0.3])
+  const imageY = useTransform(scrollYProgress, [0, 0.3], [0, -150])
 
   useEffect(() => {
+    setMounted(true)
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
     const timer = setTimeout(() => setIsLoaded(true), 300)
-    return () => clearTimeout(timer)
+    window.addEventListener('resize', checkMobile)
+    return () => {
+      window.removeEventListener('resize', checkMobile)
+      clearTimeout(timer)
+    }
   }, [])
+
+  if (!mounted) {
+    return null
+  }
 
   const hotels = [
     {
@@ -97,8 +123,6 @@ export default function AccommodationsPage() {
     //   info: "Free parking available on-site"
     // }
   ]
-
-  const [activeTab, setActiveTab] = useState('nyc')
 
   const sightseeingData = {
     nyc: [
@@ -184,17 +208,61 @@ export default function AccommodationsPage() {
   }
 
   return (
-    <div className="min-h-screen w-full community-page-bg relative text-gray-900 page-bg-extend">
-      <div className="container mx-auto px-4 page-bottom-spacing relative z-10">
+    <div className="min-h-screen w-full relative text-gray-900">
+      <div className="container mx-auto px-4 pt-8 relative z-10">
         <StandardPageHeader
           title="Accommodations"
           subtitle="Your Home Away From Home"
           description="Everything you need for your stay during the Rajat Mahotsav celebration"
           isLoaded={isLoaded}
         />
+      </div>
 
-        {/* Venue Location Section */}
-        <motion.section
+      {isMobile ? (
+        <motion.div 
+          className="container mx-auto px-4 mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <img
+            src={getCloudflareImageBiggest('05d7e7c8-ba90-476f-4881-0c1f0d190c00')}
+            alt="Accommodations Hero"
+            className="w-full max-w-2xl mx-auto h-auto object-cover rounded-2xl shadow-lg"
+          />
+        </motion.div>
+      ) : (
+        <>
+          <motion.div 
+            className="fixed left-0 w-full h-screen flex items-center justify-center overflow-hidden -z-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            style={{
+              top: '10vh',
+              filter: blurFilter,
+              opacity,
+              y: imageY
+            }}
+          >
+            <motion.img
+              src={getCloudflareImageBiggest('05d7e7c8-ba90-476f-4881-0c1f0d190c00')}
+              alt="Accommodations Hero"
+              className="max-w-4xl w-full h-auto object-cover shadow-lg rounded-2xl"
+              style={{
+                scale
+              }}
+            />
+          </motion.div>
+          <div className="relative min-h-[200vh]" />
+        </>
+      )}
+
+      <div className="relative z-20">
+        <div className="container mx-auto px-4 page-bottom-spacing">
+            {/* Venue Location Section */}
+            <motion.section
+          ref={venueRef}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -206,12 +274,17 @@ export default function AccommodationsPage() {
             <h2 className="text-3xl font-bold">Event Venue</h2>
           </div>
           <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              <div className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-orange-200">
+            {!isMobile ? (
+              <PinContainer
+                title="Shree Swaminarayan Temple"
+                href="https://maps.app.goo.gl/CVaAykRG1HQRv9hA9"
+              >
+                <div className="flex basis-full flex-col tracking-tight text-slate-100/50 w-[50rem] h-[35rem]">
                 <div className="mb-4 relative">
-                  <div className="absolute top-0 right-0 flex flex-col md:flex-row items-end md:items-center gap-1 md:gap-2">
+                  <div className="absolute top-0 right-0 flex flex-col md:flex-row items-end md:items-center gap-1 md:gap-2 z-10">
                     <button
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.preventDefault()
                         navigator.clipboard.writeText('200 Swamibapa Way, Secaucus, NJ 07094')
                         setIsCopied(true)
                         setTimeout(() => setIsCopied(false), 1000)
@@ -232,7 +305,10 @@ export default function AccommodationsPage() {
                       </motion.div>
                     </button>
                     <button
-                      onClick={() => setIsStreetView(!isStreetView)}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setIsStreetView(!isStreetView)
+                      }}
                       className="flex items-center gap-2 p-1.5 md:p-2 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 transition-colors"
                       title={isStreetView ? "Switch to Map View" : "Switch to Satellite View"}
                     >
@@ -261,7 +337,67 @@ export default function AccommodationsPage() {
                   />
                 </div>
               </div>
-            </div>
+              </PinContainer>
+            ) : (
+              <div className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-orange-200">
+                <div className="mb-4 relative">
+                  <div className="absolute top-0 right-0 flex flex-col md:flex-row items-end md:items-center gap-1 md:gap-2 z-10">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault()
+                        navigator.clipboard.writeText('200 Swamibapa Way, Secaucus, NJ 07094')
+                        setIsCopied(true)
+                        setTimeout(() => setIsCopied(false), 1000)
+                      }}
+                      className="p-1.5 md:p-2 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 transition-colors"
+                      title="Copy address"
+                    >
+                      <motion.div
+                        initial={false}
+                        animate={isCopied ? { scale: [1, 1.2, 1] } : { scale: 1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {isCopied ? (
+                          <Check className="h-4 w-4 text-orange-500" />
+                        ) : (
+                          <Copy className="h-4 w-4 text-orange-500" />
+                        )}
+                      </motion.div>
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setIsStreetView(!isStreetView)
+                      }}
+                      className="flex items-center gap-2 p-1.5 md:p-2 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 transition-colors"
+                      title={isStreetView ? "Switch to Map View" : "Switch to Satellite View"}
+                    >
+                      {isStreetView ? <ToggleRight className="h-4 w-4 text-orange-500" /> : <ToggleLeft className="h-4 w-4 text-orange-500" />}
+                      <span className="text-xs text-orange-500">{isStreetView ? "Satellite" : "Map"}</span>
+                    </button>
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold text-orange-400 mb-2 pr-20 md:pr-32">Shree Swaminarayan Temple Secaucaus, NJ</h3>
+                  <p className="text-gray-600 flex items-center gap-2 mt-5 md:mt-0">
+                    <MapPin className="h-4 w-4 text-orange-400" />
+                    200 Swamibapa Way, Secaucus, NJ 07094
+                  </p>
+                </div>
+                <div className="relative overflow-hidden rounded-lg">
+                  <iframe
+                    src={isStreetView 
+                      ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e1!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
+                      : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                    }
+                    width="100%"
+                    height="500"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </motion.section>
 
@@ -564,6 +700,7 @@ export default function AccommodationsPage() {
             </motion.div>
           </div>
         </motion.section>
+        </div>
       </div>
     </div>
   )

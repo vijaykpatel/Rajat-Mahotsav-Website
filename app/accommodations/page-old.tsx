@@ -1,43 +1,23 @@
 "use client"
 
-import { motion, useScroll, useTransform } from "framer-motion"
-import { useState, useEffect, useRef } from "react"
+import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
 import { StandardPageHeader } from "@/components/standard-page-header"
 import { ImageCarouselModal } from "@/components/image-carousel-modal"
 import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane, Check, ArrowRight } from "lucide-react"
-import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import "@/styles/community-service-theme.css"
 
 export default function AccommodationsPage() {
-  const containerRef = useRef<HTMLDivElement>(null)
+
   const [isStreetView, setIsStreetView] = useState(true)
   const [isCopied, setIsCopied] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const [selectedHotel, setSelectedHotel] = useState<number | null>(null)
 
-  const heroRef = useRef<HTMLDivElement>(null)
-  const venueRef = useRef<HTMLDivElement>(null)
-  
-  const [isMobile, setIsMobile] = useState(false)
-  
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 300)
     return () => clearTimeout(timer)
   }, [])
-
-  const { scrollYProgress } = useScroll()
-  const scale = useTransform(scrollYProgress, [0, 0.7], [1, 2])
-  const blur = useTransform(scrollYProgress, [0.4, 0.65], [0, 15])
-  const blurFilter = useTransform(blur, (b) => `blur(${b}px)`)
-  const opacity = useTransform(scrollYProgress, [0.4, 0.65], [1, 0.3])
-  const imageY = useTransform(scrollYProgress, [0, 0.3], [0, -150])
 
   const hotels = [
     {
@@ -204,53 +184,17 @@ export default function AccommodationsPage() {
   }
 
   return (
-    <div className="min-h-screen w-full relative text-gray-900">
-      <div className="container mx-auto px-4 pt-8 relative z-10">
+    <div className="min-h-screen w-full community-page-bg relative text-gray-900 page-bg-extend">
+      <div className="container mx-auto px-4 page-bottom-spacing relative z-10">
         <StandardPageHeader
           title="Accommodations"
           subtitle="Your Home Away From Home"
           description="Everything you need for your stay during the Rajat Mahotsav celebration"
           isLoaded={isLoaded}
         />
-      </div>
 
-      {isMobile ? (
-        <div className="container mx-auto px-4 mb-8">
-          <img
-            src={getCloudflareImageBiggest('05d7e7c8-ba90-476f-4881-0c1f0d190c00')}
-            alt="Accommodations Hero"
-            className="w-full max-w-2xl mx-auto h-auto object-cover rounded-2xl shadow-lg"
-          />
-        </div>
-      ) : (
-        <>
-          <motion.div 
-            className="fixed left-0 w-full h-screen flex items-center justify-center overflow-hidden -z-10"
-            style={{
-              top: '10vh',
-              filter: blurFilter,
-              opacity,
-              y: imageY
-            }}
-          >
-            <motion.img
-              src={getCloudflareImageBiggest('05d7e7c8-ba90-476f-4881-0c1f0d190c00')}
-              alt="Accommodations Hero"
-              className="max-w-4xl w-full h-auto object-cover shadow-lg rounded-2xl"
-              style={{
-                scale
-              }}
-            />
-          </motion.div>
-          <div className="relative min-h-[200vh]" />
-        </>
-      )}
-
-      <div className="relative z-20">
-        <div className="container mx-auto px-4 page-bottom-spacing">
-            {/* Venue Location Section */}
-            <motion.section
-          ref={venueRef}
+        {/* Venue Location Section */}
+        <motion.section
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -620,7 +564,6 @@ export default function AccommodationsPage() {
             </motion.div>
           </div>
         </motion.section>
-        </div>
       </div>
     </div>
   )
