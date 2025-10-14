@@ -163,7 +163,7 @@ export default function VideoSection() {
   }, [emblaApiMobile])
 
   return (
-    <div className="min-h-screen pt-30 md:pt-50 pb-20 px-4">
+    <div className="min-h-screen pb-20 px-4 flex flex-col justify-center">
       <div className="max-w-[90rem] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
