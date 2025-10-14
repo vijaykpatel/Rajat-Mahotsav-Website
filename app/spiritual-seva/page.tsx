@@ -85,9 +85,21 @@ export default function SpiritualSevaPage() {
             <StandardPageHeader
               title="Rajat Mahotsav Spiritual Initiative"
               subtitle="Dharma, Gnyan, Vairagya, and Bhakti"
-              description="In celebration of our Temple's Rajat Mahotsav, devotees are coming together in a collective spiritual endeavor that extends far beyond a single event. We are transforming this momentous milestone into a year-round journey of spiritual growth, using this celebration as a catalyst to deepen our devotion and strengthen our eternal bond with God. Through dedicated niyams and seva, and by embracing the four pillars of Dharma, Gnyan, Vairagya, and Bhakti, we commit to sustaining this spiritual momentum throughout the year, ensuring that the divine inspiration of our Rajat Mahotsav becomes a lasting foundation for our path toward God."
+              description=""
               isLoaded={isLoaded}
             />
+            
+            {/* Custom Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="flex justify-center px-4 mt-8"
+            >
+              <p className="text-center text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-5xl">
+                In celebration of our Temple's Rajat Mahotsav, devotees are coming together in a collective spiritual endeavor that extends far beyond a single event. We are transforming this momentous milestone into a year-round journey of spiritual growth, using this celebration as a catalyst to deepen our devotion and strengthen our eternal bond with God. Through dedicated niyams and seva, and by embracing the four pillars of Dharma, Gnyan, Vairagya, and Bhakti, we commit to sustaining this spiritual momentum throughout the year, ensuring that the divine inspiration of our Rajat Mahotsav becomes a lasting foundation for our path toward God.
+              </p>
+            </motion.div>
           </div>
 
           <motion.div

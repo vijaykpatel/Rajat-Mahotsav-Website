@@ -19,8 +19,8 @@ import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/hooks/use-toast"
 
 import { useDeviceType } from "@/hooks/use-device-type"
-import Typewriter from "@/components/typewriter"
 import { supabase } from "@/utils/supabase/client"
+import { motion } from "framer-motion"
 import "@/styles/registration-theme.css"
 
 
@@ -224,15 +224,16 @@ export default function RegistrationPage() {
       {/* Scrollable Background and Content */}
       <div className={`min-h-[calc(100vh+200px)] w-full reg-page-bg page-bg-extend transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} data-page="registration">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 page-bottom-spacing">
-        {/* Title with Typewriter Animation */}
+        {/* Title */}
         <div className="text-center page-header-spacing">
-          <div className="flex justify-center min-h-[6rem] lg:min-h-[6rem] xl:min-h-[6rem]">
-            <Typewriter 
-              text="Register yourself for the Rajat Mahotsav!"
-              speed={50}
-              className="standard-page-title reg-title xl:whitespace-nowrap"
-            />
-          </div>
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 30 }}
+            transition={{ duration: 0.8 }}
+            className="standard-page-title reg-title"
+          >
+            Register yourself for the Rajat Mahotsav!
+          </motion.h1>
         </div>
 
         {/* Desktop Layout: Side by side, Mobile: Stacked */}
