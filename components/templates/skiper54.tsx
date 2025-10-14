@@ -12,7 +12,7 @@ import {
   CarouselApi,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
+} from "@/components/molecules/carousel";
 
 const Skiper54 = () => {
   // ========================================
