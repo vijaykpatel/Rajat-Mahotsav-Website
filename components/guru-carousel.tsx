@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import useEmblaCarousel from 'embla-carousel-react'
 import { DotButton, useDotButton } from './video-carousel-dots'
 import GuruCard from "./guru-card"
@@ -18,14 +18,33 @@ export default function GuruCarousel({ gurus }: GuruCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi)
   const [resetKey, setResetKey] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+  const carouselRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!emblaApi) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.5 }
+    )
+
+    if (carouselRef.current) {
+      observer.observe(carouselRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [isVisible])
+
+  useEffect(() => {
+    if (!emblaApi || !isVisible) return
     const interval = setInterval(() => {
       emblaApi.scrollNext()
     }, 4000)
     return () => clearInterval(interval)
-  }, [emblaApi, resetKey])
+  }, [emblaApi, resetKey, isVisible])
 
   useEffect(() => {
     if (!emblaApi) return
@@ -35,7 +54,7 @@ export default function GuruCarousel({ gurus }: GuruCarouselProps) {
   }, [emblaApi])
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div ref={carouselRef} className="w-full flex flex-col items-center">
       <div className="overflow-hidden w-full max-w-md" ref={emblaRef}>
         <div className="flex">
           {gurus.map((guru, index) => (

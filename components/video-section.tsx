@@ -169,14 +169,34 @@ export default function VideoSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 md:mb-26 lg:mb-36 xl:mb-46"
+          className="text-center mb-10 md:mb-12 lg:mb-12 xl:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-8">
-            Rajat Mahotsav Celebrations have already begun!
+          <h2 className="text-6xl md:text-7xl font-bold mb-6 md:mb-12 relative z-10 reg-title leading-tight">
+            Follow our celebration
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            We hope you are as excited as we are. We can't wait to celebrate with you!
+          <p className="reg-text-primary font-semibold text-xl lg:text-2xl mb-4 mx-auto">
+            We hope you are as excited as we are and look forward to having you celebrate such a major milestone with us!
           </p>
+        </motion.div>
+
+        {/* YouTube Playlist Link */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mb-8 text-center"
+        >
+          <a
+            href="https://www.youtube.com/playlist?list=PLqKpGEY54C-1OklTqKwLh6JWYCDQpn5MC"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-full hover:from-orange-600 hover:to-red-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+          >
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            <span>Catch up on all of New Jersey Mandir's events leading up to the grand celebration</span>
+          </a>
         </motion.div>
 
         {/* Desktop: 2-card layout with arrows below */}
