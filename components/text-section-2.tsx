@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
-import { Carousel_003 } from "@/components/ui/skiper-ui/skiper49"
+import { Skiper54 } from "@/components/ui/skiper-ui/skiper54"
 
 export default function TextSection2() {
   const [isVisible, setIsVisible] = useState(false)
@@ -33,24 +33,8 @@ export default function TextSection2() {
         What unfolded afterwards was a golden era of the growth of the faith and the flourishing of the supreme teachings and philosophy of Lord Shree Swaminarayanbapa Swamibapa, not only in New Jersey, but all throughout North America. Over a dozen new temples and mandals have sprouted from coast to coast, and the initial seeds planted by Jeevanpran Shree Muktajeevan Swamibapa, were lovingly and tirelessly sowed by His beloved heir, Acharya Shree Purushottampriya Swamishree Maharaj, all throughout North America. This garden bloomed by Acharya Swamishree Maharaj is now being devotedly tended to in the same manner by Acharya Shree Jitendriyapriyadasji Swamiji Maharaj, the inspirer of the Shree Ghanshyam Maharaj Rajat Pratishtha Mahotsav at Shree Swaminarayan Temple, New Jersey.
       </motion.p>
       </div>
-      <div className="min-h-[50vh] w-full flex items-center justify-center py-8">
-        <Carousel_003
-          className="max-w-4xl md:max-w-7xl mx-auto"
-          images={[
-            { src: "https://placehold.co/1200x800/e2e8f0/64748b?text=Image+1", alt: "Image 1" },
-            { src: "https://placehold.co/1200x800/e2e8f0/64748b?text=Image+2", alt: "Image 2" },
-            { src: "https://placehold.co/1200x800/e2e8f0/64748b?text=Image+3", alt: "Image 3" },
-            { src: "https://placehold.co/1200x800/e2e8f0/64748b?text=Image+4", alt: "Image 4" },
-            { src: "https://placehold.co/1200x800/e2e8f0/64748b?text=Image+5", alt: "Image 5" },
-            { src: "https://placehold.co/1200x800/e2e8f0/64748b?text=Image+6", alt: "Image 6" },
-            { src: "https://placehold.co/1200x800/e2e8f0/64748b?text=Image+7", alt: "Image 7" },
-          ]}
-          showPagination={true}
-          showNavigation={false}
-          loop={true}
-          autoplay={false}
-          spaceBetween={0}
-        />
+      <div className="w-full flex items-center justify-center">
+        <Skiper54 />
       </div>
     </div>
   )
