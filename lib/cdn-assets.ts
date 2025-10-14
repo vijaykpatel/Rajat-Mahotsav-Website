@@ -18,8 +18,8 @@ export const CDN_ASSETS = {
 
 const CLOUDFLARE_IMAGES_BASE = 'https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/'
 
-export const getCommunityServiceImage = (filename: string) => 
-  `${CDN_BASE_URL}/community_service/${filename}`
+export const getR2Image = (filename: string) => 
+  `${CDN_BASE_URL}${filename}`
 
 export const getCloudflareImage = (imageId: string) => 
   `${CLOUDFLARE_IMAGES_BASE}${imageId}/bigger?format=auto&quality=90`

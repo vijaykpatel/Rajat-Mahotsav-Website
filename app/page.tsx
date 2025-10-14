@@ -13,6 +13,9 @@ import "@/styles/registration-theme.css"
 
 import { useLoading } from "@/hooks/use-loading"
 import AashirwadVideoPlayer from "@/components/aashirwad-video-player"
+import TextSection1 from "@/components/text-section-1"
+import TextSection2 from "@/components/text-section-2"
+import TextSection3 from "@/components/text-section-3"
 
 const gurus = [
   {
@@ -130,6 +133,15 @@ export default function ShaderShowcase() {
                 objectPosition: 'left center'
               }}
             />
+          </div>
+          
+          <div className="reg-page-bg page-bg-extend">
+          
+          {/* Text Sections */}
+          <TextSection1 />
+          <TextSection2 />
+          <TextSection3 />
+          
           </div>
           
           {/* Video Player Section */}

@@ -278,6 +278,27 @@ export default function VideoSection() {
           </div>
         </motion.div>
       </div>
+
+      {/* Registration CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+        className="mt-20 text-center max-w-4xl mx-auto"
+      >
+        <h3 className="text-4xl md:text-5xl leading-[1.2] font-bold mb-6 reg-title">
+          Join Us for the Rajat Mahotsav
+        </h3>
+        <p className="text-lg md:text-xl reg-text-primary mb-8 leading-relaxed">
+          Be a part of the Shree Ghanshyam Maharaj Rajat Pratishta Mahotsav New Jersey. Register now for this momentous occasion from July 25 through August 2, 2026.
+        </p>
+        <a
+          href="/registration"
+          className="inline-block px-12 py-5 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold text-xl rounded-full hover:from-amber-600 hover:to-orange-700 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 transform"
+        >
+          Register Now
+        </a>
+      </motion.div>
     </div>
   )
 }

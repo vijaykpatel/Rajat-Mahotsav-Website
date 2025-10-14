@@ -236,6 +236,24 @@ export default function RegistrationPage() {
           </motion.h1>
         </div>
 
+        {/* Video Player */}
+        {/* <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 30 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="w-full max-w-4xl mx-auto mb-12 px-4"
+        >
+          <div className="rounded-xl overflow-hidden shadow-2xl" style={{ position: "relative", paddingTop: "56.42633228840125%" }}>
+            <iframe
+              src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/0d78279ed6f5f58fd38764c060d65c86/iframe?poster=https%3A%2F%2Fcustomer-kss5h1dwt4mkz0x3.cloudflarestream.com%2F0d78279ed6f5f58fd38764c060d65c86%2Fthumbnails%2Fthumbnail.gif%3Ftime%3D95s%26duration%3D4s"
+              loading="lazy"
+              style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
+              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+              allowFullScreen
+            />
+          </div>
+        </motion.div> */}
+
         {/* Desktop Layout: Side by side, Mobile: Stacked */}
         <div className="lg:grid lg:grid-cols-3 lg:gap-8 lg:items-start">
           {/* Important Instructions - Left Third on Desktop */}

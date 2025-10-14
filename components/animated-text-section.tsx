@@ -2,8 +2,8 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { MobileSectionCarousel } from "@/components/mobile-section-carousel"
-import { getCommunityServiceImage, getCloudflareImage } from "@/lib/cdn-assets"
+import { ResponsiveImageGallery } from "@/components/responsive-image-gallery"
+import { getR2Image, getCloudflareImage } from "@/lib/cdn-assets"
 
 const textVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -18,23 +18,10 @@ const textVariants = {
   })
 }
 
-const imageVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.2,
-      duration: 0.8,
-      ease: "easeOut"
-    }
-  })
-}
-
 const whyWeServeImages = [
   { id: 1, src: getCloudflareImage("2ac2c4ad-0b7b-47ff-80fd-a16fc5559900"), alt: "Swamibapa Feeding the Community" },
-  { id: 2, src: getCommunityServiceImage("swamibapa_school_opening.jpeg"), alt: "Swamibapa School Opening Ceremony" },
-  { id: 3, src: getCommunityServiceImage("swamiji_blessing_sick.jpeg"), alt: "Swamiji Blessing the Sick" }
+  { id: 2, src: getR2Image("/community_service/swamibapa_school_opening.jpeg"), alt: "Swamibapa School Opening Ceremony" },
+  { id: 3, src: getR2Image("/community_service/swamiji_blessing_sick.jpeg"), alt: "Swamiji Blessing the Sick" }
 ]
 
 const missionImages = [
@@ -70,28 +57,7 @@ export function AnimatedTextSection() {
       <section className="min-h-screen">
         <div className="min-h-screen">
           {/* Images - Desktop: Grid, Mobile: Carousel */}
-          <div className="h-[50vh]">
-            <div className="hidden md:grid grid-cols-3 gap-0 h-full">
-              {whyWeServeImages.map((image, index) => (
-                <motion.div
-                  key={image.id}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={imageVariants}
-                  custom={index}
-                  className="relative overflow-hidden group cursor-pointer"
-                >
-                  <img src={image.src} alt={image.alt} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                </motion.div>
-              ))}
-            </div>
-            <div className="md:hidden h-full px-4 py-4">
-              <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-                <MobileSectionCarousel images={whyWeServeImages} />
-              </motion.div>
-            </div>
-          </div>
+          <ResponsiveImageGallery images={whyWeServeImages} />
           
           {/* Text Content */}
           <div className="flex items-center justify-center px-4 md:px-8 py-20 md:py-24">
@@ -116,28 +82,7 @@ export function AnimatedTextSection() {
       <section className="min-h-screen">
         <div>
           {/* Images - Desktop: Grid, Mobile: Carousel */}
-          <div className="h-[50vh]">
-            <div className="hidden md:grid grid-cols-3 gap-0 h-full">
-              {missionImages.map((image, index) => (
-                <motion.div
-                  key={image.id}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={imageVariants}
-                  custom={index}
-                  className="relative overflow-hidden group cursor-pointer"
-                >
-                  <img src={image.src} alt={image.alt} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                </motion.div>
-              ))}
-            </div>
-            <div className="md:hidden h-full px-4 py-4">
-              <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-                <MobileSectionCarousel images={missionImages} />
-              </motion.div>
-            </div>
-          </div>
+          <ResponsiveImageGallery images={missionImages} />
           
           {/* Text Content */}
           <div className="flex items-center justify-center px-4 md:px-8 pt-20 pb-12 md:py-24">
