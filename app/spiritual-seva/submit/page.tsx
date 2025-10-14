@@ -13,11 +13,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { CountrySelector } from "@/components/molecules/country-selector"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/atoms/card"
 import { Checkbox } from "@/components/atoms/checkbox"
-import LazyPhoneInput from "@/components/lazy-phone-input"
+import LazyPhoneInput from "@/components/molecules/lazy-phone-input"
 import { Toaster } from "@/components/molecules/toaster"
 import { useToast } from "@/hooks/use-toast"
 import { useDeviceType } from "@/hooks/use-device-type"
-import Typewriter from "@/components/typewriter"
+import Typewriter from "@/components/atoms/typewriter"
 import "@/styles/registration-theme.css"
 
 const sevaTypes = [
