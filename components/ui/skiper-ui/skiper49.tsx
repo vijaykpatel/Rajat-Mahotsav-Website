@@ -92,6 +92,17 @@ const Carousel_003 = ({
   autoplay?: boolean;
   spaceBetween?: number;
 }) => {
+  const [slidesPerView, setSlidesPerView] = React.useState<number | "auto">("auto");
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setSlidesPerView(window.innerWidth >= 768 ? 3 : "auto");
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const css = `
   .Carousal_003 {
     width: 100%;
@@ -146,9 +157,10 @@ const Carousel_003 = ({
           }
           effect="coverflow"
           grabCursor={true}
-          slidesPerView="auto"
+          slidesPerView={slidesPerView}
           centeredSlides={true}
           loop={loop}
+          watchSlidesProgress={true}
           coverflowEffect={{
             rotate: 40,
             stretch: 0,
