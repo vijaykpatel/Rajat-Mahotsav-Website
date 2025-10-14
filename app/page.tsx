@@ -33,12 +33,29 @@ export default function ShaderShowcase() {
 
   const { isLoading } = useLoading();
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isPanActive, setIsPanActive] = useState(false)
+  const sihasanRef = useRef<HTMLDivElement>(null)
   
   const backgroundImageUrl = `${getCloudflareImageBiggest("5aeb6c7e-f6ea-45b1-da4a-823279172400")}&width=1920`
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
     return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsPanActive(entry.isIntersecting && entry.intersectionRatio >= 0.5)
+      },
+      { threshold: [0, 0.5, 1] }
+    )
+
+    if (sihasanRef.current) {
+      observer.observe(sihasanRef.current)
+    }
+
+    return () => observer.disconnect()
   }, [])
 
   return (
@@ -53,7 +70,7 @@ export default function ShaderShowcase() {
           <div className="h-screen" />
           
           {/* Full background Sihasan image section with fade transition */}
-          <div className="h-screen w-screen relative overflow-hidden">
+          <div ref={sihasanRef} className="h-screen w-screen relative overflow-hidden">
             {/* Top gradient overlay for smooth transition from title */}
             <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%' }} />
             
@@ -72,6 +89,10 @@ export default function ShaderShowcase() {
               src={backgroundImageUrl}
               alt="Background"
               className="md:hidden absolute inset-0 animate-pan-right brightness-110"
+              style={{ 
+                animationPlayState: isPanActive ? 'running' : 'paused',
+                objectPosition: 'left center'
+              }}
             />
           </div>
           

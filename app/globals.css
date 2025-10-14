@@ -287,7 +287,7 @@
 }
 
 .animate-pan-right {
-  animation: pan-right 20s ease-in-out infinite alternate;
+  animation: pan-right 13s ease-in-out infinite alternate;
   width: 100%;
   height: 100%;
   object-fit: cover;
