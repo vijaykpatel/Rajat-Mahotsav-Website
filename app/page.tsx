@@ -99,11 +99,11 @@ export default function ShaderShowcase() {
           <div className="reg-page-bg page-bg-extend">
           
           {/* Staggered Image Cards */}
-          <div className="min-h-screen w-full pb-40 px-4 flex flex-col items-center justify-start pt-20">
+          <div className="min-h-screen w-full pb-40 px-4 flex flex-col items-center justify-start pt-28">
             <h2 className="text-6xl md:text-7xl font-bold mb-12 md:mb-24 relative z-10 reg-title">Our Beloved Gurus</h2>
             
             {/* Desktop: Staggered layout */}
-            <div className="hidden md:flex gap-12 items-end">
+            <div className="hidden md:flex gap-16 items-end">
               <GuruCard imageId={gurus[0].imageId} name={gurus[0].name} />
               <GuruCard imageId={gurus[1].imageId} name={gurus[1].name} className="translate-y-16" />
               <GuruCard imageId={gurus[2].imageId} name={gurus[2].name} className="translate-y-32" />
