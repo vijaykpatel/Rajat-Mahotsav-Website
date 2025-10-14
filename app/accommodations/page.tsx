@@ -252,13 +252,13 @@ export default function AccommodationsPage() {
               alt="Accommodations Hero"
               width="896"
               height="597"
-              className="max-w-4xl w-full h-auto object-cover shadow-lg rounded-2xl"
+              className="max-w-2xl lg:max-w-3xl xl:max-w-3xl w-full h-auto object-cover shadow-lg rounded-2xl"
               style={{
                 scale
               }}
             />
           </motion.div>
-          <div className="relative min-h-[140vh]" />
+          <div className="relative min-h-[120vh] lg:min-h-[100vh]" />
         </>
       )}
 
