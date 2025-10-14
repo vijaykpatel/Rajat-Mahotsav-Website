@@ -13,7 +13,7 @@ import { DateValue, CalendarDate } from "@internationalized/date"
 
 import { cn } from "@/lib/utils"
 import { RangeCalendar } from "@/components/ui/calendar-rac"
-import { DateInput, dateInputStyle } from "@/components/ui/datefield-rac"
+import { DateInput, dateInputStyle } from "@/components/molecules/datefield-rac"
 
 interface RegistrationDatePickerProps {
   value?: { start: DateValue | null; end: DateValue | null }

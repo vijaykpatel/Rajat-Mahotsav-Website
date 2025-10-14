@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { Home, ScrollText, ClipboardPen, CalendarDays } from "lucide-react"
-import { MenuBar } from "@/components/ui/glow-menu"
+import { MenuBar } from "@/components/organisms/glow-menu"
 import { useDeviceType } from "@/hooks/use-device-type"
 import Image from "next/image"
 

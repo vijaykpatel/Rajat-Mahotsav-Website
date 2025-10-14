@@ -1,10 +1,10 @@
 "use client"
 
 import { useState, useEffect, Suspense, lazy } from "react"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Input } from "@/components/atoms/input"
+import { Label } from "@/components/atoms/label"
 
-const RegistrationDatePicker = lazy(() => import("@/components/registration-date-picker"))
+const RegistrationDatePicker = lazy(() => import("@/components/molecules/registration-date-picker"))
 
 interface LazyDatePickerProps {
   value: any

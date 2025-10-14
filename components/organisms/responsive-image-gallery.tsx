@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { MobileSectionCarousel } from "@/components/mobile-section-carousel"
+import { MobileSectionCarousel } from "@/components/organisms/mobile-section-carousel"
 
 interface ImageData {
   id: number

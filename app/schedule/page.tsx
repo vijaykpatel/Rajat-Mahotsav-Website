@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { StandardPageHeader } from "@/components/standard-page-header"
+import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
 
 interface Event {

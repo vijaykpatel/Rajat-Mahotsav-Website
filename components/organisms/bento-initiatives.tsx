@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/molecules/dialog"
 import { Heart, Users, Utensils, Home, TreePine, Calendar } from "lucide-react"
 
 const initiatives = [

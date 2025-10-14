@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Download } from "lucide-react"
-import { IPhoneMock } from "@/components/iphone-mock"
-import { StandardPageHeader } from "@/components/standard-page-header"
+import { IPhoneMock } from "@/components/molecules/iphone-mock"
+import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import "@/styles/community-service-theme.css"
 
 const wallpapers = [

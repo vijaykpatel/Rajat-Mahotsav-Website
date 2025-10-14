@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { StandardPageHeader } from "@/components/standard-page-header"
+import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { Clock, Footprints, BookOpenText } from "lucide-react"
 import { GiPrayerBeads } from "react-icons/gi"
 import { PiHandsPraying } from "react-icons/pi"
-import { ImageMarquee } from "@/components/image-marquee"
-import { SevaSubmissionForm } from "@/components/seva-submission-form"
+import { ImageMarquee } from "@/components/organisms/image-marquee"
+import { SevaSubmissionForm } from "@/components/organisms/seva-submission-form"
 import "@/styles/community-service-theme.css"
 
 const sevaGoals = [

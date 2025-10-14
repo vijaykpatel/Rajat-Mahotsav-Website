@@ -6,7 +6,7 @@ import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image as Im
 import { PiHandsPraying } from "react-icons/pi"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { motion, AnimatePresence } from "framer-motion"
-import { NavBar } from "@/components/ui/tubelight-navbar"
+import { NavBar } from "@/components/organisms/tubelight-navbar"
 import { CDN_ASSETS } from "@/lib/cdn-assets"
 
 const menuItems = [

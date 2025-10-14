@@ -2,20 +2,20 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
-import LoadingScreen from "@/components/loading-screen"
-import VideoSection from "@/components/video-section"
-import TitleSection from "@/components/title-section"
-import GuruCard from "@/components/guru-card"
-import GuruCarousel from "@/components/guru-carousel"
+import LoadingScreen from "@/components/atoms/loading-screen"
+import VideoSection from "@/components/organisms/video-section"
+import TitleSection from "@/components/organisms/title-section"
+import GuruCard from "@/components/molecules/guru-card"
+import GuruCarousel from "@/components/organisms/guru-carousel"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import "@/styles/registration-theme.css"
 
 import { useLoading } from "@/hooks/use-loading"
-import AashirwadVideoPlayer from "@/components/aashirwad-video-player"
-import TextSection1 from "@/components/text-section-1"
-import TextSection2 from "@/components/text-section-2"
-import TextSection3 from "@/components/text-section-3"
+import AashirwadVideoPlayer from "@/components/organisms/aashirwad-video-player"
+import TextSection1 from "@/components/organisms/text-section-1"
+import TextSection2 from "@/components/organisms/text-section-2"
+import TextSection3 from "@/components/organisms/text-section-3"
 
 const gurus = [
   {

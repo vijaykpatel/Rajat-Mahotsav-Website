@@ -1,6 +1,6 @@
 "use client";
 
-import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
+import { StickyScroll } from "@/components/organisms/sticky-scroll-reveal";
 
 const content = [
     {

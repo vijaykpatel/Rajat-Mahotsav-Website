@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/card";
 
 export const StickyScroll = ({ content }: { content: any[] }) => {
   const [firstItem, ...restItems] = content;

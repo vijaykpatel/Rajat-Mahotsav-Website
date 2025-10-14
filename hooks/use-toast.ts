@@ -5,7 +5,7 @@ import * as React from "react"
 import type {
   ToastActionElement,
   ToastProps,
-} from "@/components/ui/toast"
+} from "@/components/atoms/toast"
 import { triggerFireworks } from "@/lib/confetti"
 
 const TOAST_LIMIT = 1

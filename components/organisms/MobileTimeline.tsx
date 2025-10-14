@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { FloatingMenuButton } from "@/components/floating-menu-button";
+import { FloatingMenuButton } from "@/components/organisms/floating-menu-button";
 import { timelineData } from "@/lib/timeline-data";
-import { TimelineGridTile } from "@/components/TimelineGridTile";
+import { TimelineGridTile } from "@/components/molecules/TimelineGridTile";
 
 export default function MobileTimeline() {
   const [visibleItems, setVisibleItems] = useState<Set<number>>(new Set());

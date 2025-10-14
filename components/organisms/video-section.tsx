@@ -4,8 +4,8 @@ import { motion } from "framer-motion"
 import { Play } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import useEmblaCarousel from 'embla-carousel-react'
-import { NextButton, PrevButton, usePrevNextButtons } from './video-carousel-buttons'
-import { DotButton, useDotButton } from './video-carousel-dots'
+import { NextButton, PrevButton, usePrevNextButtons } from '@/components/molecules/video-carousel-buttons'
+import { DotButton, useDotButton } from '@/components/molecules/video-carousel-dots'
 
 interface VideoCardProps {
   videoId: string

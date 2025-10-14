@@ -1,11 +1,11 @@
 "use client"
 
 import { useRef, useEffect, useState } from "react";
-import { FloatingMenuButton } from "@/components/floating-menu-button";
+import { FloatingMenuButton } from "@/components/organisms/floating-menu-button";
 import { ArrowLeft } from "lucide-react";
-import MobileTimeline from "@/components/MobileTimeline";
+import MobileTimeline from "@/components/organisms/MobileTimeline";
 import { timelineData } from "@/lib/timeline-data";
-import { TimelineGridTile } from "@/components/TimelineGridTile";
+import { TimelineGridTile } from "@/components/molecules/TimelineGridTile";
 
 export default function TimelinePage() {
   const scrollRef = useRef<HTMLDivElement>(null);

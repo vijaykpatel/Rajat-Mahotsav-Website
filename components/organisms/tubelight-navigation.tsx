@@ -1,7 +1,7 @@
 "use client"
 
 import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image as ImageIcon } from "lucide-react"
-import { NavBar } from "@/components/ui/tubelight-navbar"
+import { NavBar } from "@/components/organisms/tubelight-navbar"
 
 const navItems = [
   { name: "Home", url: "/", icon: Home },

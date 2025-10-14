@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight } from "lucide-react"
-import ShaderBackground from "./shader-background"
+import ShaderBackground from "@/components/organisms/shader-background"
 import { useLoading } from "@/hooks/use-loading"
 
 export default function LoadingScreen() {

@@ -3,12 +3,12 @@
 import { CheckIcon, ChevronsUpDown } from 'lucide-react'
 import * as React from 'react'
 import flags from 'react-phone-number-input/flags'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/atoms/button'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
+} from '@/components/atoms/popover'
 import { cn } from '@/lib/utils'
 
 interface CountryOption {

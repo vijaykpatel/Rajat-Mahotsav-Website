@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
-import { Skiper54 } from "@/components/ui/skiper-ui/skiper54"
+import { Skiper54 } from "@/components/templates/skiper54"
 
 export default function TextSection2() {
   const [isVisible, setIsVisible] = useState(false)

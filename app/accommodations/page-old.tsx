@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
-import { StandardPageHeader } from "@/components/standard-page-header"
-import { ImageCarouselModal } from "@/components/image-carousel-modal"
+import { StandardPageHeader } from "@/components/organisms/standard-page-header"
+import { ImageCarouselModal } from "@/components/organisms/image-carousel-modal"
 import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane, Check, ArrowRight } from "lucide-react"
 import "@/styles/community-service-theme.css"
 

@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { ResponsiveImageGallery } from "@/components/responsive-image-gallery"
+import { ResponsiveImageGallery } from "@/components/organisms/responsive-image-gallery"
 import { getR2Image, getCloudflareImage } from "@/lib/cdn-assets"
 
 const textVariants = {

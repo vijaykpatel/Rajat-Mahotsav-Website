@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useEffect, Suspense, lazy } from "react"
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/atoms/input"
 
-const PhoneInput = lazy(() => import("@/components/ui/phone-input").then(module => ({ default: module.PhoneInput })))
+const PhoneInput = lazy(() => import("@/components/molecules/phone-input").then(module => ({ default: module.PhoneInput })))
 
 interface LazyPhoneInputProps {
   value?: string

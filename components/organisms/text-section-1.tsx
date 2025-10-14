@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
-import { ResponsiveImageGallery } from "@/components/responsive-image-gallery"
+import { ResponsiveImageGallery } from "@/components/organisms/responsive-image-gallery"
 import { getR2Image, getCloudflareImage } from "@/lib/cdn-assets"
 
 // TODO: Replace with actual image URLs

@@ -2,9 +2,9 @@
 
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useState, useEffect, useRef } from "react"
-import { StandardPageHeader } from "@/components/standard-page-header"
-import { ImageCarouselModal } from "@/components/image-carousel-modal"
-import { PinContainer } from "@/components/ui/3d-pin"
+import { StandardPageHeader } from "@/components/organisms/standard-page-header"
+import { ImageCarouselModal } from "@/components/organisms/image-carousel-modal"
+import { PinContainer } from "@/components/molecules/3d-pin"
 import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane, Check, ArrowRight } from "lucide-react"
 import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import "@/styles/community-service-theme.css"
@@ -23,11 +23,11 @@ export default function AccommodationsPage() {
   const [activeTab, setActiveTab] = useState('nyc')
   
   const { scrollYProgress } = useScroll()
-  const scale = useTransform(scrollYProgress, [0, 0.7], [1, 2])
-  const blur = useTransform(scrollYProgress, [0.4, 0.65], [0, 15])
+  const scale = useTransform(scrollYProgress, [0, 0.4], [1, 2])
+  const blur = useTransform(scrollYProgress, [0.2, 0.4], [0, 15])
   const blurFilter = useTransform(blur, (b) => `blur(${b}px)`)
-  const opacity = useTransform(scrollYProgress, [0.4, 0.65], [1, 0.3])
-  const imageY = useTransform(scrollYProgress, [0, 0.3], [0, -150])
+  const opacity = useTransform(scrollYProgress, [0.2, 0.4], [1, 0.3])
+  const imageY = useTransform(scrollYProgress, [0, 0.25], [0, -150])
 
   useEffect(() => {
     setMounted(true)
@@ -258,7 +258,7 @@ export default function AccommodationsPage() {
               }}
             />
           </motion.div>
-          <div className="relative min-h-[200vh]" />
+          <div className="relative min-h-[140vh]" />
         </>
       )}
 

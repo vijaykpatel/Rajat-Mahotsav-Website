@@ -2,8 +2,8 @@
 
 import { useEffect, useState, useRef } from "react"
 import useEmblaCarousel from 'embla-carousel-react'
-import { DotButton, useDotButton } from './video-carousel-dots'
-import GuruCard from "./guru-card"
+import { DotButton, useDotButton } from '@/components/molecules/video-carousel-dots'
+import GuruCard from "@/components/molecules/guru-card"
 
 interface Guru {
   imageId: string
