@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import { motion } from "framer-motion"
 import LoadingScreen from "@/components/loading-screen"
 import VideoSection from "@/components/video-section"
 import TitleSection from "@/components/title-section"
@@ -34,7 +35,11 @@ export default function ShaderShowcase() {
   const { isLoading } = useLoading();
   const [isLoaded, setIsLoaded] = useState(false)
   const [isPanActive, setIsPanActive] = useState(false)
+  const [cardsVisible, setCardsVisible] = useState(false)
+  const [mobileGuruVisible, setMobileGuruVisible] = useState(false)
   const sihasanRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+  const mobileGuruRef = useRef<HTMLDivElement>(null)
   
   const backgroundImageUrl = `${getCloudflareImageBiggest("5aeb6c7e-f6ea-45b1-da4a-823279172400")}&width=1920`
 
@@ -53,6 +58,36 @@ export default function ShaderShowcase() {
 
     if (sihasanRef.current) {
       observer.observe(sihasanRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setCardsVisible(entry.isIntersecting)
+      },
+      { threshold: 0.2 }
+    )
+
+    if (cardsRef.current) {
+      observer.observe(cardsRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setMobileGuruVisible(entry.isIntersecting)
+      },
+      { threshold: 0.2 }
+    )
+
+    if (mobileGuruRef.current) {
+      observer.observe(mobileGuruRef.current)
     }
 
     return () => observer.disconnect()
@@ -99,20 +134,53 @@ export default function ShaderShowcase() {
           <div className="reg-page-bg page-bg-extend">
           
           {/* Staggered Image Cards */}
-          <div className="min-h-screen w-full pb-40 px-4 flex flex-col items-center justify-start pt-28">
-            <h2 className="text-6xl md:text-7xl font-bold mb-12 md:mb-24 relative z-10 reg-title">Our Beloved Gurus</h2>
+          <div ref={mobileGuruRef} className="min-h-screen w-full pb-40 px-4 flex flex-col items-center justify-start pt-28">
+            <motion.h2
+              initial={{ opacity: 0, y: 50 }}
+              animate={mobileGuruVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-6xl md:text-7xl font-bold mb-12 md:mb-24 relative z-10 reg-title"
+            >
+              Our Beloved Gurus
+            </motion.h2>
             
             {/* Desktop: Staggered layout */}
-            <div className="hidden md:flex gap-16 items-end">
-              <GuruCard imageId={gurus[0].imageId} name={gurus[0].name} />
-              <GuruCard imageId={gurus[1].imageId} name={gurus[1].name} className="translate-y-16" />
-              <GuruCard imageId={gurus[2].imageId} name={gurus[2].name} className="translate-y-32" />
+            <div ref={cardsRef} className="hidden md:flex gap-16 items-end">
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={cardsVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+                transition={{ duration: 1.4, ease: "easeOut" }}
+                className="translate-y-0"
+              >
+                <GuruCard imageId={gurus[0].imageId} name={gurus[0].name} />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={cardsVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+                transition={{ duration: 1.4, delay: 0.3, ease: "easeOut" }}
+                className="translate-y-16"
+              >
+                <GuruCard imageId={gurus[1].imageId} name={gurus[1].name} />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={cardsVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+                transition={{ duration: 1.4, delay: 0.6, ease: "easeOut" }}
+                className="translate-y-32"
+              >
+                <GuruCard imageId={gurus[2].imageId} name={gurus[2].name} />
+              </motion.div>
             </div>
             
             {/* Mobile: Carousel */}
-            <div className="md:hidden w-full">
+            <motion.div
+              initial={{ opacity: 0, y: 80 }}
+              animate={mobileGuruVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
+              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+              className="md:hidden w-full"
+            >
               <GuruCarousel gurus={gurus} />
-            </div>
+            </motion.div>
           </div>
           
           {/* Video section */}

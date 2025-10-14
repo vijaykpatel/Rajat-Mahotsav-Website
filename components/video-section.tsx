@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Play } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import useEmblaCarousel from 'embla-carousel-react'
 import { NextButton, PrevButton, usePrevNextButtons } from './video-carousel-buttons'
 import { DotButton, useDotButton } from './video-carousel-dots'
@@ -120,6 +120,8 @@ export default function VideoSection() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const [playingVideoIndex, setPlayingVideoIndex] = useState<number | null>(null)
   const [resetKey, setResetKey] = useState(0)
+  const [videoSectionVisible, setVideoSectionVisible] = useState(false)
+  const videoSectionRef = useRef<HTMLDivElement>(null)
   
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(emblaApi)
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApiMobile)
@@ -162,13 +164,28 @@ export default function VideoSection() {
     return () => { emblaApiMobile.off('select', onSelect).off('pointerDown', onPointerDown) }
   }, [emblaApiMobile])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setVideoSectionVisible(entry.isIntersecting)
+      },
+      { threshold: 0.2 }
+    )
+
+    if (videoSectionRef.current) {
+      observer.observe(videoSectionRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <div className="min-h-screen pb-20 px-4 flex flex-col justify-center">
+    <div ref={videoSectionRef} className="min-h-screen pb-20 px-4 flex flex-col justify-center">
       <div className="max-w-[90rem] mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 50 }}
+          animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-10 md:mb-12 lg:mb-12 xl:mb-16"
         >
           <h2 className="text-6xl md:text-7xl font-bold mb-6 md:mb-12 relative z-10 reg-title leading-tight">
@@ -181,21 +198,21 @@ export default function VideoSection() {
 
         {/* YouTube Playlist Link */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="mb-8 text-center"
         >
           <a
             href="https://www.youtube.com/playlist?list=PLqKpGEY54C-1OklTqKwLh6JWYCDQpn5MC"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-full hover:from-orange-600 hover:to-red-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+            className="inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-2xl rounded-full hover:from-orange-600 hover:to-red-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
           >
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+            <svg className="w-10 h-10" viewBox="0 0 24 24" fill="currentColor">
               <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
             </svg>
-            <span>Catch up on all of New Jersey Mandir's events leading up to the grand celebration</span>
+            <span>Check out our Youtube Playlist!</span>
           </a>
         </motion.div>
 
@@ -224,7 +241,12 @@ export default function VideoSection() {
         </div>
 
         {/* Mobile & Tablet: Single card layout with swipe */}
-        <div className="xl:hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+          transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+          className="xl:hidden"
+        >
           <div className="overflow-hidden w-full max-w-2xl md:max-w-3xl mx-auto mb-8" ref={emblaRefMobile}>
             <div className="flex">
               {videos.map((video, index) => (
@@ -254,7 +276,7 @@ export default function VideoSection() {
               />
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )
