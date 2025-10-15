@@ -68,21 +68,24 @@ export default function TextSection1({ children }: { children?: React.ReactNode 
         backgroundColor: 'rgb(235, 232, 219)',
         scrollTrigger: {
           trigger: triggerRef.current,
-          start: isMobile ? 'top -175%' : 'top -50%',
+          start: isMobile ? 'top -175%' : 'top -80%',
           end: isMobile ? '+=30%' : '+=50%',
           scrub: isMobile ? .4: 1,
         },
       });
       
-      // gsap.to('.text-transition', {
-      //   color: '#0f172a',
-      //   scrollTrigger: {
-      //     trigger: triggerRef.current,
-      //     start: isMobile ? 'top -150%' : 'top -25%',
-      //     end: isMobile ? '+=100%' : '+=75%',
-      //     scrub: .5,
-      //   },
-      // });
+      gsap.fromTo('.text-transition', {
+          color: '#f1f5f9' // slate-100 starting color
+        },
+        {
+        color: '#000000ff',
+        scrollTrigger: {
+          trigger: triggerRef.current,
+          start: isMobile ? 'top -175%' : 'top -70%',
+          end: isMobile ? '+=30%' : '+=20%',
+          scrub: isMobile ? 1: 1,
+        },
+      });
     });
 
     return () => ctx.revert();
@@ -92,7 +95,7 @@ export default function TextSection1({ children }: { children?: React.ReactNode 
     <div ref={containerRef} style={{ backgroundColor: '#0f172a', position: 'relative' }}>
       <div ref={triggerRef} style={{ minHeight: '120vh' }}>
         <div ref={sectionRef} className="w-full py-32 pb-40">
-      <div className="max-w-[90rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-12 space-y-16 sm:space-y-20 md:space-y-24 mb-20">
+      <div className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 space-y-16 sm:space-y-20 md:space-y-24 lg:space-y-32 xl:space-y-36 mb-20">
         {content.map((item, index) => (
           <div
             key={index}
@@ -109,7 +112,7 @@ export default function TextSection1({ children }: { children?: React.ReactNode 
               <h2 
                 className="font-bold text-slate-100 text-transition mb-4 md:mb-6"
                 style={{
-                  fontSize: 'clamp(1.5rem, 5vw, 2.5rem)',
+                  fontSize: 'clamp(1.87rem, 6vw, 3.5rem)',
                   lineHeight: 'clamp(1.2, 1.1 + 0.5vw, 1.3)',
                   wordBreak: 'break-word',
                   overflowWrap: 'break-word',
@@ -121,7 +124,7 @@ export default function TextSection1({ children }: { children?: React.ReactNode 
               <p 
                 className="text-slate-300 text-transition"
                 style={{
-                  fontSize: 'clamp(0.875rem, 3.5vw, 1.25rem)',
+                  fontSize: 'clamp(1.25rem, 4vw, 1.6rem)',
                   lineHeight: 'clamp(1.4, 1.3 + 0.5vw, 1.6)',
                   wordBreak: 'break-word',
                   overflowWrap: 'break-word'
@@ -136,7 +139,7 @@ export default function TextSection1({ children }: { children?: React.ReactNode 
               initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
               animate={rowsVisible[index] ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
               transition={{ duration: animDuration, ease: "easeOut" }}
-              className="w-full md:w-[45%] order-2"
+              className="w-full md:w-[50%] order-2"
             >
               <img
                 src={item.image}

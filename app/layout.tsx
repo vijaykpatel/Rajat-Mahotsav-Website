@@ -11,6 +11,7 @@ import { Navigation } from "@/components/organisms/navigation"
 import StickyFooter from "@/components/organisms/sticky-footer"
 import { ScrollToTop } from "@/components/atoms/scroll-to-top"
 import { FloatingMenuButton } from "@/components/organisms/floating-menu-button"
+import { StaticThemeColor } from "@/components/atoms/static-theme-color"
 import "./globals.css"
 
 const figtree = Figtree({
@@ -67,9 +68,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-        <meta name="theme-color" content="rgb(235, 232, 219)" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="msapplication-navbutton-color" content="rgba(248, 248, 248, 0.85)" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="msapplication-navbutton-color" content="#0f172a" />
         <style>{`
 html {
   font-family: ${figtree.style.fontFamily};
@@ -84,6 +84,7 @@ html {
       </head>
       <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoMusic.variable} ${lato.variable} ${antonio.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
+          {/* <StaticThemeColor /> */}
           <Navigation />
           <div className="min-h-screen flex flex-col">
             <div className="flex-1">

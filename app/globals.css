@@ -158,7 +158,7 @@
     /* Prevent horizontal scrolling */
     overflow-x: hidden;
     width: 100%;
-    /* Fill safe area with light grey/silver color matching footer */
+    /* Fill safe area with dark color matching page content */
     background: var(--footer-color);
     /* Ensure consistent scroll behavior */
     -webkit-overflow-scrolling: touch;
@@ -175,7 +175,8 @@
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
-    /* Safe area insets for iOS devices with notch - only sides and bottom */
+    /* Safe area insets for iOS devices - only bottom for home indicator */
+    padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
@@ -186,8 +187,6 @@
     /* Fix mobile height issues */
     min-height: 100vh;
     min-height: 100dvh;
-    /* Extend footer color to bottom safe area */
-    background: linear-gradient(to bottom, transparent 0%, transparent calc(100% - env(safe-area-inset-bottom)), var(--footer-color) calc(100% - env(safe-area-inset-bottom)));
   }
   
   /* Mobile-specific optimizations */
