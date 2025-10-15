@@ -72,7 +72,7 @@ const Skiper54 = () => {
   ];
   // ========================================
   return (
-    <div className="flex w-full items-center justify-center overflow-hidden bg-slate-50 py-4">
+    <div className="flex w-full items-center justify-center overflow-hidden py-4 bg-gradient-to-br from-red-100 via-white to-blue-100">
       <Carousel_006
         images={images}
         className=""

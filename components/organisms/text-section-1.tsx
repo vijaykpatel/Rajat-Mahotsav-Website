@@ -3,6 +3,10 @@
 import { motion } from "framer-motion"
 import { getR2Image } from "@/lib/cdn-assets"
 import { useEffect, useRef, useState } from "react"
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const content = [
   {
@@ -25,42 +29,87 @@ const content = [
   },
 ]
 
-export default function TextSection1() {
-  const [isVisible, setIsVisible] = useState(false)
+export default function TextSection1({ children }: { children?: React.ReactNode }) {
+  const [rowsVisible, setRowsVisible] = useState<boolean[]>([false, false, false])
+  const [animDuration, setAnimDuration] = useState(1.2)
   const sectionRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLDivElement>(null)
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.1 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
+    setAnimDuration(window.innerWidth < 768 ? 0.8 : 1.2)
   }, [])
 
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    const observers = rowRefs.current.map((row, index) => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          setRowsVisible(prev => {
+            const newState = [...prev]
+            newState[index] = entry.isIntersecting
+            return newState
+          })
+        },
+        { threshold: isMobile ? 0.3 : 0.5 }
+      )
+      if (row) observer.observe(row)
+      return observer
+    })
+
+    return () => observers.forEach(obs => obs.disconnect())
+  }, [])
+
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    const ctx = gsap.context(() => {
+      gsap.to(containerRef.current, {
+        backgroundColor: 'rgb(235, 232, 219)',
+        scrollTrigger: {
+          trigger: triggerRef.current,
+          start: isMobile ? 'top -205%' : 'top -25%',
+          end: isMobile ? '+=40%' : '+=75%',
+          scrub: isMobile ? .4: 1,
+        },
+      });
+      
+      // gsap.to('.text-transition', {
+      //   color: '#0f172a',
+      //   scrollTrigger: {
+      //     trigger: triggerRef.current,
+      //     start: isMobile ? 'top -150%' : 'top -25%',
+      //     end: isMobile ? '+=100%' : '+=75%',
+      //     scrub: .5,
+      //   },
+      // });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div ref={sectionRef} className="w-full bg-slate-900 py-32 pb-40">
+    <div ref={containerRef} style={{ backgroundColor: '#0f172a', position: 'relative' }}>
+      <div ref={triggerRef} style={{ minHeight: '120vh' }}>
+        <div ref={sectionRef} className="w-full py-32 pb-40">
       <div className="max-w-[90rem] mx-auto px-8 space-y-24 mb-20">
         {content.map((item, index) => (
           <div
             key={index}
+            ref={el => rowRefs.current[index] = el}
             className={`flex flex-col md:flex-row gap-8 md:gap-16 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}
           >
             {/* Text */}
             <motion.div
               initial={{ opacity: 0, y: 50 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              animate={rowsVisible[index] ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ duration: animDuration, ease: "easeOut" }}
               className="flex-1 order-1"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-100 mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-100 text-transition mb-4 md:mb-6">
                 {item.title}
               </h2>
-              <p className="text-lg md:text-xl text-slate-300 leading-relaxed">
+              <p className="text-lg md:text-xl text-slate-300 text-transition leading-relaxed">
                 {item.description}
               </p>
             </motion.div>
@@ -68,8 +117,8 @@ export default function TextSection1() {
             {/* Image */}
             <motion.div
               initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              animate={rowsVisible[index] ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              transition={{ duration: animDuration, ease: "easeOut" }}
               className="w-full md:w-[45%] order-2"
             >
               <img
@@ -81,6 +130,9 @@ export default function TextSection1() {
           </div>
         ))}
       </div>
+        </div>
+      </div>
+      {children}
     </div>
   )
 }

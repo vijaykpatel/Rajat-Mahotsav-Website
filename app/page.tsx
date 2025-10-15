@@ -16,6 +16,7 @@ import AashirwadVideoPlayer from "@/components/organisms/aashirwad-video-player"
 import TextSection1 from "@/components/organisms/text-section-1"
 import TextSection2 from "@/components/organisms/text-section-2"
 import TextSection3 from "@/components/organisms/text-section-3"
+import ScrollColorWrapper from "@/components/organisms/scroll-color-wrapper"
 
 const gurus = [
   {
@@ -136,11 +137,12 @@ export default function ShaderShowcase() {
           </div>
           
           {/* Text Sections */}
-          <TextSection1 />
+          <TextSection1>
+            <TextSection2 />
+          </TextSection1>
           
-          <div className="reg-page-bg page-bg-extend">
-          <TextSection2 />
-          <TextSection3 />
+          <div style={{ backgroundColor: 'rgb(235, 232, 219)' }}>
+            <TextSection3 />
           </div>
           
           {/* Video Player Section */}
