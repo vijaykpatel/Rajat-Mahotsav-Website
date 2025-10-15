@@ -12,6 +12,7 @@ import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import "@/styles/registration-theme.css"
 
 import { useLoading } from "@/hooks/use-loading"
+import { useThemeColor } from "@/hooks/use-theme-color"
 import AashirwadVideoPlayer from "@/components/organisms/aashirwad-video-player"
 import TextSection1 from "@/components/organisms/text-section-1"
 import TextSection2 from "@/components/organisms/text-section-2"
@@ -38,6 +39,7 @@ export default function ShaderShowcase() {
   const deviceType = useDeviceType();
 
   const { isLoading } = useLoading();
+  useThemeColor();
   const [isLoaded, setIsLoaded] = useState(false)
   const [isPanActive, setIsPanActive] = useState(false)
   const [cardsVisible, setCardsVisible] = useState(false)

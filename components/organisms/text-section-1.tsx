@@ -68,8 +68,8 @@ export default function TextSection1({ children }: { children?: React.ReactNode 
         backgroundColor: 'rgb(235, 232, 219)',
         scrollTrigger: {
           trigger: triggerRef.current,
-          start: isMobile ? 'top -205%' : 'top -25%',
-          end: isMobile ? '+=40%' : '+=75%',
+          start: isMobile ? 'top -175%' : 'top -50%',
+          end: isMobile ? '+=30%' : '+=50%',
           scrub: isMobile ? .4: 1,
         },
       });
