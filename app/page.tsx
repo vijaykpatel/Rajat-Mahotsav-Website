@@ -39,7 +39,7 @@ export default function ShaderShowcase() {
   const deviceType = useDeviceType();
 
   const { isLoading } = useLoading();
-  // useThemeColor();
+  useThemeColor();
   const [isLoaded, setIsLoaded] = useState(false)
   const [isPanActive, setIsPanActive] = useState(false)
   const [cardsVisible, setCardsVisible] = useState(false)

@@ -15,11 +15,10 @@ export function useThemeColor() {
       const scrollY = window.scrollY
       const windowHeight = window.innerHeight
       
-      // Period 1-3: Dark slate (#0f172a) - from start to text section 2
-      // Period 4+: Warm beige (rgb(235, 232, 219)) - from text section 2 onwards
-      const threshold = windowHeight * 2.5 // Approximate transition point
+      // Transparent at top, then transition to beige
+      const threshold = windowHeight * 2.5
       
-      const color = scrollY < threshold ? '#0f172a' : 'rgb(235, 232, 219)'
+      const color = scrollY < threshold ? 'transparent' : 'rgb(235, 232, 219)'
       meta?.setAttribute('content', color)
     }
 
