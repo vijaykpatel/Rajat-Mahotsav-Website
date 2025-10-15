@@ -208,7 +208,7 @@ export default function AccommodationsPage() {
   }
 
   return (
-    <div className="min-h-screen w-full relative text-gray-900">
+    <div className="min-h-screen reg-page-bg page-bg-extend w-full relative text-gray-900">
       <div className="container mx-auto px-4 pt-8 relative z-10">
         <StandardPageHeader
           title="Accommodations"
@@ -220,23 +220,26 @@ export default function AccommodationsPage() {
 
       {isMobile ? (
         <motion.div 
-          className="container mx-auto px-4 mb-8"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          className="container mx-auto px-4 mb-8 mt-8"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <img
+          <motion.img
             src={getCloudflareImageBiggest('05d7e7c8-ba90-476f-4881-0c1f0d190c00')}
             alt="Accommodations Hero"
             width="672"
             height="448"
             className="w-full max-w-2xl mx-auto h-auto object-cover rounded-2xl shadow-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           />
         </motion.div>
       ) : (
         <>
           <motion.div 
-            className="fixed left-0 w-full h-screen flex items-center justify-center overflow-hidden -z-10"
+            className="fixed left-0 w-full h-screen flex items-center justify-center overflow-hidden mb-8 mt-8 -z-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
@@ -253,6 +256,9 @@ export default function AccommodationsPage() {
               width="896"
               height="597"
               className="max-w-2xl lg:max-w-3xl xl:max-w-3xl w-full h-auto object-cover shadow-lg rounded-2xl"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               style={{
                 scale
               }}
@@ -269,7 +275,7 @@ export default function AccommodationsPage() {
           ref={venueRef}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.8 }}
           className="mb-16"
         >
@@ -409,7 +415,7 @@ export default function AccommodationsPage() {
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.8 }}
           className="mb-16"
         >
@@ -421,7 +427,7 @@ export default function AccommodationsPage() {
             <motion.div
               initial={{ y: 20 }}
               whileInView={{ y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.6 }}
               className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
             >
@@ -444,7 +450,7 @@ export default function AccommodationsPage() {
             <motion.div
               initial={{ y: 20 }}
               whileInView={{ y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
             >
@@ -467,7 +473,7 @@ export default function AccommodationsPage() {
             <motion.div
               initial={{ y: 20 }}
               whileInView={{ y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
             >
@@ -491,7 +497,7 @@ export default function AccommodationsPage() {
           <motion.div
             initial={{ y: 20 }}
             whileInView={{ y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-6"
           >
@@ -506,7 +512,7 @@ export default function AccommodationsPage() {
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.8 }}
           className="mb-16"
         >
@@ -520,7 +526,7 @@ export default function AccommodationsPage() {
                 key={index}
                 initial={{ y: 20 }}
                 whileInView={{ y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out p-6 border-2 border-purple-200 hover:-translate-y-1 relative"
               >
@@ -607,7 +613,7 @@ export default function AccommodationsPage() {
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.8 }}
           className="mb-16"
         >
@@ -621,7 +627,7 @@ export default function AccommodationsPage() {
                 key={index}
                 initial={{ y: 20 }}
                 whileInView={{ y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-yellow-200"
               >
@@ -637,7 +643,7 @@ export default function AccommodationsPage() {
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.8 }}
         >
           <div className="flex items-center gap-3 mb-8">
@@ -690,7 +696,7 @@ export default function AccommodationsPage() {
                     key={index}
                     initial={{ y: 20 }}
                     whileInView={{ y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     transition={{ duration: 0.6, delay: 0.1 * index }}
                     className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-green-200"
                   >

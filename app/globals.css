@@ -187,6 +187,7 @@
     /* Fix mobile height issues */
     min-height: 100vh;
     min-height: 100dvh;
+    background: linear-gradient(to bottom, transparent 0%, transparent calc(100% - env(safe-area-inset-bottom)), var(--footer-color) calc(100% - env(safe-area-inset-bottom)));
   }
   
   /* Mobile-specific optimizations */

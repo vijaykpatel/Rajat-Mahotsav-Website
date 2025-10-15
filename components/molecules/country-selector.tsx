@@ -108,7 +108,7 @@ export function CountrySelector({
                 onClick={() => handleSelect(country.value)}
               >
                 <FlagComponent country={country.flag} countryName={country.label} />
-                <span className='flex-1 text-sm font-medium'>{country.label}</span>
+                <span className='flex-1 font-medium'>{country.label}</span>
                 <CheckIcon
                   className={cn(
                     'ml-auto h-4 w-4 text-gray-800',
