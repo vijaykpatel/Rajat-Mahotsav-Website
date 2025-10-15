@@ -470,7 +470,10 @@ export default function RegistrationPage() {
                           className="reg-input rounded-md"
                         />
                       ) : (
-                        <Select value={field.value} onValueChange={field.onChange} disabled={!formData.country}>
+                        <Select value={field.value} onValueChange={(value) => {
+                          field.onChange(value)
+                          setValue("mandal", value, { shouldValidate: true })
+                        }} disabled={!formData.country}>
                           <SelectTrigger className="reg-input rounded-md">
                             <SelectValue placeholder={formData.country ? "Select mandal" : "Select country first"} />
                           </SelectTrigger>
