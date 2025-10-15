@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 export default function TitleSection() {
   return (
-    <div className="fixed inset-0 h-screen flex flex-col items-center justify-center px-4 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 overflow-hidden z-0">
+    <div className="fixed inset-0 h-screen flex flex-col items-center justify-center px-4 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-900 overflow-hidden z-0">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%),radial-gradient(circle_at_70%_80%,rgba(30,58,138,0.1),transparent_50%)] pointer-events-none" />
       <motion.div
         initial={{ opacity: 0, y: -50 }}

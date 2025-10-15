@@ -135,13 +135,12 @@ export default function ShaderShowcase() {
             />
           </div>
           
-          <div className="reg-page-bg page-bg-extend">
-          
           {/* Text Sections */}
           <TextSection1 />
+          
+          <div className="reg-page-bg page-bg-extend">
           <TextSection2 />
           <TextSection3 />
-          
           </div>
           
           {/* Video Player Section */}

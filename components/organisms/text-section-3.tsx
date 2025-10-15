@@ -44,7 +44,7 @@ export default function TextSection3() {
         >
           <div className="rounded-xl overflow-hidden shadow-2xl" style={{ position: "relative", paddingTop: "56.42633228840125%" }}>
             <iframe
-              src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/0d78279ed6f5f58fd38764c060d65c86/iframe?poster=https%3A%2F%2Fcustomer-kss5h1dwt4mkz0x3.cloudflarestream.com%2F0d78279ed6f5f58fd38764c060d65c86%2Fthumbnails%2Fthumbnail.gif%3Ftime%3D95s%26duration%3D4s"
+              src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/6f4c127cc7b339c9b1b7875c1dc8e745/iframe?poster=https%3A%2F%2Fcustomer-kss5h1dwt4mkz0x3.cloudflarestream.com%2F0d78279ed6f5f58fd38764c060d65c86%2Fthumbnails%2Fthumbnail.gif%3Ftime%3D95s%26duration%3D4s"
               loading="lazy"
               style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
               allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
