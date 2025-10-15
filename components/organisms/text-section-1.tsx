@@ -92,7 +92,7 @@ export default function TextSection1({ children }: { children?: React.ReactNode 
     <div ref={containerRef} style={{ backgroundColor: '#0f172a', position: 'relative' }}>
       <div ref={triggerRef} style={{ minHeight: '120vh' }}>
         <div ref={sectionRef} className="w-full py-32 pb-40">
-      <div className="max-w-[90rem] mx-auto px-8 space-y-24 mb-20">
+      <div className="max-w-[90rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-12 space-y-16 sm:space-y-20 md:space-y-24 mb-20">
         {content.map((item, index) => (
           <div
             key={index}
@@ -106,10 +106,27 @@ export default function TextSection1({ children }: { children?: React.ReactNode 
               transition={{ duration: animDuration, ease: "easeOut" }}
               className="flex-1 order-1"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-100 text-transition mb-4 md:mb-6">
+              <h2 
+                className="font-bold text-slate-100 text-transition mb-4 md:mb-6"
+                style={{
+                  fontSize: 'clamp(1.5rem, 5vw, 2.5rem)',
+                  lineHeight: 'clamp(1.2, 1.1 + 0.5vw, 1.3)',
+                  wordBreak: 'break-word',
+                  overflowWrap: 'break-word',
+                  hyphens: 'auto'
+                }}
+              >
                 {item.title}
               </h2>
-              <p className="text-lg md:text-xl text-slate-300 text-transition leading-relaxed">
+              <p 
+                className="text-slate-300 text-transition"
+                style={{
+                  fontSize: 'clamp(0.875rem, 3.5vw, 1.25rem)',
+                  lineHeight: 'clamp(1.4, 1.3 + 0.5vw, 1.6)',
+                  wordBreak: 'break-word',
+                  overflowWrap: 'break-word'
+                }}
+              >
                 {item.description}
               </p>
             </motion.div>

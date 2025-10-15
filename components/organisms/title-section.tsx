@@ -24,12 +24,11 @@ export default function TitleSection() {
         </h1>
         
         {/* Mobile */}
-        <h1 className="md:hidden font-serif italic font-bold text-white leading-tight drop-shadow-2xl space-y-3">
-          <div className="text-7xl tracking-wide">Suvarna</div>
-          <div className="text-7xl tracking-wide">Yug no</div>
-          {/* <div className="w-64 h-1 bg-white mx-auto" /> */}
-          <div className="text-7xl tracking-wider">Rajat</div>
-          <div className="text-7xl tracking-wider">Mahotsav</div>
+        <h1 className="md:hidden font-serif italic font-bold text-white leading-tight drop-shadow-2xl px-4">
+          <div style={{ fontSize: 'clamp(2.5rem, 15vw, 7rem)' }} className="tracking-wide">Suvarna</div>
+          <div style={{ fontSize: 'clamp(2.5rem, 15vw, 7rem)' }} className="tracking-wide">Yug no</div>
+          <div style={{ fontSize: 'clamp(2.5rem, 15vw, 7rem)' }} className="tracking-wider">Rajat</div>
+          <div style={{ fontSize: 'clamp(2.5rem, 15vw, 7rem)' }} className="tracking-wider">Mahotsav</div>
         </h1>
       </motion.div>
       
@@ -37,7 +36,7 @@ export default function TitleSection() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
-        className="text-center mt-12 max-w-4xl relative z-10"
+        className="text-center max-w-4xl relative z-10"
       >
         {/* Desktop */}
         <div className="hidden md:block">
@@ -52,13 +51,13 @@ export default function TitleSection() {
         </div>
         
         {/* Mobile */}
-        <div className="md:hidden space-y-4">
+        <div className="md:hidden space-y-2 px-4">
           <div className="w-64 h-1 bg-white mx-auto" />
-          <p className="text-3xl text-white font-serif italic font-medium tracking-wide leading-relaxed">
+          <p style={{ fontSize: 'clamp(1.25rem, 6vw, 1.875rem)' }} className="text-white font-serif italic font-medium tracking-wide leading-relaxed">
             A silver celebration<br/>of a golden era
           </p>
           <div className="w-64 h-1 bg-white mx-auto" />
-          <p className="text-2xl text-white font-serif italic font-medium tracking-wide leading-relaxed">
+          <p style={{ fontSize: 'clamp(1rem, 5vw, 1.5rem)' }} className="text-white font-serif italic font-medium tracking-wide leading-relaxed">
             Shree Swaminarayan Temple<br/>New Jersey Celebrates 25 years
           </p>
         </div>
