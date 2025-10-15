@@ -83,10 +83,10 @@ export function CountrySelector({
             {selectedCountry ? (
               <>
                 <FlagComponent country={selectedCountry.flag} countryName={selectedCountry.label} />
-                <span>{selectedCountry.label}</span>
+                <span className="text-base">{selectedCountry.label}</span>
               </>
             ) : (
-              <span className="text-gray-400">{placeholder}</span>
+              <span className="text-gray-400 text-base">{placeholder}</span>
             )}
           </div>
           <ChevronsUpDown className="h-4 w-4 opacity-50" />

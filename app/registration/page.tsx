@@ -234,6 +234,17 @@ export default function RegistrationPage() {
           >
             Register yourself for the Rajat Mahotsav!
           </motion.h1>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="flex justify-center px-4 mt-8"
+          >
+            <p className="text-center text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-5xl">
+              Be a part of the Shree Ghanshyam Maharaj Rajat Pratishta Mahotsav New Jersey! Register now for this momentous occasion from <span className="font-bold underline">July 25 through August 2, 2026</span>.
+            </p>
+          </motion.div>
         </div>
 
         {/* Video Player */}
@@ -255,29 +266,30 @@ export default function RegistrationPage() {
         </motion.div> */}
 
         {/* Desktop Layout: Side by side, Mobile: Stacked */}
-        <div className="lg:grid lg:grid-cols-3 lg:gap-8 lg:items-start">
-          {/* Important Instructions - Left Third on Desktop */}
-          <div className={`lg:col-span-1 transition-all duration-1000 ease-out ${
+        <div className="max-w-[90rem] mx-auto">
+          <div className="lg:grid lg:grid-cols-5 lg:gap-8 lg:items-start">
+            {/* Important Instructions - Left on Desktop */}
+            <div className={`lg:col-span-2 transition-all duration-1000 ease-out ${
             isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
           } mt-8 lg:mt-0 px-4 lg:px-0`} style={{ transitionDelay: '400ms' }}>
-            <div className="reg-important-card rounded-xl p-4 lg:p-6 relative lg:sticky lg:top-8">
-              <h3 className="text-center reg-text-primary font-semibold text-xl lg:text-2xl mb-4">Important</h3>
-              <div className="space-y-3 text-justify">
-                <p className="reg-text-secondary leading-relaxed text-sm lg:text-base">
-                  Please register yourself and share with everyone you know is coming!
+            <div className="reg-important-card rounded-xl p-6 lg:p-8 relative lg:sticky lg:top-8">
+              <h3 className="text-center reg-text-primary font-semibold text-2xl lg:text-3xl mb-6">Important</h3>
+              <div className="space-y-4 text-justify">
+                <p className="reg-text-secondary leading-relaxed text-base lg:text-xl font-medium">
+                  Register each guest individually! All the details help us plan to make the experience enjoyable for everyone!
                 </p>
-                <p className="reg-text-secondary leading-relaxed text-sm lg:text-base">
+                <p className="reg-text-secondary leading-relaxed text-base lg:text-xl font-medium">
                   If you are registering a family member or friend, please ensure <span className="reg-text-highlight underline">the combination of first name, age, phone number, and email are unique</span>.
                 </p>
-                <p className="reg-text-secondary leading-relaxed text-sm lg:text-base">
-                  Registering with the same combination of the above 4 fields will overwrite any previous registrations with matching fields.
+                <p className="reg-text-secondary leading-relaxed text-base lg:text-xl font-medium">
+                  Registering with the same combination of the above 4 fields will overwrite any previous registrations.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Registration Form - Right Two-Thirds on Desktop */}
-          <div className="lg:col-span-2 relative mt-8 lg:mt-0">
+            {/* Registration Form - Right on Desktop */}
+            <div className="lg:col-span-3 relative mt-8 lg:mt-0">
             {/* Subtle glow effect */}
             <div className="absolute -inset-4 bg-gradient-to-r from-orange-200/30 via-white/20 to-red-200/30 rounded-[2rem] blur-xl opacity-40 will-change-transform"></div>
             <div className={`relative transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
@@ -285,7 +297,7 @@ export default function RegistrationPage() {
 
                 <CardHeader className="text-center pb-6 lg:pb-8">
                   <CardTitle className="text-2xl lg:text-3xl font-semibold reg-text-primary">Registration Form</CardTitle>
-                  <CardDescription className="reg-text-secondary">Please fill in your details to register</CardDescription>
+                  <CardDescription className="reg-text-secondary text-lg">Please fill in your details to register</CardDescription>
                 </CardHeader>
                 
                 <CardContent>
@@ -573,6 +585,7 @@ export default function RegistrationPage() {
               </Card>
             </div>
           </div>
+        </div>
         </div>
         </div>
       </div>

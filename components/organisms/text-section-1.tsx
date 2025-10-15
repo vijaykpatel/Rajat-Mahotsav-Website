@@ -18,7 +18,7 @@ const content = [
   {
     title: "750 Kilograms of Pure Gold",
     description:
-      "Our beloved Prem Murti Acharya Shree Purushottampriya Swamishree Maharaj weighed all three divine idols with 750 kilograms of pure gold. This Suvarna Tula during the Murti Pratishtha Mahotsav of Shree Swaminarayan Temple - Secaucus, New Jersey, was a magnificent ceremony witnessed by thousands.",
+      "Our beloved Prem Murti Acharya Shree Purushottampriyadasji Swamishree Maharaj weighed all three divine idols with 750 kilograms of pure gold. This Suvarna Tula during the Murti Pratishtha Mahotsav of Shree Swaminarayan Temple - Secaucus, New Jersey, was a magnificent ceremony witnessed by thousands.",
     image: getR2Image("/main/golden_tula_sants.JPG"),
   },
   {
