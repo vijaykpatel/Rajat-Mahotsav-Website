@@ -112,12 +112,15 @@ export default function ShaderShowcase() {
           <div className="h-screen" />
           
           {/* Full background Sihasan image section with fade transition */}
-          <div ref={sihasanRef} className="h-screen w-screen relative overflow-hidden">
+          <div ref={sihasanRef} className="min-h-screen w-screen relative overflow-hidden flex flex-col">
             {/* Top gradient overlay for smooth transition from title */}
             <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%' }} />
             
             {/* Bottom gradient overlay for smooth transition to next section */}
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%', top: 'auto', bottom: 0 }} />
+            
+            {/* Glassmorphic overlay for lower section */}
+            <div className="absolute inset-x-0 bottom-0 h-[31%] md:h-[30%] bg-white/45 backdrop-blur-sm z-[5] pointer-events-none" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%)' }} />
             
             {/* Desktop: Static Image */}
             <img
@@ -136,6 +139,13 @@ export default function ShaderShowcase() {
                 objectPosition: 'left center'
               }}
             />
+            
+            {/* Glassmorphic Feature Card */}
+            <div className="flex items-end md:items-center justify-center w-full min-h-[400px] mt-auto pb-14 md:pb-12 relative z-20">
+              <div className="px-4 text-center">
+                <h3 className="font-bold leading-[1.4] relative z-10" style={{ color: '#0f172a', fontSize: 'clamp(3rem, 15vw, 12rem)' }}>સુવર્ણ યુગ નો રજત મહોત્સવ</h3>
+              </div>
+            </div>
           </div>
           
           {/* Text Sections */}
