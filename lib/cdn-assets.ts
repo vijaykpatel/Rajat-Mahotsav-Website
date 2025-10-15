@@ -24,5 +24,8 @@ export const getR2Image = (filename: string) =>
 export const getCloudflareImage = (imageId: string) => 
   `${CLOUDFLARE_IMAGES_BASE}${imageId}/bigger?format=auto&quality=90`
 
+export const getCloudflareImageMobileWp = (imageId: string) => 
+  `${CLOUDFLARE_IMAGES_BASE}${imageId}/mobileWP?format=auto&quality=90`
+
 export const getCloudflareImageBiggest = (imageId: string) => 
   `${CLOUDFLARE_IMAGES_BASE}${imageId}/biggest?format=auto&quality=100`

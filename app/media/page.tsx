@@ -3,60 +3,51 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Download } from "lucide-react"
-import { IPhoneMock } from "@/components/molecules/iphone-mock"
 import { StandardPageHeader } from "@/components/organisms/standard-page-header"
+import { getCloudflareImageMobileWp } from "@/lib/cdn-assets"
 import "@/styles/community-service-theme.css"
 
 const wallpapers = [
   {
     id: 1,
-    thumbnail: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=400&h=800&fit=crop",
-    fullRes: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1170&h=2532&fit=crop",
-    title: "Gradient Sunset"
+    imageId: "d9f5d758-e54c-41e8-279b-c976b1a9ba00",
+    fullRes: "https://cdn.njrajatmahotsav.com/wallpapers/rajat_mobile_wallpaper_gm_1.jpeg",
+    title: "GM Wallpaper 1"
   },
   {
     id: 2,
-    thumbnail: "https://images.unsplash.com/photo-1557683316-973673baf926?w=400&h=800&fit=crop",
-    fullRes: "https://images.unsplash.com/photo-1557683316-973673baf926?w=1170&h=2532&fit=crop",
-    title: "Abstract Gradient"
+    imageId: "b87411e2-0009-418f-bdac-be04f3b05800",
+    fullRes: "https://cdn.njrajatmahotsav.com/wallpapers/rajat_mobile_wallpaper_gm_2.jpeg",
+    title: "GM Wallpaper 2"
   },
   {
     id: 3,
-    thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=800&fit=crop",
-    fullRes: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1170&h=2532&fit=crop",
-    title: "Abstract Art"
+    imageId: "ba913755-0610-437a-35a8-00b7a5fd7a00",
+    fullRes: "https://cdn.njrajatmahotsav.com/wallpapers/rajat_mobile_wallpaper_gm_3.jpeg",
+    title: "GM Wallpaper 3"
   },
   {
     id: 4,
-    thumbnail: "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=400&h=800&fit=crop",
-    fullRes: "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1170&h=2532&fit=crop",
-    title: "Blue Gradient"
+    imageId: "5fc49f26-e8ec-40e8-45f1-e7a1d8ca3600",
+    fullRes: "https://cdn.njrajatmahotsav.com/wallpapers/rajat_mobile_wallpaper_prathna_1.jpeg",
+    title: "Prathna Wallpaper 1"
   },
 ]
 
 export default function MediaPage() {
-  const [currentIndex, setCurrentIndex] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
-  
-  const currentWallpaper = wallpapers[currentIndex]
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 300)
     return () => clearTimeout(timer)
   }, [])
 
-  const handlePrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + wallpapers.length) % wallpapers.length)
-  }
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % wallpapers.length)
-  }
-
-  const handleDownload = async () => {
+  const handleDownload = (wallpaper: typeof wallpapers[0]) => {
+    const filename = `rajat-mahotsav-${wallpaper.title.toLowerCase().replace(/\s+/g, "-")}.jpg`
+    const downloadUrl = `/api/download?url=${encodeURIComponent(wallpaper.fullRes)}&filename=${encodeURIComponent(filename)}`
     const link = document.createElement("a")
-    link.href = currentWallpaper.fullRes
-    link.download = `rajat-mahotsav-${currentWallpaper.title.toLowerCase().replace(/\s+/g, "-")}.jpg`
+    link.href = downloadUrl
+    link.download = filename
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -76,81 +67,33 @@ export default function MediaPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col items-center gap-8 max-w-5xl mx-auto"
+          className="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto"
         >
-          {/* iPhone Preview */}
-          <motion.div
-            className="flex-shrink-0 mb-4 scale-100"
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.2}
-            onDragEnd={(_, info) => {
-              if (info.offset.x > 100) handlePrevious()
-              else if (info.offset.x < -100) handleNext()
-            }}
-          >
+          {wallpapers.map((wallpaper, index) => (
             <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
+              key={wallpaper.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="flex flex-col gap-4"
             >
-              <IPhoneMock wallpaperUrl={currentWallpaper.thumbnail} />
-            </motion.div>
-          </motion.div>
-
-          {/* Pagination Dots */}
-          <div className="flex gap-2">
-            {wallpapers.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className="transition-all duration-300"
-              >
-                <div
-                  className={`rounded-full transition-all duration-300 ${
-                    index === currentIndex
-                      ? "w-8 h-2 bg-gradient-to-r from-orange-500 to-pink-500"
-                      : "w-2 h-2 bg-gray-300 hover:bg-gray-400"
-                  }`}
+              <div className="relative aspect-[9/19.5]">
+                <img
+                  src={getCloudflareImageMobileWp(wallpaper.imageId)}
+                  alt={wallpaper.title}
+                  className="w-full h-full object-contain"
                 />
+              </div>
+              <button
+                onClick={() => handleDownload(wallpaper)}
+                className="flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-transform"
+              >
+                <Download className="w-4 h-4" />
+                Download
               </button>
-            ))}
-          </div>
-
-          {/* Navigation Buttons */}
-          <div className="flex items-center justify-center gap-8">
-            <motion.button
-              onClick={handlePrevious}
-              className="p-4 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow z-10"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </motion.button>
-
-            <motion.button
-              onClick={handleNext}
-              className="p-4 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow z-10"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </motion.button>
-          </div>
-
-          {/* Download Button */}
-          <button
-            onClick={handleDownload}
-            className="flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-pink-500 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg z-10 hover:scale-[1.02] active:scale-[0.98] transition-transform"
-          >
-            <Download className="w-5 h-5" />
-            Download Wallpaper
-          </button>
+            </motion.div>
+          ))}
         </motion.section>
       </div>
     </div>
