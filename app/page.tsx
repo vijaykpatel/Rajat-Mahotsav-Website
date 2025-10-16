@@ -106,8 +106,6 @@ export default function ShaderShowcase() {
           {/* Title section */}
           <TitleSection />
           <div className="relative z-10">
-          <div className="h-screen" />
-          
           {/* Full background Sihasan image section with fade transition */}
           <div ref={sihasanRef} className="min-h-screen w-screen relative overflow-hidden flex flex-col">
             {/* Top gradient overlay for smooth transition from title */}

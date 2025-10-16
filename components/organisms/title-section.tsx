@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 export default function TitleSection() {
   return (
-    <div className="fixed inset-0 h-screen flex flex-col items-center justify-center overflow-hidden z-0" style={{ background: '#0D132D' }}>
+    <div className="page-bg-extend min-h-screen" style={{ background: '#0D132D' }}>
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -56,19 +56,33 @@ export default function TitleSection() {
         {/* Mobile */}
         <div className="md:hidden space-y-2 px-4">
           <div className="w-64 h-1 bg-white mx-auto" />
-          <p style={{ fontSize: 'clamp(1.5rem, 7vw, 2.25rem)', fontFamily: 'var(--font-instrument-serif)' }} className="text-white font-medium tracking-wide leading-relaxed">
+          <p style={{ fontSize: 'clamp(2.5rem, 7vw, 4rem)', fontFamily: 'var(--font-instrument-serif)' }} className="text-white font-medium tracking-wide leading-relaxed">
             A silver celebration<br/>of a golden era
           </p>
           <div className="w-64 h-1 bg-white mx-auto" />
-          <p style={{ fontSize: 'clamp(1.25rem, 6vw, 1.875rem)', fontFamily: 'var(--font-instrument-serif)' }} className="text-white font-medium tracking-wide leading-relaxed">
+          <p style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', fontFamily: 'var(--font-instrument-serif)' }} className="text-white font-medium tracking-wide leading-relaxed">
             Shree Swaminarayan Temple<br/>New Jersey Celebrates 25 years
           </p>
           <div className="w-64 h-1 bg-white mx-auto" />
-          <p style={{ fontSize: 'clamp(1.125rem, 5.5vw, 1.5rem)', fontFamily: 'var(--font-instrument-serif)' }} className="text-white font-medium tracking-wide leading-relaxed">
+          <p style={{ fontSize: 'clamp(2rem, 5.5vw, 2.5rem)', fontFamily: 'var(--font-instrument-serif)' }} className="text-white font-medium tracking-wide leading-relaxed">
             07.25.26 - 08.02.26
           </p>
         </div>
       </motion.div>
+
+      {/* Video Player */}
+      <div className="min-h-screen flex items-center justify-center px-4 mt-96">
+        <div className="w-full max-w-6xl">
+          <div className="rounded-xl overflow-hidden" style={{ position: "relative", paddingTop: "56.42633228840125%" }}>
+            <iframe
+              src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/6f4c127cc7b339c9b1b7875c1dc8e745/iframe?poster=https%3A%2F%2Fcustomer-kss5h1dwt4mkz0x3.cloudflarestream.com%2F6f4c127cc7b339c9b1b7875c1dc8e745%2Fthumbnails%2Fthumbnail.gif%3Ftime%3D95s%26duration%3D4s"
+              style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
+              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
