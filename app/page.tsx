@@ -99,8 +99,8 @@ export default function ShaderShowcase() {
 
   return (
     <>
-      <LoadingScreen />
-      {!isLoading && (
+      {/* <LoadingScreen /> */}
+      {/* {!isLoading && ( */}
         
         <>
           {/* Title section */}
@@ -214,7 +214,7 @@ export default function ShaderShowcase() {
           </div>
           </div>
         </>
-      )}
+      {/* )} */}
     </>
   )
 }
