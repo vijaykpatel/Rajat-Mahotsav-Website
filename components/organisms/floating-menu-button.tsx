@@ -99,7 +99,7 @@ export function FloatingMenuButton() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 20 }}
               transition={{ duration: 0.2 }}
-              className={`fixed bottom-20 md:bottom-36 left-6 z-40 rounded-2xl backdrop-blur-sm ${bgClass} p-2 shadow-lg`}
+              className={`fixed bottom-16 md:bottom-36 left-6 z-40 rounded-2xl backdrop-blur-sm ${bgClass} p-2 shadow-lg`}
             >
               <nav className="flex flex-col gap-1">
                 {menuItems.map((item) => {

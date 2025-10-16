@@ -16,7 +16,6 @@ import AashirwadVideoPlayer from "@/components/organisms/aashirwad-video-player"
 import TextSection1 from "@/components/organisms/text-section-1"
 import TextSection2 from "@/components/organisms/text-section-2"
 import TextSection3 from "@/components/organisms/text-section-3"
-import ScrollColorWrapper from "@/components/organisms/scroll-color-wrapper"
 
 const gurus = [
   {
@@ -139,7 +138,7 @@ export default function ShaderShowcase() {
             />
             
             {/* Glassmorphic Feature Card */}
-            <div className="flex items-end md:items-center justify-center w-full min-h-[400px] mt-auto relative z-20" style={{ paddingBottom: 'clamp(2.5rem, 10vh, 6rem)' }}>
+            <div className="flex items-end md:items-center justify-center w-full mt-auto relative z-20" style={{ paddingBottom: deviceType === 'tablet' ? '2.rem' : 'clamp(2.5rem, 10vh, 6rem)' }}>
               <div className="px-4 text-center">
                 <h3 className="font-bold leading-[1.4] relative z-10" style={{ color: '#0f172a', fontSize: 'clamp(3rem, 15vw, 12rem)' }}>સુવર્ણ યુગ નો રજત મહોત્સવ</h3>
               </div>

@@ -11,21 +11,24 @@ gsap.registerPlugin(ScrollTrigger)
 const content = [
   {
     title: "In August 2001",
-    description:
-      "History was made and forever forged in gold. During the installation of the divine murtis of Lord Shree Swaminarayan, Jeevanpran Shree Abji Bapashree, and Jeevanpran Shree Muktajeevan Swamibapa at Shree Swaminarayan Temple in Secaucus, New Jersey, the first shikhar-bandh mandir of Maninagar Shree Swaminarayan Gadi Sansthan in North America.",
-    image: getR2Image("/main/gold_tula_hugging.JPG"),
+    description: (
+      <>
+        History was made and forever forged in gold with the installation of the divine murtis of <u>Shree Swaminarayan Bhagwan</u>, <u>Jeevanpran Shree Abji Bapashree</u>, and <u>Jeevanpran Shree Muktajeevan Swamibapa</u> at Shree Swaminarayan Temple in Secaucus, New Jersey. Located just five miles from New York City, the 22,500sq.ft. traditional Hindu temple began construction on a 3.7 acre lot in 1998. It is notably the first traditional shikhar-bandh mandir of the entire Swaminarayan faith on the East Coast and also the first established mandir of Maninagar Shree Swaminarayan Gadi Sansthan in North America.
+      </>
+    ),
+    image: getR2Image("/main/2001_1.JPG"),
   },
   {
     title: "750 Kilograms of Pure Gold",
     description:
-      "Our beloved Prem Murti Acharya Shree Purushottampriyadasji Swamishree Maharaj weighed all three divine idols with 750 kilograms of pure gold. This Suvarna Tula during the Murti Pratishtha Mahotsav of Shree Swaminarayan Temple - Secaucus, New Jersey, was a magnificent ceremony witnessed by thousands.",
-    image: getR2Image("/main/golden_tula_sants.JPG"),
+      "Our beloved Prem Murti Acharya Shree Purushottampriyadasji Swamishree Maharaj traditionally weighed all three divine marble idols against 750 kilograms of pure gold and then ceremonially installed them into the sacred sihasan. Never before had such a magnificent Suvarna Tula taken place, creating a timeless memory that will endure for generations.",
+    image: getR2Image("/main/2001_2.JPG"),
   },
   {
     title: "A Historic Moment",
     description:
-      "This was the first time such a magnificent ceremony was ever done, and it was the last time such a magnificent ceremony would ever be witnessed. The Suvarna Tula remains a testament to the devotion and dedication of our beloved Acharya Swamishree Maharaj and the entire Swaminarayan community.",
-    image: getR2Image("/main/gold_tula_placing.JPG"),
+      "The five-day grand opening Murti Pratishtha Mahotsav, featuring spiritual discourses, Indian cultural dance and music, honorable guests, fireworks, and a vibrant parade, is still remembered as one of the most remarkable events in the history of our sansthan. The unwavering dedication of volunteers, whose tireless efforts and collective contributions made the construction of this temple possible, remains a lasting testament to the devotion and vision of our beloved Prem Murti Acharya Swamishree Maharaj and the entire Swaminarayan community.",
+    image: getR2Image("/main/2001_3.JPG"),
   },
 ]
 
