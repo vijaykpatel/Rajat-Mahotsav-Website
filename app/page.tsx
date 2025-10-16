@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import LoadingScreen from "@/components/atoms/loading-screen"
 import VideoSection from "@/components/organisms/video-section"
-import TitleSection from "@/components/organisms/title-section"
+import TitleSection from "@/components/organisms/landing-page"
 import GuruCard from "@/components/molecules/guru-card"
 import GuruCarousel from "@/components/organisms/guru-carousel"
 import { useDeviceType } from "@/hooks/use-device-type"
@@ -13,9 +13,9 @@ import "@/styles/registration-theme.css"
 
 import { useLoading } from "@/hooks/use-loading"
 import AashirwadVideoPlayer from "@/components/organisms/aashirwad-video-player"
-import TextSection1 from "@/components/organisms/text-section-1"
-import TextSection2 from "@/components/organisms/text-section-2"
-import TextSection3 from "@/components/organisms/text-section-3"
+import PratisthaStory from "@/components/organisms/pratishta-story"
+import MandalExpansionText from "@/components/organisms/mandal-expansion"
+import InviteText from "@/components/organisms/invite-text"
 
 const gurus = [
   {
@@ -138,18 +138,18 @@ export default function ShaderShowcase() {
             {/* Glassmorphic Feature Card */}
             <div className="flex items-end md:items-center justify-center w-full mt-auto relative z-20" style={{ paddingBottom: deviceType === 'tablet' ? '1rem' : 'clamp(2.5rem, 8vh, 4rem)' }}>
               <div className="px-4 text-center">
-                <h3 className="font-bold leading-[1.4] relative z-10" style={{ color: '#0f172a', fontSize: 'clamp(3rem, 15vw, 13rem)' }}>સુવર્ણ યુગ નો રજત મહોત્સવ</h3>
+                <h3 className="font-bold leading-[1.4] relative z-10" style={{ color: '#0f172a', fontSize: 'clamp(3rem, 14vw, 12rem)' }}>સુવર્ણ યુગ નો રજત મહોત્સવ</h3>
               </div>
             </div>
           </div>
           
           {/* Text Sections */}
-          <TextSection1>
-            <TextSection2 />
-          </TextSection1>
+          <PratisthaStory>
+            <MandalExpansionText />
+          </PratisthaStory>
           
           <div style={{ backgroundColor: 'rgb(235, 232, 219)' }}>
-            <TextSection3 />
+            <InviteText />
           </div>
           
           {/* Video Player Section */}

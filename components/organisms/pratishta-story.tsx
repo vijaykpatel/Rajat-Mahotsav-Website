@@ -32,7 +32,7 @@ const content = [
   },
 ]
 
-export default function TextSection1({ children }: { children?: React.ReactNode }) {
+export default function PratisthaStory({ children }: { children?: React.ReactNode }) {
   const [rowsVisible, setRowsVisible] = useState<boolean[]>([false, false, false])
   const [animDuration, setAnimDuration] = useState(1.2)
   const sectionRef = useRef<HTMLDivElement>(null)

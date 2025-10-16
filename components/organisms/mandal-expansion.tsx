@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 import { Skiper54 } from "@/components/templates/skiper54"
 
-export default function TextSection2() {
+export default function MandalExpansionText() {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
 
