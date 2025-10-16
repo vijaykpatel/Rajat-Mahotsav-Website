@@ -279,7 +279,7 @@ export default function VideoSection() {
         </motion.div>
       </div>
 
-      {/* Registration CTA */}
+      {/* Registration CTA
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -298,7 +298,7 @@ export default function VideoSection() {
         >
           Register Now
         </a>
-      </motion.div>
+      </motion.div> */}
     </div>
   )
 }

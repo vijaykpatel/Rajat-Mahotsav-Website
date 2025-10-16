@@ -48,6 +48,10 @@ export default function TitleSection() {
           <p className="sm:text-2xl md:text-3xl lg:text-4xl text-white font-serif italic font-medium tracking-wider">
             Shree Swaminarayan Temple New Jersey Celebrates 25 years
           </p>
+          <div className="w-80 h-1 bg-white mx-auto my-6" />
+          <p className="sm:text-xl md:text-2xl lg:text-3xl text-white font-serif italic font-medium tracking-wider">
+            07.25.26 - 08.02.26
+          </p>
         </div>
         
         {/* Mobile */}
@@ -59,6 +63,10 @@ export default function TitleSection() {
           <div className="w-64 h-1 bg-white mx-auto" />
           <p style={{ fontSize: 'clamp(1rem, 5vw, 1.5rem)' }} className="text-white font-serif italic font-medium tracking-wide leading-relaxed">
             Shree Swaminarayan Temple<br/>New Jersey Celebrates 25 years
+          </p>
+          <div className="w-64 h-1 bg-white mx-auto" />
+          <p style={{ fontSize: 'clamp(0.875rem, 4.5vw, 1.25rem)' }} className="text-white font-serif italic font-medium tracking-wide leading-relaxed">
+            07.25.26 - 08.02.26
           </p>
         </div>
       </motion.div>

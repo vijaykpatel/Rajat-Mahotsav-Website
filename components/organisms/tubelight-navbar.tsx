@@ -66,7 +66,7 @@ export function NavBar({ items, className }: NavBarProps) {
           /* Mobile: Overlay Menu */
           <>
             <motion.div
-              className="flex items-center justify-center w-[60px] h-[56px] bg-gradient-to-r from-slate-900/95 to-slate-800/95 border-2 border-slate-700/60 backdrop-blur-md rounded-full shadow-lg text-white cursor-pointer z-50 relative"
+              className="flex items-center justify-center w-[60px] h-[56px] bg-navy-accent border-2 border-slate-700/60 backdrop-blur-md rounded-full shadow-lg text-white cursor-pointer z-50 relative"
               onClick={() => setIsExpanded(!isExpanded)}
             >
               <motion.div animate={{ rotate: isExpanded ? 90 : 0 }} transition={{ duration: 0.2 }}>
@@ -76,7 +76,7 @@ export function NavBar({ items, className }: NavBarProps) {
             <AnimatePresence>
               {isExpanded && (
                 <motion.div
-                  className="absolute top-20 left-4 z-50 bg-gradient-to-r from-slate-900/95 to-slate-800/95 border-2 border-slate-700/60 backdrop-blur-md shadow-lg rounded-3xl p-2 w-[240px]"
+                  className="absolute top-20 left-4 z-50 bg-navy-accent border-2 border-slate-700/60 backdrop-blur-md shadow-lg rounded-3xl p-2 w-[240px]"
                   initial={{ opacity: 0, scale: 0.8, y: -20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.8, y: -20 }}
@@ -135,7 +135,7 @@ export function NavBar({ items, className }: NavBarProps) {
         ) : (
           /* Desktop: Inline Expanding Menu */
           <motion.div
-            className="flex items-center gap-3 bg-gradient-to-r from-slate-900/95 to-slate-800/95 border-2 border-slate-700/60 backdrop-blur-md rounded-full shadow-lg"
+            className="flex items-center gap-3 bg-navy-accent border-2 border-slate-700/60 backdrop-blur-md rounded-full shadow-lg"
             initial={false}
             animate={{ width: isExpanded ? "auto" : "60px", height: "56px" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}

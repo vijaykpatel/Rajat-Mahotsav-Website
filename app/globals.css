@@ -11,6 +11,40 @@
   --navbar-height: 180px;
   /* Footer color variable */
   --footer-color: rgba(248, 248, 248, 0.85);
+  /* Preset navy accent color */
+  --preset-navy-accent: #141F4D;
+  /* Preset deep navy color */
+  --preset-deep-navy: #0D132D;
+  /* Preset navy blue color */
+  --preset-navy-blue: #030A1B;
+  /* Preset zodiac blue color */
+  --preset-zodiac-blue: #0B1B33;
+  /* Preset light gray color */
+  --preset-light-gray: #F3F3F3;
+  /* Preset stone color */
+  --preset-stone: #E8E6E0;
+  /* Preset pale gray color */
+  --preset-pale-gray: #D9DEE8;
+  /* Preset red color */
+  --preset-red: #B50000;
+  /* Preset bluish gray color */
+  --preset-bluish-gray: #abb8c3;
+  /* Preset gradient very light gray to bluish gray */
+  --preset-gradient-very-light-gray-to-bluish-gray: linear-gradient(135deg, rgb(238, 238, 238) 0%, rgb(169, 184, 195) 100%);
+  /* Preset gradient topper */
+  --preset-gradient-topper: linear-gradient(0deg, var(--preset-deep-navy) 24.28%, var(--preset-zodiac-blue) 100%);
+  /* Preset gradient blue alt */
+  --preset-gradient-blue-alt: linear-gradient(321deg, var(--preset-navy-accent) 7.41%, #12347F 80.62%);
+  /* Preset gradient blue */
+  --preset-gradient-blue: linear-gradient(180deg, var(--preset-navy-blue) 0%, #3b82f6 100%);
+  /* Preset white color */
+  --preset-white: #FFFFFF;
+  /* Preset gradient topper */
+  --preset-gradient-topper: linear-gradient(0deg, var(--preset-deep-navy) 24.28%, var(--preset-zodiac-blue) 100%);
+  /* Pale gray color */
+  --pale-gray: #D9DEE8;
+  /* Navy blue color */
+  --navy-blue: #030A1B;
   /* Updated color tokens to match dramatic lighting design brief */
   --background: #000000; /* Pure black background */
   --foreground: oklch(1 0 0); /* Pure white for text and highlights */
