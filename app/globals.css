@@ -196,7 +196,7 @@
     overflow-x: hidden;
     width: 100%;
     /* Fill safe area with dark color matching page content */
-    background: var(--footer-color);
+    background: #0f172a;
     /* Ensure consistent scroll behavior */
     -webkit-overflow-scrolling: touch;
     /* Fix mobile viewport height */
