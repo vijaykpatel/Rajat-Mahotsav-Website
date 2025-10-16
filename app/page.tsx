@@ -46,7 +46,7 @@ export default function ShaderShowcase() {
   const cardsRef = useRef<HTMLDivElement>(null)
   const mobileGuruRef = useRef<HTMLDivElement>(null)
   
-  const backgroundImageUrl = `${getCloudflareImageBiggest("5aeb6c7e-f6ea-45b1-da4a-823279172400")}&width=1920`
+  const backgroundImageUrl = `${getCloudflareImageBiggest("5aeb6c7e-f6ea-45b1-da4a-823279172400")}&width=2560`
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)

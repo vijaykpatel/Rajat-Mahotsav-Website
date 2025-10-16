@@ -7,8 +7,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
-    loading: 'lazy',
+    unoptimized: true
   },
   experimental: {
     optimizePackageImports: ['framer-motion'],
