@@ -8,7 +8,7 @@ export default function TitleSection() {
   const [videoLoaded, setVideoLoaded] = useState(false)
 
   return (
-    <div className="page-bg-extend min-h-screen" style={{ background: '#0D132D' }}>
+    <div className="min-h-screen pt-32" style={{ background: '#0D132D' }}>
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
