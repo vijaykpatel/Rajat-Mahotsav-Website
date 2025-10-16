@@ -171,7 +171,7 @@ export default function ShaderShowcase() {
             {/* Glassmorphic Feature Card */}
             {/* <div className="flex items-end md:items-center justify-center w-full mt-auto relative z-20" style={{ paddingBottom: 'calc(clamp(2.5rem, 8vh, 4rem) + env(safe-area-inset-bottom))' }}>
               <div className="px-4 text-center">
-                <h3 className="font-bold leading-[1.4] relative z-10" style={{ color: '#0f172a', fontSize: 'clamp(3rem, 14vw, 12rem)', fontFamily: 'var(--font-gujarati)' }}>સુવર્ણ યુગ નો રજત મહોત્સવ</h3>
+                <h3 className="font-bold leading-[1.4] relative z-10" style={{ color: 'var(--title-section-bg)', fontSize: 'clamp(3rem, 14vw, 12rem)', fontFamily: 'var(--font-gujarati)' }}>સુવર્ણ યુગ નો રજત મહોત્સવ</h3>
               </div>
             </div> */}
           </div>
@@ -181,14 +181,14 @@ export default function ShaderShowcase() {
             <MandalExpansionText />
           </PratisthaStory>
           
-          <div style={{ backgroundColor: 'rgb(235, 232, 219)' }}>
+          <div className="bg-main-page-bg">
             <InviteText />
           </div>
           
           {/* Video Player Section */}
           <AashirwadVideoPlayer />
           
-          <div className="reg-page-bg page-bg-extend">
+          <div className="bg-main-page-bg">
           
           {/* Staggered Guru Cards */}
           <div ref={mobileGuruRef} className="min-h-screen w-full pb-40 px-4 flex flex-col items-center justify-start pt-28">

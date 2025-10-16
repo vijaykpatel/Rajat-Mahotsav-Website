@@ -14,8 +14,8 @@ export default function ScrollColorTransition() {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.to(containerRef.current, {
-        backgroundColor: 'rgb(235, 232, 219)',
-        color: '#333',
+        backgroundColor: 'var(--page-bg)',
+        color: 'var(--main-text)',
         scrollTrigger: {
           trigger: triggerRef.current,
           start: 'top -50%',

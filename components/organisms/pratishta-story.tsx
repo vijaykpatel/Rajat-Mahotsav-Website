@@ -64,16 +64,18 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
     return () => observers.forEach(obs => obs.disconnect())
   }, [])
 
+  // hex values ar faster in gsap a lot
+  // --page-bg
   useEffect(() => {
     const isMobile = window.innerWidth < 768;
     const ctx = gsap.context(() => {
       gsap.to(containerRef.current, {
-        backgroundColor: 'rgb(235, 232, 219)',
+        backgroundColor: '#F3F3F3',
         scrollTrigger: {
           trigger: triggerRef.current,
           start: isMobile ? 'top -175%' : 'top -80%',
-          end: isMobile ? '+=30%' : '+=50%',
-          scrub: isMobile ? .4: 1,
+          end: isMobile ? '+=50%' : '+=50%',
+          scrub: isMobile ? 1: 1,
         },
       });
       
@@ -81,7 +83,7 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
           color: '#f1f5f9' // slate-100 starting color
         },
         {
-        color: '#000000ff',
+        color: '#293340',
         scrollTrigger: {
           trigger: triggerRef.current,
           start: isMobile ? 'top -175%' : 'top -70%',
@@ -89,13 +91,26 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
           scrub: isMobile ? 1: 1,
         },
       });
+
+      //       gsap.fromTo('.text-transition', {
+      //     color: 'var(--text-transition-start)'
+      //   },
+      //   {
+      //   color: 'var(--main-text)',
+      //   scrollTrigger: {
+      //     trigger: triggerRef.current,
+      //     start: isMobile ? 'top -175%' : 'top -80%',
+      //     end: isMobile ? '+=50%' : '+=50%',
+      //     scrub: isMobile ? 1: 1,
+      //   },
+      // });
     });
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={containerRef} style={{ backgroundColor: '#0f172a', position: 'relative' }}>
+    <div ref={containerRef} className="bg-title-section-bg relative">
       <div ref={triggerRef} style={{ minHeight: '120vh' }}>
         <div ref={sectionRef} className="w-full py-32 pb-40">
       <div className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 space-y-16 sm:space-y-20 md:space-y-24 lg:space-y-32 xl:space-y-36 mb-20">

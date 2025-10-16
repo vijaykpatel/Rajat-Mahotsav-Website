@@ -13,7 +13,7 @@ export default function ScrollColorWrapper({ children }: { children: React.React
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.to(containerRef.current, {
-        backgroundColor: 'rgb(235, 232, 219)',
+        backgroundColor: 'var(--page-bg)',
         scrollTrigger: {
           trigger: triggerRef.current,
           start: 'top top',
@@ -27,7 +27,7 @@ export default function ScrollColorWrapper({ children }: { children: React.React
   }, []);
 
   return (
-    <div ref={containerRef} style={{ backgroundColor: '#0f172a', minHeight: '100vh' }}>
+    <div ref={containerRef} style={{ backgroundColor: 'var(--title-section-bg)', minHeight: '100vh' }}>
       <div ref={triggerRef} style={{ minHeight: '300vh' }}>
         {children}
       </div>

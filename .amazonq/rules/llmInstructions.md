@@ -32,6 +32,10 @@ You are a Senior UI/UX Engineer and expert in ReactJS, TypeScript, component des
 * Export components with proper display names
 
 ### Styling Guidelines
+* **ALWAYS check globals.css first** - Before adding any new styles, verify if a Tailwind utility class already exists for that CSS variable
+* **Never use inline styles for theme values** - If a CSS variable exists (e.g., `--title-section-bg`, `--font-instrument-serif`), use the corresponding Tailwind class (e.g., `bg-title-section-bg`, `font-instrument-serif`)
+* **Create Tailwind classes for reusable styles** - When adding new CSS variables to globals.css, always define the corresponding Tailwind utility class in the `@theme inline` section
+* **DRY principle for styling** - Reuse existing Tailwind classes instead of duplicating CSS variable references
 * Always use Tailwind classes with shadcn design tokens
 * Use CSS variables for theme-aware styling (hsl(var(--primary)))
 * Implement proper focus states and accessibility indicators

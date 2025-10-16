@@ -7,6 +7,14 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Main page background - alias for preset-light-gray */
+  --page-bg: var(--preset-light-gray);
+  /* Title section background - alias for preset-deep-navy */
+  --title-section-bg: var(--preset-deep-navy);
+  /* Main text color - alias for preset-charcoal */
+  --main-text: var(--preset-charcoal);
+  /* Text transition starting color */
+  --text-transition-start: #f1f5f9;
   /* Navbar height variable - includes padding */
   --navbar-height: 180px;
   /* Footer color variable */
@@ -29,6 +37,8 @@
   --preset-red: #B50000;
   /* Preset bluish gray color */
   --preset-bluish-gray: #abb8c3;
+  /* Preset charcoal color */
+  --preset-charcoal: #293340;
   /* Preset gradient very light gray to bluish gray */
   --preset-gradient-very-light-gray-to-bluish-gray: linear-gradient(135deg, rgb(238, 238, 238) 0%, rgb(169, 184, 195) 100%);
   /* Preset gradient topper */
@@ -132,6 +142,22 @@
 
 
 @theme inline {
+  /* Preset colors */
+  --color-preset-navy-accent: var(--preset-navy-accent);
+  --color-preset-deep-navy: var(--preset-deep-navy);
+  --color-preset-navy-blue: var(--preset-navy-blue);
+  --color-preset-zodiac-blue: var(--preset-zodiac-blue);
+  --color-preset-light-gray: var(--preset-light-gray);
+  --color-preset-stone: var(--preset-stone);
+  --color-preset-pale-gray: var(--preset-pale-gray);
+  --color-preset-red: var(--preset-red);
+  --color-preset-bluish-gray: var(--preset-bluish-gray);
+  --color-preset-charcoal: var(--preset-charcoal);
+  --color-preset-white: var(--preset-white);
+  --color-page-bg: var(--page-bg);
+  --color-main-page-bg: var(--preset-light-gray);
+  --color-title-section-bg: var(--title-section-bg);
+  --color-main-text: var(--main-text);
   /* UNUSED - Shadow input */
   /* --shadow-input:
     0px 2px 3px -1px rgba(0, 0, 0, 0.1),

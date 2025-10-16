@@ -8,7 +8,7 @@ export default function TitleSection() {
   const [videoLoaded, setVideoLoaded] = useState(false)
 
   return (
-    <div className="min-h-screen pt-32" style={{ background: '#0D132D' }}>
+    <div className="min-h-screen pt-32 bg-title-section-bg">
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -16,7 +16,7 @@ export default function TitleSection() {
         className="text-center space-y-8 w-full relative z-10"
       >
         {/* Desktop */}
-        <h1 className="hidden md:block font-bold text-white leading-tight drop-shadow-2xl my-6" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+        <h1 className="hidden md:block font-bold text-white leading-tight drop-shadow-2xl my-6 font-instrument-serif">
           <div className="tracking-wide whitespace-nowrap" style={{ fontSize: 'clamp(7rem, 15vw, 12rem)' }}>
             Suvarna Yug no
           </div>
@@ -27,7 +27,7 @@ export default function TitleSection() {
         </h1>
         
         {/* Mobile */}
-        <h1 className="md:hidden font-bold text-white leading-tight drop-shadow-2xl my-6" style={{ fontFamily: 'var(--font-instrument-serif)' }}>
+        <h1 className="md:hidden font-bold text-white leading-tight drop-shadow-2xl my-6 font-instrument-serif">
           <div style={{ fontSize: 'clamp(2.5rem, 15vw, 12rem)' }} className="tracking-wide">Suvarna Yug no</div>
           <div style={{ fontSize: 'clamp(2.5rem, 15vw, 12rem)' }} className="tracking-wide">Rajat Mahotsav</div>
           {/* <div style={{ fontSize: 'clamp(2.5rem, 15vw, 9rem)' }} className="tracking-wider">Rajat</div>
@@ -44,15 +44,15 @@ export default function TitleSection() {
         {/* Desktop */}
         <div className="hidden md:block">
           <div className="w-80 h-1 bg-white mx-auto my-2" />
-          <p className="text-white font-medium leading-relaxed" style={{ fontFamily: 'var(--font-instrument-serif)', fontSize: 'clamp(4rem, 5vw, 6rem)' }}>
+          <p className="text-white font-medium leading-relaxed font-instrument-serif" style={{ fontSize: 'clamp(4rem, 5vw, 6rem)' }}>
             A silver celebration of a golden era
           </p>
           <div className="w-80 h-1 bg-white mx-auto my-2" />
-          <p className="text-white font-medium  tracking-wider leading-relaxed" style={{ fontFamily: 'var(--font-instrument-serif)', fontSize: 'clamp(3rem, 3vw, 4.5rem)' }}>
+          <p className="text-white font-medium tracking-wider leading-relaxed font-instrument-serif" style={{ fontSize: 'clamp(3rem, 3vw, 4.5rem)' }}>
             Shree Swaminarayan Temple New Jersey<br/>Celebrates 25 years
           </p>
           <div className="w-80 h-1 bg-white mx-auto my-2" />
-          <p className="text-white font-medium leading-relaxed" style={{ fontFamily: 'var(--font-instrument-serif)', fontSize: 'clamp(2.75rem, 3vw, 4rem)' }}>
+          <p className="text-white font-medium leading-relaxed font-instrument-serif" style={{ fontSize: 'clamp(2.75rem, 3vw, 4rem)' }}>
             07.25.26 - 08.02.26
           </p>
         </div>
@@ -60,15 +60,15 @@ export default function TitleSection() {
         {/* Mobile */}
         <div className="md:hidden space-y-2 px-4">
           <div className="w-64 h-1 bg-white mx-auto" />
-          <p style={{ fontSize: 'clamp(2.5rem, 7vw, 4rem)', fontFamily: 'var(--font-instrument-serif)' }} className="text-white font-medium tracking-wide leading-relaxed">
+          <p style={{ fontSize: 'clamp(2.5rem, 7vw, 4rem)' }} className="text-white font-medium tracking-wide leading-relaxed font-instrument-serif">
             A silver celebration<br/>of a golden era
           </p>
           <div className="w-64 h-1 bg-white mx-auto" />
-          <p style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', fontFamily: 'var(--font-instrument-serif)' }} className="text-white font-medium tracking-wide leading-relaxed">
+          <p style={{ fontSize: 'clamp(2rem, 6vw, 3rem)' }} className="text-white font-medium tracking-wide leading-relaxed font-instrument-serif">
             Shree Swaminarayan Temple<br/>New Jersey Celebrates 25 years
           </p>
           <div className="w-64 h-1 bg-white mx-auto" />
-          <p style={{ fontSize: 'clamp(2rem, 5.5vw, 2.5rem)', fontFamily: 'var(--font-instrument-serif)' }} className="text-white font-medium tracking-wide leading-relaxed">
+          <p style={{ fontSize: 'clamp(2rem, 5.5vw, 2.5rem)' }} className="text-white font-medium tracking-wide leading-relaxed font-instrument-serif">
             07.25.26 - 08.02.26
           </p>
         </div>
