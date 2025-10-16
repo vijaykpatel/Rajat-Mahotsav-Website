@@ -128,7 +128,7 @@ export default function ShaderShowcase() {
             <img
               src={backgroundImageUrl}
               alt="Background"
-              className="xl:hidden absolute inset-0 animate-pan-right brightness-110"
+              className="xl:hidden absolute inset-0 animate-pan-right brightness-115"
               style={{ 
                 animationPlayState: isPanActive ? 'running' : 'paused',
                 objectPosition: 'left center'
