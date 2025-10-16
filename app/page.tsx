@@ -115,7 +115,7 @@ export default function ShaderShowcase() {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%', top: 'auto', bottom: 0 }} />
             
             {/* Glassmorphic overlay for lower section */}
-            <div className="absolute inset-x-0 bottom-0 h-[35%] md:h-[32%] bg-white/45 backdrop-blur-sm z-[5] pointer-events-none" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%)' }} />
+            <div className="absolute inset-x-0 bottom-0 h-[30%] md:h-[30%] bg-white/45 backdrop-blur-sm z-[5] pointer-events-none" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%)' }} />
             
             {/* Desktop: Static Image (> 1280px) */}
             <img
@@ -136,9 +136,9 @@ export default function ShaderShowcase() {
             />
             
             {/* Glassmorphic Feature Card */}
-            <div className="flex items-end md:items-center justify-center w-full mt-auto relative z-20" style={{ paddingBottom: deviceType === 'tablet' ? '2.rem' : 'clamp(2.5rem, 10vh, 6rem)' }}>
+            <div className="flex items-end md:items-center justify-center w-full mt-auto relative z-20" style={{ paddingBottom: deviceType === 'tablet' ? '1rem' : 'clamp(2.5rem, 8vh, 4rem)' }}>
               <div className="px-4 text-center">
-                <h3 className="font-bold leading-[1.4] relative z-10" style={{ color: '#0f172a', fontSize: 'clamp(3rem, 15vw, 12rem)' }}>સુવર્ણ યુગ નો રજત મહોત્સવ</h3>
+                <h3 className="font-bold leading-[1.4] relative z-10" style={{ color: '#0f172a', fontSize: 'clamp(3rem, 15vw, 13rem)' }}>સુવર્ણ યુગ નો રજત મહોત્સવ</h3>
               </div>
             </div>
           </div>

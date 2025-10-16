@@ -71,7 +71,7 @@ export default function TitleSection() {
       </motion.div>
 
       {/* Video Player */}
-      <div className="min-h-screen flex items-center justify-center px-4 mt-96">
+      <div className="min-h-screen flex items-center justify-center px-4">
         <div className="w-full max-w-6xl">
           <div className="rounded-xl overflow-hidden" style={{ position: "relative", paddingTop: "56.42633228840125%" }}>
             <iframe
