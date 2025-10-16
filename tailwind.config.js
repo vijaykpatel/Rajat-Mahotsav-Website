@@ -34,6 +34,7 @@ module.exports = {
         'preset-red': '#B50000',
         'preset-bluish-gray': '#abb8c3',
         'preset-white': '#FFFFFF',
+        'preset-charcoal': '#293340',
       },
     },
   },
