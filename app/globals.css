@@ -196,7 +196,8 @@
     overflow-x: hidden;
     width: 100%;
     /* Fill safe area with dark color matching page content */
-    background: #0f172a;
+    /* controls the toolbar color on iphone */
+    background: #0D132D;
     /* Ensure consistent scroll behavior */
     -webkit-overflow-scrolling: touch;
     /* Fix mobile viewport height */

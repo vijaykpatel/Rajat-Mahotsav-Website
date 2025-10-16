@@ -8,6 +8,10 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    loading: 'lazy',
+  },
+  experimental: {
+    optimizePackageImports: ['framer-motion'],
   },
 }
 

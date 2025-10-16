@@ -213,11 +213,18 @@ export default function RegistrationPage() {
     return mandalOptions[country as keyof typeof mandalOptions] || []
   }
 
+  const [mounted, setMounted] = useState(false)
+
   // Set loaded after component mounts with delay for mobile optimization
   useEffect(() => {
+    setMounted(true)
     const timer = setTimeout(() => setIsLoaded(true), 200)
     return () => clearTimeout(timer)
   }, [])
+
+  if (!mounted) {
+    return null
+  }
 
   return (
     <>
