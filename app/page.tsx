@@ -159,7 +159,7 @@ export default function ShaderShowcase() {
             
             {/* Mobile/Tablet: Panning Sihasan Image (<= 1280px, includes iPad Pro) */}
             <img
-              src={sihasan_trimmed}
+              src={backgroundImageUrl}
               alt="Background"
               className="xl:hidden absolute inset-0 h-full object-cover animate-pan-right brightness-115"
               style={{ 
