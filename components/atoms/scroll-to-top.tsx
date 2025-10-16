@@ -58,8 +58,8 @@ export function ScrollToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-6 md:bottom-20 right-6 z-40 p-3 rounded-full backdrop-blur-sm transition-all duration-300 ${
-        isDarkBackground ? 'text-white/90 hover:text-white bg-black/20 hover:bg-black/30' : 'text-black/90 hover:text-black bg-white/20 hover:bg-white/30'
+      className={`fixed bottom-6 md:bottom-20 right-6 z-40 p-3 rounded-full transition-all duration-300 ${
+        isDarkBackground ? 'text-white/90 hover:text-white bg-black/10 hover:bg-black/20' : 'text-black/90 hover:text-black bg-white/10 hover:bg-white/20'
       } ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
       }`}

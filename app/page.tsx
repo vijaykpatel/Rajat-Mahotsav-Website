@@ -12,7 +12,6 @@ import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import "@/styles/registration-theme.css"
 
 import { useLoading } from "@/hooks/use-loading"
-import { useThemeColor } from "@/hooks/use-theme-color"
 import AashirwadVideoPlayer from "@/components/organisms/aashirwad-video-player"
 import TextSection1 from "@/components/organisms/text-section-1"
 import TextSection2 from "@/components/organisms/text-section-2"
@@ -39,7 +38,6 @@ export default function ShaderShowcase() {
   const deviceType = useDeviceType();
 
   const { isLoading } = useLoading();
-  // useThemeColor();
   const [isLoaded, setIsLoaded] = useState(false)
   const [isPanActive, setIsPanActive] = useState(false)
   const [cardsVisible, setCardsVisible] = useState(false)
@@ -120,20 +118,20 @@ export default function ShaderShowcase() {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%', top: 'auto', bottom: 0 }} />
             
             {/* Glassmorphic overlay for lower section */}
-            <div className="absolute inset-x-0 bottom-0 h-[31%] md:h-[30%] bg-white/45 backdrop-blur-sm z-[5] pointer-events-none" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%)' }} />
+            <div className="absolute inset-x-0 bottom-0 h-[35%] md:h-[32%] bg-white/45 backdrop-blur-sm z-[5] pointer-events-none" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%)' }} />
             
-            {/* Desktop: Static Image */}
+            {/* Desktop: Static Image (> 1280px) */}
             <img
               src={backgroundImageUrl}
               alt="Background"
-              className="hidden md:block absolute inset-0 w-full h-full object-cover brightness-115"
+              className="hidden xl:block absolute inset-0 w-full h-full object-cover brightness-115"
             />
             
-            {/* Mobile: Panning Sihasan Image */}
+            {/* Mobile/Tablet: Panning Sihasan Image (<= 1280px, includes iPad Pro) */}
             <img
               src={backgroundImageUrl}
               alt="Background"
-              className="md:hidden absolute inset-0 animate-pan-right brightness-110"
+              className="xl:hidden absolute inset-0 animate-pan-right brightness-110"
               style={{ 
                 animationPlayState: isPanActive ? 'running' : 'paused',
                 objectPosition: 'left center'
@@ -141,7 +139,7 @@ export default function ShaderShowcase() {
             />
             
             {/* Glassmorphic Feature Card */}
-            <div className="flex items-end md:items-center justify-center w-full min-h-[400px] mt-auto pb-14 md:pb-12 relative z-20">
+            <div className="flex items-end md:items-center justify-center w-full min-h-[400px] mt-auto pb-20 md:pb-10 relative z-20">
               <div className="px-4 text-center">
                 <h3 className="font-bold leading-[1.4] relative z-10" style={{ color: '#0f172a', fontSize: 'clamp(3rem, 15vw, 12rem)' }}>સુવર્ણ યુગ નો રજત મહોત્સવ</h3>
               </div>

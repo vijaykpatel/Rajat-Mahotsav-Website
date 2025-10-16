@@ -69,7 +69,7 @@ export function FloatingMenuButton() {
     router.push(href)
   }
 
-  const bgClass = isDarkBackground ? 'bg-black/20 hover:bg-black/30' : 'bg-white/20 hover:bg-white/30'
+  const bgClass = isDarkBackground ? 'bg-black/10 hover:bg-black/20' : 'bg-white/10 hover:bg-white/20'
   const textClass = isDarkBackground ? 'text-white/90 hover:text-white' : 'text-black/90 hover:text-black'
 
   return (
