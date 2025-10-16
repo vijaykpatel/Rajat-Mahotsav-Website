@@ -115,6 +115,7 @@ export default function TextSection1({ children }: { children?: React.ReactNode 
               <h2 
                 className="font-bold text-slate-100 text-transition mb-4 md:mb-6"
                 style={{
+                  fontFamily: 'var(--font-instrument-serif)',
                   fontSize: 'clamp(1.87rem, 6vw, 3.5rem)',
                   lineHeight: 'clamp(1.2, 1.1 + 0.5vw, 1.3)',
                   wordBreak: 'break-word',
@@ -127,6 +128,7 @@ export default function TextSection1({ children }: { children?: React.ReactNode 
               <p 
                 className="text-slate-300 text-transition"
                 style={{
+                  fontFamily: 'var(--font-instrument-serif)',
                   fontSize: 'clamp(1.25rem, 4vw, 1.6rem)',
                   lineHeight: 'clamp(1.4, 1.3 + 0.5vw, 1.6)',
                   wordBreak: 'break-word',
