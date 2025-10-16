@@ -139,7 +139,7 @@ export default function ShaderShowcase() {
             />
             
             {/* Glassmorphic Feature Card */}
-            <div className="flex items-end md:items-center justify-center w-full min-h-[400px] mt-auto pb-20 md:pb-10 relative z-20">
+            <div className="flex items-end md:items-center justify-center w-full min-h-[400px] mt-auto relative z-20" style={{ paddingBottom: 'clamp(2.5rem, 10vh, 6rem)' }}>
               <div className="px-4 text-center">
                 <h3 className="font-bold leading-[1.4] relative z-10" style={{ color: '#0f172a', fontSize: 'clamp(3rem, 15vw, 12rem)' }}>સુવર્ણ યુગ નો રજત મહોત્સવ</h3>
               </div>

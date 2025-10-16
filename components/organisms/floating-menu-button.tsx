@@ -76,7 +76,7 @@ export function FloatingMenuButton() {
     <>
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className={`fixed bottom-6 md:bottom-20 left-6 z-40 p-3 rounded-full backdrop-blur-sm transition-all duration-300 ${bgClass} ${textClass} ${
+        className={`fixed bottom-2 md:bottom-20 left-6 z-40 p-3 rounded-full backdrop-blur-sm transition-all duration-300 ${bgClass} ${textClass} ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
         aria-label="Toggle menu"

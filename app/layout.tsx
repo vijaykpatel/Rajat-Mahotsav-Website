@@ -11,7 +11,6 @@ import { Navigation } from "@/components/organisms/navigation"
 import StickyFooter from "@/components/organisms/sticky-footer"
 import { ScrollToTop } from "@/components/atoms/scroll-to-top"
 import { FloatingMenuButton } from "@/components/organisms/floating-menu-button"
-import { StaticThemeColor } from "@/components/atoms/static-theme-color"
 import "./globals.css"
 
 const figtree = Figtree({
@@ -84,7 +83,6 @@ html {
       </head>
       <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoMusic.variable} ${lato.variable} ${antonio.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
-          {/* <StaticThemeColor /> */}
           <Navigation />
           <div className="min-h-screen flex flex-col">
             <div className="flex-1">
