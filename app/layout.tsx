@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Figtree } from "next/font/google"
 import { Instrument_Serif } from "next/font/google"
+import { Noto_Sans_Gujarati } from "next/font/google"
 import { ThemeProvider } from "@/components/atoms/theme-provider"
 import { Navigation } from "@/components/organisms/navigation"
 import StickyFooter from "@/components/organisms/sticky-footer"
@@ -13,7 +14,7 @@ const figtree = Figtree({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-figtree",
-  display: "swap",
+  display: "block",
 })
 
 const instrumentSerif = Instrument_Serif({
@@ -21,7 +22,14 @@ const instrumentSerif = Instrument_Serif({
   weight: ["400"],
   style: ["normal", "italic"],
   variable: "--font-instrument-serif",
-  display: "swap",
+  display: "block",
+})
+
+const notoGujarati = Noto_Sans_Gujarati({
+  subsets: ["gujarati"],
+  weight: ["400", "700"],
+  variable: "--font-gujarati",
+  display: "block",
 })
 
 
@@ -54,10 +62,11 @@ html {
   font-family: ${figtree.style.fontFamily};
   --font-sans: ${figtree.variable};
   --font-instrument-serif: ${instrumentSerif.variable};
+  --font-gujarati: ${notoGujarati.variable};
 }
         `}</style>
       </head>
-      <body className={`${figtree.variable} ${instrumentSerif.variable}`}>
+      <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoGujarati.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
           <Navigation />
           <div className="min-h-screen flex flex-col">

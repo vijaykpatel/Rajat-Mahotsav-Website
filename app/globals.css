@@ -85,6 +85,7 @@
   /* Added Figtree as the primary font variable */
   --font-figtree: "Figtree", sans-serif; /* Figtree font family configuration */
   --font-noto-music: "Noto Music", sans-serif; /* Noto Music font family configuration */
+  --font-gujarati: "Noto Sans Gujarati", sans-serif; /* Gujarati font family configuration */
 }
 
 .dark {
@@ -126,6 +127,7 @@
   --font-instrument-serif: "Instrument Serif", serif; /* Instrument Serif font family configuration */
   /* Added Figtree font variable for dark mode consistency */
   --font-figtree: "Figtree", sans-serif; /* Figtree font family configuration */
+  --font-gujarati: "Noto Sans Gujarati", sans-serif; /* Gujarati font family configuration */
 }
 
 
@@ -178,6 +180,7 @@
   --font-sans: var(--font-figtree);
   --font-figtree: var(--font-figtree);
   --font-noto-music: var(--font-noto-music);
+  --font-gujarati: var(--font-gujarati);
 }
 
 @layer base {
