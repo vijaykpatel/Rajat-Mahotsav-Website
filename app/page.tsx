@@ -47,6 +47,7 @@ export default function ShaderShowcase() {
   const mobileGuruRef = useRef<HTMLDivElement>(null)
   
   const backgroundImageUrl = `${getCloudflareImageBiggest("5aeb6c7e-f6ea-45b1-da4a-823279172400")}&width=2560`
+  const sihasan_trimmed = `${getCloudflareImageBiggest("c7853ba8-25d7-4097-b754-53d5ff3adb00")}&width=2560`
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
@@ -147,7 +148,7 @@ export default function ShaderShowcase() {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%', top: 'auto', bottom: 0 }} />
             
             {/* Glassmorphic overlay for lower section */}
-            <div className="absolute inset-x-0 bottom-0 h-[30%] md:h-[30%] bg-white/45 backdrop-blur-sm z-[5] pointer-events-none" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%)' }} />
+            {/* git <div className="absolute inset-x-0 bottom-0 h-[30%] md:h-[30%] bg-white/45 backdrop-blur-sm z-[5] pointer-events-none" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%)' }} /> */}
             
             {/* Desktop: Static Image (> 1280px) */}
             <img
@@ -158,9 +159,9 @@ export default function ShaderShowcase() {
             
             {/* Mobile/Tablet: Panning Sihasan Image (<= 1280px, includes iPad Pro) */}
             <img
-              src={backgroundImageUrl}
+              src={sihasan_trimmed}
               alt="Background"
-              className="xl:hidden absolute inset-0 animate-pan-right brightness-115"
+              className="xl:hidden absolute inset-0 h-full object-cover animate-pan-right brightness-115"
               style={{ 
                 animationPlayState: isPanActive ? 'running' : 'paused',
                 objectPosition: 'left center'
@@ -168,11 +169,11 @@ export default function ShaderShowcase() {
             />
             
             {/* Glassmorphic Feature Card */}
-            <div className="flex items-end md:items-center justify-center w-full mt-auto relative z-20" style={{ paddingBottom: 'calc(clamp(2.5rem, 8vh, 4rem) + env(safe-area-inset-bottom))' }}>
+            {/* <div className="flex items-end md:items-center justify-center w-full mt-auto relative z-20" style={{ paddingBottom: 'calc(clamp(2.5rem, 8vh, 4rem) + env(safe-area-inset-bottom))' }}>
               <div className="px-4 text-center">
                 <h3 className="font-bold leading-[1.4] relative z-10" style={{ color: '#0f172a', fontSize: 'clamp(3rem, 14vw, 12rem)', fontFamily: 'var(--font-gujarati)' }}>સુવર્ણ યુગ નો રજત મહોત્સવ</h3>
               </div>
-            </div>
+            </div> */}
           </div>
           
           {/* Text Sections */}
