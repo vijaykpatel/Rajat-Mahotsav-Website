@@ -5,6 +5,8 @@ import { getR2Image } from "@/lib/cdn-assets"
 import { useEffect, useRef, useState } from "react"
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Skiper54 } from "@/components/templates/skiper54"
+import { getCloudflareImage } from "@/lib/cdn-assets"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -30,16 +32,14 @@ const content = [
       "The five-day grand opening Murti Pratishtha Mahotsav, featuring spiritual discourses, Indian cultural dance and music, honorable guests, fireworks, and a vibrant parade, is still remembered as one of the most remarkable events in the history of our sansthan. The unwavering dedication of volunteers, whose tireless efforts and collective contributions made the construction of this temple possible, remains a lasting testament to the devotion and vision of our beloved Prem Murti Acharya Swamishree Maharaj and the entire Swaminarayan community.",
     image: getR2Image("/main/2001_3.JPG"),
   },
-  {
-    title: "Suvarna Yug no Rajat Mahotsav",
-    description:
-      "What unfolded afterwards was a golden era of the growth of the faith and the flourishing of the supreme teachings and philosophy of Lord Shree Swaminarayanbapa Swamibapa, not only in New Jersey, but all throughout North America.",
-    isVideo: true,
-  },
 ]
 
 export default function PratisthaStory({ children }: { children?: React.ReactNode }) {
-  const [rowsVisible, setRowsVisible] = useState<boolean[]>([false, false, false, false])
+  const [rowsVisible, setRowsVisible] = useState<boolean[]>([false, false, false])
+  const [videoSectionVisible, setVideoSectionVisible] = useState(false)
+  const [closingTextVisible, setClosingTextVisible] = useState(false)
+  const videoSectionRef = useRef<HTMLDivElement>(null)
+  const closingTextRef = useRef<HTMLDivElement>(null)
   const [animDuration, setAnimDuration] = useState(1.2)
   const sectionRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -69,6 +69,42 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
 
     return () => observers.forEach(obs => obs.disconnect())
   }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setVideoSectionVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    )
+    if (videoSectionRef.current) observer.observe(videoSectionRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setClosingTextVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    )
+    if (closingTextRef.current) observer.observe(closingTextRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  const mandalImages = [
+    { src: getCloudflareImage("bdf8b51a-570b-447d-7caa-9e30b94b4300"), alt: "Seattle Hari Mandir", title: "Seattle Hari Mandir" },
+    { src: getCloudflareImage("a9c67756-fe7b-4518-9097-5f97219adb00"), alt: "Ocala Mandir Ground Breaking", title: "Ocala Mandir Ground Breaking" },
+    { src: getCloudflareImage("e712a1af-45df-4b53-6ebd-a71bcc2d9e00"), alt: "Georgia Hari Mandir Murti Pratishta", title: "Georgia Hari Mandir Murti Pratishta"},
+    { src: getCloudflareImage("05321c03-9773-44a0-d011-4ac2b7ccba00"), alt: "Chicago Murti Pratishta", title: "Chicago Murti Pratishta" },
+    { src: getCloudflareImage("e22429be-2df7-40dc-7f8f-f4dfdd135e00"), alt: "Los Angeles Mandir Murti Pratishta", title: "Los Angeles Mandir Murti Pratishta" },
+    { src: getCloudflareImage("606b2839-0750-4eee-719c-c37cdfb45f00"), alt: "Kentucky Mandir Murti Pratishta", title: "Kentucky Mandir Murti Pratishta" },
+    { src: getCloudflareImage("33a475fc-4473-4641-7a61-8bb18069a300"), alt: "Delaware Mandir Murti Pratishta & Diamond Tula", title: "Delaware Mandir Murti Pratishta & Diamond Tula" },
+    { src: getCloudflareImage("808c6572-2fba-4d68-0f57-1c641e583400"), alt: "Tennessee Hari Mandir Murti Pratishta", title: "Tennessee Hari Mandir Murti Pratishta" },
+    { src: getCloudflareImage("0755116a-1b7d-41cb-4a46-1a0e09871500"), alt: "Toronto Mandir Murti Pratishta", title: "Toronto Mandir Murti Pratishta" },
+    { src: getCloudflareImage("87a4268e-8c43-48a2-2d5a-36a7bd9d8b00"), alt: "Ohio Hari Mandir Murti Pratishta", title: "Ohio Hari Mandir Murti Pratishta" },
+    { src: getCloudflareImage("311766d8-23da-4762-e5b9-634606bbfc00"), alt: "North America Convention 2015", title: "North America Convention 2015" },
+    { src: getCloudflareImage("03ab5bfc-f774-434f-b710-c0739cd8d700"), alt: "Virginia Mandir Murti Pratishta", title: "Virginia Mandir Murti Pratishta" },
+    { src: getCloudflareImage("42f7297b-9fac-4834-e3d2-df24f47d0300"), alt: "Ocala Mandir Murti Pratishta", title: "Ocala Mandir Murti Pratishta" },
+    { src: getCloudflareImage("9f2d8425-226e-4013-5641-3463f7e1a000"), alt: "Tennessee Mandir Murti Pratishta", title: "Tennessee Mandir Murti Pratishta" },
+    { src: getCloudflareImage("26b6c7da-4a70-4847-29b2-a31b27222a00"), alt: "Kentucky Shilanyas Ceremony", title: "Kentucky Shilanyas Ceremony" },
+  ]
 
   // hex values ar faster in gsap a lot
   // --page-bg
@@ -158,33 +194,112 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
               </p>
             </motion.div>
 
-            {/* Image or Video */}
+            {/* Image */}
             <motion.div
               initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
               animate={rowsVisible[index] ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
               transition={{ duration: animDuration, ease: "easeOut" }}
               className="w-full md:w-[50%] order-2"
             >
-              {item.isVideo ? (
-                <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ position: 'relative', paddingTop: '56.42633228840125%' }}>
-                  <iframe
-                    src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/6f4c127cc7b339c9b1b7875c1dc8e745/iframe?poster=https%3A%2F%2Fcustomer-kss5h1dwt4mkz0x3.cloudflarestream.com%2F6f4c127cc7b339c9b1b7875c1dc8e745%2Fthumbnails%2Fthumbnail.gif%3Ftime%3D96s%26duration%3D4s&defaultQuality=1080p"
-                    loading="lazy"
-                    style={{ border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
-                    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                    allowFullScreen
-                  />
-                </div>
-              ) : (
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-auto object-cover rounded-2xl shadow-2xl"
-                />
-              )}
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-auto object-cover rounded-2xl shadow-2xl"
+              />
             </motion.div>
           </div>
         ))}
+      </div>
+      
+      {/* Video Section - Separate */}
+      <div ref={videoSectionRef} className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 py-16 md:py-24">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="font-bold text-slate-100 text-transition text-center mb-12 md:mb-16"
+          style={{
+            fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
+            lineHeight: 'clamp(1.2, 1.1 + 0.5vw, 1.3)'
+          }}
+        >
+          Suvarna Yug no Rajat Mahotsav
+        </motion.h2>
+        
+        <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
+          {/* Video */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={videoSectionVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            transition={{ duration: animDuration, ease: "easeOut" }}
+            className="w-full md:w-[50%]"
+          >
+            <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ position: 'relative', paddingTop: '56.42633228840125%' }}>
+              <iframe
+                src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/6f4c127cc7b339c9b1b7875c1dc8e745/iframe?poster=https%3A%2F%2Fcustomer-kss5h1dwt4mkz0x3.cloudflarestream.com%2F6f4c127cc7b339c9b1b7875c1dc8e745%2Fthumbnails%2Fthumbnail.gif%3Ftime%3D96s%26duration%3D4s&defaultQuality=1080p"
+                loading="lazy"
+                style={{ border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
+                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                allowFullScreen
+              />
+            </div>
+          </motion.div>
+          
+          {/* Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: animDuration, ease: "easeOut" }}
+            className="flex-1"
+          >
+            <h2 
+              className="font-bold text-slate-100 text-transition mb-4 md:mb-6"
+              style={{
+                fontSize: 'clamp(1.87rem, 6vw, 3.5rem)',
+                lineHeight: 'clamp(1.2, 1.1 + 0.5vw, 1.3)',
+                wordBreak: 'break-word',
+                overflowWrap: 'break-word',
+                hyphens: 'auto'
+              }}
+            >
+              25 Years in Secaucus
+            </h2>            
+            <p 
+              className="text-slate-300 text-transition"
+              style={{
+                fontSize: 'clamp(1.25rem, 4vw, 1.6rem)',
+                lineHeight: 'clamp(1.4, 1.3 + 0.5vw, 1.6)',
+                wordBreak: 'break-word',
+                overflowWrap: 'break-word'
+              }}
+            >
+              What unfolded afterwards was a golden era of the growth of the faith and the flourishing of the supreme teachings and philosophy of Lord Shree Swaminarayanbapa Swamibapa, not only in New Jersey, but all throughout North America.
+            </p>
+          </motion.div>
+        </div>
+      </div>
+      
+      {/* Closing Text */}
+      <div ref={closingTextRef} className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 py-16 md:py-20">
+        <motion.p
+          initial={{ opacity: 0, y: 50 }}
+          animate={closingTextVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-slate-300 text-transition text-center"
+          style={{
+            fontSize: 'clamp(1.25rem, 4vw, 1.6rem)',
+            lineHeight: 'clamp(1.4, 1.3 + 0.5vw, 1.6)',
+            wordBreak: 'break-word',
+            overflowWrap: 'break-word'
+          }}
+        >
+          The Karan Satsang throughout America flourished magnificently after the Suvarna Tula Murti Pratishta, truly ushering in a golden era of growth for the entire Swaminarayan faith across North America. Temples and mandals sprouted abundantly from coast to coast, New York to Los Angeles, Toronto to Florida, as the seeds planted by Jeevanpran Shree Muktajeevan Swamibapa were lovingly nurtured by His divine successor, Acharya Swamishree Maharaj. Today, this thriving garden continues to flourish under the inspired guidance of Acharya Shree Jitendriyapriyadasji Swamiji Maharaj.
+        </motion.p>
+      </div>
+      
+      {/* Carousel */}
+      <div className="w-full py-16 md:py-20">
+        <Skiper54 images={mandalImages} />
       </div>
         </div>
       </div>
