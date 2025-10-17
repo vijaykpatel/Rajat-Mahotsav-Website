@@ -19,7 +19,7 @@ const menuItems = [
     label: "Seva", 
     href: "#",
     subItems: [
-      { icon: Heart, label: "Community Service", href: "/community-service" },
+      { icon: Heart, label: "Community Seva", href: "/community-seva" },
       { icon: PiHandsPraying, label: "Spiritual Seva", href: "/spiritual-seva" },
     ]
   },

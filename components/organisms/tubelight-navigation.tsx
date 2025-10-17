@@ -9,7 +9,7 @@ const navItems = [
   { name: "Registration", url: "/registration", icon: ClipboardPen },
   { name: "Accommodations", url: "/accommodations", icon: Hotel },
   { name: "Schedule", url: "/schedule", icon: CalendarDays },
-  { name: "Community Service", url: "/community-service", icon: Heart },
+  { name: "Community Seva", url: "/community-seva", icon: Heart },
   { name: "Media", url: "/media", icon: ImageIcon },
 ]
 

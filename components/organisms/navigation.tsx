@@ -60,8 +60,8 @@ const menuItems = [
     subItems: [
       {
         icon: Heart,
-        label: "Community Service",
-        href: "/community-service",
+        label: "Community Seva",
+        href: "/community-seva",
       },
       {
         icon: PiHandsPraying,

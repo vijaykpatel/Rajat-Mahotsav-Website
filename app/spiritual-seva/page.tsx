@@ -24,7 +24,7 @@ const parayans = [
   { 
     icon: BookOpenText, 
     title: "Sadachar Sandesh", 
-    description: "Teachings of Acharya Shree Purushottampriyadasji Swamishree Maharaj",
+    description: "Teachings of Prem Murti Acharya Swamishree Maharaj",
     gujaratiLink: "https://www.swaminarayangadi.com/publications/books/scriptures/english/sadachar-sandesh-gujarati",
     englishLink: "https://www.swaminarayangadi.com/publications/books/scriptures/english/sadachar-sandesh-english"
   },
@@ -104,14 +104,9 @@ export default function SpiritualSevaPage() {
             </motion.div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="w-full mb-20"
-          >
+          <div className="w-full mb-20">
             <ImageMarquee firstRow={firstRowImages} secondRow={secondRowImages} />
-          </motion.div>
+          </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-16">
             <div className="space-y-8">
@@ -157,10 +152,10 @@ export default function SpiritualSevaPage() {
                             {goal.target}
                             {goal.suffix && <span className="text-lg ml-1">{goal.suffix}</span>}
                           </div>
-                          <h4 className="text-lg font-semibold community-text-primary">
+                          <h4 className="text-xl font-semibold community-text-primary">
                             {goal.label}
                           </h4>
-                          <p className="text-sm community-text-secondary">
+                          <p className="text-base community-text-secondary">
                             {goal.description}
                           </p>
                         </div>
@@ -210,10 +205,10 @@ export default function SpiritualSevaPage() {
                               <Icon className="h-8 w-8 community-text-accent" />
                             </div>
                           </div>
-                          <h4 className="text-lg font-semibold community-text-primary">
+                          <h4 className="text-xl font-semibold community-text-primary">
                             {parayan.title}
                           </h4>
-                          <p className="text-sm community-text-secondary">
+                          <p className="text-base community-text-secondary">
                             {parayan.description}
                           </p>
                         </div>

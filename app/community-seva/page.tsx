@@ -162,7 +162,7 @@ export default function CommunityServicePage() {
           {/* Hero Content */}
           <div className="mb-36">
             <StandardPageHeader
-              title="Community Service"
+              title="Community Seva"
               subtitle="Seva in Action"
               description=""
               isLoaded={isLoaded}
@@ -198,14 +198,7 @@ export default function CommunityServicePage() {
           
 
           {/* Image Marquee - Full Width */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 1 }}
-            className="w-full"
-          >
-            <ImageMarquee firstRow={firstRowImages} secondRow={secondRowImages} />
-          </motion.div>
+          <ImageMarquee firstRow={firstRowImages} secondRow={secondRowImages} />
 
           {/* Path of Service Story - Sticky Scroll Sections */}
           <div>
