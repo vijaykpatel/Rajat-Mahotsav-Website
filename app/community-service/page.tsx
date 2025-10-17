@@ -22,19 +22,26 @@ import { PathOfServiceStory } from "@/components/organisms/path-of-service-story
 import "@/styles/community-service-theme.css"
 
 const firstRowImages = [
-  { src: getCloudflareImage("001591ef-616d-40ae-7102-30f4bad78b00"), alt: "Community Service Event 1" },
-  { src: getCloudflareImage("944138d2-cc15-45f5-6eec-f4a6a3e30800"), alt: "Community Service Event 2" },
-  { src: getCloudflareImage("1a01f892-a3ab-4715-496c-bd570de83b00"), alt: "Community Service Event 3" },
-  { src: getCloudflareImage("428174c3-965c-4055-f941-381562cf8000"), alt: "Community Service Event 4" },
-  { src: getCloudflareImage("8711b5e8-0ce7-44e5-2f3f-6f5abdb6db00"), alt: "Community Service Event 5" },
+  { src: getCloudflareImage("001591ef-616d-40ae-7102-30f4bad78b00"), alt: "Community Service Event 1" }, // local police 5k
+  { src: getCloudflareImage("79c313ad-200d-448f-4609-0b70f44ac500"), alt: "Community Service Event 1" }, // funds donation
+  { src: getCloudflareImage("944138d2-cc15-45f5-6eec-f4a6a3e30800"), alt: "Community Service Event 2" }, // hall bd
+  { src: getCloudflareImage("1a01f892-a3ab-4715-496c-bd570de83b00"), alt: "Community Service Event 3" }, // food & toy
+  { src: getCloudflareImage("428174c3-965c-4055-f941-381562cf8000"), alt: "Community Service Event 4" }, // t shirts raising
+  { src: getCloudflareImage("8711b5e8-0ce7-44e5-2f3f-6f5abdb6db00"), alt: "Community Service Event 5" }, // medshare 2
+  { src: getCloudflareImage("2725d2b7-fa9a-4300-356d-719da7932f00"), alt: "Community Service Event 11" }, // american cancer
+  { src: getCloudflareImage("30526bd0-cd22-4496-bed1-f9e9451b3b00"), alt: "Community Service Event 13" }, // health camp 1
 ]
 
 const secondRowImages = [
-  { src: getCloudflareImage("c80899d2-8dcb-4420-90ea-bea0c4b7fa00"), alt: "Community Service Event 6" },
-  { src: getCloudflareImage("79fbc010-6b11-47be-e0af-e5d073711500"), alt: "Community Service Event 7" },
-  { src: getCloudflareImage("239db829-530a-4543-4a7d-4f795d8d9900"), alt: "Community Service Event 8" },
-  { src: getCloudflareImage("a1ec5573-6e43-4499-79be-2028ebce6200"), alt: "Community Service Event 9" },
-  { src: getCloudflareImage("2f2f3c0b-c371-41c5-3e94-043fad0da700"), alt: "Community Service Event 10" },
+  { src: getCloudflareImage("c80899d2-8dcb-4420-90ea-bea0c4b7fa00"), alt: "Community Service Event 6" }, //medshare
+  { src: getCloudflareImage("d556615a-8d35-4506-b04a-4b359c5ef900"), alt: "Community Service Event 6" }, // tree planting
+  { src: getCloudflareImage("eed0022e-457e-4949-cd9f-220c08971300"), alt: "Community Service Event 7" }, // 5k sharing network band
+  { src: getCloudflareImage("e3d55165-9b4c-4313-7047-524f689bda00"), alt: "Community Service Event 8" }, // ladies hurrican relief
+  { src: getCloudflareImage("0344f8a6-96d7-4885-8124-8c0851f02500"), alt: "Community Service Event 9" }, // earth day
+  { src: getCloudflareImage("2f2f3c0b-c371-41c5-3e94-043fad0da700"), alt: "Community Service Event 10" }, // pizza
+  { src: getCloudflareImage("df2179f1-cb42-4f5c-a542-5fc7cba05500"), alt: "Community Service Event 12" }, // ealry food drive
+  { src: getCloudflareImage("6fb86845-e7a9-48ff-f1b8-88b28b6dc700"), alt: "Community Service Event 14" }, // health camp 2
+  { src: getCloudflareImage("ee07b747-ecc9-4437-e620-348a2e9c8d00"), alt: "Community Service Event 14" }, // blood donation sign
 ]
 
 const communityStats = [

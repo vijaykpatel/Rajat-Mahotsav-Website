@@ -24,7 +24,7 @@ export function ImageMarquee({
   imageWidth = "w-[20rem] md:w-[30rem]",
   imageHeight = "h-[30vh] md:h-[30vh]",
   gap = "gap-3 md:gap-6",
-  duration = { mobile: 45, desktop: 35 }
+  duration = { mobile: 55, desktop: 40 }
 }: ImageMarqueeProps) {
   const deviceType = useDeviceType()
   const animationDuration = deviceType === 'mobile' ? duration.mobile : duration.desktop

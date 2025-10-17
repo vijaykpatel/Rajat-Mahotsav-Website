@@ -10,6 +10,7 @@ import { PiHandsPraying } from "react-icons/pi"
 import { ImageMarquee } from "@/components/organisms/image-marquee"
 import { SevaSubmissionForm } from "@/components/organisms/seva-submission-form"
 import "@/styles/community-service-theme.css"
+import { getCloudflareImage } from "@/lib/cdn-assets"
 
 const sevaGoals = [
   { icon: GiPrayerBeads, label: "Malas", target: 250, description: "Meditational Prayer Beads" },
@@ -49,19 +50,20 @@ const parayans = [
 ]
 
 const firstRowImages = [
-  { src: "https://placehold.co/600x400/orange/white?text=Spiritual+Seva+1", alt: "Spiritual Seva 1" },
-  { src: "https://placehold.co/600x400/red/white?text=Spiritual+Seva+2", alt: "Spiritual Seva 2" },
-  { src: "https://placehold.co/600x400/orange/white?text=Spiritual+Seva+3", alt: "Spiritual Seva 3" },
-  { src: "https://placehold.co/600x400/red/white?text=Spiritual+Seva+4", alt: "Spiritual Seva 4" },
-  { src: "https://placehold.co/600x400/orange/white?text=Spiritual+Seva+5", alt: "Spiritual Seva 5" },
+  { src: getCloudflareImage("07f0293e-f384-4a9e-4364-4f7131263100"), alt: "Spiritual Seva 1" },
+  { src: getCloudflareImage("f8a344b2-8045-4273-ceb7-bcd0a4f4de00"), alt: "Spiritual Seva 2" },
+  { src: getCloudflareImage("dfea2296-fa83-4bdc-6b23-bb28434a5a00"), alt: "Spiritual Seva 3" },
+  { src: getCloudflareImage("a8f9e2cb-feec-4bb0-15a5-29dd83648b00"), alt: "Spiritual Seva 4" },
+  { src: getCloudflareImage("7e9de524-cfc3-49ca-96cf-105fba01ce00"), alt: "Spiritual Seva 5" },
 ]
 
 const secondRowImages = [
-  { src: "https://placehold.co/600x400/red/white?text=Spiritual+Seva+6", alt: "Spiritual Seva 6" },
-  { src: "https://placehold.co/600x400/orange/white?text=Spiritual+Seva+7", alt: "Spiritual Seva 7" },
-  { src: "https://placehold.co/600x400/red/white?text=Spiritual+Seva+8", alt: "Spiritual Seva 8" },
-  { src: "https://placehold.co/600x400/orange/white?text=Spiritual+Seva+9", alt: "Spiritual Seva 9" },
-  { src: "https://placehold.co/600x400/red/white?text=Spiritual+Seva+10", alt: "Spiritual Seva 10" },
+  { src: getCloudflareImage("694c7ad0-74f9-4c2a-8b30-eb4dce7f8000"), alt: "Spiritual Seva 6" },
+  { src: getCloudflareImage("b7160132-914d-4d1f-d6c4-48418b6aa000"), alt: "Spiritual Seva 7" },
+  { src: getCloudflareImage("d1b8a1af-abfc-4a8c-b7e2-d4b1377ebf00"), alt: "Spiritual Seva 8" },
+  { src: getCloudflareImage("bdf8f682-7bd3-4838-46c4-fe7ba1358b00"), alt: "Spiritual Seva 9" },
+  { src: getCloudflareImage("a494c6be-02eb-4fc2-d6eb-9df81b294600"), alt: "Spiritual Seva 10" },
+  { src: getCloudflareImage("8c1c0405-0c48-4f49-606b-a4260e2c5900"), alt: "Spiritual Seva 11" },
 ]
 
 export default function SpiritualSevaPage() {
