@@ -2,7 +2,8 @@ import { getCloudflareImage } from "@/lib/cdn-assets";
 
 export const timelineData = [
   { year: "1970", title: "Jeevanpran Shree Muktajeevan Swamibapa's First Visit to USA", description: "", speed: 3, image: getCloudflareImage("fc5c68aa-dc1f-44b4-9736-326e30be9900") },
-  { year: "1987", title: "Acharya Swamishree Maharaj establishes SSSSM USA", description: "", speed: -3, image: getCloudflareImage("7e729aa6-93f4-49a1-50f5-0e3e7cb19500") },
+  { year: "1987", title: "Acharya Swamishree Maharaj establishes SSSSM USA", description: "", speed: -3, image: getCloudflareImage("4e613a00-fa0e-489e-84bb-a90a8cc74100") },
+  // { year: "1987", title: "Acharya Swamishree Maharaj establishes SSSSM USA", description: "", speed: -3, image: getCloudflareImage("7e729aa6-93f4-49a1-50f5-0e3e7cb19500") },
   { year: "1992", title: "Acharya Swamishree Maharaj's Second Visit to USA", description: "", speed: 3, image: getCloudflareImage("c2ccd5c1-2068-44e3-0b0f-36219cce8100") },
   { year: "1995", title: "Acharya Swamishree Maharaj establishes New Jersey Hari Mandir", description: "", speed: -3, image: getCloudflareImage("4abea43e-77ef-4afd-3b01-4eca68dd9500") },
   { year: "1998", title: "Secaucus Temple Ground Breaking", description: "", speed: 3, image: getCloudflareImage("ca84f8d6-6405-4472-e2df-6dab2fc9e900") },

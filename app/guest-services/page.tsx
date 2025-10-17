@@ -10,7 +10,7 @@ import { getCloudflareImage } from "@/lib/cdn-assets"
 import "@/styles/community-service-theme.css"
 import "@/styles/registration-theme.css"
 
-export default function AccommodationsPage() {
+export default function GuestServicesPage() {
   const containerRef = useRef<HTMLDivElement>(null)
   const heroRef = useRef<HTMLDivElement>(null)
   const venueRef = useRef<HTMLDivElement>(null)
@@ -212,7 +212,7 @@ export default function AccommodationsPage() {
     <div className="min-h-screen reg-page-bg page-bg-extend w-full relative text-gray-900">
       <div className="container mx-auto px-4 relative z-10">
         <StandardPageHeader
-          title="Accommodations"
+          title="Guest Services"
           description="Prepare for the Rajat Mahotsav with complete peace of mind. This Guest Services guide will help you with accommodations, travel logistics, and important onsite instructions for the event, so you can focus entirely on the celebration and create lasting spiritual memories."
           isLoaded={isLoaded}
         />
@@ -436,7 +436,7 @@ export default function AccommodationsPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
           transition={{ duration: 0.8 }}
-          className="mb-16"
+          className="mb-16 mt-24"
         >
           <div className="flex items-center gap-3 mb-8">
             <Plane className="h-8 w-8 text-blue-500" />

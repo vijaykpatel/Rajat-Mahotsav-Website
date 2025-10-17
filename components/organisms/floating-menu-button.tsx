@@ -12,7 +12,7 @@ const menuItems = [
   { icon: Home, label: "Home", href: "/" },
   { icon: ScrollText, label: "Timeline", href: "/timeline" },
   { icon: ClipboardPen, label: "Registration", href: "/registration" },
-  { icon: Hotel, label: "Accommodations", href: "/accommodations" },
+  { icon: Hotel, label: "Guest Services", href: "/guest-services" },
   { icon: CalendarDays, label: "Schedule", href: "/schedule" },
   { 
     icon: PiHandsPraying, 

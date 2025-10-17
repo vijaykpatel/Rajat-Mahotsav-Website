@@ -7,7 +7,7 @@ const navItems = [
   { name: "Home", url: "/", icon: Home },
   { name: "Timeline", url: "/timeline", icon: ScrollText },
   { name: "Registration", url: "/registration", icon: ClipboardPen },
-  { name: "Accommodations", url: "/accommodations", icon: Hotel },
+  { name: "Guest Services", url: "/guest-services", icon: Hotel },
   { name: "Schedule", url: "/schedule", icon: CalendarDays },
   { name: "Community Seva", url: "/community-seva", icon: Heart },
   { name: "Media", url: "/media", icon: ImageIcon },

@@ -36,8 +36,8 @@ const menuItems = [
   },
   {
     icon: Hotel,
-    label: "Accommodations",
-    href: "/accommodations",
+    label: "Guest Services",
+    href: "/guest-services",
     gradient:
       "radial-gradient(circle, rgba(168,85,247,0.15) 0%, rgba(147,51,234,0.06) 50%, rgba(126,34,206,0) 100%)",
     iconColor: "text-purple-500",
