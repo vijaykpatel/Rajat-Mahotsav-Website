@@ -61,13 +61,13 @@ const communityStats = [
     target: 25000,
     suffix: ""
   },
-  {
-    icon: MapPin,
-    label: "Distance Walked",
-    current: 80,
-    target: 2500,
-    suffix: "km"
-  },
+  // {
+  //   icon: MapPin,
+  //   label: "Distance Walked",
+  //   current: 80,
+  //   target: 2500,
+  //   suffix: "km"
+  // },
   {
     icon: Heart,
     label: "Community Events",
@@ -240,13 +240,13 @@ export default function CommunityServicePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-lg community-text-secondary"
+                className="text-xl community-text-secondary"
               >
                 Together, we're making a difference in our community. Here's a live tracker of us on our way to meeting our Rajat Mahotsav Community Service Goals!
               </motion.p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {communityStats.map((stat, index) => (
                 <ProgressCounter
                   key={stat.label}
@@ -271,22 +271,40 @@ export default function CommunityServicePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="text-3xl lg:text-4xl font-bold community-text-primary mb-4"
+                className="text-3xl lg:text-4xl mb-6 font-bold community-text-primary mb-4"
               >
                 Support Our Mission
               </motion.h2>
+              <motion.h3 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className="text-2xl lg:text-3xl font-semibold text-orange-600 mb-6"
+              >
+                Volunteer With Us
+              </motion.h3>
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-2xl font-bold text-orange-600"
+                className="text-xl community-text-secondary max-w-4xl mb-6 mx-auto leading-relaxed"
+              >
+                There are ways for everyone to get involved, whether that means joining us on our community seva or even helping out your community in Swaminarayan Bhagwan's name. We will soon provide more information on how you can get involved and join the efforts along with a tool to record your seva!
+              </motion.p>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-2xl lg:text-3xl font-semibold text-orange-600"
               >
                 Your Gift, Doubled
               </motion.p>
             </div>
             
-            <div className="max-w-4xl mx-auto space-y-8">
+            <div className="max-w-4xl mx-auto space-y-8 -mt-2">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
