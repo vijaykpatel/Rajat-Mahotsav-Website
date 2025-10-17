@@ -5,7 +5,7 @@ export const timelineData = [
   { year: "1987", title: "Acharya Swamishree Maharaj establishes SSSSM USA", description: "", speed: -3, image: getCloudflareImage("7e729aa6-93f4-49a1-50f5-0e3e7cb19500") },
   { year: "1992", title: "Acharya Swamishree Maharaj's Second Visit to USA", description: "", speed: 3, image: getCloudflareImage("c2ccd5c1-2068-44e3-0b0f-36219cce8100") },
   { year: "1995", title: "Acharya Swamishree Maharaj establishes New Jersey Hari Mandir", description: "", speed: -3, image: getCloudflareImage("4abea43e-77ef-4afd-3b01-4eca68dd9500") },
-  { year: "1998", title: "Secaucus Temple Ground Breaking", description: "", speed: 3, image: getCloudflareImage("485aac20-6512-4752-87da-29ae4e3c4b00") },
+  { year: "1998", title: "Secaucus Temple Ground Breaking", description: "", speed: 3, image: getCloudflareImage("ca84f8d6-6405-4472-e2df-6dab2fc9e900") },
   { year: "1999", title: "Acharya Swamishree Maharaj Visits Temple Construction Site", description: "", speed: -3, image: getCloudflareImage("311d238e-8de7-4d33-f243-a52bb2a99d00") },
   { year: "2001", title: "Suvarna Tula Murti Pratishta Opening", description: "", speed: -3, image: getCloudflareImage("1742c4b3-44e1-4604-6dde-73a9dc83cf00") },
   { year: "2002", title: "Muktajeevan Swamibapa Community Hall Opening", description: "", speed: 3, image: getCloudflareImage("8258116b-05d1-48ac-5a16-0ef54a92a900") },
@@ -32,4 +32,5 @@ export const timelineData = [
   { year: "2023", title: "22nd Patotsav Samuh Raas Celebrations", description: "", speed: -3, image: getCloudflareImage("6016a349-d49b-4f9f-5b5b-2dc1b2178e00") },
   { year: "2024", title: "Guruparampara Grand Hindolo", description: "", speed: 3, image: getCloudflareImage("d5b57d06-27aa-4c6e-b063-30ea4a449500") },
   { year: "2025", title: "Acharya Swamiji Maharaj is showered with flower pedals", description: "", speed: -3, image: getCloudflareImage("263ba23e-efbd-43e7-b8fa-e9f971d6dd00") },
+  { year: "2026", title: "Something Extraordinary Awaits...", description: "", speed: 3, image: "https://cdn.njrajatmahotsav.com/main_logo.png" },
 ];
