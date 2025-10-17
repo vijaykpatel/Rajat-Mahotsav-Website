@@ -85,7 +85,7 @@ export default function SpiritualSevaPage() {
         <div className="relative z-10">
           <div className="mb-36">
             <StandardPageHeader
-              title="Rajat Mahotsav Spiritual Initiative"
+              title="Spiritual Seva"
               subtitle="Dharma, Gnyan, Vairagya, and Bhakti"
               description=""
               isLoaded={isLoaded}
@@ -102,10 +102,6 @@ export default function SpiritualSevaPage() {
                 In celebration of our Temple's Rajat Mahotsav, devotees are coming together in a collective spiritual endeavor that extends far beyond a single event. We are transforming this momentous milestone into a year-round journey of spiritual growth, using this celebration as a catalyst to deepen our devotion and strengthen our eternal bond with God. Through dedicated niyams and seva, and by embracing the four pillars of Dharma, Gnyan, Vairagya, and Bhakti, we commit to sustaining this spiritual momentum throughout the year, ensuring that the divine inspiration of our Rajat Mahotsav becomes a lasting foundation for our path toward God.
               </p>
             </motion.div>
-          </div>
-
-          <div className="w-full mb-20">
-            <ImageMarquee firstRow={firstRowImages} secondRow={secondRowImages} />
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-16">
@@ -271,7 +267,13 @@ export default function SpiritualSevaPage() {
                 </motion.div>
               </div>
             </div>
+          </div>
 
+          <div className="w-full mb-20">
+            <ImageMarquee firstRow={firstRowImages} secondRow={secondRowImages} />
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* <div className="space-y-8 mt-20">
               <motion.h3
                 initial={{ opacity: 0, y: 30 }}

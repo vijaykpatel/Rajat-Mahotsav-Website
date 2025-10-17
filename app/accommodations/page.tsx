@@ -220,8 +220,8 @@ export default function AccommodationsPage() {
 
       <motion.div 
         className="container mx-auto px-4 mb-20 mt-8"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <motion.img
@@ -230,9 +230,10 @@ export default function AccommodationsPage() {
           width="1200"
           height="800"
           className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl mx-auto h-auto object-cover rounded-2xl shadow-lg"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          initial={{ opacity: 0, scale: 0.9, y: 30 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
         />
       </motion.div>
 
@@ -346,22 +347,22 @@ export default function AccommodationsPage() {
                       <span className="text-xs text-orange-500">{isStreetView ? "Satellite" : "Map"}</span>
                     </button>
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-orange-400 mb-2 pr-20 md:pr-32">Shree Swaminarayan Temple Secaucaus, NJ</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-orange-400 mb-2 pr-20 md:pr-32">Shree Swaminarayan Temple Secaucaus, NJ</h3>
                   <p className="text-gray-600 flex items-center gap-2 mt-5 md:mt-0">
                     <MapPin className="h-4 w-4 text-orange-400" />
                     200 Swamibapa Way, Secaucus, NJ 07094
                   </p>
                 </div>
-                <div className="relative overflow-hidden rounded-lg w-full">
+                <div className="relative overflow-hidden rounded-lg w-full h-[400px] md:h-[500px] bg-gray-100">
                   <iframe
                     src={isStreetView 
-                      ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e1!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
-                      : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                      ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e1!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus&loading=eager" 
+                      : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus&loading=eager"
                     }
-                    className="w-full h-[400px] md:h-[500px]"
-                    style={{ border: 0 }}
+                    className="w-full h-full absolute inset-0"
+                    style={{ border: 0, contentVisibility: 'auto' }}
                     allowFullScreen
-                    loading="lazy"
+                    loading="eager"
                     referrerPolicy="no-referrer-when-downgrade"
                   />
                 </div>
@@ -405,23 +406,22 @@ export default function AccommodationsPage() {
                       <span className="text-xs text-orange-500">{isStreetView ? "Satellite" : "Map"}</span>
                     </button>
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-orange-400 mb-2 pr-20 md:pr-32">Shree Swaminarayan Temple Secaucaus, NJ</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-orange-400 mb-2 pr-20 md:pr-32">Shree Swaminarayan Temple Secaucaus, NJ</h3>
                   <p className="text-gray-600 flex items-center gap-2 mt-5 md:mt-0">
                     <MapPin className="h-4 w-4 text-orange-400" />
                     200 Swamibapa Way, Secaucus, NJ 07094
                   </p>
                 </div>
-                <div className="relative overflow-hidden rounded-lg">
+                <div className="relative overflow-hidden rounded-lg h-[500px] bg-gray-100">
                   <iframe
                     src={isStreetView 
-                      ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e1!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
-                      : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                      ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e1!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus&loading=eager" 
+                      : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus&loading=eager"
                     }
-                    width="100%"
-                    height="500"
-                    style={{ border: 0 }}
+                    className="w-full h-full absolute inset-0"
+                    style={{ border: 0, contentVisibility: 'auto' }}
                     allowFullScreen
-                    loading="lazy"
+                    loading="eager"
                     referrerPolicy="no-referrer-when-downgrade"
                   />
                 </div>

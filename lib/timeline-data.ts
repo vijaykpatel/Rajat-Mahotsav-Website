@@ -22,7 +22,7 @@ export const timelineData = [
   { year: "2013", title: "Swamibapa Pipe Band USA 10th Anniversary", description: "", speed: -3, image: getCloudflareImage("5d1c000e-16ee-4a73-f101-095fcebd4400") },
   { year: "2014", title: "Flash Mob Welcome Dance", description: "", speed: 3, image: getCloudflareImage("2d61d6ba-2f0b-446f-68cd-01825a75bc00") },
   { year: "2015", title: "One World Trade Center Visit", description: "", speed: -3, image: getCloudflareImage("d4cb9e82-48ac-44e6-9e35-280a9ba21700") },
-  { year: "2016", title: "Opening Swamibapa Way", description: "", speed: 3, image: getCloudflareImage("6f740bee-cbdb-48a2-afd2-08e2e83cd900") },
+  { year: "2016", title: "Opening of Swamibapa Way", description: "", speed: 3, image: getCloudflareImage("6f740bee-cbdb-48a2-afd2-08e2e83cd900") },
   { year: "2017", title: "Sadbhav Amrut Parva", description: "", speed: -3, image: getCloudflareImage("3e5aae65-2f71-46aa-1812-ae0c6ec7d800") },
   { year: "2018", title: "New Loya Shakotsav", description: "", speed: 3, image: getCloudflareImage("8184e169-4253-4dd3-9aa1-74b87c6b6700") },
   { year: "2019", title: "Acharya Swamishree Maharaj Final USA Vicharan", description: "", speed: -3, image: getCloudflareImage("4a90683c-8f77-48ab-3907-37743cec6c00") },
