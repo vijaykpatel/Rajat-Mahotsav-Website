@@ -39,7 +39,7 @@ export default function AashirwadSection() {
         >
           <div style={{ position: "relative", paddingTop: "56.25%" }}>
             <iframe
-              src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/7ef05b327338f7548d1a7b678f40a4db/iframe?poster=https%3A%2F%2Fcustomer-kss5h1dwt4mkz0x3.cloudflarestream.com%2F7ef05b327338f7548d1a7b678f40a4db%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D78s%26height%3D600"
+              src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/7ef05b327338f7548d1a7b678f40a4db/iframe?poster=https%3A%2F%2Fcustomer-kss5h1dwt4mkz0x3.cloudflarestream.com%2F7ef05b327338f7548d1a7b678f40a4db%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D78s%26height%3D600&defaultQuality=1080p"
               loading="lazy"
               style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
               allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"

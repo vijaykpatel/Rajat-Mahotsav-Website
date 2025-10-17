@@ -186,9 +186,6 @@ export default function ShaderShowcase() {
             <InviteText />
           </div>
           
-          {/* Video Player Section */}
-          {/* <AashirwadVideoPlayer /> */}
-          
           <div className="bg-main-page-bg">
           
           {/* Aashirwad Section */}

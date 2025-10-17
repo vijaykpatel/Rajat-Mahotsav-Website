@@ -30,10 +30,16 @@ const content = [
       "The five-day grand opening Murti Pratishtha Mahotsav, featuring spiritual discourses, Indian cultural dance and music, honorable guests, fireworks, and a vibrant parade, is still remembered as one of the most remarkable events in the history of our sansthan. The unwavering dedication of volunteers, whose tireless efforts and collective contributions made the construction of this temple possible, remains a lasting testament to the devotion and vision of our beloved Prem Murti Acharya Swamishree Maharaj and the entire Swaminarayan community.",
     image: getR2Image("/main/2001_3.JPG"),
   },
+  {
+    title: "Suvarna Yug no Rajat Mahotsav",
+    description:
+      "What unfolded afterwards was a golden era of the growth of the faith and the flourishing of the supreme teachings and philosophy of Lord Shree Swaminarayanbapa Swamibapa, not only in New Jersey, but all throughout North America.",
+    isVideo: true,
+  },
 ]
 
 export default function PratisthaStory({ children }: { children?: React.ReactNode }) {
-  const [rowsVisible, setRowsVisible] = useState<boolean[]>([false, false, false])
+  const [rowsVisible, setRowsVisible] = useState<boolean[]>([false, false, false, false])
   const [animDuration, setAnimDuration] = useState(1.2)
   const sectionRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -152,18 +158,30 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
               </p>
             </motion.div>
 
-            {/* Image */}
+            {/* Image or Video */}
             <motion.div
               initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
               animate={rowsVisible[index] ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
               transition={{ duration: animDuration, ease: "easeOut" }}
               className="w-full md:w-[50%] order-2"
             >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-auto object-cover rounded-2xl shadow-2xl"
-              />
+              {item.isVideo ? (
+                <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ position: 'relative', paddingTop: '56.42633228840125%' }}>
+                  <iframe
+                    src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/6f4c127cc7b339c9b1b7875c1dc8e745/iframe?poster=https%3A%2F%2Fcustomer-kss5h1dwt4mkz0x3.cloudflarestream.com%2F6f4c127cc7b339c9b1b7875c1dc8e745%2Fthumbnails%2Fthumbnail.gif%3Ftime%3D96s%26duration%3D4s&defaultQuality=1080p"
+                    loading="lazy"
+                    style={{ border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
+                    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                    allowFullScreen
+                  />
+                </div>
+              ) : (
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-auto object-cover rounded-2xl shadow-2xl"
+                />
+              )}
             </motion.div>
           </div>
         ))}
