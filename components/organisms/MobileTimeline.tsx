@@ -30,7 +30,7 @@ export default function MobileTimeline() {
       <FloatingMenuButton />
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 page-bg-extend overflow-x-hidden">
         <div className="px-6 py-12 pb-32">
-          <h1 className="text-6xl leading-[1.2] pl-4 font-serif italic font-extrabold bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent mb-16">
+          <h1 className="text-7xl leading-[1.2] pl-4 tracking-wide font-instrument-serif italic font-extrabold bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent mb-16">
             Our Journey
           </h1>
           <div className="space-y-12">
@@ -50,8 +50,8 @@ export default function MobileTimeline() {
             ))}
           </div>
           <div className="mt-24 pl-4">
-            <span className="block text-5xl leading-[1.2] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">Let's continue</span>
-            <span className="block text-5xl leading-[1.2] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">making history</span>
+            <span className="block text-6xl leading-[1.2] tracking-wide font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">Let's continue</span>
+            <span className="block text-6xl leading-[1.2] tracking-wide font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">making history</span>
           </div>
         </div>
       </div>

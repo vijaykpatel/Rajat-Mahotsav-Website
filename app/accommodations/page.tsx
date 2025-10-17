@@ -539,7 +539,19 @@ export default function AccommodationsPage() {
             <Hotel className="h-8 w-8 text-purple-500" />
             <h2 className="text-3xl font-bold">Recommended Hotels</h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            initial={{ y: 20 }}
+            whileInView={{ y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.6 }}
+            className="bg-gradient-to-r from-purple-50 to-violet-50 rounded-2xl shadow-lg p-6"
+          >
+            <p className="acc-card-base text-gray-700 leading-relaxed">
+              <span className="font-semibold">Note:</span> We are currently working on securing hotel group rates for our guests. 
+              This page will be updated as soon as the information is ready.
+            </p>
+          </motion.div>
+          {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {hotels.map((hotel, index) => (
               <motion.div
                 key={index}
@@ -625,7 +637,7 @@ export default function AccommodationsPage() {
               open={selectedHotel !== null}
               onOpenChange={(open) => !open && setSelectedHotel(null)}
             />
-          )}
+          )} */}
         </motion.section>
 
         {/* Transportation Section */}

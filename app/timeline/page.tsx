@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { FloatingMenuButton } from "@/components/organisms/floating-menu-button";
+import { FloatingButton } from "@/components/atoms/floating-button";
 import { ArrowLeft } from "lucide-react";
 import MobileTimeline from "@/components/organisms/MobileTimeline";
 import { timelineData } from "@/lib/timeline-data";
@@ -13,13 +14,56 @@ export default function TimelinePage() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDarkBackground, setIsDarkBackground] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const rafRef = useRef<number>();
+  const scrollbarRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
 
   const scrollToStart = () => {
     if (locomotiveScrollRef.current) {
       locomotiveScrollRef.current.scrollTo(0, { duration: 1000, disableLerp: false });
     }
   };
+
+  const handleScrollbarClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isDragging.current || !scrollbarRef.current || !locomotiveScrollRef.current) return;
+    const rect = scrollbarRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const percentage = (x / rect.width) * 100;
+    const maxScroll = locomotiveScrollRef.current.scroll.instance.limit.x;
+    const targetScroll = (percentage / 100) * maxScroll;
+    locomotiveScrollRef.current.scrollTo(targetScroll, { duration: 600, disableLerp: false });
+  };
+
+  const handleScrollbarDrag = (e: MouseEvent) => {
+    if (!isDragging.current || !scrollbarRef.current || !locomotiveScrollRef.current) return;
+    e.preventDefault();
+    const rect = scrollbarRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const percentage = Math.min(100, Math.max(0, (x / rect.width) * 100));
+    const maxScroll = locomotiveScrollRef.current.scroll.instance.limit.x;
+    const targetScroll = (percentage / 100) * maxScroll;
+    locomotiveScrollRef.current.scrollTo(targetScroll, { duration: 100, disableLerp: false });
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging.current) {
+        e.preventDefault();
+        handleScrollbarDrag(e);
+      }
+    };
+    const handleMouseUp = () => {
+      isDragging.current = false;
+      document.body.style.userSelect = '';
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -48,6 +92,9 @@ export default function TimelinePage() {
       locomotiveScrollRef.current = scroll;
       scroll.on("scroll", (obj: any) => {
         setIsScrolled(obj.scroll.x > 300);
+        const maxScroll = obj.limit.x;
+        const progress = maxScroll > 0 ? (obj.scroll.x / maxScroll) * 100 : 0;
+        setScrollProgress(Math.min(100, Math.max(0, progress)));
         if (rafRef.current) cancelAnimationFrame(rafRef.current);
         rafRef.current = requestAnimationFrame(() => {
           const element = document.elementFromPoint(50, window.innerHeight - 100);
@@ -92,23 +139,53 @@ export default function TimelinePage() {
     <>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4/dist/locomotive-scroll.min.css" />
       <FloatingMenuButton />
-      <button
+      <FloatingButton
         onClick={scrollToStart}
-        className={`fixed bottom-6 right-6 z-40 p-3 rounded-full backdrop-blur-sm transition-all duration-300 ${
-          isDarkBackground ? 'bg-black/20 hover:bg-black/30 text-white/90 hover:text-white' : 'bg-white/20 hover:bg-white/30 text-black/90 hover:text-black'
-        } ${
-          isScrolled ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
-        }`}
+        isDarkBackground={isDarkBackground}
+        isVisible={isScrolled}
+        className="fixed bottom-6 right-6 z-40"
         aria-label="Back to start"
       >
         <ArrowLeft size={24} />
-      </button>
+      </FloatingButton>
+      
+      {/* Custom Scrollbar */}
+      <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-40 w-[90%] max-w-6xl select-none">
+        <div
+          ref={scrollbarRef}
+          onClick={handleScrollbarClick}
+          onMouseDown={(e) => { 
+            e.preventDefault();
+            isDragging.current = true;
+            document.body.style.userSelect = 'none';
+          }}
+          className="relative h-4 bg-preset-bluish-gray/40 backdrop-blur-sm rounded-full cursor-pointer shadow-lg"
+        >
+          <div
+            className="absolute top-0 left-0 h-full bg-gradient-to-r from-orange-500 to-red-600 rounded-full pointer-events-none"
+            style={{ width: `${scrollProgress}%` }}
+          />
+          <div
+            className="absolute top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center cursor-grab active:cursor-grabbing"
+            style={{ left: `calc(${scrollProgress}% - 20px)` }}
+            onMouseDown={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              isDragging.current = true;
+              document.body.style.userSelect = 'none';
+            }}
+          >
+            <div className="w-7 h-7 bg-gradient-to-r from-orange-500 to-red-600 rounded-full shadow-lg pointer-events-none" />
+          </div>
+        </div>
+      </div>
+
       <div className="h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 page-bg-extend overflow-hidden">
         <div data-scroll-container ref={scrollRef}>
           <div className="flex ml-[12vw] pr-[12vw]">
             <div className="flex-shrink-0 mx-[10vw] ml-[2vw]">
-              <span className="block text-[10vw] pl-12 leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="-1" data-scroll-direction="vertical">Our</span>
-              <span className="block text-[10vw] pl-12 leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="2" data-scroll-direction="vertical"> Journey</span>
+              <span className="block text-[12vw] pl-12 leading-[1.5] tracking-wider font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="-1" data-scroll-direction="vertical">Our</span>
+              <span className="block text-[12vw] pl-12 leading-[1.5] tracking-wider font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="2" data-scroll-direction="vertical"> Journey</span>
             </div>
             {timelineData.map((item, index) => (
               <figure
@@ -122,8 +199,8 @@ export default function TimelinePage() {
               </figure>
             ))}
             <div className="flex-shrink-0 mx-[10vw]">
-              <span className="block text-[10vw] pl-12 leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="-4" data-scroll-direction="vertical">Let's continue</span>
-              <span className="block text-[10vw] pl-12 leading-[1.5] font-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="3" data-scroll-direction="vertical">making history</span>
+              <span className="block text-[12vw] pl-12 leading-[1.1] tracking-wider font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="-4" data-scroll-direction="vertical">Let's continue</span>
+              <span className="block text-[12vw] pl-12 leading-[1.2] tracking-wider font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="3" data-scroll-direction="vertical">making history</span>
             </div>
           </div>
         </div>
