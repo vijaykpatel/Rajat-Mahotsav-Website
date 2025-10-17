@@ -168,7 +168,7 @@ export default function LoadingScreen() {
                       color: 'transparent'
                     }}
                   >
-                    Inspired By: His Divine Holiness Acharya Shree Jitendriyapriyadasji Swamiji Maharaj
+                    Inspired by His Divine Holiness Acharya Shree Jitendriyapriyadasji Swamiji Maharaj
                   </h4>
                 </div>
               </motion.div>

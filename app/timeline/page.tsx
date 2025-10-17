@@ -102,8 +102,8 @@ export default function TimelinePage() {
             const styles = window.getComputedStyle(element);
             const bgColor = styles.backgroundColor;
             if (bgColor && bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {
-              const rgb = bgColor.match(/\d+/g);
-              if (rgb) {
+              const rgb = bgColor?.match(/\d+/g);
+              if (rgb && rgb.length >= 3) {
                 const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
                 setIsDarkBackground(brightness < 128);
               }
