@@ -27,6 +27,7 @@ const Skiper54 = ({ images }: Skiper54Props) => {
         loop={true}
         showNavigation={true}
         showPagination={true}
+        autoplay={true}
       />
     </div>
   );
@@ -51,6 +52,9 @@ const Carousel_006 = ({
 }: Carousel_006Props) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const autoplayPlugin = React.useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: false })
+  );
 
   useEffect(() => {
     if (!api) return;
@@ -83,17 +87,7 @@ const Carousel_006 = ({
           slidesToScroll: 1,
           align: "center",
         }}
-        plugins={
-          autoplay
-            ? [
-                Autoplay({
-                  delay: 2000,
-                  stopOnInteraction: true,
-                  stopOnMouseEnter: true,
-                }),
-              ]
-            : []
-        }
+        plugins={autoplay ? [autoplayPlugin.current] : []}
       >
         <CarouselContent className="flex h-[500px] w-full !ml-0">
         {images.map((img, index) => (
@@ -127,7 +121,10 @@ const Carousel_006 = ({
         {showNavigation && (
           <button
             aria-label="Previous slide"
-            onClick={() => api?.scrollPrev()}
+            onClick={() => {
+              api?.scrollPrev();
+              autoplayPlugin.current.reset();
+            }}
             className="rounded-full bg-black/10 p-2"
           >
             <ChevronLeft className="text-white" />
@@ -153,7 +150,10 @@ const Carousel_006 = ({
         {showNavigation && (
           <button
             aria-label="Next slide"
-            onClick={() => api?.scrollNext()}
+            onClick={() => {
+              api?.scrollNext();
+              autoplayPlugin.current.reset();
+            }}
             className="rounded-full bg-black/10 p-2"
           >
             <ChevronRight className="text-white" />
