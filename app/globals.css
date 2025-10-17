@@ -295,7 +295,7 @@
   } */
   
   .page-header-spacing {
-    @apply mb-12;
+    @apply mb-16 md:mb-20 lg:mb-24;
   }
   
   /* UNUSED - Page title desc spacing */
@@ -340,6 +340,23 @@
   
   .animated-word {
     @apply inline-block mr-2 transition-all duration-500 ease-out;
+  }
+  
+  /* Accommodation Card Typography */
+  .acc-card-title {
+    @apply text-xl font-bold;
+  }
+  
+  .acc-card-sub-title {
+    @apply text-lg font-semibold;
+  }
+  
+  .acc-card-base {
+    @apply text-lg;
+  }
+  
+  .acc-card-caption {
+    @apply text-base;
   }
   
 }

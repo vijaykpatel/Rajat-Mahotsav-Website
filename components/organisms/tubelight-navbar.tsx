@@ -42,7 +42,11 @@ export function NavBar({ items, className }: NavBarProps) {
   }, [isExpanded])
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 1024)
+    const handleResize = () => {
+      const width = window.innerWidth
+      // Switch to mobile mode at 1280px or when expanded navbar would be too wide
+      setIsMobile(width <= 1280)
+    }
     handleResize()
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
@@ -150,7 +154,7 @@ export function NavBar({ items, className }: NavBarProps) {
             </motion.div>
             {isExpanded && (
               <motion.div
-                className="flex flex-row items-center gap-2"
+                className="flex flex-row items-center gap-1"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -167,9 +171,9 @@ export function NavBar({ items, className }: NavBarProps) {
                       onClick={() => setActiveTab(item.name)}
                       onMouseEnter={() => setHoveredTab(item.name)}
                       onMouseLeave={() => setHoveredTab(null)}
-                      className="relative cursor-pointer text-base font-semibold px-5 py-3 rounded-full transition-colors whitespace-nowrap flex items-center justify-center text-white/80 hover:text-white"
+                      className="relative cursor-pointer text-base font-semibold px-3 py-2.5 rounded-full transition-colors whitespace-nowrap flex items-center justify-center text-white/80 hover:text-white"
                     >
-                      <Icon size={20} strokeWidth={2.5} className="mr-2" />
+                      <Icon size={18} strokeWidth={2.5} className="mr-1.5" />
                       <span>{item.name}</span>
                       {(isHovered || (!hoveredTab && isActive)) && (
                         <motion.div

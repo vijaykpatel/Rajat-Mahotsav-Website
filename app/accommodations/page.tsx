@@ -6,7 +6,7 @@ import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { ImageCarouselModal } from "@/components/organisms/image-carousel-modal"
 import { PinContainer } from "@/components/molecules/3d-pin"
 import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane, Check, ArrowRight } from "lucide-react"
-import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
+import { getCloudflareImage } from "@/lib/cdn-assets"
 import "@/styles/community-service-theme.css"
 import "@/styles/registration-theme.css"
 
@@ -23,12 +23,12 @@ export default function AccommodationsPage() {
   const [mounted, setMounted] = useState(false)
   const [activeTab, setActiveTab] = useState('nyc')
   
-  const { scrollYProgress } = useScroll()
-  const scale = useTransform(scrollYProgress, [0, 0.4], [1, 2])
-  const blur = useTransform(scrollYProgress, [0.2, 0.4], [0, 15])
-  const blurFilter = useTransform(blur, (b) => `blur(${b}px)`)
-  const opacity = useTransform(scrollYProgress, [0.2, 0.4], [1, 0.3])
-  const imageY = useTransform(scrollYProgress, [0, 0.25], [0, -150])
+  // const { scrollYProgress } = useScroll()
+  // const scale = useTransform(scrollYProgress, [0, 0.4], [1, 2])
+  // const blur = useTransform(scrollYProgress, [0.2, 0.4], [0, 15])
+  // const blurFilter = useTransform(blur, (b) => `blur(${b}px)`)
+  // const opacity = useTransform(scrollYProgress, [0.2, 0.4], [1, 0.3])
+  // const imageY = useTransform(scrollYProgress, [0, 0.25], [0, -150])
 
   useEffect(() => {
     setMounted(true)
@@ -210,16 +210,34 @@ export default function AccommodationsPage() {
 
   return (
     <div className="min-h-screen reg-page-bg page-bg-extend w-full relative text-gray-900">
-      <div className="container mx-auto px-4 pt-8 relative z-10">
+      <div className="container mx-auto px-4 relative z-10">
         <StandardPageHeader
           title="Accommodations"
-          subtitle="Your Home Away From Home"
-          description="Everything you need for your stay during the Rajat Mahotsav celebration"
+          description="Prepare for the Rajat Mahotsav with complete peace of mind. This Guest Services guide will help you with accommodations, travel logistics, and important onsite instructions for the event, so you can focus entirely on the celebration and create lasting spiritual memories."
           isLoaded={isLoaded}
         />
       </div>
 
-      {isMobile ? (
+      <motion.div 
+        className="container mx-auto px-4 mb-20 mt-8"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <motion.img
+          src={getCloudflareImage('05d7e7c8-ba90-476f-4881-0c1f0d190c00')}
+          alt="Accommodations Hero"
+          width="1200"
+          height="800"
+          className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl mx-auto h-auto object-cover rounded-2xl shadow-lg"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        />
+      </motion.div>
+
+      {/* DESKTOP SCROLL ANIMATION - COMMENTED OUT */}
+      {/* {isMobile ? (
         <motion.div 
           className="container mx-auto px-4 mb-8 mt-8"
           initial={{ opacity: 0, scale: 0.95 }}
@@ -240,7 +258,7 @@ export default function AccommodationsPage() {
       ) : (
         <>
           <motion.div 
-            className="fixed left-0 w-full h-screen flex items-center justify-center overflow-hidden mb-8 mt-8"
+            className="fixed left-0 w-full h-screen flex items-center justify-center overflow-hidden mb-8 mt-36"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
@@ -257,7 +275,7 @@ export default function AccommodationsPage() {
               alt="Accommodations Hero"
               width="896"
               height="597"
-              className="max-w-2xl lg:max-w-3xl xl:max-w-3xl w-full h-auto object-cover shadow-lg rounded-2xl"
+              className="max-w-2xl lg:max-w-3xl xl:max-w-4xl w-full h-auto object-cover shadow-lg rounded-2xl"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -268,7 +286,7 @@ export default function AccommodationsPage() {
           </motion.div>
           <div className="relative min-h-[120vh] lg:min-h-[100vh]" />
         </>
-      )}
+      )} */}
 
       <div className="relative z-20 bg-transparent">
         <div className="container mx-auto px-4 page-bottom-spacing">
@@ -291,7 +309,7 @@ export default function AccommodationsPage() {
                 title="Shree Swaminarayan Temple"
                 href="https://maps.app.goo.gl/CVaAykRG1HQRv9hA9"
               >
-                <div className="flex basis-full flex-col tracking-tight text-slate-100/50 w-[50rem] h-[35rem]">
+                <div className="flex basis-full flex-col tracking-tight text-slate-100/50 w-full max-w-[50rem] min-h-[35rem]">
                 <div className="mb-4 relative">
                   <div className="absolute top-0 right-0 flex flex-col md:flex-row items-end md:items-center gap-1 md:gap-2 z-10">
                     <button
@@ -334,14 +352,13 @@ export default function AccommodationsPage() {
                     200 Swamibapa Way, Secaucus, NJ 07094
                   </p>
                 </div>
-                <div className="relative overflow-hidden rounded-lg">
+                <div className="relative overflow-hidden rounded-lg w-full">
                   <iframe
                     src={isStreetView 
                       ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e1!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
                       : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
                     }
-                    width="100%"
-                    height="500"
+                    className="w-full h-[400px] md:h-[500px]"
                     style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"
@@ -433,19 +450,19 @@ export default function AccommodationsPage() {
               transition={{ duration: 0.6 }}
               className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
             >
-              <h3 className="text-xl font-bold mb-3">Newark Liberty International (EWR)</h3>
+              <h3 className="acc-card-title mb-3">Newark Liberty International (EWR)</h3>
               <div className="space-y-2 text-gray-600">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-blue-400" />
-                  <span className="text-sm font-medium">25-35 min drive</span>
+                  <span className="acc-card-base font-medium">25-35 min drive</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Car className="h-4 w-4 text-blue-400" />
-                  <span className="text-sm">Uber/Lyft: $35-50</span>
+                  <span className="acc-card-base">Uber/Lyft: $35-50</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Navigation className="h-4 w-4 text-blue-400" />
-                  <span className="text-sm">Taxi: $45-60</span>
+                  <span className="acc-card-base">Taxi: $45-60</span>
                 </div>
               </div>
             </motion.div>
@@ -456,19 +473,19 @@ export default function AccommodationsPage() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
             >
-              <h3 className="text-xl font-bold mb-3">LaGuardia Airport (LGA)</h3>
+              <h3 className="acc-card-title mb-3">LaGuardia Airport (LGA)</h3>
               <div className="space-y-2 text-gray-600">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-blue-400" />
-                  <span className="text-sm font-medium">35-45 min drive</span>
+                  <span className="acc-card-base font-medium">35-45 min drive</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Car className="h-4 w-4 text-blue-400" />
-                  <span className="text-sm">Uber/Lyft: $45-65</span>
+                  <span className="acc-card-base">Uber/Lyft: $45-65</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Navigation className="h-4 w-4 text-blue-400" />
-                  <span className="text-sm">Taxi: $55-75</span>
+                  <span className="acc-card-base">Taxi: $55-75</span>
                 </div>
               </div>
             </motion.div>
@@ -479,19 +496,19 @@ export default function AccommodationsPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
             >
-              <h3 className="text-xl font-bold mb-3">John F. Kennedy International (JFK)</h3>
+              <h3 className="acc-card-title mb-3">John F. Kennedy International (JFK)</h3>
               <div className="space-y-2 text-gray-600">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-blue-400" />
-                  <span className="text-sm font-medium">45-60 min drive</span>
+                  <span className="acc-card-base font-medium">45-60 min drive</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Car className="h-4 w-4 text-blue-400" />
-                  <span className="text-sm">Uber/Lyft: $60-85</span>
+                  <span className="acc-card-base">Uber/Lyft: $60-85</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Navigation className="h-4 w-4 text-blue-400" />
-                  <span className="text-sm">Taxi: $70-95</span>
+                  <span className="acc-card-base">Taxi: $70-95</span>
                 </div>
               </div>
             </motion.div>
@@ -503,7 +520,7 @@ export default function AccommodationsPage() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-6"
           >
-            <p className="text-gray-700 leading-relaxed">
+            <p className="acc-card-base text-gray-700 leading-relaxed">
               <span className="font-semibold">Note:</span> The Temple is currently exploring transportation options from Newark airport for our international guests. 
               We will update this page with detailed information as arrangements are finalized. Travelling to/from Newark airport is the preferred method due it's proximity to the temple.
             </p>
@@ -532,41 +549,41 @@ export default function AccommodationsPage() {
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out p-6 border-2 border-purple-200 hover:-translate-y-1 relative"
               >
-                <h3 className="text-xl font-bold mb-3 min-h-[3.5rem]">{hotel.name}</h3>
+                <h3 className="acc-card-title mb-3 min-h-[3.5rem]">{hotel.name}</h3>
                 <div className="space-y-2 text-gray-600">
                   <div className="flex items-center gap-2">
                     <Hash className="h-4 w-4 text-purple-400" />
-                    <span className="text-sm font-medium">{hotel.hotelCode}</span>
+                    <span className="acc-card-base font-medium">{hotel.hotelCode}</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <MapPin className="h-4 w-4 mt-1 text-purple-400" />
-                    <span className="text-sm">{hotel.address}</span>
+                    <span className="acc-card-base">{hotel.address}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Phone className="h-4 w-4 text-purple-400" />
-                    <span className="text-sm">{hotel.phone}</span>
+                    <span className="acc-card-base">{hotel.phone}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4 text-purple-400" />
-                    <span className="text-sm font-medium">{hotel.travelTime}</span>
+                    <span className="acc-card-base font-medium">{hotel.travelTime}</span>
                     <a 
                       href={hotel.directionsLink} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="text-xs text-blue-600 hover:underline"
+                      className="acc-card-caption text-blue-600 hover:underline"
                       onClick={(e) => e.stopPropagation()}
                     >
                       (Directions)
                     </a>
-                    {hotel.walkable && <span className="text-xs bg-green-500/20 text-green-600 px-2 py-1 rounded">Walkable</span>}
+                    {hotel.walkable && <span className="acc-card-caption bg-green-500/20 text-green-600 px-2 py-1 rounded">Walkable</span>}
                   </div>
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-purple-400" />
-                    <span className="text-sm">{hotel.blockDates}</span>
+                    <span className="acc-card-base">{hotel.blockDates}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <DollarSign className="h-4 w-4 text-purple-400" />
-                    <span className="text-sm font-semibold">{hotel.pricePerNight}/night</span>
+                    <span className="acc-card-base font-semibold">{hotel.pricePerNight}/night</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <ExternalLink className="h-4 w-4 text-purple-400" />
@@ -574,7 +591,7 @@ export default function AccommodationsPage() {
                       href={hotel.bookingLink} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="text-sm text-blue-600 hover:underline"
+                      className="acc-card-base text-blue-600 hover:underline"
                       onClick={(e) => e.stopPropagation()}
                     >
                       Book Now
@@ -583,7 +600,7 @@ export default function AccommodationsPage() {
                   <div className="mt-3 pr-28">
                     <div className="flex flex-wrap gap-1">
                       {hotel.amenities.map((amenity, i) => (
-                        <span key={i} className="text-xs bg-purple-500/20 text-black px-2 py-1 rounded">
+                        <span key={i} className="acc-card-caption bg-purple-500/20 text-black px-2 py-1 rounded">
                           {amenity}
                         </span>
                       ))}
@@ -592,7 +609,7 @@ export default function AccommodationsPage() {
                 </div>
                 <button
                   onClick={() => setSelectedHotel(index)}
-                  className="absolute bottom-4 right-4 flex items-center gap-1 bg-gradient-to-r from-purple-400 to-purple-500 hover:from-purple-500 hover:to-purple-600 text-white px-3 py-1.5 rounded-full text-sm font-medium transition-all border-2 border-purple-300 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-400/50"
+                  className="absolute bottom-4 right-4 flex items-center gap-1 bg-gradient-to-r from-purple-400 to-purple-500 hover:from-purple-500 hover:to-purple-600 text-white px-3 py-1.5 rounded-full acc-card-caption font-medium transition-all border-2 border-purple-300 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-400/50"
                 >
                   <span>View Photos</span>
                   <ArrowRight className="h-4 w-4" />
@@ -633,9 +650,9 @@ export default function AccommodationsPage() {
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-yellow-200"
               >
-                <h3 className="text-xl font-bold mb-3">{transport.type}</h3>
-                <p className="text-gray-600 mb-2"><strong>Routes:</strong> {transport.routes}</p>
-                <p className="text-gray-500 text-sm">{transport.info}</p>
+                <h3 className="acc-card-title mb-3">{transport.type}</h3>
+                <p className="acc-card-base text-gray-600 mb-2"><strong>Routes:</strong> {transport.routes}</p>
+                <p className="acc-card-base text-gray-500">{transport.info}</p>
               </motion.div>
             ))}
           </div>

@@ -118,38 +118,35 @@ export function Navigation() {
       >
         <style jsx>{`
           nav[data-navbar] {
-            --nav-padding: 2vw;
-          }
-          @media (min-width: 1024px) {
-            nav[data-navbar] {
-              --nav-padding: 2vw;
-            }
+            --nav-padding: max(1rem, 2vw);
           }
         `}</style>
-        <div className="flex items-center justify-between w-full">
+        <div className="flex items-center justify-between w-full gap-2 sm:gap-4">
 
           {/* Left Side - Tubelight Navbar */}
-          <NavBar items={menuItems.map(item => ({ name: item.label, url: item.href, icon: item.icon }))} />
+          <div className="flex-shrink-0">
+            <NavBar items={menuItems.map(item => ({ name: item.label, url: item.href, icon: item.icon }))} />
+          </div>
 
-          {/* Center - Empty space for better balance */}
-          <div className="flex-1"></div>
+          {/* Center - Flexible spacer */}
+          <div className="flex-1 min-w-0"></div>
 
           {/* Right Side - Both Logos */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <img
               src={CDN_ASSETS.mainLogoNoText}
               alt="Main Logo"
               width="144"
               height="144"
-              className="h-22 w-auto sm:h-26 md:h-30 lg:h-36 object-contain"
+              className="h-20 w-auto sm:h-24 md:h-28 lg:h-32 xl:h-36 object-contain"
             />
-            <div className="h-16 w-px bg-white/40 sm:h-20 md:h-24 lg:h-30 "></div>
+            <div className="h-14 w-px bg-white/40 sm:h-18 md:h-22 lg:h-26 xl:h-30"></div>
             <img
               src={CDN_ASSETS.maningarLogo}
               alt="Maninagar Logo"
               width="144"
               height="144"
-              className="h-22 w-auto sm:h-26 md:h-30 lg:h-36 object-contain"
+              className="h-20 w-auto sm:h-24 md:h-28 lg:h-32 xl:h-36 object-contain"
             />
           </div>
         </div>

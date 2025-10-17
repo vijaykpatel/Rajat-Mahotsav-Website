@@ -67,11 +67,11 @@ export const PinContainer = ({
     <div
       ref={ref}
       className={cn(
-        "relative z-50 cursor-pointer",
+        "relative z-50 cursor-pointer w-full",
         showPin && "group/pin",
         containerClassName
       )}
-      style={{ width: isMobile ? "100%" : "52rem", height: isMobile ? "auto" : "37rem", padding: isMobile ? "0" : "1rem" }}
+      style={{ maxWidth: isMobile ? "100%" : "52rem", height: isMobile ? "auto" : "37rem", padding: isMobile ? "0" : "1rem", margin: "0 auto" }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -86,9 +86,9 @@ export const PinContainer = ({
           style={{
             transform: transform,
           }}
-          className="absolute left-1/2 top-1/2 flex justify-start items-start rounded-2xl shadow-[0_8px_16px_rgb(0_0_0/0.4)] bg-white border-2 border-orange-200 group-hover/pin:border-orange-300 transition-all duration-500 overflow-hidden pointer-events-auto p-6"
+          className="absolute left-1/2 top-1/2 flex justify-start items-start rounded-2xl shadow-[0_8px_16px_rgb(0_0_0/0.4)] bg-white border-2 border-orange-200 group-hover/pin:border-orange-300 transition-all duration-500 overflow-hidden pointer-events-auto p-6 w-[calc(100vw-2rem)] max-w-[50rem]"
         >
-          <div className={cn(" relative z-50 ", className)}>{children}</div>
+          <div className={cn(" relative z-50 w-full", className)}>{children}</div>
         </div>
       </div>
       <PinPerspective title={title} href={href} showPin={showPin} />
