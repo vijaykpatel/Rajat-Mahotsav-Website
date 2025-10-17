@@ -188,6 +188,7 @@ export default function TimelinePage() {
         <div data-scroll-container ref={scrollRef}>
           <div className="flex ml-[12vw] pr-[12vw]">
             <div className="flex-shrink-0 mx-[10vw] ml-[2vw]">
+              {/* font-instrument-serif font-extrabold italic */}
               <span className="block text-[12vw] pl-16 leading-[1.5] tracking-wider font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="-1" data-scroll-direction="vertical">Our</span>
               <span className="block text-[12vw] pl-16 leading-[1.5] tracking-wider font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="2" data-scroll-direction="vertical"> Journey</span>
             </div>
@@ -203,6 +204,7 @@ export default function TimelinePage() {
               </figure>
             ))}
             <div className="flex-shrink-0 mx-[10vw]">
+              {/* font-instrument-serif font-extrabold italic */}
               <span className="block text-[12vw] pl-12 leading-[1.1] tracking-wider font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="-4" data-scroll-direction="vertical">Let's continue</span>
               <span className="block text-[12vw] pl-12 leading-[1.2] tracking-wider font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="3" data-scroll-direction="vertical">making history</span>
             </div>

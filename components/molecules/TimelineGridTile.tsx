@@ -13,7 +13,8 @@ export function TimelineGridTile({ item, variant = "mobile" }: TimelineGridTileP
           <div className="w-12 h-12 rounded-full bg-orange-600 text-white flex items-center justify-center text-2xl font-instrument-serif font-bold flex-shrink-0">
             {item.year}
           </div>
-          <h2 className="text-3xl font-instrument-serif font-extrabold italic text-orange-900 whitespace-pre-line">{item.title}</h2>
+          {/* font-instrument-serif font-extrabold italic */}
+          <h2 className="text-2xl font-figtree font-bold text-orange-900 whitespace-pre-line">{item.title}</h2>
         </div>
         <div className="relative rounded-xl overflow-hidden aspect-[4/3] w-full">
           <img
@@ -32,7 +33,8 @@ export function TimelineGridTile({ item, variant = "mobile" }: TimelineGridTileP
   return (
     <div className="grid grid-cols-[6rem_24vmax] grid-rows-[auto_24vmax_2rem] gap-0">
       <div className="col-start-2 row-start-1 flex items-center pb-4">
-        <h2 className="text-[clamp(1.25rem,3.5vw,3rem)] font-instrument-serif font-extrabold italic text-orange-900 whitespace-pre-line leading-tight" data-scroll data-scroll-speed="1">
+        {/* font-instrument-serif font-extrabold italic */}
+        <h2 className="text-[clamp(1.25rem,4.5vw,2.35rem)] font-figtree font-bold text-orange-900 whitespace-pre-line leading-tight" data-scroll data-scroll-speed="1">
           {item.title}
         </h2>
       </div>
