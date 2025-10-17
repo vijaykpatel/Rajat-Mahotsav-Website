@@ -30,7 +30,7 @@ export default function InviteText() {
           initial={{ opacity: 0, y: 50 }}
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-lg md:text-xl max-w-4xl text-center leading-relaxed relative z-10 text-slate-800"
+          className="text-lg md:text-xl max-w-4xl text-center leading-relaxed relative z-10 text-main-text"
         >
           This Rajat Mahotsav (Silver Jubilee), which will take place from July 25 through August 2, 2026, will celebrate the 25th anniversary, the silver anniversary, of the murti pratishtha of Lord Shree Swaminarayan, Jeevanpran Shree Abji Bapashree, and Jeevanpran Shree Muktajeevan Swamibapa, and the opening of Shree Swaminarayan Temple - Secaucus, New Jersey. This grand occasion will celebrate twenty-five years of faith, community, and fellowship at Shree Swaminarayan Temple - Secaucus, New Jersey, with scripture recitals, divine blessings from Acharya Swamiji Maharaj, cultural programs, special women's events, and a sports shibir. As this temple holds a special place in the hearts of devotees all throughout North America and the world, and has been home to some of the most blissful memories and divine episodes over the last twenty-five years, the members of Shree Swaminarayan Temple - Secaucus, New Jersey, invite you all to be part of this Rajat Mahotsav. Please join us as we celebrate the strength of gold, now with the glow of silver.
         </motion.p>

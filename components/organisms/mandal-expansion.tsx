@@ -28,7 +28,7 @@ export default function MandalExpansionText() {
         initial={{ opacity: 0, y: 50 }}
         animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="text-lg md:text-xl max-w-4xl text-center leading-relaxed relative z-10 text-slate-800"
+        className="text-lg md:text-xl max-w-4xl text-center leading-relaxed relative z-10 text-main-text"
       >
         What unfolded afterwards was a golden era of the growth of the faith and the flourishing of the supreme teachings and philosophy of Lord Shree Swaminarayanbapa Swamibapa, not only in New Jersey, but all throughout North America. Over a dozen new temples and mandals have sprouted from coast to coast, and the initial seeds planted by Jeevanpran Shree Muktajeevan Swamibapa, were lovingly and tirelessly sowed by His beloved heir, Acharya Shree Purushottampriya Swamishree Maharaj, all throughout North America. This garden bloomed by Acharya Swamishree Maharaj is now being devotedly tended to in the same manner by Acharya Shree Jitendriyapriyadasji Swamiji Maharaj, the inspirer of the Shree Ghanshyam Maharaj Rajat Pratishtha Mahotsav at Shree Swaminarayan Temple, New Jersey.
       </motion.p>
