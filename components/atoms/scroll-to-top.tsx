@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { ArrowUp } from "lucide-react"
+import { FloatingButton } from "./floating-button"
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false)
@@ -14,13 +15,11 @@ export function ScrollToTop() {
     const handleScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          // Fast visibility check
           setIsVisible(window.scrollY > 300)
           
-          // Throttle expensive background sampling
           if (rafRef.current) cancelAnimationFrame(rafRef.current)
           rafRef.current = requestAnimationFrame(() => {
-            const element = document.elementFromPoint(window.innerWidth - 50, window.innerHeight - 100)
+            const element = document.elementFromPoint(50, window.innerHeight - 100)
             if (element) {
               const styles = window.getComputedStyle(element)
               const bgColor = styles.backgroundColor
@@ -56,16 +55,14 @@ export function ScrollToTop() {
   }
 
   return (
-    <button
+    <FloatingButton
       onClick={scrollToTop}
-      className={`fixed bottom-2 md:bottom-20 right-6 z-40 p-3 rounded-full transition-all duration-300 ${
-        isDarkBackground ? 'text-white/90 hover:text-white bg-black/10 hover:bg-black/20' : 'text-black/90 hover:text-black bg-white/10 hover:bg-white/20'
-      } ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
-      }`}
+      isDarkBackground={isDarkBackground}
+      isVisible={isVisible}
+      className="fixed bottom-2 md:bottom-20 right-6 z-40"
       aria-label="Scroll to top"
     >
       <ArrowUp size={24} />
-    </button>
+    </FloatingButton>
   )
 }

@@ -51,20 +51,24 @@ const menuItems = [
     iconColor: "text-red-500",
   },
   {
-    icon: Heart,
-    label: "Community Service",
-    href: "/community-service",
+    icon: PiHandsPraying,
+    label: "Seva",
+    href: "#",
     gradient:
       "radial-gradient(circle, rgba(251,146,60,0.15) 0%, rgba(249,115,22,0.06) 50%, rgba(234,88,12,0) 100%)",
     iconColor: "text-orange-500",
-  },
-  {
-    icon: PiHandsPraying,
-    label: "Spiritual Seva",
-    href: "/spiritual-seva",
-    gradient:
-      "radial-gradient(circle, rgba(168,85,247,0.15) 0%, rgba(147,51,234,0.06) 50%, rgba(126,34,206,0) 100%)",
-    iconColor: "text-purple-500",
+    subItems: [
+      {
+        icon: Heart,
+        label: "Community Service",
+        href: "/community-service",
+      },
+      {
+        icon: PiHandsPraying,
+        label: "Spiritual Seva",
+        href: "/spiritual-seva",
+      },
+    ],
   },
   {
     icon: ImageIcon,
@@ -125,7 +129,16 @@ export function Navigation() {
 
           {/* Left Side - Tubelight Navbar */}
           <div className="flex-shrink-0">
-            <NavBar items={menuItems.map(item => ({ name: item.label, url: item.href, icon: item.icon }))} />
+            <NavBar items={menuItems.map(item => ({ 
+              name: item.label, 
+              url: item.href, 
+              icon: item.icon,
+              subItems: item.subItems?.map(sub => ({
+                name: sub.label,
+                url: sub.href,
+                icon: sub.icon
+              }))
+            }))} />
           </div>
 
           {/* Center - Flexible spacer */}

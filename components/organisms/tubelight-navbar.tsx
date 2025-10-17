@@ -11,6 +11,7 @@ interface NavItem {
   name: string
   url: string
   icon: LucideIcon
+  subItems?: NavItem[]
 }
 
 interface NavBarProps {
@@ -25,9 +26,13 @@ export function NavBar({ items, className }: NavBarProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [hasAnimated, setHasAnimated] = useState(false)
+  const [expandedItem, setExpandedItem] = useState<string | null>(null)
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
 
   useEffect(() => {
-    const currentItem = items.find(item => item.url === pathname)
+    const currentItem = items.find(item => 
+      item.url === pathname || item.subItems?.some(sub => sub.url === pathname)
+    )
     if (currentItem) setActiveTab(currentItem.name)
   }, [pathname, items])
 
@@ -89,46 +94,120 @@ export function NavBar({ items, className }: NavBarProps) {
                 <div className="flex flex-col gap-1">
           {items.map((item) => {
             const Icon = item.icon
-            const isActive = activeTab === item.name
+            const isActive = activeTab === item.name || item.subItems?.some(sub => sub.url === pathname)
             const isHovered = hoveredTab === item.name
+            const isExpanded = expandedItem === item.name
 
             return (
-              <Link
-                key={item.name}
-                href={item.url}
-                onClick={() => {
-                  setActiveTab(item.name)
-                  setIsExpanded(false)
-                }}
-                onMouseEnter={() => !isMobile && setHoveredTab(item.name)}
-                onMouseLeave={() => !isMobile && setHoveredTab(null)}
-                className={cn(
-                  "relative cursor-pointer text-base font-semibold rounded-full transition-colors flex items-center",
-                  "text-white/80 hover:text-white",
-                  isActive && "text-white",
-                  isMobile ? "px-4 py-3 w-full justify-start" : "px-5 py-3 whitespace-nowrap justify-center"
-                )}
-              >
-                <Icon size={20} strokeWidth={2.5} className="mr-2" />
-                <span>{item.name}</span>
-                {(isActive || (!isMobile && isHovered)) && (
-                  <motion.div
-                    layoutId="lamp"
+              <div key={item.name}>
+                {item.subItems ? (
+                  <>
+                    <button
+                      onClick={() => setExpandedItem(isExpanded ? null : item.name)}
+                      className={cn(
+                        "relative cursor-pointer text-base font-semibold rounded-full transition-colors flex items-center w-full justify-start",
+                        "text-white/80 hover:text-white px-4 py-3",
+                        isActive && "text-white"
+                      )}
+                    >
+                      <Icon size={20} strokeWidth={2.5} className="mr-2" />
+                      <span>{item.name}</span>
+                      <motion.div
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        className="ml-auto"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                          <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" />
+                        </svg>
+                      </motion.div>
+                      {isActive && (
+                        <motion.div
+                          layoutId="lamp"
+                          className="absolute inset-0 w-full rounded-full bg-red-500/20 -z-10"
+                          initial={false}
+                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        >
+                          <div className="absolute top-1/2 -translate-y-1/2 -left-2 w-1.5 h-10 bg-red-500 rounded-l-full shadow-[0_0_10px_rgba(239,68,68,0.8)]">
+                            <div className="absolute h-16 w-8 bg-red-500/50 rounded-full blur-lg -left-3 -top-3" />
+                            <div className="absolute h-12 w-8 bg-red-500/50 rounded-full blur-lg -left-2" />
+                            <div className="absolute h-6 w-6 bg-red-500/60 rounded-full blur-md top-2 left-0" />
+                          </div>
+                        </motion.div>
+                      )}
+                    </button>
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden pl-6"
+                        >
+                          {item.subItems.map((subItem) => {
+                            const SubIcon = subItem.icon
+                            const isSubActive = pathname === subItem.url
+                            return (
+                              <Link
+                                key={subItem.name}
+                                href={subItem.url}
+                                onClick={() => {
+                                  setActiveTab(item.name)
+                                  setIsExpanded(false)
+                                  setExpandedItem(null)
+                                  setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0)
+                                }}
+                                className={cn(
+                                  "flex items-center px-4 py-2 text-sm rounded-full transition-colors",
+                                  "text-white/70 hover:text-white",
+                                  isSubActive && "text-white bg-white/10"
+                                )}
+                              >
+                                <SubIcon size={18} strokeWidth={2.5} className="mr-2" />
+                                <span>{subItem.name}</span>
+                              </Link>
+                            )
+                          })}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </>
+                ) : (
+                  <Link
+                    href={item.url}
+                    onClick={() => {
+                      setActiveTab(item.name)
+                      setIsExpanded(false)
+                      setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0)
+                    }}
+                    onMouseEnter={() => !isMobile && setHoveredTab(item.name)}
+                    onMouseLeave={() => !isMobile && setHoveredTab(null)}
                     className={cn(
-                      "absolute inset-0 w-full rounded-full -z-10",
-                      isActive ? "bg-red-500/20" : "bg-red-500/10"
+                      "relative cursor-pointer text-base font-semibold rounded-full transition-colors flex items-center",
+                      "text-white/80 hover:text-white px-4 py-3 w-full justify-start"
                     )}
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   >
-                    <div className="absolute top-1/2 -translate-y-1/2 -left-2 w-1.5 h-10 bg-red-500 rounded-l-full shadow-[0_0_10px_rgba(239,68,68,0.8)]">
-                      <div className="absolute h-16 w-8 bg-red-500/50 rounded-full blur-lg -left-3 -top-3" />
-                      <div className="absolute h-12 w-8 bg-red-500/50 rounded-full blur-lg -left-2" />
-                      <div className="absolute h-6 w-6 bg-red-500/60 rounded-full blur-md top-2 left-0" />
-                    </div>
-                  </motion.div>
+                    <Icon size={20} strokeWidth={2.5} className="mr-2" />
+                    <span>{item.name}</span>
+                    {(isActive || (!isMobile && isHovered)) && (
+                      <motion.div
+                        layoutId="lamp"
+                        className={cn(
+                          "absolute inset-0 w-full rounded-full -z-10",
+                          isActive ? "bg-red-500/20" : "bg-red-500/10"
+                        )}
+                        initial={false}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      >
+                        <div className="absolute top-1/2 -translate-y-1/2 -left-2 w-1.5 h-10 bg-red-500 rounded-l-full shadow-[0_0_10px_rgba(239,68,68,0.8)]">
+                          <div className="absolute h-16 w-8 bg-red-500/50 rounded-full blur-lg -left-3 -top-3" />
+                          <div className="absolute h-12 w-8 bg-red-500/50 rounded-full blur-lg -left-2" />
+                          <div className="absolute h-6 w-6 bg-red-500/60 rounded-full blur-md top-2 left-0" />
+                        </div>
+                      </motion.div>
+                    )}
+                  </Link>
                 )}
-              </Link>
+              </div>
             )
           })}
                 </div>
@@ -162,35 +241,101 @@ export function NavBar({ items, className }: NavBarProps) {
               >
                 {items.map((item) => {
                   const Icon = item.icon
-                  const isActive = activeTab === item.name
-                  const isHovered = hoveredTab === item.name
+                  const isActive = activeTab === item.name || item.subItems?.some(sub => sub.url === pathname)
+                  const isHovered = hoveredItem === item.name
+                  
                   return (
-                    <Link
+                    <div
                       key={item.name}
-                      href={item.url}
-                      onClick={() => setActiveTab(item.name)}
-                      onMouseEnter={() => setHoveredTab(item.name)}
-                      onMouseLeave={() => setHoveredTab(null)}
-                      className="relative cursor-pointer text-base font-semibold px-3 py-2.5 rounded-full transition-colors whitespace-nowrap flex items-center justify-center text-white/80 hover:text-white"
+                      className="relative"
+                      onMouseEnter={() => setHoveredItem(item.name)}
+                      onMouseLeave={() => setHoveredItem(null)}
                     >
-                      <Icon size={18} strokeWidth={2.5} className="mr-1.5" />
-                      <span>{item.name}</span>
-                      {(isHovered || (!hoveredTab && isActive)) && (
-                        <motion.div
-                          layoutId="lamp"
-                          className="absolute inset-0 w-full bg-red-500/35 rounded-full -z-10"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={hasAnimated ? { type: "spring", stiffness: 300, damping: 30 } : { delay: 0.15, duration: 0.2 }}
-                        >
-                          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-10 h-1.5 bg-red-500 rounded-t-full shadow-[0_0_10px_rgba(239,68,68,0.8)]">
-                            <div className="absolute w-16 h-8 bg-red-500/50 rounded-full blur-lg -top-3 -left-3" />
-                            <div className="absolute w-12 h-8 bg-red-500/50 rounded-full blur-lg -top-2" />
-                            <div className="absolute w-6 h-6 bg-red-500/60 rounded-full blur-md top-0 left-2" />
+                      {item.subItems ? (
+                        <>
+                          <div className="relative cursor-pointer text-lg font-semibold px-3 py-2.5 rounded-full transition-colors whitespace-nowrap flex items-center justify-center text-white/80 hover:text-white">
+                            <Icon size={18} strokeWidth={2.5} className="mr-1.5" />
+                            <span>{item.name}</span>
+                            {(isHovered || (!hoveredItem && isActive)) && (
+                              <motion.div
+                                layoutId="lamp"
+                                className="absolute inset-0 w-full bg-red-500/35 rounded-full -z-10"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={hasAnimated ? { type: "spring", stiffness: 300, damping: 30 } : { delay: 0.15, duration: 0.2 }}
+                              >
+                                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-10 h-1.5 bg-red-500 rounded-t-full shadow-[0_0_10px_rgba(239,68,68,0.8)]">
+                                  <div className="absolute w-16 h-8 bg-red-500/50 rounded-full blur-lg -top-3 -left-3" />
+                                  <div className="absolute w-12 h-8 bg-red-500/50 rounded-full blur-lg -top-2" />
+                                  <div className="absolute w-6 h-6 bg-red-500/60 rounded-full blur-md top-0 left-2" />
+                                </div>
+                              </motion.div>
+                            )}
                           </div>
-                        </motion.div>
+                          <AnimatePresence>
+                            {isHovered && (
+                              <motion.div
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                className="absolute top-full left-0 pt-2 z-50"
+                              >
+                                <div className="bg-gradient-to-r from-slate-900/95 to-slate-800/95 border-2 border-slate-700/60 backdrop-blur-md rounded-2xl p-2 shadow-lg min-w-[240px]">
+                                {item.subItems.map((subItem) => {
+                                  const SubIcon = subItem.icon
+                                  const isSubActive = pathname === subItem.url
+                                  return (
+                                    <Link
+                                      key={subItem.name}
+                                      href={subItem.url}
+                                      onClick={() => {
+                                        setActiveTab(item.name)
+                                        setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0)
+                                      }}
+                                      className={cn(
+                                        "flex items-center px-3 py-2 text-lg rounded-lg transition-colors text-white/80 hover:text-white hover:bg-red-500/20",
+                                        isSubActive && "bg-red-500/25 text-white"
+                                      )}
+                                    >
+                                      <SubIcon size={16} strokeWidth={2.5} className="mr-2" />
+                                      <span>{subItem.name}</span>
+                                    </Link>
+                                  )
+                                })}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </>
+                      ) : (
+                        <Link
+                          href={item.url}
+                          onClick={() => {
+                            setActiveTab(item.name)
+                            setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0)
+                          }}
+                          className="relative cursor-pointer text-lg font-semibold px-3 py-2.5 rounded-full transition-colors whitespace-nowrap flex items-center justify-center text-white/80 hover:text-white"
+                        >
+                          <Icon size={18} strokeWidth={2.5} className="mr-1.5" />
+                          <span>{item.name}</span>
+                          {(isHovered || (!hoveredItem && isActive)) && (
+                            <motion.div
+                              layoutId="lamp"
+                              className="absolute inset-0 w-full bg-red-500/35 rounded-full -z-10"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={hasAnimated ? { type: "spring", stiffness: 300, damping: 30 } : { delay: 0.15, duration: 0.2 }}
+                            >
+                              <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-10 h-1.5 bg-red-500 rounded-t-full shadow-[0_0_10px_rgba(239,68,68,0.8)]">
+                                <div className="absolute w-16 h-8 bg-red-500/50 rounded-full blur-lg -top-3 -left-3" />
+                                <div className="absolute w-12 h-8 bg-red-500/50 rounded-full blur-lg -top-2" />
+                                <div className="absolute w-6 h-6 bg-red-500/60 rounded-full blur-md top-0 left-2" />
+                              </div>
+                            </motion.div>
+                          )}
+                        </Link>
                       )}
-                    </Link>
+                    </div>
                   )
                 })}
               </motion.div>
