@@ -8,6 +8,7 @@ import { PinContainer } from "@/components/molecules/3d-pin"
 import { Hotel, Car, MapPin, Phone, Globe, Clock, Navigation, ExternalLink, Calendar, Hash, MapPin as Walk, Copy, ToggleLeft, ToggleRight, DollarSign, Plane, Check, ArrowRight } from "lucide-react"
 import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import "@/styles/community-service-theme.css"
+import "@/styles/registration-theme.css"
 
 export default function AccommodationsPage() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -239,7 +240,7 @@ export default function AccommodationsPage() {
       ) : (
         <>
           <motion.div 
-            className="fixed left-0 w-full h-screen flex items-center justify-center overflow-hidden mb-8 mt-8 -z-10"
+            className="fixed left-0 w-full h-screen flex items-center justify-center overflow-hidden mb-8 mt-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
@@ -247,7 +248,8 @@ export default function AccommodationsPage() {
               top: '10vh',
               filter: blurFilter,
               opacity,
-              y: imageY
+              y: imageY,
+              zIndex: 0
             }}
           >
             <motion.img
@@ -268,7 +270,7 @@ export default function AccommodationsPage() {
         </>
       )}
 
-      <div className="relative z-20">
+      <div className="relative z-20 bg-transparent">
         <div className="container mx-auto px-4 page-bottom-spacing">
             {/* Venue Location Section */}
             <motion.section
