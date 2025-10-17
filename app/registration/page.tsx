@@ -20,7 +20,6 @@ import { useToast } from "@/hooks/use-toast"
 
 import { useDeviceType } from "@/hooks/use-device-type"
 import { supabase } from "@/utils/supabase/client"
-import { motion } from "framer-motion"
 import "@/styles/registration-theme.css"
 
 
@@ -232,25 +231,15 @@ export default function RegistrationPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 page-bottom-spacing">
         {/* Title */}
         <div className="text-center page-header-spacing">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 30 }}
-            transition={{ duration: 0.8 }}
-            className="standard-page-title reg-title"
-          >
+          <h1 className={`standard-page-title reg-title ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
             Register yourself for the Rajat Mahotsav!
-          </motion.h1>
+          </h1>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="flex justify-center px-4 mt-8"
-          >
+          <div className={`flex justify-center px-4 mt-8 transition-all duration-800 delay-400 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}>
             <p className="text-center text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-5xl">
               Be a part of the Shree Ghanshyam Maharaj Rajat Pratishta Mahotsav New Jersey! Register now for this momentous occasion from <span className="font-bold underline">July 25 through August 2, 2026</span>.
             </p>
-          </motion.div>
+          </div>
         </div>
 
         {/* Video Player */}
