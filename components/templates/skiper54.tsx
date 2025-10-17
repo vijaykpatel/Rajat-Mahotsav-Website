@@ -14,65 +14,13 @@ import {
   CarouselItem,
 } from "@/components/molecules/carousel";
 
-const Skiper54 = () => {
-  // ========================================
-  // REPLACE WITH YOUR IMAGE LINKS BELOW
-  // ========================================
-  const images = [
-    {
-      src: "https://placehold.co/800x1000/e2e8f0/64748b?text=Image+1",
-      alt: "Image 1",
-      title: "Image 1",
-    },
-    {
-      src: "https://placehold.co/800x1000/e2e8f0/64748b?text=Image+2",
-      alt: "Image 2",
-      title: "Image 2",
-    },
-    {
-      src: "https://placehold.co/800x1000/e2e8f0/64748b?text=Image+3",
-      alt: "Image 3",
-      title: "Image 3",
-    },
-    {
-      src: "https://placehold.co/800x1000/e2e8f0/64748b?text=Image+4",
-      alt: "Image 4",
-      title: "Image 4",
-    },
-    {
-      src: "https://placehold.co/800x1000/e2e8f0/64748b?text=Image+5",
-      alt: "Image 5",
-      title: "Image 5",
-    },
-    {
-      src: "https://placehold.co/800x1000/e2e8f0/64748b?text=Image+6",
-      alt: "Image 6",
-      title: "Image 6",
-    },
-    {
-      src: "https://placehold.co/800x1000/e2e8f0/64748b?text=Image+7",
-      alt: "Image 7",
-      title: "Image 7",
-    },
-    {
-      src: "https://placehold.co/800x1000/e2e8f0/64748b?text=Image+8",
-      alt: "Image 8",
-      title: "Image 8",
-    },
-    {
-      src: "https://placehold.co/800x1000/e2e8f0/64748b?text=Image+9",
-      alt: "Image 9",
-      title: "Image 9",
-    },
-    {
-      src: "https://placehold.co/800x1000/e2e8f0/64748b?text=Image+10",
-      alt: "Image 10",
-      title: "Image 10",
-    },
-  ];
-  // ========================================
+interface Skiper54Props {
+  images: { src: string; alt: string; title: string }[];
+}
+
+const Skiper54 = ({ images }: Skiper54Props) => {
   return (
-    <div className="flex w-full items-center justify-center overflow-hidden py-4 bg-carousel-bg">
+    <div className="relative flex w-full items-center justify-center overflow-hidden pt-4 pb-4 bg-carousel-bg">
       <Carousel_006
         images={images}
         className=""
@@ -113,30 +61,45 @@ const Carousel_006 = ({
   }, [api]);
 
   return (
-    <Carousel
-      setApi={setApi}
-      className={cn("w-full", className)}
-      opts={{
-        loop,
-        slidesToScroll: 1,
-      }}
-      plugins={
-        autoplay
-          ? [
-              Autoplay({
-                delay: 2000,
-                stopOnInteraction: true,
-                stopOnMouseEnter: true,
-              }),
-            ]
-          : []
-      }
-    >
-      <CarouselContent className="flex h-[500px] w-full">
+    <div className="w-full">
+      <AnimatePresence mode="wait">
+        {images[current] && (
+          <motion.div
+            key={current}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center justify-center text-center font-figtree font-semibold text-white text-2xl md:text-3xl mb-6 h-[4rem] px-4"
+          >
+            {images[current].title}
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <Carousel
+        setApi={setApi}
+        className={cn("w-full relative", className)}
+        opts={{
+          loop,
+          slidesToScroll: 1,
+          align: "center",
+        }}
+        plugins={
+          autoplay
+            ? [
+                Autoplay({
+                  delay: 2000,
+                  stopOnInteraction: true,
+                  stopOnMouseEnter: true,
+                }),
+              ]
+            : []
+        }
+      >
+        <CarouselContent className="flex h-[500px] w-full !ml-0">
         {images.map((img, index) => (
           <CarouselItem
             key={index}
-            className="relative flex h-[85%] w-full basis-[73%] items-center justify-center sm:basis-[50%] md:basis-[30%] lg:basis-[25%] xl:basis-[21%]"
+            className="relative flex h-[80%] w-full basis-[92%] items-center justify-center sm:basis-[50%] md:basis-[30%] lg:basis-[25%] xl:basis-[21%] pl-2 px-2"
           >
             <motion.div
               initial={false}
@@ -146,7 +109,7 @@ const Carousel_006 = ({
                     ? "inset(15% 0 15% 0 round 2rem)"
                     : "inset(0 0 0 0 round 2rem)",
               }}
-              className="h-full w-full overflow-hidden rounded-3xl"
+              className="h-full w-full overflow-hidden rounded-3xl mx-auto"
             >
               <div className="relative h-full w-full border">
                 <img
@@ -156,23 +119,11 @@ const Carousel_006 = ({
                 />
               </div>
             </motion.div>
-            <AnimatePresence mode="wait">
-              {current === index && (
-                <motion.div
-                  initial={{ opacity: 0, filter: "blur(10px)" }}
-                  animate={{ opacity: 1, filter: "blur(0px)" }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute bottom-0 left-2 flex h-[14%] w-full translate-y-full items-center justify-center p-2 text-center font-medium tracking-tight text-black/20"
-                >
-                  {img.title}
-                </motion.div>
-              )}
-            </AnimatePresence>
           </CarouselItem>
         ))}
       </CarouselContent>
 
-      <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-6">
+      <div className="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-4">
         {showNavigation && (
           <button
             aria-label="Previous slide"
@@ -209,7 +160,8 @@ const Carousel_006 = ({
           </button>
         )}
       </div>
-    </Carousel>
+      </Carousel>
+    </div>
   );
 };
 
