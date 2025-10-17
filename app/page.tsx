@@ -16,6 +16,7 @@ import AashirwadVideoPlayer from "@/components/organisms/aashirwad-video-player"
 import PratisthaStory from "@/components/organisms/pratishta-story"
 import MandalExpansionText from "@/components/organisms/mandal-expansion"
 import InviteText from "@/components/organisms/invite-text"
+import AashirwadSection from "@/components/organisms/aashirwad-section"
 
 const gurus = [
   {
@@ -190,13 +191,16 @@ export default function ShaderShowcase() {
           
           <div className="bg-main-page-bg">
           
+          {/* Aashirwad Section */}
+          <AashirwadSection />
+          
           {/* Staggered Guru Cards */}
-          <div ref={mobileGuruRef} className="min-h-screen w-full pb-40 px-4 flex flex-col items-center justify-start pt-28">
+          <div ref={mobileGuruRef} className="min-h-screen w-full pb-40 px-4 flex flex-col items-center justify-center">
             <motion.h2
               initial={{ opacity: 0, y: 50 }}
               animate={mobileGuruVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-6xl md:text-7xl font-bold mb-12 md:mb-24 relative z-10 reg-title"
+              className="section-title"
             >
               Our Beloved Gurus
             </motion.h2>

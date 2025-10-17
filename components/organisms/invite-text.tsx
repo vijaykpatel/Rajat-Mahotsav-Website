@@ -2,11 +2,9 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
-import { Play } from "lucide-react"
 
 export default function InviteText() {
   const [isVisible, setIsVisible] = useState(false)
-  const [videoLoaded, setVideoLoaded] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -22,6 +20,8 @@ export default function InviteText() {
     return () => observer.disconnect()
   }, [])
 
+
+
   return (
     <div ref={sectionRef} className="min-h-screen w-full flex flex-col">
       {/* Top 50% - Text Content */}
@@ -36,41 +36,7 @@ export default function InviteText() {
         </motion.p>
       </div>
       
-      {/* Bottom 50% - Video Player */}
-      <div className="flex-1 w-full flex items-start justify-center px-4 pt-8 pb-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full max-w-4xl mx-auto"
-        >
-          <div className="rounded-xl overflow-hidden shadow-2xl relative" style={{ paddingTop: "56.42633228840125%" }}>
-            {!videoLoaded ? (
-              <div 
-                className="absolute inset-0 bg-black flex items-center justify-center cursor-pointer group"
-                onClick={() => setVideoLoaded(true)}
-                style={{ 
-                  backgroundImage: 'url(https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/6f4c127cc7b339c9b1b7875c1dc8e745/thumbnails/thumbnail.gif?time=95s&duration=4s)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              >
-                <div className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center group-hover:bg-white group-hover:scale-110 transition-all">
-                  <Play size={40} className="text-black ml-1" fill="currentColor" />
-                </div>
-              </div>
-            ) : (
-              <iframe
-                src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/6f4c127cc7b339c9b1b7875c1dc8e745/iframe?autoplay=true"
-                style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
-                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                allowFullScreen
-                loading="lazy"
-              />
-            )}
-          </div>
-        </motion.div>
-      </div>
+
     </div>
   )
 }

@@ -188,7 +188,7 @@ export default function VideoSection() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-10 md:mb-12 lg:mb-12 xl:mb-16"
         >
-          <h2 className="text-6xl md:text-7xl font-bold mb-6 md:mb-12 relative z-10 reg-title leading-tight">
+          <h2 className="section-title">
             Follow our celebration
           </h2>
           <p className="reg-text-primary font-semibold text-xl lg:text-2xl mb-4 mx-auto">
