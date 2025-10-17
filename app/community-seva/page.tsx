@@ -31,6 +31,7 @@ const firstRowImages = [
   { src: getCloudflareImage("2725d2b7-fa9a-4300-356d-719da7932f00"), alt: "Community Service Event 11" }, // american cancer
   { src: getCloudflareImage("30526bd0-cd22-4496-bed1-f9e9451b3b00"), alt: "Community Service Event 13" }, // health camp 1
   { src: getCloudflareImage("782e5779-3834-4e09-ae43-24f174632200"), alt: "Community Service Event 15" }, // blood bus
+  { src: getCloudflareImage("e78f5926-785f-4a48-0515-3cdf10216e00"), alt: "Community Service Event 17" }, // visa camp
 ]
 
 const secondRowImages = [

@@ -9,8 +9,9 @@ import { GiPrayerBeads } from "react-icons/gi"
 import { PiHandsPraying } from "react-icons/pi"
 import { ImageMarquee } from "@/components/organisms/image-marquee"
 import { SevaSubmissionForm } from "@/components/organisms/seva-submission-form"
+import { ResponsiveImageGallery } from "@/components/organisms/responsive-image-gallery"
 import "@/styles/community-service-theme.css"
-import { getCloudflareImage } from "@/lib/cdn-assets"
+import { getCloudflareImage, getR2Image } from "@/lib/cdn-assets"
 
 const sevaGoals = [
   { icon: GiPrayerBeads, label: "Malas", target: 250, description: "Meditational Prayer Beads" },
@@ -52,6 +53,7 @@ const parayans = [
 const firstRowImages = [
   { src: getCloudflareImage("07f0293e-f384-4a9e-4364-4f7131263100"), alt: "Spiritual Seva 1" },
   { src: getCloudflareImage("f8a344b2-8045-4273-ceb7-bcd0a4f4de00"), alt: "Spiritual Seva 2" },
+  { src: getCloudflareImage("1ea74bd4-3867-4016-8010-07622468a800"), alt: "Spiritual Seva 12" },
   { src: getCloudflareImage("dfea2296-fa83-4bdc-6b23-bb28434a5a00"), alt: "Spiritual Seva 3" },
   { src: getCloudflareImage("a8f9e2cb-feec-4bb0-15a5-29dd83648b00"), alt: "Spiritual Seva 4" },
   { src: getCloudflareImage("7e9de524-cfc3-49ca-96cf-105fba01ce00"), alt: "Spiritual Seva 5" },
@@ -64,6 +66,12 @@ const secondRowImages = [
   { src: getCloudflareImage("bdf8f682-7bd3-4838-46c4-fe7ba1358b00"), alt: "Spiritual Seva 9" },
   { src: getCloudflareImage("a494c6be-02eb-4fc2-d6eb-9df81b294600"), alt: "Spiritual Seva 10" },
   { src: getCloudflareImage("8c1c0405-0c48-4f49-606b-a4260e2c5900"), alt: "Spiritual Seva 11" },
+]
+
+const whyWeServeImages = [
+  { id: 1, src: getCloudflareImage("03a146fb-9450-46d8-003b-b15d9b286c00"), alt: "Swamibapa Mantra" },
+  { id: 2, src: getCloudflareImage("6f2ae80b-f53f-4a98-20c8-e064b5895200"), alt: "Prem Murti Bapa Darshan" },
+  { id: 3, src: getCloudflareImage("04302505-add8-4190-ca57-c4d2ed5c3e00"), alt: "Acharya Swamiji Dhyaan" }
 ]
 
 export default function SpiritualSevaPage() {
@@ -103,6 +111,8 @@ export default function SpiritualSevaPage() {
               </p>
             </motion.div>
           </div>
+
+          <ResponsiveImageGallery images={whyWeServeImages} />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-16">
             <div className="space-y-8">
@@ -269,7 +279,7 @@ export default function SpiritualSevaPage() {
             </div>
           </div>
 
-          <div className="w-full mb-20">
+          <div className="w-full pb-20">
             <ImageMarquee firstRow={firstRowImages} secondRow={secondRowImages} />
           </div>
 
