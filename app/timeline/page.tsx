@@ -113,12 +113,16 @@ export default function TimelinePage() {
         for (const key of Object.keys(obj.currentElements)) {
           if (obj.currentElements[key].el.classList.contains("gallery__item-imginner")) {
             const progress = obj.currentElements[key].progress;
-            const saturateVal = progress < 0.5 
-              ? Math.max(0, Math.min(1, (progress / 0.5)))
-              : Math.max(0, Math.min(1, ((1 - progress) / 0.5)));
-            const brightnessVal = progress < 0.5
-              ? Math.max(0, Math.min(1, (progress / 0.5)))
-              : Math.max(0, Math.min(1, ((1 - progress) / 0.5)));
+            const saturateVal = progress < 0.3 
+              ? Math.max(0, Math.min(1, (progress / 0.3)))
+              : progress > 0.7
+              ? Math.max(0, Math.min(1, ((1 - progress) / 0.3)))
+              : 1;
+            const brightnessVal = progress < 0.3
+              ? Math.max(0, Math.min(1, (progress / 0.3)))
+              : progress > 0.7
+              ? Math.max(0, Math.min(1, ((1 - progress) / 0.3)))
+              : 1;
             obj.currentElements[key].el.style.filter = `saturate(${saturateVal}) brightness(${brightnessVal})`;
           }
         }
@@ -184,8 +188,8 @@ export default function TimelinePage() {
         <div data-scroll-container ref={scrollRef}>
           <div className="flex ml-[12vw] pr-[12vw]">
             <div className="flex-shrink-0 mx-[10vw] ml-[2vw]">
-              <span className="block text-[12vw] pl-12 leading-[1.5] tracking-wider font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="-1" data-scroll-direction="vertical">Our</span>
-              <span className="block text-[12vw] pl-12 leading-[1.5] tracking-wider font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="2" data-scroll-direction="vertical"> Journey</span>
+              <span className="block text-[12vw] pl-16 leading-[1.5] tracking-wider font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="-1" data-scroll-direction="vertical">Our</span>
+              <span className="block text-[12vw] pl-16 leading-[1.5] tracking-wider font-instrument-serif font-extrabold italic bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent" data-scroll data-scroll-speed="2" data-scroll-direction="vertical"> Journey</span>
             </div>
             {timelineData.map((item, index) => (
               <figure

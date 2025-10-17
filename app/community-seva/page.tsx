@@ -27,9 +27,10 @@ const firstRowImages = [
   { src: getCloudflareImage("944138d2-cc15-45f5-6eec-f4a6a3e30800"), alt: "Community Service Event 2" }, // hall bd
   { src: getCloudflareImage("1a01f892-a3ab-4715-496c-bd570de83b00"), alt: "Community Service Event 3" }, // food & toy
   { src: getCloudflareImage("428174c3-965c-4055-f941-381562cf8000"), alt: "Community Service Event 4" }, // t shirts raising
-  { src: getCloudflareImage("8711b5e8-0ce7-44e5-2f3f-6f5abdb6db00"), alt: "Community Service Event 5" }, // medshare 2
+  { src: getCloudflareImage("b8af526f-08f9-4a68-9280-466597ed7400"), alt: "Community Service Event 5" }, // community lighting
   { src: getCloudflareImage("2725d2b7-fa9a-4300-356d-719da7932f00"), alt: "Community Service Event 11" }, // american cancer
   { src: getCloudflareImage("30526bd0-cd22-4496-bed1-f9e9451b3b00"), alt: "Community Service Event 13" }, // health camp 1
+  { src: getCloudflareImage("782e5779-3834-4e09-ae43-24f174632200"), alt: "Community Service Event 15" }, // blood bus
 ]
 
 const secondRowImages = [
@@ -41,7 +42,7 @@ const secondRowImages = [
   { src: getCloudflareImage("2f2f3c0b-c371-41c5-3e94-043fad0da700"), alt: "Community Service Event 10" }, // pizza
   { src: getCloudflareImage("df2179f1-cb42-4f5c-a542-5fc7cba05500"), alt: "Community Service Event 12" }, // ealry food drive
   { src: getCloudflareImage("6fb86845-e7a9-48ff-f1b8-88b28b6dc700"), alt: "Community Service Event 14" }, // health camp 2
-  { src: getCloudflareImage("ee07b747-ecc9-4437-e620-348a2e9c8d00"), alt: "Community Service Event 14" }, // blood donation sign
+  { src: getCloudflareImage("ee07b747-ecc9-4437-e620-348a2e9c8d00"), alt: "Community Service Event 16" }, // blood donation sign
 ]
 
 const communityStats = [

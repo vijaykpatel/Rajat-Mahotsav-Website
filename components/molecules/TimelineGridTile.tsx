@@ -10,10 +10,10 @@ export function TimelineGridTile({ item, variant = "mobile" }: TimelineGridTileP
     return (
       <div className="flex flex-col gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-orange-600 text-white flex items-center justify-center text-lg font-serif font-bold flex-shrink-0">
-            {item.number}
+          <div className="w-12 h-12 rounded-full bg-orange-600 text-white flex items-center justify-center text-2xl font-instrument-serif font-bold flex-shrink-0">
+            {item.year}
           </div>
-          <h2 className="text-3xl font-serif font-extrabold italic text-orange-900">{item.number}</h2>
+          <h2 className="text-3xl font-instrument-serif font-extrabold italic text-orange-900 whitespace-pre-line">{item.title}</h2>
         </div>
         <div className="relative rounded-xl overflow-hidden aspect-[4/3] w-full">
           <img
@@ -30,10 +30,10 @@ export function TimelineGridTile({ item, variant = "mobile" }: TimelineGridTileP
   }
 
   return (
-    <div className="grid grid-cols-[6rem_20vmax] grid-rows-[6rem_20vmax_2rem] gap-0">
-      <div className="col-start-2 row-start-1 flex items-center">
-        <h2 className="text-[clamp(1.5rem,4vw,3rem)] font-serif font-extrabold italic text-orange-900" data-scroll data-scroll-speed="1">
-          {item.number}
+    <div className="grid grid-cols-[6rem_24vmax] grid-rows-[auto_24vmax_2rem] gap-0">
+      <div className="col-start-2 row-start-1 flex items-center pb-4">
+        <h2 className="text-[clamp(1.25rem,3.5vw,3rem)] font-instrument-serif font-extrabold italic text-orange-900 whitespace-pre-line leading-tight" data-scroll data-scroll-speed="1">
+          {item.title}
         </h2>
       </div>
       <div className="col-start-2 row-start-2 overflow-hidden relative rounded-2xl">
@@ -49,8 +49,8 @@ export function TimelineGridTile({ item, variant = "mobile" }: TimelineGridTileP
         </div>
       </div>
       <div className="col-start-1 row-start-3 flex items-end">
-        <a className="w-[90px] h-[90px] rounded-full bg-orange-600 text-white flex items-center justify-center text-2xl font-serif font-bold hover:bg-orange-400 transition-colors cursor-pointer">
-          {item.number}
+        <a className="w-[90px] h-[90px] rounded-full bg-orange-600 text-white flex items-center justify-center text-4xl font-instrument-serif font-bold hover:bg-orange-400 transition-colors cursor-pointer whitespace-pre-line text-center">
+          {item.year}
         </a>
       </div>
     </div>
