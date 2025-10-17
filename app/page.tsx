@@ -186,7 +186,7 @@ export default function ShaderShowcase() {
           </div>
           
           {/* Video Player Section */}
-          <AashirwadVideoPlayer />
+          {/* <AashirwadVideoPlayer /> */}
           
           <div className="bg-main-page-bg">
           
