@@ -14,7 +14,7 @@ const figtree = Figtree({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-figtree",
-  display: "block",
+  display: "swap",
 })
 
 const instrumentSerif = Instrument_Serif({
