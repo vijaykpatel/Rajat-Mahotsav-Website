@@ -139,7 +139,7 @@ const Carousel_006 = ({
                 onClick={() => api?.scrollTo(index)}
                 className={cn(
                   "h-2 w-2 cursor-pointer rounded-full transition-all",
-                  current === index ? "bg-black" : "bg-[#D9D9D9]",
+                  current === index ? "bg-preset-red" : "bg-[#D9D9D9]",
                 )}
                 aria-label={`Go to slide ${index + 1}`}
               />

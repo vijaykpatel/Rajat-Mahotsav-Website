@@ -39,8 +39,8 @@
   --preset-bluish-gray: #abb8c3;
   /* Preset charcoal color */
   --preset-charcoal: #293340;
-  /* Carousel background color - alias for preset-bluish-gray */
-  --carousel-bg: var(--preset-bluish-gray);
+  /* Carousel background color - alias for preset-deep-navy */
+  --carousel-bg: var(--preset-deep-navy);
   /* Preset gradient very light gray to bluish gray */
   --preset-gradient-very-light-gray-to-bluish-gray: linear-gradient(135deg, rgb(238, 238, 238) 0%, rgb(169, 184, 195) 100%);
   /* Preset gradient topper */

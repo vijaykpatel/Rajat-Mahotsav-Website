@@ -71,7 +71,7 @@ export default function LoadingScreen() {
                     style={{
                       fontSize: 'clamp(0.8rem, 2vw, 1.2rem)',
                       lineHeight: '1.3',
-                      letterSpacing: '0.02em',
+                      letterSpacing: 'normal',
                       background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
                       backgroundClip: 'text',
@@ -86,10 +86,9 @@ export default function LoadingScreen() {
                   <h1
                     className="uppercase font-black text-center px-2 relative"
                     style={{
-                      fontSize: 'clamp(2.3rem, 9vw, 7.5rem)',
-                      fontFamily: 'Impact, Arial Black, sans-serif',
-                      lineHeight: '1.0',
-                      letterSpacing: '0.09em',
+                      fontSize: 'clamp(2rem, 8vw, 7rem)',
+                      lineHeight: '1.2',
+                      letterSpacing: 'normal',
                       textAlign: 'center',
                       background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
@@ -118,7 +117,7 @@ export default function LoadingScreen() {
                     style={{
                       fontSize: 'clamp(2.5rem, 9vw, 8rem)',
                       lineHeight: '1.2',
-                      letterSpacing: '0.05em',
+                      letterSpacing: 'normal',
                       background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
                       backgroundClip: 'text',
@@ -129,7 +128,7 @@ export default function LoadingScreen() {
                   </h2>
 
                   {/* Audio Choice Buttons */}
-                  <div className="w-full flex flex-row gap-4 md:gap-6 justify-center mt-4 mb-2">
+                  <div className="w-full flex flex-row pt-6 gap-4 md:gap-6 justify-center mt-4 mb-2">
                     <AudioChoiceButton
                       icon={Volume2}
                       label="Audio"
@@ -151,7 +150,7 @@ export default function LoadingScreen() {
                     style={{
                       fontSize: 'clamp(0.8rem, 2vw, 1.2rem)',
                       lineHeight: '1.3',
-                      letterSpacing: '0.02em',
+                      letterSpacing: 'normal',
                       background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
                       backgroundClip: 'text',
