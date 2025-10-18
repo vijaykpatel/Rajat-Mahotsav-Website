@@ -51,20 +51,18 @@ export default function LoadingScreen() {
             <div className="h-screen w-screen flex items-center justify-center p-4">
               {/* Beige Rectangle with Text Cutout */}
               <motion.div
-                className="relative"
+                className="relative w-[90vw] max-w-4xl"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3, duration: 0.6, ease: 'easeOut' }}
                 style={{
-                  width: '75vw',
-                  height: '55vh',
                   background: 'rgba(245, 245, 220, 0.85)',
                   borderRadius: '12px',
                   boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), 0 8px 25px rgba(0, 0, 0, 0.2)',
                   transform: 'translateY(-10px)'
                 }}
               >
-                <div className="h-full flex flex-col justify-between items-stretch px-4 py-4 overflow-hidden">
+                <div className="flex flex-col justify-between items-stretch px-4 py-6 gap-4">
                   {/* Header Text */}
                   <h3
                     className="font-medium text-center"
@@ -81,14 +79,14 @@ export default function LoadingScreen() {
                     Maninagar Shree Swaminarayan Gadi Sansthan - Shree Swaminarayan Temple New Jersey
                   </h3>
 
-                  <div className="flex flex-col justify-center items-stretch flex-1 min-h-0">
+                  <div className="flex flex-col justify-center items-stretch gap-1">
                   {/* English Text */}
                   <h1
                     className="uppercase font-black text-center px-2"
                     style={{
-                      fontSize: 'clamp(1.5rem, 4vw + 2vh, 5rem)',
-                      lineHeight: '1',
-                      letterSpacing: '-0.02em',
+                      fontSize: 'clamp(1.35rem, 4vw + 1.8vh, 4.5rem)',
+                      lineHeight: '1.2',
+                      letterSpacing: '-0.03em',
                       background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
                       backgroundClip: 'text',
@@ -115,7 +113,7 @@ export default function LoadingScreen() {
                     className="font-bold text-center px-2"
                     style={{
                       fontSize: 'clamp(1.8rem, 5vw + 2.5vh, 6rem)',
-                      lineHeight: '1.1',
+                      lineHeight: '1.2',
                       letterSpacing: 'normal',
                       background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
@@ -127,7 +125,7 @@ export default function LoadingScreen() {
                   </h2>
 
                   {/* Audio Choice Buttons */}
-                  <div className="w-full flex flex-row pt-4 gap-3 md:gap-6 justify-center mt-2">
+                  <div className="w-full flex flex-row pt-6 pb-2 gap-3 md:gap-6 justify-center mt-2">
                     <AudioChoiceButton
                       icon={Volume2}
                       label="Audio"

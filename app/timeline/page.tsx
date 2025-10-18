@@ -43,7 +43,7 @@ export default function TimelinePage() {
     const percentage = Math.min(100, Math.max(0, (x / rect.width) * 100));
     const maxScroll = locomotiveScrollRef.current.scroll.instance.limit.x;
     const targetScroll = (percentage / 100) * maxScroll;
-    locomotiveScrollRef.current.scrollTo(targetScroll, { duration: 100, disableLerp: false });
+    locomotiveScrollRef.current.scrollTo(targetScroll, { duration: 0, disableLerp: true });
   };
 
   useEffect(() => {
@@ -85,7 +85,8 @@ export default function TimelinePage() {
         el: scrollRef.current,
         smooth: true,
         direction: "horizontal",
-        multiplier: 0.5,
+        multiplier: 0.8,
+        lerp: 0.08,
         smartphone: { smooth: true },
         tablet: { smooth: true },
       });
