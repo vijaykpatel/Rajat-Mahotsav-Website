@@ -116,7 +116,7 @@ export function Navigation() {
     <>
       <nav 
         data-navbar
-        className={`relative w-full z-50 py-3 transition-all duration-300 ${mounted ? 'opacity-100' : 'opacity-0'} ${isHomePage ? 'bg-title-section-bg shadow-[0_10px_0_0_var(--title-section-bg)]' : ''}`}
+        className={`${isHomePage ? 'absolute' : 'relative'} w-full z-50 py-3 transition-all duration-300 ${mounted ? 'opacity-100' : 'opacity-0'} bg-transparent`}
         style={{ 
           paddingLeft: 'var(--nav-padding)', 
           paddingRight: 'var(--nav-padding)' 

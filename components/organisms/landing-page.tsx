@@ -1,10 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { AudioPlayButton } from "@/components/audio-player"
 
 export default function TitleSection() {
   return (
-    <div className="bg-title-section-bg flex flex-col items-center justify-start">
+    <div className="bg-title-section-bg h-full flex items-center justify-end relative">
       {/* Commented out original text */}
       {/* <motion.div
         initial={{ opacity: 0, y: -50 }}
@@ -65,11 +66,21 @@ export default function TitleSection() {
       </motion.div> */}
 
       {/* New text layout */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
+        >
+          <AudioPlayButton />
+        </motion.div>
+      </div>
+
       <motion.div 
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="absolute top-1/2 -translate-y-1/2 right-4 z-10 text-right sm:right-8"
+        className="pr-4 z-10 text-right sm:pr-8"
       >
         <div className="font-instrument-serif leading-tight">
           <motion.h1 

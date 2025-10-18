@@ -16,6 +16,7 @@ import PratisthaStory from "@/components/organisms/pratishta-story"
 import MandalExpansionText from "@/components/organisms/mandal-expansion"
 import AashirwadSection from "@/components/organisms/aashirwad-section"
 import VideoBackgroundSection from "@/components/organisms/video-background-section"
+import { AudioPlayer } from "@/components/audio-player"
 
 const gurus = [
   {
@@ -102,17 +103,18 @@ export default function ShaderShowcase() {
 
   return (
     <>
+      <AudioPlayer />
       {/* <LoadingScreen /> */}
       {/* {!isLoading && ( */}
         
         <>
                   {/* Title section - Scrollable overlay */}
-          <div className="relative z-10 pb-[10rem] bg-title-section-bg" style={{ minHeight: '100vh' }}>
+          <div className="relative z-10 bg-title-section-bg h-screen block">
             <TitleSection />
           </div>
           
           {/* Video background - Fixed underneath */}
-          <div className="z-0">
+          <div className="z-0 block">
             <VideoBackgroundSection />
           </div>
           
@@ -127,7 +129,7 @@ export default function ShaderShowcase() {
           <div className="relative z-10 bg-slate-900" style={{ pointerEvents: 'auto' }}>
           
           {/* Full background Sihasan image section with fade transition */}
-          <div ref={sihasanRef} className="w-screen relative overflow-hidden flex flex-col bg-slate-900" style={{ minHeight: '100vh' }}>
+          <div ref={sihasanRef} data-section="sihasan" className="w-screen relative overflow-hidden flex flex-col bg-slate-900" style={{ minHeight: '100vh' }}>
             {/* Top gradient overlay for smooth transition from title */}
             <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%' }} />
             
