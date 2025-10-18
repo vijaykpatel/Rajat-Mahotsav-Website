@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { FloatingMenuButton } from "@/components/organisms/floating-menu-button";
 import { timelineData } from "@/lib/timeline-data";
 import { TimelineGridTile } from "@/components/molecules/TimelineGridTile";
@@ -31,9 +32,14 @@ export default function MobileTimeline() {
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 page-bg-extend overflow-x-hidden">
         <div className="px-6 py-12 pb-24">
           {/* font-instrument-serif font-extrabold italic */}
-          <h1 className="text-7xl leading-[1.2] pl-4 font-figtree italic font-bold bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent mb-16">
+          <motion.h1 
+            className="text-7xl leading-[1.2] pl-4 font-figtree italic font-bold bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             Our Journey
-          </h1>
+          </motion.h1>
           <div className="space-y-12">
             {timelineData.map((item, index) => (
               <div

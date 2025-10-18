@@ -1,14 +1,10 @@
 "use client"
 
-import { useState } from "react"
 import { motion } from "framer-motion"
-import { Play } from "lucide-react"
 
 export default function TitleSection() {
-  const [videoLoaded, setVideoLoaded] = useState(false)
-
   return (
-    <div className="min-h-screen pt-32 bg-title-section-bg">
+    <div className="min-h-screen bg-title-section-bg flex flex-col items-center justify-start">
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -20,7 +16,6 @@ export default function TitleSection() {
           <div className="tracking-wide whitespace-nowrap" style={{ fontSize: 'clamp(7rem, 15vw, 12rem)' }}>
             Suvarna Yug no
           </div>
-          {/* <div className="w-80 h-1 bg-white mx-auto" /> */}
           <div className="tracking-wider whitespace-nowrap" style={{ fontSize: 'clamp(7rem, 15vw, 12rem)' }}>
             Rajat Mahotsav
           </div>
@@ -30,8 +25,6 @@ export default function TitleSection() {
         <h1 className="md:hidden font-bold text-white leading-tight drop-shadow-2xl my-6 font-instrument-serif">
           <div style={{ fontSize: 'clamp(2.5rem, 15vw, 12rem)' }} className="tracking-wide">Suvarna Yug no</div>
           <div style={{ fontSize: 'clamp(2.5rem, 15vw, 12rem)' }} className="tracking-wide">Rajat Mahotsav</div>
-          {/* <div style={{ fontSize: 'clamp(2.5rem, 15vw, 9rem)' }} className="tracking-wider">Rajat</div>
-          <div style={{ fontSize: 'clamp(2.5rem, 15vw, 9rem)' }} className="tracking-wider">Mahotsav</div> */}
         </h1>
       </motion.div>
       
@@ -41,7 +34,6 @@ export default function TitleSection() {
         transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
         className="text-center relative z-10"
       >
-        {/* Desktop */}
         <div className="hidden md:block">
           <div className="w-80 h-1 bg-white mx-auto my-2" />
           <p className="text-white font-medium leading-relaxed font-instrument-serif" style={{ fontSize: 'clamp(4rem, 5vw, 6rem)' }}>
@@ -57,7 +49,6 @@ export default function TitleSection() {
           </p>
         </div>
         
-        {/* Mobile */}
         <div className="md:hidden space-y-2 px-4">
           <div className="w-64 h-1 bg-white mx-auto" />
           <p style={{ fontSize: 'clamp(2.5rem, 7vw, 4rem)' }} className="text-white font-medium tracking-wide leading-relaxed font-instrument-serif">

@@ -112,12 +112,12 @@ export default function ShaderShowcase() {
           </div>
           
           {/* Title section - Scrollable overlay */}
-          <div className="relative z-10 page-bg-extend bg-title-section-bg -pt-10" style={{ minHeight: '100vh' }}>
+          <div className="relative z-10 bg-title-section-bg" style={{ minHeight: '100vh' }}>
             <TitleSection />
           </div>
           
           {/* Video reveal spacer */}
-          <div className="relative z-10" style={{ minHeight: '100vh' }} />
+          <div className="relative z-10" style={{ minHeight: '125vh' }} />
           
           <div className="relative z-10 bg-slate-900" style={{ pointerEvents: 'auto' }}>
           

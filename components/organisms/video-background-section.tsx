@@ -9,7 +9,7 @@ export default function VideoBackgroundSection() {
   
   return (
     <>
-      <div className="w-screen h-screen relative overflow-hidden bg-preset-deep-navy">
+      <div className="w-screen h-screen relative overflow-hidden bg-title-section-bg">
         <iframe
           src={isMobile 
             ? "https://player.vimeo.com/video/1128421563?badge=0&autopause=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1"

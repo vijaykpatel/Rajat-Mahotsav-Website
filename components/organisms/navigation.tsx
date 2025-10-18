@@ -110,11 +110,13 @@ export function Navigation() {
 
   const isMobile = mounted && deviceType !== 'desktop'
 
+  const isHomePage = pathname === '/'
+
   return (
     <>
       <nav 
         data-navbar
-        className={`relative w-full z-50 py-3 transition-opacity duration-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}
+        className={`relative w-full z-50 py-3 transition-all duration-300 ${mounted ? 'opacity-100' : 'opacity-0'} ${isHomePage ? 'bg-title-section-bg shadow-[0_10px_0_0_var(--title-section-bg)]' : ''}`}
         style={{ 
           paddingLeft: 'var(--nav-padding)', 
           paddingRight: 'var(--nav-padding)' 

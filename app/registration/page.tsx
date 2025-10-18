@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { isValidPhoneNumber, parsePhoneNumber } from "react-phone-number-input"
 import { CalendarDate } from "@internationalized/date"
+import { motion } from "framer-motion"
 import { Button } from "@/components/atoms/button"
 import { Input } from "@/components/atoms/input"
 import { Label } from "@/components/atoms/label"
@@ -82,7 +83,6 @@ export default function RegistrationPage() {
     return countryMap[country] || "US"
   }
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isLoaded, setIsLoaded] = useState(false)
 
   const {
     control,
@@ -214,10 +214,8 @@ export default function RegistrationPage() {
 
   const [mounted, setMounted] = useState(false)
 
-  // Set loaded immediately to prevent flicker
   useEffect(() => {
     setMounted(true)
-    setIsLoaded(true)
   }, [])
 
   if (!mounted) {
@@ -231,15 +229,25 @@ export default function RegistrationPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 page-bottom-spacing">
         {/* Title */}
         <div className="text-center page-header-spacing">
-          <h1 className={`standard-page-title reg-title ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+          <motion.h1 
+            className="standard-page-title reg-title"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             Register yourself for the Rajat Mahotsav!
-          </h1>
+          </motion.h1>
           
-          <div className={`flex justify-center px-4 mt-8 transition-all duration-800 delay-400 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}>
+          <motion.div 
+            className="flex justify-center px-4 mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          >
             <p className="text-center text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-5xl">
               Be a part of the Shree Ghanshyam Maharaj Rajat Pratishta Mahotsav New Jersey! Register now for this momentous occasion from <span className="font-bold underline">July 25 through August 2, 2026</span>.
             </p>
-          </div>
+          </motion.div>
         </div>
 
         {/* Video Player */}
@@ -264,9 +272,12 @@ export default function RegistrationPage() {
         <div className="max-w-[90rem] mx-auto">
           <div className="lg:grid lg:grid-cols-5 lg:gap-8 lg:items-start">
             {/* Important Instructions - Left on Desktop */}
-            <div className={`lg:col-span-2 transition-all duration-1000 ease-out ${
-            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-          } mt-8 lg:mt-0 px-4 lg:px-0`} style={{ transitionDelay: '400ms' }}>
+            <motion.div 
+              className="lg:col-span-2 mt-8 lg:mt-0 px-4 lg:px-0"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            >
             <div className="reg-important-card rounded-xl p-6 lg:p-8 relative lg:sticky lg:top-8">
               <h3 className="text-center reg-text-primary font-semibold text-2xl lg:text-3xl mb-6">Important</h3>
               <div className="space-y-4 text-justify">
@@ -281,13 +292,18 @@ export default function RegistrationPage() {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
             {/* Registration Form - Right on Desktop */}
-            <div className="lg:col-span-3 relative mt-8 lg:mt-0">
+            <motion.div 
+              className="lg:col-span-3 relative mt-8 lg:mt-0"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            >
             {/* Subtle glow effect */}
             <div className="absolute -inset-4 bg-gradient-to-r from-orange-200/30 via-white/20 to-red-200/30 rounded-[2rem] blur-xl opacity-40 will-change-transform"></div>
-            <div className={`relative transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
+            <div className="relative">
               <Card className="reg-card rounded-3xl overflow-hidden relative">
 
                 <CardHeader className="text-center pb-6 lg:pb-8">
@@ -582,7 +598,7 @@ export default function RegistrationPage() {
                 </CardContent>
               </Card>
             </div>
-          </div>
+          </motion.div>
         </div>
         </div>
         </div>
