@@ -204,7 +204,7 @@ export default function PratisthaStory() {
             lineHeight: 'clamp(1.2, 1.1 + 0.5vw, 1.3)'
           }}
         >
-          Opening the doors to Shree Swaminarayan Temple - Secaucus, NJ
+          Shree Swaminarayan Temple - Secaucus, NJ Suvarna Tula Murti Pratishta
         </motion.h2>
         
         <div className="space-y-16 sm:space-y-20 md:space-y-24 lg:space-y-32 xl:space-y-36">

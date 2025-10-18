@@ -244,7 +244,7 @@ export default function RegistrationPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           >
-            <p className="text-center text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-5xl">
+            <p className="text-center text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-5xl">
               Be a part of the Shree Ghanshyam Maharaj Rajat Pratishta Mahotsav New Jersey! Register now for this momentous occasion from <span className="font-bold underline">July 25 through August 2, 2026</span>.
             </p>
           </motion.div>
@@ -279,15 +279,15 @@ export default function RegistrationPage() {
               transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             >
             <div className="reg-important-card rounded-xl p-6 lg:p-8 relative lg:sticky lg:top-8">
-              <h3 className="text-center reg-text-primary font-semibold text-2xl lg:text-3xl mb-6">Important</h3>
+              <h3 className="text-center reg-text-primary font-semibold text-xl lg:text-2xl mb-6">Important</h3>
               <div className="space-y-4 text-justify">
-                <p className="reg-text-secondary leading-relaxed text-base lg:text-xl font-medium">
+                <p className="reg-text-secondary leading-relaxed text-sm lg:text-base font-medium">
                   Register each guest individually! All the details help us plan to make the experience enjoyable for everyone!
                 </p>
-                <p className="reg-text-secondary leading-relaxed text-base lg:text-xl font-medium">
+                <p className="reg-text-secondary leading-relaxed text-sm lg:text-base font-medium">
                   If you are registering a family member or friend, please ensure <span className="reg-text-highlight underline">the combination of first name, age, phone number, and email are unique</span>.
                 </p>
-                <p className="reg-text-secondary leading-relaxed text-base lg:text-xl font-medium">
+                <p className="reg-text-secondary leading-relaxed text-sm lg:text-base font-medium">
                   Registering with the same combination of the above 4 fields will overwrite any previous registrations.
                 </p>
               </div>
@@ -307,8 +307,8 @@ export default function RegistrationPage() {
               <Card className="reg-card rounded-3xl overflow-hidden relative">
 
                 <CardHeader className="text-center pb-6 lg:pb-8">
-                  <CardTitle className="text-2xl lg:text-3xl font-semibold reg-text-primary">Registration Form</CardTitle>
-                  <CardDescription className="reg-text-secondary text-lg">Please fill in your details to register</CardDescription>
+                  <CardTitle className="text-xl lg:text-2xl font-semibold reg-text-primary">Registration Form</CardTitle>
+                  <CardDescription className="reg-text-secondary text-base">Please fill in your details to register</CardDescription>
                 </CardHeader>
                 
                 <CardContent>

@@ -105,7 +105,7 @@ export function NavBar({ items, className }: NavBarProps) {
                     <button
                       onClick={() => setExpandedItem(isExpanded ? null : item.name)}
                       className={cn(
-                        "relative cursor-pointer text-base font-semibold rounded-full transition-colors flex items-center w-full justify-start",
+                        "relative cursor-pointer text-sm font-semibold rounded-full transition-colors flex items-center w-full justify-start",
                         "text-white/80 hover:text-white px-4 py-3",
                         isActive && "text-white"
                       )}
@@ -182,7 +182,7 @@ export function NavBar({ items, className }: NavBarProps) {
                     onMouseEnter={() => !isMobile && setHoveredTab(item.name)}
                     onMouseLeave={() => !isMobile && setHoveredTab(null)}
                     className={cn(
-                      "relative cursor-pointer text-base font-semibold rounded-full transition-colors flex items-center",
+                      "relative cursor-pointer text-sm font-semibold rounded-full transition-colors flex items-center",
                       "text-white/80 hover:text-white px-4 py-3 w-full justify-start"
                     )}
                   >
@@ -253,7 +253,7 @@ export function NavBar({ items, className }: NavBarProps) {
                     >
                       {item.subItems ? (
                         <>
-                          <div className="relative cursor-pointer text-lg font-semibold px-3 py-2.5 rounded-full transition-colors whitespace-nowrap flex items-center justify-center text-white/80 hover:text-white">
+                          <div className="relative cursor-pointer text-base font-semibold px-3 py-2.5 rounded-full transition-colors whitespace-nowrap flex items-center justify-center text-white/80 hover:text-white">
                             <Icon size={18} strokeWidth={2.5} className="mr-1.5" />
                             <span>{item.name}</span>
                             {(isHovered || (!hoveredItem && isActive)) && (
@@ -293,7 +293,7 @@ export function NavBar({ items, className }: NavBarProps) {
                                         setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0)
                                       }}
                                       className={cn(
-                                        "flex items-center px-3 py-2 text-lg rounded-lg transition-colors text-white/80 hover:text-white hover:bg-red-500/20",
+                                        "flex items-center px-3 py-2 text-sm rounded-lg transition-colors text-white/80 hover:text-white hover:bg-red-500/20",
                                         isSubActive && "bg-red-500/25 text-white"
                                       )}
                                     >
@@ -314,7 +314,7 @@ export function NavBar({ items, className }: NavBarProps) {
                             setActiveTab(item.name)
                             setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0)
                           }}
-                          className="relative cursor-pointer text-lg font-semibold px-3 py-2.5 rounded-full transition-colors whitespace-nowrap flex items-center justify-center text-white/80 hover:text-white"
+                          className="relative cursor-pointer text-base font-semibold px-3 py-2.5 rounded-full transition-colors whitespace-nowrap flex items-center justify-center text-white/80 hover:text-white"
                         >
                           <Icon size={18} strokeWidth={2.5} className="mr-1.5" />
                           <span>{item.name}</span>
