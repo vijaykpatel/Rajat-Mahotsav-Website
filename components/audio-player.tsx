@@ -53,7 +53,7 @@ export function AudioPlayer() {
       disabled={!isLoaded}
       isDarkBackground={isDarkBackground}
       isVisible={isLoaded}
-      className="fixed bottom-[5.5rem] md:bottom-[8.5rem] right-6 z-40 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="fixed bottom-6 right-6 z-40 disabled:opacity-50 disabled:cursor-not-allowed"
       aria-label={isPlaying ? 'Pause audio' : 'Play audio'}
     >
       {isPlaying ? <Pause size={24} /> : <Play size={24} className="ml-0.5" />}

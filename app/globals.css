@@ -387,6 +387,40 @@
   object-fit: cover;
 }
 
+@keyframes scroll-vertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-33.33%);
+  }
+}
+
+.animate-scroll-vertical {
+  animation: scroll-vertical 20s linear infinite;
+}
+
+.animate-scroll-vertical-slow {
+  animation: scroll-vertical 40s linear infinite;
+}
+
+.animate-scroll-vertical-slower {
+  animation: scroll-vertical 45s linear infinite;
+}
+
+@keyframes scroll-vertical-reverse {
+  0% {
+    transform: translateY(-33.33%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-scroll-vertical-reverse {
+  animation: scroll-vertical-reverse 45s linear infinite;
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
