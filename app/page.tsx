@@ -12,10 +12,8 @@ import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import "@/styles/registration-theme.css"
 
 import { useLoading } from "@/hooks/use-loading"
-import AashirwadVideoPlayer from "@/components/organisms/aashirwad-video-player"
 import PratisthaStory from "@/components/organisms/pratishta-story"
 import MandalExpansionText from "@/components/organisms/mandal-expansion"
-import InviteText from "@/components/organisms/invite-text"
 import AashirwadSection from "@/components/organisms/aashirwad-section"
 
 const gurus = [
@@ -178,13 +176,8 @@ export default function ShaderShowcase() {
           </div>
           
           {/* Text Sections */}
-          <PratisthaStory>
-            <MandalExpansionText />
-          </PratisthaStory>
+          <PratisthaStory/>
           
-          <div className="bg-main-page-bg">
-            <InviteText />
-          </div>
           
           <div className="bg-main-page-bg">
           

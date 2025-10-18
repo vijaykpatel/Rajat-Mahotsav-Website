@@ -361,7 +361,8 @@
   
   /* Section Title Utility Class */
   .section-title {
-    @apply text-6xl md:text-7xl font-bold mb-12 md:mb-24 relative z-10 text-center;
+    @apply font-bold mb-12 md:mb-24 relative z-10 text-center;
+    font-size: clamp(2.5rem, 8vw, 7rem);
     background: linear-gradient(to right, rgb(234 88 12), rgb(220 38 38));
     background-clip: text;
     -webkit-background-clip: text;

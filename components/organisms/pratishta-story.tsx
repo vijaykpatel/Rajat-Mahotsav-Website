@@ -21,9 +21,9 @@ const content = [
     image: getR2Image("/main/2001_1.JPG"),
   },
   {
-    title: "750 Kilograms of Pure Gold",
+    title: "780 Kilograms of Pure Gold",
     description:
-      "Our beloved Prem Murti Acharya Shree Purushottampriyadasji Swamishree Maharaj traditionally weighed all three divine marble idols against 750 kilograms of pure gold and then ceremonially installed them into the sacred sihasan. Never before had such a magnificent Suvarna Tula taken place, creating a timeless memory that will endure for generations.",
+      "Our beloved Prem Murti Acharya Shree Purushottampriyadasji Swamishree Maharaj traditionally weighed all three divine marble idols against 780 kilograms of pure gold and then ceremonially installed them into the sacred sihasan. Never before had such a magnificent Suvarna Tula taken place, creating a timeless memory that will endure for generations.",
     image: getR2Image("/main/2001_2.JPG"),
   },
   {
@@ -34,12 +34,14 @@ const content = [
   },
 ]
 
-export default function PratisthaStory({ children }: { children?: React.ReactNode }) {
+export default function PratisthaStory() {
   const [rowsVisible, setRowsVisible] = useState<boolean[]>([false, false, false])
   const [videoSectionVisible, setVideoSectionVisible] = useState(false)
   const [closingTextVisible, setClosingTextVisible] = useState(false)
+  const [invitationVisible, setInvitationVisible] = useState(false)
   const videoSectionRef = useRef<HTMLDivElement>(null)
   const closingTextRef = useRef<HTMLDivElement>(null)
+  const invitationRef = useRef<HTMLDivElement>(null)
   const [animDuration, setAnimDuration] = useState(1.2)
   const sectionRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -85,6 +87,15 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
       { threshold: 0.2 }
     )
     if (closingTextRef.current) observer.observe(closingTextRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setInvitationVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    )
+    if (invitationRef.current) observer.observe(invitationRef.current)
     return () => observer.disconnect()
   }, [])
 
@@ -154,8 +165,22 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
   return (
     <div ref={containerRef} className="bg-title-section-bg relative">
       <div ref={triggerRef} style={{ minHeight: '120vh' }}>
-        <div ref={sectionRef} className="w-full py-32 pb-40">
-      <div className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 space-y-16 sm:space-y-20 md:space-y-24 lg:space-y-32 xl:space-y-36 mb-20">
+        <div ref={sectionRef} className="w-full py-32 pb-8">
+      <div className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 mb-20">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="font-bold text-slate-100 text-transition text-center mb-16 md:mb-20"
+          style={{
+            fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
+            lineHeight: 'clamp(1.2, 1.1 + 0.5vw, 1.3)'
+          }}
+        >
+          Opening the doors to Shree Swaminarayan Temple - Secaucus, NJ
+        </motion.h2>
+        
+        <div className="space-y-16 sm:space-y-20 md:space-y-24 lg:space-y-32 xl:space-y-36">
         {content.map((item, index) => (
           <div
             key={index}
@@ -209,6 +234,7 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
             </motion.div>
           </div>
         ))}
+        </div>
       </div>
       
       {/* Video Section - Separate */}
@@ -217,7 +243,7 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
           initial={{ opacity: 0, y: 30 }}
           animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="font-bold text-slate-100 text-transition text-center mb-12 md:mb-16"
+          className="font-bold text-slate-100 text-transition text-center mb-16 md:mb-20"
           style={{
             fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
             lineHeight: 'clamp(1.2, 1.1 + 0.5vw, 1.3)'
@@ -232,11 +258,11 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
             initial={{ opacity: 0, x: -50 }}
             animate={videoSectionVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             transition={{ duration: animDuration, ease: "easeOut" }}
-            className="w-full md:w-[50%]"
+            className="w-full md:w-[50%] order-2 md:order-1"
           >
             <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ position: 'relative', paddingTop: '56.42633228840125%' }}>
               <iframe
-                src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/6f4c127cc7b339c9b1b7875c1dc8e745/iframe?poster=https%3A%2F%2Fcustomer-kss5h1dwt4mkz0x3.cloudflarestream.com%2F6f4c127cc7b339c9b1b7875c1dc8e745%2Fthumbnails%2Fthumbnail.gif%3Ftime%3D96s%26duration%3D4s&defaultQuality=1080p"
+                src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/6f4c127cc7b339c9b1b7875c1dc8e745/iframe?poster=https%3A%2F%2Fcustomer-kss5h1dwt4mkz0x3.cloudflarestream.com%2F6f4c127cc7b339c9b1b7875c1dc8e745%2Fthumbnails%2Fthumbnail.gif%3Ftime%3D28s%26duration%3D3s&defaultQuality=1080p"
                 loading="lazy"
                 style={{ border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
                 allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
@@ -250,7 +276,7 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
             initial={{ opacity: 0, y: 50 }}
             animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: animDuration, ease: "easeOut" }}
-            className="flex-1"
+            className="flex-1 order-1 md:order-2"
           >
             <h2 
               className="font-bold text-slate-100 text-transition mb-4 md:mb-6"
@@ -280,12 +306,24 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
       </div>
       
       {/* Closing Text */}
-      <div ref={closingTextRef} className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 py-16 md:py-20">
+      <div ref={closingTextRef} className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 pt-8 md:pt-12 pb-16 md:pb-20">
+        <motion.h3
+          initial={{ opacity: 0, y: 30 }}
+          animate={closingTextVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="font-bold text-slate-100 text-transition text-left md:text-center mb-8 md:mb-10"
+          style={{
+            fontSize: 'clamp(1.87rem, 6vw, 3.5rem)',
+            lineHeight: 'clamp(1.2, 1.1 + 0.5vw, 1.3)'
+          }}
+        >
+          Growth in America
+        </motion.h3>
         <motion.p
           initial={{ opacity: 0, y: 50 }}
           animate={closingTextVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-slate-300 text-transition text-center"
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="text-slate-300 text-transition text-left md:text-center"
           style={{
             fontSize: 'clamp(1.25rem, 4vw, 1.6rem)',
             lineHeight: 'clamp(1.4, 1.3 + 0.5vw, 1.6)',
@@ -298,12 +336,52 @@ export default function PratisthaStory({ children }: { children?: React.ReactNod
       </div>
       
       {/* Carousel */}
-      <div className="w-full py-16 md:py-20">
+      <div className="w-full py-8 md:py-12">
         <Skiper54 images={mandalImages} />
+      </div>
+      
+      {/* Final Invitation Text */}
+      <div ref={invitationRef} className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 py-16 md:py-20">
+        <motion.h3
+          initial={{ opacity: 0, y: 30 }}
+          animate={invitationVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="font-bold text-slate-100 text-transition text-left md:text-center mb-8 md:mb-10"
+          style={{
+            fontSize: 'clamp(1.87rem, 6vw, 3.5rem)',
+            lineHeight: 'clamp(1.2, 1.1 + 0.5vw, 1.3)'
+          }}
+        >
+          A Celebration of a Lifetime
+        </motion.h3>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={invitationVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="text-slate-300 text-transition text-left md:text-center space-y-6 md:space-y-8"
+          style={{
+            fontSize: 'clamp(1.25rem, 4vw, 1.6rem)',
+            lineHeight: 'clamp(1.4, 1.3 + 0.5vw, 1.6)',
+            wordBreak: 'break-word',
+            overflowWrap: 'break-word'
+          }}
+        >
+          <p>
+            The Shree Ghanshyam Maharaj Rajat Pratishta Mahotsav, which will take place from July 25 through August 2, 2026, will celebrate the 25th anniversary of the murti pratishtha of Lord Shree Swaminarayan, Jeevanpran Shree Abji Bapashree, and Jeevanpran Shree Muktajeevan Swamibapa, and the opening of Shree Swaminarayan Temple - Secaucus, New Jersey.
+          </p>
+          <p>
+            This grand occasion will celebrate the past twenty-five years of faith, community, and fellowship at our temple, with scripture recitals, divine blessings from Acharya Swamiji Maharaj, cultural programs, special women's events, and a sports shibir.
+          </p>
+          <p>
+            We pray to Lord Swaminarayanbapa Swamibapa to bless our efforts as we celebrate this momentous occasion. Through His divine guidance, grace, and strength, the devotees of Shree Swaminarayan Temple - Secaucus, NJ are honored to host an unforgettable mahotsav.
+          </p>
+          <p>
+            As this temple holds a special place in the hearts of devotees all throughout North America and the world, the members of Shree Swaminarayan Temple - Secaucus, New Jersey, invite you and your family to be part of this Rajat Mahotsav.
+          </p>
+        </motion.div>
       </div>
         </div>
       </div>
-      {children}
     </div>
   )
 }

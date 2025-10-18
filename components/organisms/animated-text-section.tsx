@@ -67,7 +67,7 @@ export function AnimatedTextSection() {
               viewport={{ once: true, margin: "-100px" }}
               className="max-w-xl md:max-w-5xl mx-auto text-center space-y-6 md:space-y-8"
             >
-              <motion.h2 variants={textVariants} custom={0} className="text-2xl md:text-4xl lg:text-5xl font-bold community-text-primary">
+              <motion.h2 variants={textVariants} custom={0} className="text-3xl lg:text-4xl font-bold community-text-primary">
                 {whyWeServeContent.title}
               </motion.h2>
               <motion.p variants={textVariants} custom={1} className="text-xl md:text-xl lg:text-2xl community-text-secondary leading-relaxed">
@@ -92,7 +92,7 @@ export function AnimatedTextSection() {
               viewport={{ once: true, margin: "-100px" }}
               className="max-w-xl md:max-w-5xl mx-auto text-center space-y-6 md:space-y-8"
             >
-              <motion.h2 variants={textVariants} custom={0} className="text-2xl md:text-4xl lg:text-5xl font-bold community-text-primary">
+              <motion.h2 variants={textVariants} custom={0} className="text-3xl lg:text-4xl font-bold community-text-primary">
                 {missionContent.title}
               </motion.h2>
               <motion.p variants={textVariants} custom={1} className="text-xl md:text-xl lg:text-2xl community-text-secondary leading-relaxed">
