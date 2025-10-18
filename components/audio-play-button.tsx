@@ -14,10 +14,10 @@ export function AudioPlayButton() {
       onClick={toggle}
       isDarkBackground={true}
       isVisible={true}
-      className="fixed top-[calc(1.5rem+56px+2.5rem)] left-[max(1rem,2vw)] z-40"
+      className="hidden lg:fixed top-20 left-4 z-40"
       aria-label={isPlaying ? 'Pause audio' : 'Play audio'}
     >
-      {isPlaying ? <Pause size={24} /> : <Play size={24} className="ml-0.5" />}
+      {isPlaying ? <Pause size={22} strokeWidth={2.5} /> : <Play size={22} strokeWidth={2.5} className="ml-0.5" />}
     </FloatingButton>
   )
 }
