@@ -48,11 +48,7 @@ export default function PratisthaStory() {
   const containerRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
   const rowRefs = useRef<(HTMLDivElement | null)[]>([])
-<<<<<<< HEAD
-  const { fadeToVolume, fadeOut, play } = useAudioContext()
-=======
   const { fadeToVolume, fadeOut, play, hasUserConsent } = useAudioContext()
->>>>>>> fad1d91 (v1.01)
 
   useEffect(() => {
     setAnimDuration(window.innerWidth < 768 ? 0.8 : 1.2)
