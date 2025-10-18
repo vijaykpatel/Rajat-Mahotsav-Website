@@ -27,10 +27,10 @@ function VideoCard({ videoId, title, thumbnail, onPlay, isPlaying: externalIsPla
     }
   }, [externalIsPlaying, isPlaying])
 
-  const { fadeOut } = useAudioContext()
+  const { pause } = useAudioContext()
 
   const handleClick = () => {
-    fadeOut(500)
+    pause()
     setIsPlaying(true)
     onPlay?.()
   }

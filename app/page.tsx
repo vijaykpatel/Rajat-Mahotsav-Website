@@ -54,6 +54,12 @@ export default function ShaderShowcase() {
     return () => clearTimeout(timer)
   }, [])
 
+  useEffect(() => {
+    if (!isLoading) {
+      window.scrollTo(0, 0)
+    }
+  }, [isLoading])
+
 
 
   useEffect(() => {
@@ -104,10 +110,7 @@ export default function ShaderShowcase() {
   return (
     <>
       <AudioPlayer />
-      {/* <LoadingScreen /> */}
-      {!isLoading && (
-        
-        <>
+      <LoadingScreen />
                   {/* Title section - Scrollable overlay */}
           <div className="relative z-10 bg-title-section-bg h-screen block">
             <TitleSection />
@@ -228,8 +231,6 @@ export default function ShaderShowcase() {
           <VideoSection />
           </div>
           </div>
-        </>
-      )}
     </>
   )
 }

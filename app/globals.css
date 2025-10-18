@@ -58,7 +58,7 @@
   /* Navy blue color */
   --navy-blue: #030A1B;
   /* Updated color tokens to match dramatic lighting design brief */
-  --background: #000000; /* Pure black background */
+  --background: var(--preset-deep-navy); /* Deep navy background */
   --foreground: oklch(1 0 0); /* Pure white for text and highlights */
   --card: oklch(0.95 0 0); /* Light gray for subtle backgrounds */
   --card-foreground: oklch(0 0 0); /* Black text on light cards */

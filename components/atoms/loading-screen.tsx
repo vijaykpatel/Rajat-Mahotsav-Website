@@ -1,36 +1,21 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { Volume2, VolumeX } from "lucide-react"
 import ShaderBackground from "@/components/organisms/shader-background"
 import { useLoading } from "@/hooks/use-loading"
+import { useAudioContext } from "@/contexts/audio-context"
+import { AudioChoiceButton } from "@/components/atoms/audio-choice-button"
 
 export default function LoadingScreen() {
   const { isLoading, setIsLoading } = useLoading()
-  const [canSkip, setCanSkip] = useState(false)
+  const { play } = useAudioContext()
 
-  useEffect(() => {
-    if (isLoading) {
-      const skipTimer = setTimeout(() => {
-        setCanSkip(true)
-      }, 1000)
-
-      const autoTimer = setTimeout(() => {
-        setIsLoading(false)
-      }, 2800)
-
-      return () => {
-        clearTimeout(skipTimer)
-        clearTimeout(autoTimer)
-      }
+  const handleEnter = (withAudio: boolean) => {
+    if (withAudio) {
+      play()
     }
-  }, [isLoading, setIsLoading])
-
-  const handleSkip = () => {
-    if (canSkip) {
-      setIsLoading(false)
-    }
+    setIsLoading(false)
   }
 
   return (
@@ -52,7 +37,7 @@ export default function LoadingScreen() {
             filter: { duration: 0.5 },
             rotateY: { duration: 0.8 }
           }}
-          className="fixed cursor-pointer"
+          className="fixed"
           style={{
             top: 0,
             left: 0,
@@ -60,21 +45,9 @@ export default function LoadingScreen() {
             height: '100vh',
             zIndex: 60
           }}
-          onClick={handleSkip}
         >
           <ShaderBackground>
             <div className="h-screen w-screen flex items-center justify-center p-4">
-              {canSkip && (
-                <motion.button
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="absolute bottom-6 right-6 p-3 rounded-full backdrop-blur-sm bg-white/20 hover:bg-white/30 text-white/90 hover:text-white transition-all duration-300 animate-pulse"
-                  onClick={handleSkip}
-                  aria-label="Skip loading"
-                >
-                  <ArrowRight size={20} />
-                </motion.button>
-              )}
               {/* Beige Rectangle with Text Cutout */}
               <motion.div
                 className="relative"
@@ -84,7 +57,7 @@ export default function LoadingScreen() {
                 style={{
                   width: '75vw',
                   height: '55vh',
-                  background: '#F5F5DC',
+                  background: 'rgba(245, 245, 220, 0.85)',
                   borderRadius: '12px',
                   boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), 0 8px 25px rgba(0, 0, 0, 0.2)',
                   transform: 'translateY(-10px)'
@@ -98,7 +71,7 @@ export default function LoadingScreen() {
                       fontSize: 'clamp(0.8rem, 2vw, 1.2rem)',
                       lineHeight: '1.3',
                       letterSpacing: '0.02em',
-                      background: 'linear-gradient(45deg, #FFD700, #C0C0C0, #DC143C, #72b8d3)',
+                      background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
                       backgroundClip: 'text',
                       color: 'transparent'
@@ -117,7 +90,7 @@ export default function LoadingScreen() {
                       lineHeight: '1.0',
                       letterSpacing: '0.09em',
                       textAlign: 'center',
-                      background: 'linear-gradient(45deg, #FFD700, #C0C0C0, #DC143C, #72b8d3)',
+                      background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
                       backgroundClip: 'text',
                       color: 'transparent'
@@ -145,7 +118,7 @@ export default function LoadingScreen() {
                       fontSize: 'clamp(2.5rem, 9vw, 8rem)',
                       lineHeight: '1.2',
                       letterSpacing: '0.05em',
-                      background: 'linear-gradient(45deg, #FFD700, #C0C0C0, #DC143C, #72b8d3)',
+                      background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
                       backgroundClip: 'text',
                       color: 'transparent'
@@ -153,6 +126,22 @@ export default function LoadingScreen() {
                   >
                     જય શ્રી સ્વામિનારાયણ
                   </h2>
+
+                  {/* Audio Choice Buttons */}
+                  <div className="w-full flex flex-row gap-4 md:gap-6 justify-center mt-4 mb-2">
+                    <AudioChoiceButton
+                      icon={Volume2}
+                      label="With Audio"
+                      onClick={() => handleEnter(true)}
+                      delay={0.5}
+                    />
+                    <AudioChoiceButton
+                      icon={VolumeX}
+                      label="Silently"
+                      onClick={() => handleEnter(false)}
+                      delay={0.6}
+                    />
+                  </div>
                   </div>
 
                   {/* Footer Text */}
@@ -162,7 +151,7 @@ export default function LoadingScreen() {
                       fontSize: 'clamp(0.8rem, 2vw, 1.2rem)',
                       lineHeight: '1.3',
                       letterSpacing: '0.02em',
-                      background: 'linear-gradient(45deg, #FFD700, #C0C0C0, #DC143C, #72b8d3)',
+                      background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
                       backgroundClip: 'text',
                       color: 'transparent'

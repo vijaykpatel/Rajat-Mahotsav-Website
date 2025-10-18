@@ -83,16 +83,10 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
         
       )}
 
-      {/* 
-        ORIGINAL COLOR SCHEME (stored for reference):
-        Primary: ["#644a40", "#582d1d", "#202020", "#e8e8e8"]
-        Secondary: ["#ffdfb5", "#644a40", "#582d1d", "#ffffff"]
-      */}
-      
-      {/* Primary Background Shader - Elegant Red/Blue/White/Silver Theme */}
+      {/* Primary Background Shader - Deep Navy, White, Light Gray Theme */}
       <MeshGradient
         className="absolute inset-0 w-full h-full"
-        colors={["#FFD700", "#C0C0C0", "#DC143C", "#72b8d3ff"]}
+        colors={["#0D132D", "#0D132D", "#FFFFFF", "#F3F3F3"]}
         speed={speeds.primary}
       />
       
@@ -100,7 +94,7 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
       {mounted && showSecondaryShader && (
         <MeshGradient
           className="absolute inset-0 w-full h-full opacity-50"
-          colors={["#FFA500", "#E5E5E5", "#B22222","#4682B4"]}
+          colors={["#0D132D", "#0D132D", "#FFFFFF", "#F3F3F3"]}
           speed={speeds.secondary}
           wireframe="true"
         />

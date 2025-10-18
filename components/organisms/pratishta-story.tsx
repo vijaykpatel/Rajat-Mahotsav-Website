@@ -7,6 +7,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Skiper54 } from "@/components/templates/skiper54"
 import { getCloudflareImage } from "@/lib/cdn-assets"
+import { useAudioContext } from '@/contexts/audio-context'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -47,6 +48,7 @@ export default function PratisthaStory() {
   const containerRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
   const rowRefs = useRef<(HTMLDivElement | null)[]>([])
+  const { fadeToVolume, fadeOut, play } = useAudioContext()
 
   useEffect(() => {
     setAnimDuration(window.innerWidth < 768 ? 0.8 : 1.2)
@@ -117,6 +119,31 @@ export default function PratisthaStory() {
     { src: getCloudflareImage("26b6c7da-4a70-4847-29b2-a31b27222a00"), alt: "Kentucky Shilanyas Ceremony", title: "Kentucky Shilanyas Ceremony" },
   ]
 
+  useEffect(() => {
+    const sectionTrigger = ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: 'top center',
+      end: 'bottom center',
+      onEnter: () => fadeToVolume(0.3, 1500),
+      onLeave: () => fadeToVolume(1, 1500),
+      onEnterBack: () => fadeToVolume(0.3, 1500),
+      onLeaveBack: () => fadeToVolume(1, 1500),
+    })
+
+    const videoTrigger = ScrollTrigger.create({
+      trigger: videoSectionRef.current,
+      start: 'top bottom',
+      end: 'bottom top',
+      onEnter: () => fadeOut(1500),
+      onLeaveBack: () => play(),
+    })
+
+    return () => {
+      sectionTrigger.kill()
+      videoTrigger.kill()
+    }
+  }, [fadeToVolume, fadeOut, play])
+
   // hex values ar faster in gsap a lot
   // --page-bg
   useEffect(() => {
@@ -126,8 +153,8 @@ export default function PratisthaStory() {
         backgroundColor: '#F3F3F3',
         scrollTrigger: {
           trigger: triggerRef.current,
-          start: isMobile ? 'top -175%' : 'top -140%',
-          end: isMobile ? '+=50%' : '+=50%',
+          start: isMobile ? 'top -175%' : 'top -120%',
+          end: isMobile ? '+=30%' : '+=35%',
           scrub: isMobile ? 1: 1,
         },
       });
@@ -139,8 +166,8 @@ export default function PratisthaStory() {
         color: '#293340',
         scrollTrigger: {
           trigger: triggerRef.current,
-          start: isMobile ? 'top -175%' : 'top -70%',
-          end: isMobile ? '+=30%' : '+=20%',
+          start: isMobile ? 'top -175%' : 'top -120%',
+          end: isMobile ? '+=30%' : '+=35%',
           scrub: isMobile ? 1: 1,
         },
       });
@@ -260,7 +287,10 @@ export default function PratisthaStory() {
             transition={{ duration: animDuration, ease: "easeOut" }}
             className="w-full md:w-[50%] order-2 md:order-1"
           >
-            <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ position: 'relative', paddingTop: '56.42633228840125%' }}>
+            <div 
+              className="rounded-2xl overflow-hidden shadow-2xl" 
+              style={{ position: 'relative', paddingTop: '56.42633228840125%' }}
+            >
               <iframe
                 src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/6f4c127cc7b339c9b1b7875c1dc8e745/iframe?poster=https%3A%2F%2Fcustomer-kss5h1dwt4mkz0x3.cloudflarestream.com%2F6f4c127cc7b339c9b1b7875c1dc8e745%2Fthumbnails%2Fthumbnail.gif%3Ftime%3D28s%26duration%3D3s&defaultQuality=1080p"
                 loading="lazy"

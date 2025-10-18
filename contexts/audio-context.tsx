@@ -6,6 +6,7 @@ interface AudioContextType {
   play: () => void
   pause: () => void
   fadeOut: (duration?: number) => void
+  fadeToVolume: (targetVolume: number, duration?: number) => void
   toggle: () => void
   isPlaying: boolean
   isLoaded: boolean
@@ -18,6 +19,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const targetVolumeRef = useRef(1)
 
   useEffect(() => {
     audioRef.current = new Audio('https://cdn.njrajatmahotsav.com/audio_files/prathna_audio.mp3')
@@ -42,7 +44,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
 
   const play = () => {
     if (audioRef.current) {
-      audioRef.current.volume = 1
+      audioRef.current.volume = targetVolumeRef.current
       audioRef.current.play()
       setIsPlaying(true)
     }
@@ -76,13 +78,38 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     }, stepTime)
   }
 
+  const fadeToVolume = (targetVolume: number, duration = 1000) => {
+    if (!audioRef.current) return
+
+    if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current)
+
+    const audio = audioRef.current
+    const startVolume = audio.volume
+    const volumeDiff = targetVolume - startVolume
+    const steps = 50
+    const stepTime = duration / steps
+    const volumeStep = volumeDiff / steps
+
+    targetVolumeRef.current = targetVolume
+
+    fadeIntervalRef.current = setInterval(() => {
+      const newVolume = audio.volume + volumeStep
+      if ((volumeStep > 0 && newVolume < targetVolume) || (volumeStep < 0 && newVolume > targetVolume)) {
+        audio.volume = newVolume
+      } else {
+        audio.volume = targetVolume
+        if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current)
+      }
+    }, stepTime)
+  }
+
   const toggle = () => {
     if (isPlaying) pause()
     else play()
   }
 
   return (
-    <AudioContext.Provider value={{ play, pause, fadeOut, toggle, isPlaying, isLoaded }}>
+    <AudioContext.Provider value={{ play, pause, fadeOut, fadeToVolume, toggle, isPlaying, isLoaded }}>
       {children}
     </AudioContext.Provider>
   )
