@@ -9,10 +9,18 @@ import { AudioChoiceButton } from "@/components/atoms/audio-choice-button"
 
 export default function LoadingScreen() {
   const { isLoading, setIsLoading } = useLoading()
+<<<<<<< HEAD
   const { play } = useAudioContext()
 
   const handleEnter = (withAudio: boolean) => {
     if (withAudio) {
+=======
+  const { play, grantConsent } = useAudioContext()
+
+  const handleEnter = (withAudio: boolean) => {
+    if (withAudio) {
+      grantConsent()
+>>>>>>> fad1d91 (v1.01)
       play()
     }
     setIsLoading(false)

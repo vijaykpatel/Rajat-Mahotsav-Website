@@ -43,7 +43,29 @@ export const metadata: Metadata = {
   description: "Shree Swaminarayan Temple Secaucus, NJ Celebrates its Rajat Mahotsav from July 29, 2026 - August 02, 2026.",
   generator: "v0.app",
   icons: {
-    icon: "https://https://cdn.njrajatmahotsav.com/main_logo.png",
+    icon: "https://cdn.njrajatmahotsav.com/main_logo.png",
+  },
+  openGraph: {
+    title: "New Jersey Rajat Mahotsav",
+    description: "Shree Swaminarayan Temple Secaucus, NJ Celebrates its Rajat Mahotsav from July 29, 2026 - August 02, 2026.",
+    url: "https://njrajatmahotsav.com",
+    siteName: "NJ Rajat Mahotsav",
+    images: [
+      {
+        url: "https://imagedelivery.net/TW4ooLBcBYa-Ux0CtzoLqg/5aeb6c7e-f6ea-45b1-da4a-823279172400/public",
+        width: 1200,
+        height: 630,
+        alt: "New Jersey Rajat Mahotsav",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "New Jersey Rajat Mahotsav",
+    description: "Shree Swaminarayan Temple Secaucus, NJ Celebrates its Rajat Mahotsav from July 29, 2026 - August 02, 2026.",
+    images: ["https://imagedelivery.net/TW4ooLBcBYa-Ux0CtzoLqg/5aeb6c7e-f6ea-45b1-da4a-823279172400/public"],
   },
 }
 

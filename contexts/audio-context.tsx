@@ -1,6 +1,10 @@
 'use client'
 
 import { createContext, useContext, useEffect, useRef, useState, ReactNode } from 'react'
+<<<<<<< HEAD
+=======
+import { usePathname } from 'next/navigation'
+>>>>>>> fad1d91 (v1.01)
 
 interface AudioContextType {
   play: () => void
@@ -10,6 +14,11 @@ interface AudioContextType {
   toggle: () => void
   isPlaying: boolean
   isLoaded: boolean
+<<<<<<< HEAD
+=======
+  hasUserConsent: boolean
+  grantConsent: () => void
+>>>>>>> fad1d91 (v1.01)
 }
 
 const AudioContext = createContext<AudioContextType | null>(null)
@@ -18,8 +27,16 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+<<<<<<< HEAD
   const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const targetVolumeRef = useRef(1)
+=======
+  const hasUserConsentRef = useRef(false)
+  const [hasUserConsent, setHasUserConsent] = useState(false)
+  const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const targetVolumeRef = useRef(1)
+  const pathname = usePathname()
+>>>>>>> fad1d91 (v1.01)
 
   useEffect(() => {
     audioRef.current = new Audio('https://cdn.njrajatmahotsav.com/audio_files/prathna_audio.mp3')
@@ -42,8 +59,24 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+<<<<<<< HEAD
   const play = () => {
     if (audioRef.current) {
+=======
+  useEffect(() => {
+    if (pathname !== '/') {
+      fadeOut(1500)
+    }
+  }, [pathname])
+
+  const grantConsent = () => {
+    hasUserConsentRef.current = true
+    setHasUserConsent(true)
+  }
+
+  const play = () => {
+    if (audioRef.current && hasUserConsentRef.current) {
+>>>>>>> fad1d91 (v1.01)
       audioRef.current.volume = targetVolumeRef.current
       audioRef.current.play()
       setIsPlaying(true)
@@ -53,10 +86,19 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const pause = () => {
     audioRef.current?.pause()
     setIsPlaying(false)
+<<<<<<< HEAD
   }
 
   const fadeOut = (duration = 1000) => {
     if (!audioRef.current || !isPlaying) return
+=======
+    hasUserConsentRef.current = false
+    setHasUserConsent(false)
+  }
+
+  const fadeOut = (duration = 1000) => {
+    if (!audioRef.current || !isPlaying || !hasUserConsentRef.current) return
+>>>>>>> fad1d91 (v1.01)
 
     if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current)
 
@@ -79,7 +121,11 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   }
 
   const fadeToVolume = (targetVolume: number, duration = 1000) => {
+<<<<<<< HEAD
     if (!audioRef.current) return
+=======
+    if (!audioRef.current || !hasUserConsentRef.current) return
+>>>>>>> fad1d91 (v1.01)
 
     if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current)
 
@@ -104,12 +150,29 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   }
 
   const toggle = () => {
+<<<<<<< HEAD
     if (isPlaying) pause()
     else play()
   }
 
   return (
     <AudioContext.Provider value={{ play, pause, fadeOut, fadeToVolume, toggle, isPlaying, isLoaded }}>
+=======
+    if (isPlaying) {
+      pause()
+    } else {
+      grantConsent()
+      if (audioRef.current) {
+        audioRef.current.volume = targetVolumeRef.current
+        audioRef.current.play()
+        setIsPlaying(true)
+      }
+    }
+  }
+
+  return (
+    <AudioContext.Provider value={{ play, pause, fadeOut, fadeToVolume, toggle, isPlaying, isLoaded, hasUserConsent, grantConsent }}>
+>>>>>>> fad1d91 (v1.01)
       {children}
     </AudioContext.Provider>
   )

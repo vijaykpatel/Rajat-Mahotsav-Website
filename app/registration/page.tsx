@@ -147,7 +147,11 @@ export default function RegistrationPage() {
       
       // First, check if record exists
       const { data: existingRecord } = await supabase
+<<<<<<< HEAD
         .from('registrations_dev')
+=======
+        .from('registrations')
+>>>>>>> fad1d91 (v1.01)
         .select('id')
         .eq('first_name', dbData.first_name)
         .eq('age', dbData.age)
@@ -160,14 +164,22 @@ export default function RegistrationPage() {
       if (existingRecord) {
         // Update existing record
         const { error: updateError } = await supabase
+<<<<<<< HEAD
           .from('registrations_dev')
+=======
+          .from('registrations')
+>>>>>>> fad1d91 (v1.01)
           .update(dbData)
           .eq('id', existingRecord.id)
         error = updateError
       } else {
         // Insert new record
         const { error: insertError } = await supabase
+<<<<<<< HEAD
           .from('registrations_dev')
+=======
+          .from('registrations')
+>>>>>>> fad1d91 (v1.01)
           .insert([dbData])
         error = insertError
       }

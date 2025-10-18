@@ -79,6 +79,17 @@ export default function SpiritualSevaPage() {
   const deviceType = useDeviceType()
 
   useEffect(() => {
+<<<<<<< HEAD
+=======
+    const allImages = [...firstRowImages, ...secondRowImages, ...whyWeServeImages]
+    allImages.forEach((image) => {
+      const img = new Image()
+      img.src = image.src
+    })
+  }, [])
+
+  useEffect(() => {
+>>>>>>> fad1d91 (v1.01)
     const timer = setTimeout(() => setIsLoaded(true), 200)
     return () => clearTimeout(timer)
   }, [])
