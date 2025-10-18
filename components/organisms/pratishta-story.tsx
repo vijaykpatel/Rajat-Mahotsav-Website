@@ -126,7 +126,7 @@ export default function PratisthaStory() {
         backgroundColor: '#F3F3F3',
         scrollTrigger: {
           trigger: triggerRef.current,
-          start: isMobile ? 'top -175%' : 'top -80%',
+          start: isMobile ? 'top -175%' : 'top -140%',
           end: isMobile ? '+=50%' : '+=50%',
           scrub: isMobile ? 1: 1,
         },

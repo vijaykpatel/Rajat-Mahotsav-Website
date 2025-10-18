@@ -36,7 +36,7 @@ const wallpapers = [
     id: 5,
     imageId: "fa49d6f1-a249-44bb-805f-f55644188e00",
     fullRes: "https://cdn.njrajatmahotsav.com/wallpapers/rajat_mobile_wallpaper_pebbled_1.jpg",
-    title: "Prathna Wallpaper 1"
+    title: "Pebbled Wallpaper 1"
   },
 ]
 
@@ -85,13 +85,11 @@ export default function MediaPage() {
               className="flex flex-col gap-4"
             >
               <div className="relative aspect-[9/19.5]">
-                {wallpaper.imageId && (
-                  <img
-                    src={getCloudflareImageMobileWp(wallpaper.imageId)}
-                    alt={wallpaper.title}
-                    className="w-full h-full object-contain"
-                  />
-                )}
+                <img
+                  src={getCloudflareImageMobileWp(wallpaper.imageId)}
+                  alt={wallpaper.title}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <button
                 onClick={() => handleDownload(wallpaper)}

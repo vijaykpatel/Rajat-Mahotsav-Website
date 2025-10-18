@@ -135,7 +135,7 @@ export default function ShaderShowcase() {
           </div>
           
           {/* Spacer - height matches title section content */}
-          <div style={{ height: 'calc(100vh + 70vh)' }} />
+          <div style={{ height: 'calc(100vh)' }} />
           
           <div className="relative z-10" style={{ pointerEvents: 'auto' }}>
           {/* Full background Sihasan image section with fade transition */}
