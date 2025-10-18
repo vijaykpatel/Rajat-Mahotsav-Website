@@ -92,7 +92,7 @@ export function FloatingMenuButton() {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         isDarkBackground={isDarkBackground}
         isVisible={isVisible}
-        className="fixed bottom-6 right-6 md:left-6 md:right-auto z-40"
+        className="fixed bottom-6 left-6 z-40"
         aria-label="Toggle menu"
       >
         {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -113,7 +113,7 @@ export function FloatingMenuButton() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 20 }}
               transition={{ duration: 0.2 }}
-              className="fixed bottom-20 right-6 md:left-6 md:right-auto z-40 rounded-2xl backdrop-blur-md bg-gradient-to-r from-slate-900/20 to-slate-800/20 p-2 shadow-lg w-[220px]"
+              className="fixed bottom-20 left-6 z-40 rounded-2xl backdrop-blur-md bg-gradient-to-r from-slate-900/20 to-slate-800/20 p-2 shadow-lg w-[220px]"
             >
               <nav className="flex flex-col gap-1">
                 {menuItems.map((item) => {

@@ -59,7 +59,7 @@ export function ScrollToTop() {
       onClick={scrollToTop}
       isDarkBackground={isDarkBackground}
       isVisible={isVisible}
-      className="fixed bottom-6 left-24 md:right-6 md:left-auto z-40"
+      className="fixed bottom-6 right-6 z-40"
       aria-label="Scroll to top"
     >
       <ArrowUp size={24} />

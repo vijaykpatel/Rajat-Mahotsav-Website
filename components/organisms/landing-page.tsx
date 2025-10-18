@@ -65,7 +65,7 @@ export default function TitleSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: !isLoading ? 1 : 0, ease: "easeOut" }}
-            className="leading-wide text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-6xl"
+            className="leading-wide text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
           >
             Shree
           </motion.h1>
@@ -73,7 +73,7 @@ export default function TitleSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: !isLoading ? 1.2 : 0, ease: "easeOut" }}
-            className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-6xl"
+            className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
           >
             Ghanshyam Maharaj
           </motion.h2>
@@ -81,7 +81,7 @@ export default function TitleSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: !isLoading ? 1.4 : 0, ease: "easeOut" }}
-            className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-6xl"
+            className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
           >
             Rajat Pratishta Mahotsav
           </motion.h3>
@@ -89,7 +89,7 @@ export default function TitleSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: !isLoading ? 1.6 : 0, ease: "easeOut" }}
-            className="mt-2 text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-6xl"
+            className="mt-2 text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
           >
             Shree Swaminarayan Temple
           </motion.p>
@@ -97,7 +97,7 @@ export default function TitleSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: !isLoading ? 1.8 : 0, ease: "easeOut" }}
-            className="mt-2 text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-6xl"
+            className="mt-2 text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
           >
             Secaucus, New Jersey
           </motion.p>
@@ -105,7 +105,7 @@ export default function TitleSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: !isLoading ? 1.8 : 0, ease: "easeOut" }}
-            className="mt-2 text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-6xl"
+            className="mt-2 text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
           >
             celebrates 25 years
           </motion.p>
