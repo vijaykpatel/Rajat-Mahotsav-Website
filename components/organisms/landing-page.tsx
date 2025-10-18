@@ -41,9 +41,9 @@ export default function TitleSection() {
   return (
     <div className="bg-title-section-bg h-full flex items-end justify-end relative pb-36 sm:pb-36 md:pb-48 lg:pb-48 xl:pb-48">
       {/* Slider columns on left side - Desktop only (>1280px) */}
-      <div className="hidden xl:flex absolute left-4 top-0 w-auto h-full z-20 gap-4">
+      <div className="hidden xl:flex absolute left-4 top-0 w-auto max-w-[45vw] h-full z-20 gap-4">
         {columnImages.map((images, col) => (
-          <div key={col} className="w-56 sm:w-64 md:w-72 lg:w-80 xl:w-96 h-full overflow-hidden">
+          <div key={col} className="w-64 lg:w-72 xl:w-80 h-full overflow-hidden">
             <div className={`flex flex-col gap-4 ${col === 1 ? 'animate-scroll-vertical-reverse' : 'animate-scroll-vertical-slower'}`} style={{ animationDelay: `${-col * 10}s` }}>
               {images.concat(images).concat(images).map((image, idx) => (
                 <div key={`${col}-${idx}`} className="w-full h-64 sm:h-72 md:h-80 bg-white/10 backdrop-blur-sm rounded-lg flex-shrink-0 border border-white/20 overflow-hidden">
@@ -58,7 +58,7 @@ export default function TitleSection() {
         initial={{ opacity: 0, x: 100 }}
         animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
         transition={{ duration: 1, delay: !isLoading ? 0.8 : 0, ease: "easeOut" }}
-        className="pr-4 z-10 text-right sm:pr-8"
+        className="pr-4 z-10 text-right sm:pr-8 xl:max-w-[50vw]"
       >
         <div className="font-instrument-serif leading-tight">
           <motion.h1 
