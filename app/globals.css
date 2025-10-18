@@ -7,8 +7,58 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Main page background - alias for preset-light-gray */
+  --page-bg: var(--preset-light-gray);
+  /* Title section background - alias for preset-deep-navy */
+  --title-section-bg: var(--preset-deep-navy);
+  /* Main text color - alias for preset-charcoal */
+  --main-text: var(--preset-charcoal);
+  /* Text transition starting color */
+  --text-transition-start: #f1f5f9;
+  /* Navbar height variable - includes padding */
+  --navbar-height: 180px;
+  /* Footer color variable */
+  --footer-color: rgba(248, 248, 248, 0.85);
+  /* Preset navy accent color */
+  --preset-navy-accent: #141F4D;
+  /* Preset deep navy color */
+  --preset-deep-navy: #0D132D;
+  /* Preset navy blue color */
+  --preset-navy-blue: #030A1B;
+  /* Preset zodiac blue color */
+  --preset-zodiac-blue: #0B1B33;
+  /* Preset light gray color */
+  --preset-light-gray: #F3F3F3;
+  /* Preset stone color */
+  --preset-stone: #E8E6E0;
+  /* Preset pale gray color */
+  --preset-pale-gray: #D9DEE8;
+  /* Preset red color */
+  --preset-red: #B50000;
+  /* Preset bluish gray color */
+  --preset-bluish-gray: #abb8c3;
+  /* Preset charcoal color */
+  --preset-charcoal: #293340;
+  /* Carousel background color - alias for preset-bluish-gray */
+  --carousel-bg: var(--preset-bluish-gray);
+  /* Preset gradient very light gray to bluish gray */
+  --preset-gradient-very-light-gray-to-bluish-gray: linear-gradient(135deg, rgb(238, 238, 238) 0%, rgb(169, 184, 195) 100%);
+  /* Preset gradient topper */
+  --preset-gradient-topper: linear-gradient(0deg, var(--preset-deep-navy) 24.28%, var(--preset-zodiac-blue) 100%);
+  /* Preset gradient blue alt */
+  --preset-gradient-blue-alt: linear-gradient(321deg, var(--preset-navy-accent) 7.41%, #12347F 80.62%);
+  /* Preset gradient blue */
+  --preset-gradient-blue: linear-gradient(180deg, var(--preset-navy-blue) 0%, #3b82f6 100%);
+  /* Preset white color */
+  --preset-white: #FFFFFF;
+  /* Preset gradient topper */
+  --preset-gradient-topper: linear-gradient(0deg, var(--preset-deep-navy) 24.28%, var(--preset-zodiac-blue) 100%);
+  /* Pale gray color */
+  --pale-gray: #D9DEE8;
+  /* Navy blue color */
+  --navy-blue: #030A1B;
   /* Updated color tokens to match dramatic lighting design brief */
-  --background: #000000; /* Pure black background */
+  --background: var(--preset-deep-navy); /* Deep navy background */
   --foreground: oklch(1 0 0); /* Pure white for text and highlights */
   --card: oklch(0.95 0 0); /* Light gray for subtle backgrounds */
   --card-foreground: oklch(0 0 0); /* Black text on light cards */
@@ -27,24 +77,27 @@
   --border: oklch(1 0 0); /* White borders for contrast */
   --input: oklch(0.95 0 0); /* Light gray for inputs */
   --ring: oklch(0.65 0.2 270); /* Violet for focus rings */
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  /* UNUSED - Chart variables */
+  /* --chart-1: oklch(0.646 0.222 41.116); */
+  /* --chart-2: oklch(0.6 0.118 184.704); */
+  /* --chart-3: oklch(0.398 0.07 227.392); */
+  /* --chart-4: oklch(0.828 0.189 84.429); */
+  /* --chart-5: oklch(0.769 0.188 70.08); */
   --radius: 0.5rem; /* Softer rounded corners */
-  --sidebar: oklch(0 0 0); /* Black sidebar */
-  --sidebar-foreground: oklch(1 0 0); /* White sidebar text */
-  --sidebar-primary: oklch(0.65 0 0); /* Violet for primary sidebar */
-  --sidebar-primary-foreground: oklch(1 0 0); /* White text on sidebar primary */
-  --sidebar-accent: oklch(0.95 0 0); /* Light gray for sidebar accent */
-  --sidebar-accent-foreground: oklch(0 0 0); /* Black text on sidebar accent */
-  --sidebar-border: oklch(1 0 0); /* White sidebar borders */
-  --sidebar-ring: oklch(0.65 0.2 270); /* Violet for sidebar focus */
+  /* UNUSED - Sidebar variables */
+  /* --sidebar: oklch(0 0 0); */
+  /* --sidebar-foreground: oklch(1 0 0); */
+  /* --sidebar-primary: oklch(0.65 0 0); */
+  /* --sidebar-primary-foreground: oklch(1 0 0); */
+  /* --sidebar-accent: oklch(0.95 0 0); */
+  /* --sidebar-accent-foreground: oklch(0 0 0); */
+  /* --sidebar-border: oklch(1 0 0); */
+  /* --sidebar-ring: oklch(0.65 0.2 270); */
   --font-instrument-serif: "Instrument Serif", serif; /* Instrument Serif font family configuration */
   /* Added Figtree as the primary font variable */
   --font-figtree: "Figtree", sans-serif; /* Figtree font family configuration */
   --font-noto-music: "Noto Music", sans-serif; /* Noto Music font family configuration */
+  --font-gujarati: "Noto Sans Gujarati", sans-serif; /* Gujarati font family configuration */
 }
 
 .dark {
@@ -68,25 +121,51 @@
   --border: oklch(0.3 0 0);
   --input: oklch(0.15 0 0);
   --ring: oklch(0.7 0.25 270);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.05 0 0);
-  --sidebar-foreground: oklch(1 0 0);
-  --sidebar-primary: oklch(0.7 0.25 270);
-  --sidebar-primary-foreground: oklch(0 0 0);
-  --sidebar-accent: oklch(0.15 0 0);
-  --sidebar-accent-foreground: oklch(1 0 0);
-  --sidebar-border: oklch(0.3 0 0);
-  --sidebar-ring: oklch(0.7 0.25 270);
+  /* UNUSED - Chart variables */
+  /* --chart-1: oklch(0.488 0.243 264.376); */
+  /* --chart-2: oklch(0.696 0.17 162.48); */
+  /* --chart-3: oklch(0.769 0.188 70.08); */
+  /* --chart-4: oklch(0.627 0.265 303.9); */
+  /* --chart-5: oklch(0.645 0.246 16.439); */
+  /* UNUSED - Sidebar variables */
+  /* --sidebar: oklch(0.05 0 0); */
+  /* --sidebar-foreground: oklch(1 0 0); */
+  /* --sidebar-primary: oklch(0.7 0.25 270); */
+  /* --sidebar-primary-foreground: oklch(0 0 0); */
+  /* --sidebar-accent: oklch(0.15 0 0); */
+  /* --sidebar-accent-foreground: oklch(1 0 0); */
+  /* --sidebar-border: oklch(0.3 0 0); */
+  /* --sidebar-ring: oklch(0.7 0.25 270); */
   --font-instrument-serif: "Instrument Serif", serif; /* Instrument Serif font family configuration */
   /* Added Figtree font variable for dark mode consistency */
   --font-figtree: "Figtree", sans-serif; /* Figtree font family configuration */
+  --font-gujarati: "Noto Sans Gujarati", sans-serif; /* Gujarati font family configuration */
 }
 
+
 @theme inline {
+  /* Preset colors */
+  --color-preset-navy-accent: var(--preset-navy-accent);
+  --color-preset-deep-navy: var(--preset-deep-navy);
+  --color-preset-navy-blue: var(--preset-navy-blue);
+  --color-preset-zodiac-blue: var(--preset-zodiac-blue);
+  --color-preset-light-gray: var(--preset-light-gray);
+  --color-preset-stone: var(--preset-stone);
+  --color-preset-pale-gray: var(--preset-pale-gray);
+  --color-preset-red: var(--preset-red);
+  --color-preset-bluish-gray: var(--preset-bluish-gray);
+  --color-preset-charcoal: var(--preset-charcoal);
+  --color-preset-white: var(--preset-white);
+  --color-carousel-bg: var(--carousel-bg);
+  --color-page-bg: var(--page-bg);
+  --color-main-page-bg: var(--preset-light-gray);
+  --color-title-section-bg: var(--title-section-bg);
+  --color-main-text: var(--main-text);
+  /* UNUSED - Shadow input */
+  /* --shadow-input:
+    0px 2px 3px -1px rgba(0, 0, 0, 0.1),
+    0px 1px 0px 0px rgba(25, 28, 33, 0.02),
+    0px 0px 0px 1px rgba(25, 28, 33, 0.08); */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -106,33 +185,56 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+  /* UNUSED - Chart color variables */
+  /* --color-chart-1: var(--chart-1); */
+  /* --color-chart-2: var(--chart-2); */
+  /* --color-chart-3: var(--chart-3); */
+  /* --color-chart-4: var(--chart-4); */
+  /* --color-chart-5: var(--chart-5); */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  /* UNUSED - Sidebar color variables */
+  /* --color-sidebar: var(--sidebar); */
+  /* --color-sidebar-foreground: var(--sidebar-foreground); */
+  /* --color-sidebar-primary: var(--sidebar-primary); */
+  /* --color-sidebar-primary-foreground: var(--sidebar-primary-foreground); */
+  /* --color-sidebar-accent: var(--sidebar-accent); */
+  /* --color-sidebar-accent-foreground: var(--sidebar-accent-foreground); */
+  /* --color-sidebar-border: var(--sidebar-border); */
+  /* --color-sidebar-ring: var(--sidebar-ring); */
   --font-instrument-serif: var(--font-instrument-serif);
   /* Added Figtree font to theme configuration */
   --font-sans: var(--font-figtree);
   --font-figtree: var(--font-figtree);
   --font-noto-music: var(--font-noto-music);
+  --font-gujarati: var(--font-gujarati);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    /* Enable smooth scrolling for better scroll-to-top experience */
+    scroll-behavior: smooth;
+    /* Prevent bounce effect when scrolling to top/bottom */
+    overscroll-behavior: none;
+    /* Prevent horizontal scrolling */
+    overflow-x: hidden;
+    width: 100%;
+    /* Fill safe area with dark color matching page content */
+    /* controls the toolbar color on iphone */
+    background: #0D132D;
+    /* Ensure consistent scroll behavior */
+    -webkit-overflow-scrolling: touch;
+    /* Fix mobile viewport height */
+    height: 100%;
+    /* Extend background to safe areas */
+    /* padding-bottom: env(safe-area-inset-bottom); */
   }
   body {
     @apply bg-background text-foreground;
@@ -140,6 +242,15 @@
     font-family: var(--font-figtree);
     /* Prevent horizontal scrolling on mobile */
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    /* Prevent independent scrolling */
+    overscroll-behavior: none;
+    /* Ensure unified scroll behavior */
+    -webkit-overflow-scrolling: touch;
+    /* Fix mobile height issues */
+    min-height: 100vh;
+    min-height: 100dvh;
   }
   
   /* Mobile-specific optimizations */
@@ -152,10 +263,144 @@
     body {
       /* Improve touch scrolling on mobile */
       -webkit-overflow-scrolling: touch;
+      /* Fix mobile scroll behavior */
+      touch-action: pan-y;
+    }
+    
+    /* Prevent content from scrolling independently on mobile */
+    * {
+      overscroll-behavior: contain;
     }
   }
 }
 
 .instrument {
   font-family: var(--font-instrument-serif);
+}
+
+/* Page Layout Utility Classes */
+@layer utilities {
+  /* UNUSED - Page title size */
+  /* .page-title-size {
+    @apply text-4xl md:text-4xl lg:text-5xl xl:text-6xl;
+  } */
+  
+  /* UNUSED - Page description size */
+  /* .page-description-size {
+    @apply text-lg md:text-xl lg:text-2xl;
+  } */
+  
+  .page-header-spacing {
+    @apply mb-16 md:mb-20 lg:mb-24;
+  }
+  
+  /* UNUSED - Page title desc spacing */
+  /* .page-title-desc-spacing {
+    @apply mb-2;
+  } */
+  
+  .page-bottom-spacing {
+    @apply pb-8;
+  }
+  
+  /* Extend page background behind navbar */
+  .page-bg-extend {
+    margin-top: calc(-1 * var(--navbar-height));
+    padding-top: calc(var(--navbar-height) + 2rem);
+  }
+  
+  @media (min-width: 768px) {
+    .page-bg-extend {
+      padding-top: calc(var(--navbar-height) + 3rem);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .page-bg-extend {
+      padding-top: calc(var(--navbar-height) + 5rem);
+    }
+  }
+  
+  /* Standard Page Header Component Styles */
+  .standard-page-title {
+    @apply text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-2 leading-tight transition-all duration-1000 ease-out;
+  }
+  
+  .standard-page-subtitle {
+    @apply text-2xl md:text-3xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent mb-6 leading-relaxed transition-all duration-1000 ease-out;
+  }
+  
+  .standard-page-description {
+    @apply text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-4xl mx-auto;
+  }
+  
+  .animated-word {
+    @apply inline-block mr-2 transition-all duration-500 ease-out;
+  }
+  
+  /* Accommodation Card Typography */
+  .acc-card-title {
+    @apply text-lg md:text-xl font-bold;
+  }
+  
+  .acc-card-sub-title {
+    @apply text-base md:text-lg font-semibold;
+  }
+  
+  .acc-card-base {
+    @apply text-sm md:text-base;
+  }
+  
+  .acc-card-caption {
+    @apply text-xs md:text-base;
+  }
+  
+  /* Section Title Utility Class */
+  .section-title {
+    @apply font-bold mb-12 md:mb-24 relative z-10 text-center;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(to right, rgb(234 88 12), rgb(220 38 38));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    line-height: 1.2;
+  }
+  
+}
+
+@keyframes pan-right {
+  0% {
+    object-position: left center;
+  }
+  100% {
+    object-position: right center;
+  }
+}
+
+.animate-pan-right {
+  animation: pan-right 13s ease-in-out infinite alternate;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide floating elements when video is playing on mobile */
+@media (max-width: 768px) {
+  body.hide-floating-elements .scroll-to-top,
+  body.hide-floating-elements .floating-menu-button {
+    display: none !important;
+  }
+}
+
+/* Force Google Maps iframe to render immediately */
+iframe[src*="google.com/maps"] {
+  content-visibility: visible !important;
+  contain-intrinsic-size: auto 500px;
 }

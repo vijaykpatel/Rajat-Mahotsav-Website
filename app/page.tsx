@@ -1,44 +1,236 @@
 "use client"
 
-import ShaderBackground from "@/components/shader-background"
-import Countdown from "@/components/countdown"
-import Logo from "@/components/logo"
-import { ChevronRight } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
+import { motion } from "framer-motion"
+import LoadingScreen from "@/components/atoms/loading-screen"
+import VideoSection from "@/components/organisms/video-section"
+import TitleSection from "@/components/organisms/landing-page"
+import GuruCard from "@/components/molecules/guru-card"
+import GuruCarousel from "@/components/organisms/guru-carousel"
 import { useDeviceType } from "@/hooks/use-device-type"
+import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
+import "@/styles/registration-theme.css"
+
+import { useLoading } from "@/hooks/use-loading"
+import PratisthaStory from "@/components/organisms/pratishta-story"
+import MandalExpansionText from "@/components/organisms/mandal-expansion"
+import AashirwadSection from "@/components/organisms/aashirwad-section"
+import VideoBackgroundSection from "@/components/organisms/video-background-section"
+import { AudioPlayer } from "@/components/audio-player"
+
+const gurus = [
+  {
+    imageId: "dc885005-1573-4b68-9b7d-8d21f2ae8b00",
+    name: "Jeevanpran Shree Muktajeevan Swamibapa"
+  },
+  {
+    imageId: "b148858a-2ce9-4ac7-71e9-5bd5e076de00",
+    name: "Acharya Shree Purushottampriyadasji Swamishree Maharaj"
+  },
+  {
+    imageId: "e2881864-b5d1-4e12-d289-63add00d1400",
+    name: "Acharya Shree Jitendriyapriyadasji Swamiji Maharaj"
+  }
+]
 
 export default function ShaderShowcase() {
-  // Set target date to July 28, 2026 at 5 PM EST
-  const targetDate = new Date('2026-07-28T17:00:00-05:00');
+  const targetDate = '2026-07-28T17:00:00-05:00';
   const deviceType = useDeviceType();
 
+  const { isLoading } = useLoading();
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [isPanActive, setIsPanActive] = useState(false)
+  const [cardsVisible, setCardsVisible] = useState(false)
+  const [mobileGuruVisible, setMobileGuruVisible] = useState(false)
+  const sihasanRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+  const mobileGuruRef = useRef<HTMLDivElement>(null)
+  
+  const backgroundImageUrl = `${getCloudflareImageBiggest("5aeb6c7e-f6ea-45b1-da4a-823279172400")}&width=2560`
+  const sihasan_trimmed = `${getCloudflareImageBiggest("c7853ba8-25d7-4097-b754-53d5ff3adb00")}&width=2560`
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100)
+    return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    if (!isLoading) {
+      window.scrollTo(0, 0)
+    }
+  }, [isLoading])
+
+
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsPanActive(entry.isIntersecting && entry.intersectionRatio >= 0.5)
+      },
+      { threshold: [0, 0.5, 1] }
+    )
+
+    if (sihasanRef.current) {
+      observer.observe(sihasanRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setCardsVisible(entry.isIntersecting)
+      },
+      { threshold: 0.2 }
+    )
+
+    if (cardsRef.current) {
+      observer.observe(cardsRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setMobileGuruVisible(entry.isIntersecting)
+      },
+      { threshold: 0.2 }
+    )
+
+    if (mobileGuruRef.current) {
+      observer.observe(mobileGuruRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <ShaderBackground>
-      <div className="h-screen w-screen flex flex-col items-center justify-center p-4 relative z-20 overflow-hidden">
-        <div className="flex-1 flex flex-col items-center justify-center space-y-[2vh] relative z-30 max-h-[80vh] portrait:max-h-[60vh]">
-          <div className="max-h-[45vh] landscape:max-h-[45vh] flex items-center justify-start">
-            <Logo />
+    <>
+      <AudioPlayer />
+      <LoadingScreen />
+                  {/* Title section - Scrollable overlay */}
+          <div className="relative z-10 bg-title-section-bg h-screen block">
+            <TitleSection />
           </div>
-          <div className="max-h-[25vh] landscape:max-h-[20vh] landscape:max-w-[80vw] flex items-center justify-start">
-            <Countdown targetDate={targetDate} />
+          
+          {/* Video background - Fixed underneath */}
+          <div className="z-0 block">
+            <VideoBackgroundSection />
           </div>
-        </div>
-        
-        {/* Enter Site Button */}
-        <div className={`flex justify-center z-40 mb-4 landscape:mb-2 ${deviceType === 'mobile' ? 'px-4 landscape:px-0' : ''}`}>
-          <button className={`flex items-center justify-center px-4 py-2 text-white/90 hover:text-white transition-colors duration-200 bg-transparent backdrop-blur-md rounded-xl border-2 border-white/30 shadow-[0_0_20px_rgba(232,232,232,0.3)] hover:shadow-[0_0_30px_rgba(232,232,232,0.5)] hover:border-white/50 ${deviceType === 'mobile' ? 'w-full landscape:w-auto landscape:max-w-[80vw]' : 'w-auto'}`}>
-            Enter Site
-            <ChevronRight className="ml-2 h-4 w-4" />
-          </button>
-        </div>
-        
-        <div className="flex justify-center relative z-30 items-end pb-4 portrait:pb-8">
-          <p className="text-white/80 text-[2.5vw] md:text-[1.5vw] lg:text-[1.2vw] xl:text-base font-lato text-center max-w-4xl leading-tight">
-            Inspirator: His Divine Holiness Acharya Shree Jitendriyapriyadasji Swamiji Maharaj
-          </p>
-        </div>
-      </div>
-      {/* <HeroContent /> */}
-      {/* <PulsingCircle /> */}
-    </ShaderBackground>
+          
+          {/* Title section - Scrollable overlay */}
+          {/* <div className="relative z-10 bg-title-section-bg" style={{ minHeight: '100vh' }}>
+            <TitleSection />
+          </div>
+           */}
+          {/* Video reveal spacer */}
+          {/* <div className="relative z-10" style={{ minHeight: '125vh' }} /> */}
+          
+          <div className="relative z-10 bg-slate-900" style={{ pointerEvents: 'auto' }}>
+          
+          {/* Full background Sihasan image section with fade transition */}
+          <div ref={sihasanRef} data-section="sihasan" className="w-screen relative overflow-hidden flex flex-col bg-slate-900" style={{ minHeight: '100vh' }}>
+            {/* Top gradient overlay for smooth transition from title */}
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%' }} />
+            
+            {/* Bottom gradient overlay for smooth transition to next section */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%', top: 'auto', bottom: 0 }} />
+            
+            {/* Glassmorphic overlay for lower section */}
+            {/* git <div className="absolute inset-x-0 bottom-0 h-[30%] md:h-[30%] bg-white/45 backdrop-blur-sm z-[5] pointer-events-none" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%)' }} /> */}
+            
+            {/* Desktop: Static Image (> 1280px) */}
+            <img
+              src={backgroundImageUrl}
+              alt="Background"
+              className="hidden xl:block absolute inset-0 w-full h-full object-cover brightness-115"
+            />
+            
+            {/* Mobile/Tablet: Panning Sihasan Image (<= 1280px, includes iPad Pro) */}
+            <img
+              src={backgroundImageUrl}
+              alt="Background"
+              className="xl:hidden absolute inset-0 h-full object-cover animate-pan-right brightness-115"
+              style={{ 
+                animationPlayState: isPanActive ? 'running' : 'paused',
+                objectPosition: 'left center'
+              }}
+            />
+            
+            {/* Glassmorphic Feature Card */}
+            {/* <div className="flex items-end md:items-center justify-center w-full mt-auto relative z-20" style={{ paddingBottom: 'calc(clamp(2.5rem, 8vh, 4rem) + env(safe-area-inset-bottom))' }}>
+              <div className="px-4 text-center">
+                <h3 className="font-bold leading-[1.4] relative z-10" style={{ color: 'var(--title-section-bg)', fontSize: 'clamp(3rem, 14vw, 12rem)', fontFamily: 'var(--font-gujarati)' }}>સુવર્ણ યુગ નો રજત મહોત્સવ</h3>
+              </div>
+            </div> */}
+          </div>
+          
+          {/* Text Sections */}
+          <PratisthaStory/>
+          
+          
+          <div className="bg-main-page-bg">
+          
+          {/* Aashirwad Section */}
+          <AashirwadSection />
+          
+          {/* Staggered Guru Cards */}
+          <div ref={mobileGuruRef} className="min-h-screen w-full pb-40 px-4 flex flex-col items-center justify-center">
+            <motion.h2
+              initial={{ opacity: 0, y: 50 }}
+              animate={mobileGuruVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="section-title"
+            >
+              Our Beloved Gurus
+            </motion.h2>
+            
+            {/* Desktop: Staggered layout */}
+            <div ref={cardsRef} className="hidden md:flex gap-16 items-end">
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={cardsVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+                transition={{ duration: 1.4, ease: "easeOut" }}
+                className="translate-y-0"
+              >
+                <GuruCard imageId={gurus[0].imageId} name={gurus[0].name} />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={cardsVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+                transition={{ duration: 1.4, delay: 0.3, ease: "easeOut" }}
+                className="translate-y-16"
+              >
+                <GuruCard imageId={gurus[1].imageId} name={gurus[1].name} />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={cardsVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+                transition={{ duration: 1.4, delay: 0.6, ease: "easeOut" }}
+                className="translate-y-32"
+              >
+                <GuruCard imageId={gurus[2].imageId} name={gurus[2].name} />
+              </motion.div>
+            </div>
+            
+            {/* Mobile: Carousel */}
+            <motion.div
+              initial={{ opacity: 0, y: 80 }}
+              animate={mobileGuruVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
+              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+              className="md:hidden w-full"
+            >
+              <GuruCarousel gurus={gurus} />
+            </motion.div>
+          </div>
+          
+          {/* Video section */}
+          <VideoSection />
+          </div>
+          </div>
+    </>
   )
 }

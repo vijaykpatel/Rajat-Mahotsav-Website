@@ -1,0 +1,16 @@
+.color-transition-container {
+  background-color: #0f172a;
+  color: #cbd5e1;
+  margin: 0;
+  padding: 0;
+}
+
+.color-transition-container h1 {
+  color: #f1f5f9;
+}
+
+.scroll-trigger-section {
+  height: 200vh;
+  margin: 0;
+  padding: 0;
+}

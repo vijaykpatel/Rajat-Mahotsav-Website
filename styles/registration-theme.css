@@ -1,0 +1,170 @@
+/* Registration Page Theme Variables */
+:root {
+  /* Background gradients */
+  --reg-bg-main: linear-gradient(to bottom right, rgb(255 247 237), rgb(255 255 255), rgb(254 242 242));
+  --reg-bg-overlay: linear-gradient(to bottom right, rgb(255 237 213 / 0.2), transparent, rgb(254 226 226 / 0.2));
+  --reg-bg-card: linear-gradient(to bottom right, rgb(255 255 255 / 0.8), rgb(255 247 237 / 0.8));
+  --reg-bg-important: linear-gradient(to bottom right, rgb(255 237 213 / 0.9), rgb(254 226 226 / 0.9));
+  --reg-bg-button: linear-gradient(to right, rgb(249 115 22), rgb(239 68 68));
+  --reg-bg-button-hover: linear-gradient(to right, rgb(234 88 12), rgb(220 38 38));
+
+  /* Text colors */
+  --reg-text-primary: rgb(31 41 55);
+  --reg-text-secondary: rgb(75 85 99);
+  --reg-text-label: rgb(55 65 81);
+  --reg-text-placeholder: rgb(156 163 175);
+  --reg-text-error: rgb(239 68 68);
+  --reg-text-success: rgb(34 197 94);
+
+  /* Border and ring colors */
+  --reg-border-primary: rgb(254 215 170);
+  --reg-border-focus: rgb(254 215 170);
+  --reg-ring-focus: rgb(254 215 170);
+
+  /* Background colors for inputs */
+  --reg-input-bg: rgb(255 255 255 / 0.6);
+  --reg-input-bg-disabled: rgb(243 244 246);
+  --reg-input-bg-search: rgb(249 250 251);
+
+  /* Hover and focus states */
+  --reg-hover-light: rgb(255 247 237);
+  --reg-hover-medium: rgb(255 237 213);
+  --reg-focus-ring: 0 0 0 2px rgb(254 215 170);
+
+  /* Shadow colors */
+  --reg-shadow-card: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --reg-shadow-popover: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Title gradient */
+  --reg-title-gradient: linear-gradient(to right, rgb(234 88 12), rgb(220 38 38));
+}
+
+/* Registration page specific classes */
+.reg-page-bg {
+  background: var(--reg-bg-main);
+}
+
+.reg-title {
+  background: var(--reg-title-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.reg-card {
+  background: var(--reg-bg-card);
+  border: 2px solid var(--reg-border-primary);
+  box-shadow: var(--reg-shadow-card);
+  backdrop-filter: blur(4px);
+}
+
+.reg-important-card {
+  background: var(--reg-bg-important);
+  border: 2px solid var(--reg-border-primary);
+  box-shadow: var(--reg-shadow-card);
+}
+
+.reg-input {
+  height: 3.5rem;
+  font-size: 1.1 rem;
+  background: var(--reg-input-bg);
+  border: 1px solid var(--reg-border-primary);
+  color: var(--reg-text-primary);
+  backdrop-filter: blur(4px);
+}
+
+.reg-input::placeholder {
+  color: var(--reg-text-placeholder);
+}
+
+.reg-input:focus {
+  outline: none;
+  border-color: var(--reg-border-focus);
+  box-shadow: var(--reg-focus-ring);
+}
+
+.reg-input:disabled {
+  background: var(--reg-input-bg-disabled);
+  color: var(--reg-text-secondary);
+  cursor: not-allowed;
+}
+
+.reg-label {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--reg-text-label);
+}
+
+.reg-button {
+  background: var(--reg-bg-button);
+  color: white;
+  font-weight: 500;
+  box-shadow: var(--reg-shadow-card);
+  transition: all 0.3s ease;
+}
+
+.reg-button:hover:not(:disabled) {
+  background: var(--reg-bg-button-hover);
+}
+
+.reg-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reg-popover {
+  background: white;
+  border: 2px solid var(--reg-border-primary);
+  box-shadow: var(--reg-shadow-popover);
+}
+
+.reg-popover-search {
+  background: var(--reg-input-bg-search);
+  border: 1px solid var(--reg-border-primary);
+  color: var(--reg-text-primary);
+}
+
+.reg-popover-search::placeholder {
+  color: var(--reg-text-secondary);
+}
+
+.reg-popover-search:focus {
+  outline: none;
+  border-color: var(--reg-border-focus);
+  box-shadow: var(--reg-focus-ring);
+}
+
+.reg-popover-item {
+  color: var(--reg-text-primary);
+  transition: all 0.2s ease;
+  padding: 0.75rem !important;
+  font-size: 1.05rem !important;
+  font-weight: 500 !important;
+}
+
+.reg-popover-item:hover {
+  background: var(--reg-hover-medium);
+}
+
+.reg-error-text {
+  color: var(--reg-text-error);
+  font-size: .9rem;
+}
+
+.reg-success-text {
+  color: var(--reg-text-success);
+  font-size: 1.05rem;
+}
+
+.reg-text-primary {
+  color: var(--reg-text-primary);
+}
+
+.reg-text-secondary {
+  color: var(--reg-text-secondary);
+}
+
+.reg-text-highlight {
+  color: rgb(194 65 12);
+  font-weight: 700;
+}

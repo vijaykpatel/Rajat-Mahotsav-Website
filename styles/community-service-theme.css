@@ -1,0 +1,209 @@
+/* Community Service Page Theme */
+
+/* Page Background - Removed duplicate, handled below */
+
+@keyframes communityGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Typography */
+.community-title {
+  background: linear-gradient(135deg, 
+    #ea580c 0%, 
+    #dc2626 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.community-text-primary {
+  color: hsl(220 14% 20%);
+  font-weight: 600;
+}
+
+.community-text-secondary {
+  color: hsl(220 9% 35%);
+  font-weight: 400;
+}
+
+.community-text-accent {
+  color: #ea580c;
+  font-weight: 500;
+}
+
+.community-text-highlight {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+/* Dark mode text adjustments */
+@media (prefers-color-scheme: dark) {
+  .community-text-primary {
+    color: hsl(0 0% 95%);
+  }
+  
+  .community-text-secondary {
+    color: hsl(0 0% 75%);
+  }
+  
+  .community-text-accent {
+    color: #f97316;
+  }
+  
+  .community-text-highlight {
+    color: #ef4444;
+  }
+}
+
+/* Cards */
+.community-card {
+  background: hsl(0 0% 100% / 0.95);
+  border: 2px solid hsl(220 13% 90%);
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.08),
+    0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.community-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 12px 20px -4px rgba(0, 0, 0, 0.12),
+    0 6px 8px -2px rgba(0, 0, 0, 0.08);
+  border-color: rgb(234 88 12 / 0.3);
+}
+
+/* Dark mode card adjustments */
+@media (prefers-color-scheme: dark) {
+  .community-card {
+    background: hsl(220 14% 10% / 0.95);
+    border-color: hsl(220 13% 20%);
+  }
+  
+  .community-card:hover {
+    border-color: rgb(249 115 22 / 0.3);
+  }
+}
+
+/* Form Elements */
+.community-label {
+  color: hsl(220 14% 20%);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.community-input {
+  background: hsl(0 0% 100%);
+  border: 2px solid hsl(220 13% 85%);
+  color: hsl(220 14% 20%);
+  transition: all 0.2s ease;
+}
+
+.community-input:focus {
+  border-color: #ea580c;
+  box-shadow: 0 0 0 3px rgb(234 88 12 / 0.15);
+  background: hsl(0 0% 100%);
+}
+
+.community-input::placeholder {
+  color: hsl(220 9% 55%);
+}
+
+/* Dark mode form adjustments */
+@media (prefers-color-scheme: dark) {
+  .community-label {
+    color: hsl(0 0% 95%);
+  }
+  
+  .community-input {
+    background: hsl(220 14% 15%);
+    border-color: hsl(220 13% 25%);
+    color: hsl(0 0% 95%);
+  }
+  
+  .community-input:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgb(249 115 22 / 0.15);
+  }
+  
+  .community-input::placeholder {
+    color: hsl(0 0% 65%);
+  }
+}
+
+/* Button */
+.community-button {
+  background: linear-gradient(135deg, 
+    #ea580c 0%, 
+    #dc2626 100%
+  );
+  color: white;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.community-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(251, 146, 60, 0.3);
+}
+
+.community-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.community-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.community-button:hover::before {
+  left: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .community-title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+  
+  .community-card {
+    margin: 0 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .community-title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
+/* Match schedule page theme */
+.community-page-bg {
+  background: linear-gradient(to bottom right, 
+    rgb(255 247 237) 0%,
+    rgb(255 255 255) 50%,
+    rgb(254 242 242) 100%
+  );
+}
