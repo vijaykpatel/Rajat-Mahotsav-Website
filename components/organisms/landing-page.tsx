@@ -39,9 +39,9 @@ export default function TitleSection() {
   const { isLoading } = useLoading()
 
   return (
-    <div className="bg-title-section-bg h-full flex items-end justify-end relative pb-36 sm:pb-36 md:pb-48 lg:pb-48 xl:pb-48">
+    <div className="bg-title-section-bg h-full flex items-end justify-end relative pb-24 sm:pb-24 md:pb-24 lg:pb-24 xl:pb-24">
       {/* Slider columns on left side - Desktop only (>1280px) */}
-      <div className="hidden xl:flex absolute left-4 top-0 w-auto max-w-[45vw] h-full z-20 gap-4">
+      <div className="hidden xl:flex absolute left-4 top-0 w-auto xl:max-w-[45vw] 2xl:max-w-[50vw] h-full z-20 gap-4">
         {columnImages.map((images, col) => (
           <div key={col} className="w-64 lg:w-72 xl:w-80 h-full overflow-hidden">
             <div className={`flex flex-col gap-4 ${col === 1 ? 'animate-scroll-vertical-reverse' : 'animate-scroll-vertical-slower'}`} style={{ animationDelay: `${-col * 10}s` }}>
@@ -58,14 +58,14 @@ export default function TitleSection() {
         initial={{ opacity: 0, x: 100 }}
         animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
         transition={{ duration: 1, delay: !isLoading ? 0.8 : 0, ease: "easeOut" }}
-        className="pr-4 z-10 text-right sm:pr-8 xl:max-w-[50vw]"
+        className="pr-4 z-10 text-right sm:pr-8 xl:max-w-[52vw] 2xl:max-w-[48vw]"
       >
         <div className="font-instrument-serif leading-tight">
           <motion.h1 
             initial={{ opacity: 0, x: 50 }}
             animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: !isLoading ? 1 : 0, ease: "easeOut" }}
-            className="leading-wide text-4xl font-semibold text-white drop-shadow-lg sm:text-5xl lg:text-6xl xl:text-7xl"
+            className="leading-wide text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-6xl"
           >
             Shree
           </motion.h1>
@@ -73,7 +73,7 @@ export default function TitleSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: !isLoading ? 1.2 : 0, ease: "easeOut" }}
-            className="leading-tight text-4xl font-semibold text-white drop-shadow-lg sm:text-5xl lg:text-6xl xl:text-7xl"
+            className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-6xl"
           >
             Ghanshyam Maharaj
           </motion.h2>
@@ -81,7 +81,7 @@ export default function TitleSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: !isLoading ? 1.4 : 0, ease: "easeOut" }}
-            className="leading-tight text-4xl font-semibold text-white drop-shadow-lg sm:text-5xl lg:text-6xl xl:text-7xl"
+            className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-6xl"
           >
             Rajat Pratishta Mahotsav
           </motion.h3>
@@ -89,7 +89,7 @@ export default function TitleSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: !isLoading ? 1.6 : 0, ease: "easeOut" }}
-            className="mt-2 text-4xl font-semibold text-white drop-shadow-lg sm:text-5xl lg:text-6xl xl:text-7xl"
+            className="mt-2 text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-6xl"
           >
             Shree Swaminarayan Temple
           </motion.p>
@@ -97,7 +97,7 @@ export default function TitleSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: !isLoading ? 1.8 : 0, ease: "easeOut" }}
-            className="mt-2 text-4xl font-semibold text-white drop-shadow-lg sm:text-5xl lg:text-6xl xl:text-7xl"
+            className="mt-2 text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-6xl"
           >
             Secaucus, New Jersey
           </motion.p>
@@ -105,7 +105,7 @@ export default function TitleSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: !isLoading ? 1.8 : 0, ease: "easeOut" }}
-            className="mt-2 text-4xl font-semibold text-white drop-shadow-lg sm:text-5xl lg:text-6xl xl:text-7xl"
+            className="mt-2 text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-6xl"
           >
             celebrates 25 years
           </motion.p>
@@ -113,7 +113,7 @@ export default function TitleSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={!isLoading ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.8, delay: !isLoading ? 2 : 0, ease: "easeOut" }}
-            className="mt-2 text-4xl font-semibold italic text-white drop-shadow-lg sm:text-6xl lg:text-7xl xl:text-8xl"
+            className="mt-2 text-3xl font-semibold italic text-white drop-shadow-lg sm:text-5xl lg:text-6xl xl:text-5xl 2xl:text-7xl"
           >
             07.25.26 - 08.02.26
           </motion.p>
