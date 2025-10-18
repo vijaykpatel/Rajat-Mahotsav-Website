@@ -106,18 +106,23 @@ export default function ShaderShowcase() {
       {/* {!isLoading && ( */}
         
         <>
+                  {/* Title section - Scrollable overlay */}
+          <div className="relative z-10 pb-[10rem] bg-title-section-bg" style={{ minHeight: '100vh' }}>
+            <TitleSection />
+          </div>
+          
           {/* Video background - Fixed underneath */}
-          <div className="fixed inset-0 z-0">
+          <div className="z-0">
             <VideoBackgroundSection />
           </div>
           
           {/* Title section - Scrollable overlay */}
-          <div className="relative z-10 bg-title-section-bg" style={{ minHeight: '100vh' }}>
+          {/* <div className="relative z-10 bg-title-section-bg" style={{ minHeight: '100vh' }}>
             <TitleSection />
           </div>
-          
+           */}
           {/* Video reveal spacer */}
-          <div className="relative z-10" style={{ minHeight: '125vh' }} />
+          {/* <div className="relative z-10" style={{ minHeight: '125vh' }} /> */}
           
           <div className="relative z-10 bg-slate-900" style={{ pointerEvents: 'auto' }}>
           

@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 export default function TitleSection() {
   return (
-    <div className="min-h-screen bg-title-section-bg flex flex-col items-center justify-start">
+    <div className="bg-title-section-bg flex flex-col items-center justify-start">
       {/* Commented out original text */}
       {/* <motion.div
         initial={{ opacity: 0, y: -50 }}
@@ -69,7 +69,7 @@ export default function TitleSection() {
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="fixed bottom-16 right-4 z-10 text-right sm:bottom-8 sm:right-8"
+        className="absolute top-1/2 -translate-y-1/2 right-4 z-10 text-right sm:right-8"
       >
         <div className="font-instrument-serif leading-tight">
           <motion.h1 

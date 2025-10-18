@@ -194,7 +194,7 @@ export default function VideoSection() {
           initial={{ opacity: 0, y: 60 }}
           animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-          className="hidden xl:grid xl:grid-cols-3 gap-8"
+          className="hidden xl:grid xl:grid-cols-3 gap-8 max-w-[110rem] mx-auto"
         >
           {videos.map((video, index) => (
             <VideoCard 
