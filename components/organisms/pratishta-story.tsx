@@ -322,7 +322,7 @@ export default function PratisthaStory() {
                 hyphens: 'auto'
               }}
             >
-              25 Years in Secaucus
+              25 Years Later
             </h2>            
             <p 
               className="text-slate-300 text-transition"
@@ -333,7 +333,7 @@ export default function PratisthaStory() {
                 overflowWrap: 'break-word'
               }}
             >
-              What unfolded afterwards was a golden era of the growth of the faith and the flourishing of the supreme teachings and philosophy of Lord Shree Swaminarayanbapa Swamibapa, not only in New Jersey, but all throughout North America.
+              Over the next 25 years, Shree Swaminarayan Temple - Secaucus, NJ has flourished under guidance, supreme teachings, and philosophy of Lord Shree Swaminarayanbapa Swamibapa. It has become a beacon of spirituality for the community and has provided members of the Swaminarayan faith form all around the world a lifetime of blissful memories.
             </p>
           </motion.div>
         </div>
