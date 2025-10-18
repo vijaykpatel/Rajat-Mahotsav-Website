@@ -131,13 +131,13 @@ export default function LoadingScreen() {
                   <div className="w-full flex flex-row gap-4 md:gap-6 justify-center mt-4 mb-2">
                     <AudioChoiceButton
                       icon={Volume2}
-                      label="With Audio"
+                      label="Audio"
                       onClick={() => handleEnter(true)}
                       delay={0.5}
                     />
                     <AudioChoiceButton
                       icon={VolumeX}
-                      label="Silently"
+                      label="Silent"
                       onClick={() => handleEnter(false)}
                       delay={0.6}
                     />
