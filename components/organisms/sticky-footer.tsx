@@ -4,7 +4,7 @@ import { CDN_ASSETS } from "@/lib/cdn-assets"
 
 export default function StickyFooter() {
   return (
-    <footer className="backdrop-blur-xl border-t-4 border-orange-500/60 md:shadow-[0_0_40px_rgba(255,255,255,0.3)] bg-title-section-bg">
+    <footer className="backdrop-blur-xl border-t-4 border-red-500/60 md:shadow-[0_0_40px_rgba(255,255,255,0.3)] bg-title-section-bg">
       {/* Desktop Layout */}
       <div className="hidden md:grid grid-cols-3 items-start py-1 px-6 gap-4">
         {/* Left Column */}

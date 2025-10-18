@@ -173,7 +173,7 @@ export default function PratisthaStory() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="font-bold text-slate-100 text-transition text-center mb-16 md:mb-20"
           style={{
-            fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
+            fontSize: 'clamp(2.2rem, 7vw, 4.5rem)',
             lineHeight: 'clamp(1.2, 1.1 + 0.5vw, 1.3)'
           }}
         >

@@ -115,53 +115,26 @@ const videos = [
 ]
 
 export default function VideoSection() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, slidesToScroll: 1 })
   const [emblaRefMobile, emblaApiMobile] = useEmblaCarousel({ loop: true })
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const [playingVideoIndex, setPlayingVideoIndex] = useState<number | null>(null)
-  const [resetKey, setResetKey] = useState(0)
   const [videoSectionVisible, setVideoSectionVisible] = useState(false)
   const videoSectionRef = useRef<HTMLDivElement>(null)
   
-  const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(emblaApi)
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApiMobile)
 
   useEffect(() => {
-    if (!emblaApi || isVideoPlaying) return
-    const interval = setInterval(() => {
-      emblaApi.scrollNext()
-    }, 4500)
-    return () => clearInterval(interval)
-  }, [emblaApi, isVideoPlaying, resetKey])
-
-  useEffect(() => {
-    if (!emblaApiMobile || isVideoPlaying) return
+    if (!emblaApiMobile) return
     const interval = setInterval(() => {
       emblaApiMobile.scrollNext()
     }, 4500)
     return () => clearInterval(interval)
-  }, [emblaApiMobile, isVideoPlaying, resetKey])
-
-  useEffect(() => {
-    if (!emblaApi) return
-    const onSelect = () => {
-      setPlayingVideoIndex(null)
-      setIsVideoPlaying(false)
-    }
-    const onPointerDown = () => setResetKey(k => k + 1)
-    emblaApi.on('select', onSelect).on('pointerDown', onPointerDown)
-    return () => { emblaApi.off('select', onSelect).off('pointerDown', onPointerDown) }
-  }, [emblaApi])
+  }, [emblaApiMobile])
 
   useEffect(() => {
     if (!emblaApiMobile) return
-    const onSelect = () => {
-      setPlayingVideoIndex(null)
-      setIsVideoPlaying(false)
-    }
-    const onPointerDown = () => setResetKey(k => k + 1)
-    emblaApiMobile.on('select', onSelect).on('pointerDown', onPointerDown)
-    return () => { emblaApiMobile.off('select', onSelect).off('pointerDown', onPointerDown) }
+    const onSelect = () => setPlayingVideoIndex(null)
+    emblaApiMobile.on('select', onSelect)
+    return () => { emblaApiMobile.off('select', onSelect) }
   }, [emblaApiMobile])
 
   useEffect(() => {
@@ -180,19 +153,19 @@ export default function VideoSection() {
   }, [])
 
   return (
-    <div ref={videoSectionRef} className="min-h-screen pb-20 px-4 flex flex-col justify-center">
-      <div className="max-w-[90rem] mx-auto">
+    <div ref={videoSectionRef} className="min-h-screen pb-20 flex flex-col justify-center">
+      <div className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-10 md:mb-12 lg:mb-12 xl:mb-16"
+          className="text-center mb-10 md:mb-12 lg:mb-12 xl:mb-16 px-4"
         >
           <h2 className="section-title">
             Follow our celebration
           </h2>
-          <p className="reg-text-primary font-semibold text-xl lg:text-2xl mb-4 mx-auto">
-            We hope you are as excited as we are and look forward to having you celebrate such a major milestone with us!
+          <p className="text-slate-300 text-transition text-left md:text-center space-y-6 md:space-y-8" style={{ fontSize: 'clamp(1.25rem, 4vw, 1.6rem)', lineHeight: 'clamp(1.4, 1.3 + 0.5vw, 1.6)', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+            Follow our celebrations throughout the year leading up to the Mahotsav.
           </p>
         </motion.div>
 
@@ -201,7 +174,7 @@ export default function VideoSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="mb-8 text-center"
+          className="mb-8 text-center px-4"
         >
           <a
             href="https://www.youtube.com/playlist?list=PLqKpGEY54C-1OklTqKwLh6JWYCDQpn5MC"
@@ -216,29 +189,22 @@ export default function VideoSection() {
           </a>
         </motion.div>
 
-        {/* Desktop: 2-card layout with arrows below */}
-        <div className="hidden xl:block">
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex">
-              {videos.map((video, index) => (
-                <div key={video.videoId} className="flex-[0_0_50%] min-w-0 px-6">
-                  <VideoCard 
-                    {...video} 
-                    onPlay={() => {
-                      setIsVideoPlaying(true)
-                      setPlayingVideoIndex(index)
-                    }}
-                    isPlaying={playingVideoIndex === index}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="flex justify-center gap-4 mt-8">
-            <PrevButton onClick={() => { onPrevButtonClick(); setResetKey(k => k + 1) }} disabled={prevBtnDisabled} />
-            <NextButton onClick={() => { onNextButtonClick(); setResetKey(k => k + 1) }} disabled={nextBtnDisabled} />
-          </div>
-        </div>
+        {/* Desktop: 3-column grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+          transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+          className="hidden xl:grid xl:grid-cols-3 gap-8"
+        >
+          {videos.map((video, index) => (
+            <VideoCard 
+              key={video.videoId}
+              {...video} 
+              onPlay={() => setPlayingVideoIndex(index)}
+              isPlaying={playingVideoIndex === index}
+            />
+          ))}
+        </motion.div>
 
         {/* Mobile & Tablet: Single card layout with swipe */}
         <motion.div
@@ -253,10 +219,7 @@ export default function VideoSection() {
                 <div key={video.videoId} className="flex-[0_0_100%] min-w-0">
                   <VideoCard 
                     {...video} 
-                    onPlay={() => {
-                      setIsVideoPlaying(true)
-                      setPlayingVideoIndex(index)
-                    }}
+                    onPlay={() => setPlayingVideoIndex(index)}
                     isPlaying={playingVideoIndex === index}
                   />
                 </div>
@@ -269,7 +232,7 @@ export default function VideoSection() {
             {scrollSnaps.map((_, index) => (
               <DotButton
                 key={index}
-                onClick={() => { onDotButtonClick(index); setResetKey(k => k + 1) }}
+                onClick={() => onDotButtonClick(index)}
                 className={`w-3 h-3 rounded-full transition-colors ${
                   index === selectedIndex ? 'bg-orange-500' : 'bg-gray-300'
                 }`}

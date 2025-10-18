@@ -15,6 +15,7 @@ import { useLoading } from "@/hooks/use-loading"
 import PratisthaStory from "@/components/organisms/pratishta-story"
 import MandalExpansionText from "@/components/organisms/mandal-expansion"
 import AashirwadSection from "@/components/organisms/aashirwad-section"
+import VideoBackgroundSection from "@/components/organisms/video-background-section"
 
 const gurus = [
   {
@@ -40,7 +41,6 @@ export default function ShaderShowcase() {
   const [isPanActive, setIsPanActive] = useState(false)
   const [cardsVisible, setCardsVisible] = useState(false)
   const [mobileGuruVisible, setMobileGuruVisible] = useState(false)
-  const [titleScrolled, setTitleScrolled] = useState(false)
   const sihasanRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
   const mobileGuruRef = useRef<HTMLDivElement>(null)
@@ -53,30 +53,7 @@ export default function ShaderShowcase() {
     return () => clearTimeout(timer)
   }, [])
 
-  useEffect(() => {
-    const titleContainer = document.getElementById('title-container')
-    if (!titleContainer) return
 
-    let isLocked = false
-    const titleContentHeight = titleContainer.scrollHeight - window.innerHeight
-
-    const handleScroll = () => {
-      const scrollTop = window.scrollY
-      
-      if (scrollTop < titleContentHeight) {
-        // Still scrolling through title content
-        isLocked = false
-        titleContainer.scrollTop = scrollTop
-      } else if (!isLocked) {
-        // Lock title at bottom
-        isLocked = true
-        titleContainer.scrollTop = titleContentHeight
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -129,17 +106,23 @@ export default function ShaderShowcase() {
       {/* {!isLoading && ( */}
         
         <>
-          {/* Title section - Scrollable then fixed */}
-          <div className="fixed inset-0 z-0 overflow-hidden" id="title-container">
+          {/* Video background - Fixed underneath */}
+          <div className="fixed inset-0 z-0">
+            <VideoBackgroundSection />
+          </div>
+          
+          {/* Title section - Scrollable overlay */}
+          <div className="relative z-10 page-bg-extend bg-title-section-bg -pt-10" style={{ minHeight: '100vh' }}>
             <TitleSection />
           </div>
           
-          {/* Spacer - height matches title section content */}
-          <div style={{ height: 'calc(100vh)' }} />
+          {/* Video reveal spacer */}
+          <div className="relative z-10" style={{ minHeight: '100vh' }} />
           
-          <div className="relative z-10" style={{ pointerEvents: 'auto' }}>
+          <div className="relative z-10 bg-slate-900" style={{ pointerEvents: 'auto' }}>
+          
           {/* Full background Sihasan image section with fade transition */}
-          <div ref={sihasanRef} className="w-screen relative overflow-hidden flex flex-col" style={{ minHeight: '100vh' }}>
+          <div ref={sihasanRef} className="w-screen relative overflow-hidden flex flex-col bg-slate-900" style={{ minHeight: '100vh' }}>
             {/* Top gradient overlay for smooth transition from title */}
             <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%' }} />
             
