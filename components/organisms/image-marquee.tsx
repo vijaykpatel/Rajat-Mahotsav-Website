@@ -32,8 +32,6 @@ export function ImageMarquee({
   const marqueeRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-<<<<<<< HEAD
-=======
     const allImages = [...firstRow, ...secondRow]
     allImages.forEach((image) => {
       const img = new Image()
@@ -42,7 +40,6 @@ export function ImageMarquee({
   }, [firstRow, secondRow])
 
   useEffect(() => {
->>>>>>> fad1d91 (v1.01)
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !isVisible) {
