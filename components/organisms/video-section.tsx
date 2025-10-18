@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react"
 import useEmblaCarousel from 'embla-carousel-react'
 import { NextButton, PrevButton, usePrevNextButtons } from '@/components/molecules/video-carousel-buttons'
 import { DotButton, useDotButton } from '@/components/molecules/video-carousel-dots'
+import { useAudioContext } from '@/contexts/audio-context'
 
 interface VideoCardProps {
   videoId: string
@@ -26,7 +27,10 @@ function VideoCard({ videoId, title, thumbnail, onPlay, isPlaying: externalIsPla
     }
   }, [externalIsPlaying, isPlaying])
 
+  const { fadeOut } = useAudioContext()
+
   const handleClick = () => {
+    fadeOut(500)
     setIsPlaying(true)
     onPlay?.()
   }

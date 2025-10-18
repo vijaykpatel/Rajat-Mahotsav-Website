@@ -105,7 +105,7 @@ export default function ShaderShowcase() {
     <>
       <AudioPlayer />
       {/* <LoadingScreen /> */}
-      {/* {!isLoading && ( */}
+      {!isLoading && (
         
         <>
                   {/* Title section - Scrollable overlay */}
@@ -229,7 +229,7 @@ export default function ShaderShowcase() {
           </div>
           </div>
         </>
-      {/* )} */}
+      )}
     </>
   )
 }

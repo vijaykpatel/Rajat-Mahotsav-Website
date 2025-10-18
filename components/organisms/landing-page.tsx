@@ -66,16 +66,6 @@ export default function TitleSection() {
       </motion.div> */}
 
       {/* New text layout */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
-        >
-          <AudioPlayButton />
-        </motion.div>
-      </div>
-
       <motion.div 
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}

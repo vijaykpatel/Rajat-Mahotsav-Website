@@ -1,25 +1,22 @@
 'use client'
 
-import { useAudio } from '@/hooks/use-audio'
+import { useAudioContext } from '@/contexts/audio-context'
 import { Play, Pause } from 'lucide-react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { FloatingButton } from './atoms/floating-button'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export function AudioPlayer() {
-  const { play, pause, fadeOut, isPlaying, isLoaded } = useAudio(
-    'https://cdn.njrajatmahotsav.com/audio_files/prathna_audio.mp3'
-  )
-  const triggerRef = useRef<HTMLDivElement>(null)
+  const { toggle, isPlaying, isLoaded, fadeOut } = useAudioContext()
+  const [isDarkBackground, setIsDarkBackground] = useState(true)
+  const rafRef = useRef<number>()
 
   useEffect(() => {
-    const sihasanSection = document.querySelector('[data-section="sihasan"]')
-    if (!sihasanSection) return
-
     const trigger = ScrollTrigger.create({
-      trigger: sihasanSection,
+      trigger: '[data-section="sihasan"]',
       start: 'bottom center',
       onEnter: () => fadeOut(2000),
       onEnterBack: () => fadeOut(2000),
@@ -28,39 +25,113 @@ export function AudioPlayer() {
     return () => trigger.kill()
   }, [fadeOut])
 
+  useEffect(() => {
+    let ticking = false
+    
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (rafRef.current) cancelAnimationFrame(rafRef.current)
+          rafRef.current = requestAnimationFrame(() => {
+            const element = document.elementFromPoint(50, window.innerHeight - 180)
+            if (element) {
+              const styles = window.getComputedStyle(element)
+              const bgColor = styles.backgroundColor
+              
+              if (bgColor && bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {
+                const rgb = bgColor.match(/\d+/g)
+                if (rgb) {
+                  const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000
+                  setIsDarkBackground(brightness < 128)
+                }
+              }
+            }
+          })
+          
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [])
+
   return (
-    <>
-      <div ref={triggerRef} />
-      <button
-        onClick={isPlaying ? pause : play}
-        disabled={!isLoaded}
-        className="fixed bottom-8 right-8 z-50 p-4 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
-        aria-label={isPlaying ? 'Pause audio' : 'Play audio'}
-      >
-        {isPlaying ? (
-          <Pause className="w-6 h-6" />
-        ) : (
-          <Play className="w-6 h-6 ml-0.5" />
-        )}
-      </button>
-    </>
+    <FloatingButton
+      onClick={toggle}
+      disabled={!isLoaded}
+      isDarkBackground={isDarkBackground}
+      isVisible={true}
+      className="fixed bottom-[6.5rem] md:bottom-[9rem] right-6 z-40"
+      aria-label={isPlaying ? 'Pause audio' : 'Play audio'}
+    >
+      {isPlaying ? (
+        <Pause size={24} />
+      ) : (
+        <Play size={24} className="ml-0.5" />
+      )}
+    </FloatingButton>
   )
 }
 
 export function AudioPlayButton() {
-  const { play, isLoaded } = useAudio(
-    'https://cdn.njrajatmahotsav.com/audio_files/prathna_audio.mp3'
-  )
+  const { play, isLoaded } = useAudioContext()
+  const [isDarkBackground, setIsDarkBackground] = useState(true)
+  const rafRef = useRef<number>()
+
+  useEffect(() => {
+    let ticking = false
+    
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (rafRef.current) cancelAnimationFrame(rafRef.current)
+          rafRef.current = requestAnimationFrame(() => {
+            const element = document.elementFromPoint(50, window.innerHeight - 240)
+            if (element) {
+              const styles = window.getComputedStyle(element)
+              const bgColor = styles.backgroundColor
+              
+              if (bgColor && bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {
+                const rgb = bgColor.match(/\d+/g)
+                if (rgb) {
+                  const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000
+                  setIsDarkBackground(brightness < 128)
+                }
+              }
+            }
+          })
+          
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [])
 
   return (
-    <button
+    <FloatingButton
       onClick={play}
       disabled={!isLoaded}
-      className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-xl rounded-full hover:from-orange-600 hover:to-red-600 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
+      isDarkBackground={isDarkBackground}
+      isVisible={true}
+      className="fixed bottom-[6.5rem] md:bottom-[9rem] right-[4.5rem] z-40"
       aria-label="Play background audio"
     >
-      <Play className="w-6 h-6" />
-      <span>Play Audio</span>
-    </button>
+      <Play size={24} className="ml-0.5" />
+    </FloatingButton>
   )
 }

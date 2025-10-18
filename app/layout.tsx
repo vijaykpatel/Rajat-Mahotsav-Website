@@ -8,6 +8,7 @@ import { Navigation } from "@/components/organisms/navigation"
 import StickyFooter from "@/components/organisms/sticky-footer"
 import { ScrollToTop } from "@/components/atoms/scroll-to-top"
 import { FloatingMenuButton } from "@/components/organisms/floating-menu-button"
+import { AudioProvider } from "@/contexts/audio-context"
 import "./globals.css"
 
 const figtree = Figtree({
@@ -66,17 +67,19 @@ html {
         `}</style>
       </head>
       <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoGujarati.variable}`}>
-        <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
-          <Navigation />
-          <div className="min-h-screen flex flex-col">
-            <div className="flex-1">
-              {children}
+        <AudioProvider>
+          <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
+            <Navigation />
+            <div className="min-h-screen flex flex-col">
+              <div className="flex-1">
+                {children}
+              </div>
+              <StickyFooter />
             </div>
-            <StickyFooter />
-          </div>
-          <ScrollToTop />
-          <FloatingMenuButton />
-        </ThemeProvider>
+            <ScrollToTop />
+            <FloatingMenuButton />
+          </ThemeProvider>
+        </AudioProvider>
       </body>
     </html>
   )
