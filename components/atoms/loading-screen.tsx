@@ -64,13 +64,13 @@ export default function LoadingScreen() {
                   transform: 'translateY(-10px)'
                 }}
               >
-                <div className="h-full flex flex-col justify-between items-stretch px-0 py-4">
+                <div className="h-full flex flex-col justify-between items-stretch px-4 py-4 overflow-hidden">
                   {/* Header Text */}
                   <h3
-                    className="font-medium text-center px-4"
+                    className="font-medium text-center"
                     style={{
-                      fontSize: 'clamp(0.8rem, 2vw, 1.2rem)',
-                      lineHeight: '1.3',
+                      fontSize: 'clamp(0.65rem, 1.5vw + 0.3vh, 1rem)',
+                      lineHeight: '1.2',
                       letterSpacing: 'normal',
                       background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
@@ -81,15 +81,14 @@ export default function LoadingScreen() {
                     Maninagar Shree Swaminarayan Gadi Sansthan - Shree Swaminarayan Temple New Jersey
                   </h3>
 
-                  <div className="flex flex-col justify-center items-stretch">
+                  <div className="flex flex-col justify-center items-stretch flex-1 min-h-0">
                   {/* English Text */}
                   <h1
-                    className="uppercase font-black text-center px-2 relative"
+                    className="uppercase font-black text-center px-2"
                     style={{
-                      fontSize: 'clamp(2rem, 8vw, 6.5rem)',
-                      lineHeight: '1.1',
-                      letterSpacing: 'normal',
-                      textAlign: 'center',
+                      fontSize: 'clamp(1.5rem, 4vw + 2vh, 5rem)',
+                      lineHeight: '1',
+                      letterSpacing: '-0.02em',
                       background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
                       backgroundClip: 'text',
@@ -100,7 +99,7 @@ export default function LoadingScreen() {
                   </h1>
 
                   {/* Loading Bar */}
-                  <div className="w-full mt-6 mb-6 relative z-0">
+                  <div className="w-full my-4 relative z-0">
                     <div className="h-px bg-gray-200 relative overflow-hidden">
                       <motion.div
                         className="h-full bg-gradient-to-r from-gray-400 to-gray-600"
@@ -113,10 +112,10 @@ export default function LoadingScreen() {
 
                   {/* Gujarati Text */}
                   <h2
-                    className="font-bold text-center px-2 relative"
+                    className="font-bold text-center px-2"
                     style={{
-                      fontSize: 'clamp(2.5rem, 9vw, 8rem)',
-                      lineHeight: '1.2',
+                      fontSize: 'clamp(1.8rem, 5vw + 2.5vh, 6rem)',
+                      lineHeight: '1.1',
                       letterSpacing: 'normal',
                       background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
@@ -128,7 +127,7 @@ export default function LoadingScreen() {
                   </h2>
 
                   {/* Audio Choice Buttons */}
-                  <div className="w-full flex flex-row pt-6 gap-4 md:gap-6 justify-center mt-4 mb-2">
+                  <div className="w-full flex flex-row pt-4 gap-3 md:gap-6 justify-center mt-2">
                     <AudioChoiceButton
                       icon={Volume2}
                       label="Audio"
@@ -146,10 +145,10 @@ export default function LoadingScreen() {
 
                   {/* Footer Text */}
                   <h4
-                    className="font-medium text-center px-4"
+                    className="font-medium text-center"
                     style={{
-                      fontSize: 'clamp(0.8rem, 2vw, 1.2rem)',
-                      lineHeight: '1.3',
+                      fontSize: 'clamp(0.65rem, 1.5vw + 0.3vh, 1rem)',
+                      lineHeight: '1.2',
                       letterSpacing: 'normal',
                       background: 'linear-gradient(45deg, #B50000, #0D132D)',
                       WebkitBackgroundClip: 'text',
