@@ -31,10 +31,10 @@ export function TimelineGridTile({ item, variant = "mobile" }: TimelineGridTileP
   }
 
   return (
-    <div className="grid grid-cols-[6rem_20vmax] grid-rows-[auto_20vmax_2rem] gap-0">
+    <div className="grid grid-cols-[6rem_25vmax] grid-rows-[auto_25vmax_2rem] gap-0">
       <div className="col-start-2 row-start-1 flex items-center pb-4">
         {/* font-instrument-serif font-extrabold italic */}
-        <h2 className="text-[clamp(1.5rem,4.5vw,2.75rem)] font-figtree font-semibold text-orange-900 whitespace-pre-line leading-tight" data-scroll data-scroll-speed="1">
+        <h2 className="text-[clamp(1.5rem,4.5vw,2.5rem)] font-figtree font-semibold text-orange-900 whitespace-pre-line leading-tight" data-scroll data-scroll-speed="1">
           {item.title}
         </h2>
       </div>
