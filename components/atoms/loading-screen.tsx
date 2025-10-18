@@ -86,8 +86,8 @@ export default function LoadingScreen() {
                   <h1
                     className="uppercase font-black text-center px-2 relative"
                     style={{
-                      fontSize: 'clamp(2rem, 8vw, 7rem)',
-                      lineHeight: '1.2',
+                      fontSize: 'clamp(2rem, 8vw, 6.5rem)',
+                      lineHeight: '1.1',
                       letterSpacing: 'normal',
                       textAlign: 'center',
                       background: 'linear-gradient(45deg, #B50000, #0D132D)',
