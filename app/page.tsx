@@ -16,7 +16,6 @@ import PratisthaStory from "@/components/organisms/pratishta-story"
 import MandalExpansionText from "@/components/organisms/mandal-expansion"
 import AashirwadSection from "@/components/organisms/aashirwad-section"
 import VideoBackgroundSection from "@/components/organisms/video-background-section"
-import { AudioPlayer } from "@/components/audio-player"
 
 const gurus = [
   {
@@ -109,7 +108,6 @@ export default function ShaderShowcase() {
 
   return (
     <>
-      <AudioPlayer />
       <LoadingScreen />
                   {/* Title section - Scrollable overlay */}
           <div className="relative z-10 bg-title-section-bg h-screen block">

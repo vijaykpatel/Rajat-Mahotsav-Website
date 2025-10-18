@@ -8,6 +8,7 @@ import { useDeviceType } from "@/hooks/use-device-type"
 import { motion, AnimatePresence } from "framer-motion"
 import { NavBar } from "@/components/organisms/tubelight-navbar"
 import { CDN_ASSETS } from "@/lib/cdn-assets"
+import { AudioPlayButton } from "@/components/audio-play-button"
 
 const menuItems = [
   {
@@ -125,6 +126,7 @@ export function Navigation() {
         <style jsx>{`
           nav[data-navbar] {
             --nav-padding: max(1rem, 2vw);
+            --navbar-height: calc(5rem + 1.5rem);
           }
         `}</style>
         <div className="flex items-center justify-between w-full gap-2 sm:gap-4">
@@ -166,6 +168,7 @@ export function Navigation() {
           </div>
         </div>
       </nav>
+      <AudioPlayButton />
     </>
   )
 }
