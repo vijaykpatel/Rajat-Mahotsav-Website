@@ -13,7 +13,6 @@ import "@/styles/registration-theme.css"
 
 import { useLoading } from "@/hooks/use-loading"
 import PratisthaStory from "@/components/organisms/pratishta-story"
-import MandalExpansionText from "@/components/organisms/mandal-expansion"
 import AashirwadSection from "@/components/organisms/aashirwad-section"
 import VideoBackgroundSection from "@/components/organisms/video-background-section"
 

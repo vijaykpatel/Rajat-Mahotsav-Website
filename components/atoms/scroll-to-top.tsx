@@ -62,7 +62,7 @@ export function ScrollToTop() {
       className="fixed bottom-6 right-6 z-40"
       aria-label="Scroll to top"
     >
-      <ArrowUp size={24} />
+      <ArrowUp size={18} />
     </FloatingButton>
   )
 }

@@ -35,24 +35,28 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     const audio = audioRef.current
 
     const handleCanPlayThrough = () => setIsLoaded(true)
+    const handleLoadedMetadata = () => setIsLoaded(true)
     const handleEnded = () => setIsPlaying(false)
 
     audio.addEventListener('canplaythrough', handleCanPlayThrough)
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata)
     audio.addEventListener('ended', handleEnded)
 
     return () => {
       if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current)
       audio.pause()
       audio.removeEventListener('canplaythrough', handleCanPlayThrough)
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
       audio.removeEventListener('ended', handleEnded)
     }
   }, [])
 
-  useEffect(() => {
-    if (pathname !== '/') {
-      fadeOut(1500)
-    }
-  }, [pathname])
+  // commenting to maintain audio through webpages if on already. audio butotn will be present at all times to user to turn off.
+  // useEffect(() => {
+  //   if (pathname !== '/') {
+  //     fadeOut(1500)
+  //   }
+  // }, [pathname])
 
   const grantConsent = () => {
     hasUserConsentRef.current = true
@@ -70,8 +74,6 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const pause = () => {
     audioRef.current?.pause()
     setIsPlaying(false)
-    hasUserConsentRef.current = false
-    setHasUserConsent(false)
   }
 
   const fadeOut = (duration = 1000) => {

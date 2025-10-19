@@ -8,6 +8,7 @@ import { Navigation } from "@/components/organisms/navigation"
 import StickyFooter from "@/components/organisms/sticky-footer"
 import { ScrollToTop } from "@/components/atoms/scroll-to-top"
 import { FloatingMenuButton } from "@/components/organisms/floating-menu-button"
+import { AudioPlayer } from "@/components/audio-player"
 import { AudioProvider } from "@/contexts/audio-context"
 import { LoadingProvider } from "@/hooks/use-loading"
 import "./globals.css"
@@ -102,6 +103,7 @@ html {
               </div>
               <ScrollToTop />
               <FloatingMenuButton />
+              <AudioPlayer />
             </ThemeProvider>
           </AudioProvider>
         </LoadingProvider>
