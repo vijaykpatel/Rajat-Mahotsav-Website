@@ -71,8 +71,6 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const pause = () => {
     audioRef.current?.pause()
     setIsPlaying(false)
-    hasUserConsentRef.current = false
-    setHasUserConsent(false)
   }
 
   const fadeOut = (duration = 1000) => {
