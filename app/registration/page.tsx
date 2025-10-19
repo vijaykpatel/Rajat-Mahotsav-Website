@@ -245,7 +245,7 @@ export default function RegistrationPage() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           >
             <p className="text-center text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-5xl">
-              Be a part of the Shree Ghanshyam Maharaj Rajat Pratishta Mahotsav New Jersey! Register now for this momentous occasion from <span className="font-bold underline">July 25 through August 2, 2026</span>.
+              Be a part of the Shree Ghanshyam Maharaj Rajat Pratishtha Mahotsav New Jersey! Register now for this momentous occasion from <span className="font-bold underline">July 25 through August 2, 2026</span>.
             </p>
           </motion.div>
         </div>

@@ -104,18 +104,18 @@ export default function PratisthaStory() {
   const mandalImages = [
     { src: getCloudflareImage("bdf8b51a-570b-447d-7caa-9e30b94b4300"), alt: "Seattle Hari Mandir", title: "Seattle Hari Mandir" },
     { src: getCloudflareImage("a9c67756-fe7b-4518-9097-5f97219adb00"), alt: "Ocala Mandir Ground Breaking", title: "Ocala Mandir Ground Breaking" },
-    { src: getCloudflareImage("e712a1af-45df-4b53-6ebd-a71bcc2d9e00"), alt: "Georgia Hari Mandir Murti Pratishta", title: "Georgia Hari Mandir Murti Pratishta"},
-    { src: getCloudflareImage("05321c03-9773-44a0-d011-4ac2b7ccba00"), alt: "Chicago Murti Pratishta", title: "Chicago Murti Pratishta" },
-    { src: getCloudflareImage("e22429be-2df7-40dc-7f8f-f4dfdd135e00"), alt: "Los Angeles Mandir Murti Pratishta", title: "Los Angeles Mandir Murti Pratishta" },
-    { src: getCloudflareImage("606b2839-0750-4eee-719c-c37cdfb45f00"), alt: "Kentucky Mandir Murti Pratishta", title: "Kentucky Mandir Murti Pratishta" },
-    { src: getCloudflareImage("33a475fc-4473-4641-7a61-8bb18069a300"), alt: "Delaware Mandir Murti Pratishta & Diamond Tula", title: "Delaware Mandir Murti Pratishta & Diamond Tula" },
-    { src: getCloudflareImage("808c6572-2fba-4d68-0f57-1c641e583400"), alt: "Tennessee Hari Mandir Murti Pratishta", title: "Tennessee Hari Mandir Murti Pratishta" },
-    { src: getCloudflareImage("0755116a-1b7d-41cb-4a46-1a0e09871500"), alt: "Toronto Mandir Murti Pratishta", title: "Toronto Mandir Murti Pratishta" },
-    { src: getCloudflareImage("87a4268e-8c43-48a2-2d5a-36a7bd9d8b00"), alt: "Ohio Hari Mandir Murti Pratishta", title: "Ohio Hari Mandir Murti Pratishta" },
+    { src: getCloudflareImage("e712a1af-45df-4b53-6ebd-a71bcc2d9e00"), alt: "Georgia Hari Mandir Murti Pratishtha", title: "Georgia Hari Mandir Murti Pratishtha"},
+    { src: getCloudflareImage("05321c03-9773-44a0-d011-4ac2b7ccba00"), alt: "Chicago Murti Pratishtha", title: "Chicago Murti Pratishtha" },
+    { src: getCloudflareImage("e22429be-2df7-40dc-7f8f-f4dfdd135e00"), alt: "Los Angeles Mandir Murti Pratishtha", title: "Los Angeles Mandir Murti Pratishtha" },
+    { src: getCloudflareImage("606b2839-0750-4eee-719c-c37cdfb45f00"), alt: "Kentucky Mandir Murti Pratishtha", title: "Kentucky Mandir Murti Pratishtha" },
+    { src: getCloudflareImage("33a475fc-4473-4641-7a61-8bb18069a300"), alt: "Delaware Mandir Murti Pratishtha & Diamond Tula", title: "Delaware Mandir Murti Pratishtha & Diamond Tula" },
+    { src: getCloudflareImage("808c6572-2fba-4d68-0f57-1c641e583400"), alt: "Tennessee Hari Mandir Murti Pratishtha", title: "Tennessee Hari Mandir Murti Pratishtha" },
+    { src: getCloudflareImage("0755116a-1b7d-41cb-4a46-1a0e09871500"), alt: "Toronto Mandir Murti Pratishtha", title: "Toronto Mandir Murti Pratishtha" },
+    { src: getCloudflareImage("87a4268e-8c43-48a2-2d5a-36a7bd9d8b00"), alt: "Ohio Hari Mandir Murti Pratishtha", title: "Ohio Hari Mandir Murti Pratishtha" },
     { src: getCloudflareImage("311766d8-23da-4762-e5b9-634606bbfc00"), alt: "North America Convention 2015", title: "North America Convention 2015" },
-    { src: getCloudflareImage("03ab5bfc-f774-434f-b710-c0739cd8d700"), alt: "Virginia Mandir Murti Pratishta", title: "Virginia Mandir Murti Pratishta" },
-    { src: getCloudflareImage("42f7297b-9fac-4834-e3d2-df24f47d0300"), alt: "Ocala Mandir Murti Pratishta", title: "Ocala Mandir Murti Pratishta" },
-    { src: getCloudflareImage("9f2d8425-226e-4013-5641-3463f7e1a000"), alt: "Tennessee Mandir Murti Pratishta", title: "Tennessee Mandir Murti Pratishta" },
+    { src: getCloudflareImage("03ab5bfc-f774-434f-b710-c0739cd8d700"), alt: "Virginia Mandir Murti Pratishtha", title: "Virginia Mandir Murti Pratishtha" },
+    { src: getCloudflareImage("42f7297b-9fac-4834-e3d2-df24f47d0300"), alt: "Ocala Mandir Murti Pratishtha", title: "Ocala Mandir Murti Pratishtha" },
+    { src: getCloudflareImage("9f2d8425-226e-4013-5641-3463f7e1a000"), alt: "Tennessee Mandir Murti Pratishtha", title: "Tennessee Mandir Murti Pratishtha" },
     { src: getCloudflareImage("26b6c7da-4a70-4847-29b2-a31b27222a00"), alt: "Kentucky Shilanyas Ceremony", title: "Kentucky Shilanyas Ceremony" },
   ]
 
@@ -204,7 +204,7 @@ export default function PratisthaStory() {
             lineHeight: 'clamp(1.2, 1.1 + 0.5vw, 1.3)'
           }}
         >
-          Shree Swaminarayan Temple - Secaucus, NJ Suvarna Tula Murti Pratishta
+          Shree Swaminarayan Temple - Secaucus, NJ Suvarna Tula Murti Pratishtha
         </motion.h2>
         
         <div className="space-y-16 sm:space-y-20 md:space-y-24 lg:space-y-32 xl:space-y-36">
@@ -361,7 +361,7 @@ export default function PratisthaStory() {
             overflowWrap: 'break-word'
           }}
         >
-          The Karan Satsang throughout America flourished magnificently after the Suvarna Tula Murti Pratishta, truly ushering in a golden era of growth for the entire Swaminarayan faith across North America. Temples and mandals sprouted abundantly from coast to coast, New York to Los Angeles, Toronto to Florida, as the seeds planted by Jeevanpran Shree Muktajeevan Swamibapa were lovingly nurtured by His divine successor, Acharya Swamishree Maharaj. Today, this thriving garden continues to flourish under the inspired guidance of Acharya Shree Jitendriyapriyadasji Swamiji Maharaj.
+          The Karan Satsang throughout America flourished magnificently after the Suvarna Tula Murti Pratishtha, truly ushering in a golden era of growth for the entire Swaminarayan faith across North America. Temples and mandals sprouted abundantly from coast to coast, New York to Los Angeles, Toronto to Florida, as the seeds planted by Jeevanpran Shree Muktajeevan Swamibapa were lovingly nurtured by His divine successor, Acharya Swamishree Maharaj. Today, this thriving garden continues to flourish under the inspired guidance of Acharya Shree Jitendriyapriyadasji Swamiji Maharaj.
         </motion.p>
       </div>
       
@@ -397,7 +397,7 @@ export default function PratisthaStory() {
           }}
         >
           <p>
-            The Shree Ghanshyam Maharaj Rajat Pratishta Mahotsav, which will take place from July 25 through August 2, 2026, will celebrate the 25th anniversary of the murti pratishtha of Lord Shree Swaminarayan, Jeevanpran Shree Abji Bapashree, and Jeevanpran Shree Muktajeevan Swamibapa, and the opening of Shree Swaminarayan Temple - Secaucus, New Jersey.
+            The Shree Ghanshyam Maharaj Rajat Pratishtha Mahotsav, which will take place from July 25 through August 2, 2026, will celebrate the 25th anniversary of the murti pratishtha of Lord Shree Swaminarayan, Jeevanpran Shree Abji Bapashree, and Jeevanpran Shree Muktajeevan Swamibapa, and the opening of Shree Swaminarayan Temple - Secaucus, New Jersey.
           </p>
           <p>
             This grand occasion will celebrate the past twenty-five years of faith, community, and fellowship at our temple, with scripture recitals, divine blessings from Acharya Swamiji Maharaj, cultural programs, special women's events, and a sports shibir.

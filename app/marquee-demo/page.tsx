@@ -12,7 +12,7 @@ export default function MarqueeDemo() {
             Ghanshyam Maharaj
           </h2>
           <h3 className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-6xl lg:text-7xl xl:text-8xl">
-            Rajat Pratishta Mahotsav
+            Rajat Pratishtha Mahotsav
           </h3>
           <p className="mt-2 text-3xl font-semibold text-white drop-shadow-lg sm:text-6xl lg:text-7xl xl:text-8xl">
             Shree Swaminarayan Temple
