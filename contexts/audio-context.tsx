@@ -35,15 +35,18 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     const audio = audioRef.current
 
     const handleCanPlayThrough = () => setIsLoaded(true)
+    const handleLoadedMetadata = () => setIsLoaded(true)
     const handleEnded = () => setIsPlaying(false)
 
     audio.addEventListener('canplaythrough', handleCanPlayThrough)
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata)
     audio.addEventListener('ended', handleEnded)
 
     return () => {
       if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current)
       audio.pause()
       audio.removeEventListener('canplaythrough', handleCanPlayThrough)
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
       audio.removeEventListener('ended', handleEnded)
     }
   }, [])
