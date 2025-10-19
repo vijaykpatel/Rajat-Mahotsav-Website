@@ -120,13 +120,17 @@ export default function PratisthaStory() {
   ]
 
   useEffect(() => {
+    ScrollTrigger.refresh()
+    // gsap isnt working properly on mobile, but not an issue? volume button persists on mobile and if you play another video on phone, 
+    // then it stops the audio too which is the main driver. 
+
     const sectionTrigger = ScrollTrigger.create({
       trigger: sectionRef.current,
       start: 'top center',
       end: 'bottom center',
-      onEnter: () => fadeToVolume(0.3, 1500),
+      onEnter: () => fadeToVolume(0.5, 1500),
       onLeave: () => fadeToVolume(1, 1500),
-      onEnterBack: () => fadeToVolume(0.3, 1500),
+      onEnterBack: () => fadeToVolume(0.5, 1500),
       onLeaveBack: () => fadeToVolume(1, 1500),
     })
 
@@ -139,7 +143,7 @@ export default function PratisthaStory() {
     })
 
     return () => {
-      sectionTrigger.kill()
+      //sectionTrigger.kill()
       videoTrigger.kill()
     }
   }, [fadeToVolume, fadeOut, play])

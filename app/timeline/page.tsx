@@ -151,7 +151,7 @@ export default function TimelinePage() {
         className="fixed bottom-6 right-6 z-40"
         aria-label="Back to start"
       >
-        <ArrowLeft size={24} />
+        <ArrowLeft size={18} />
       </FloatingButton>
       
       {/* Custom Scrollbar */}

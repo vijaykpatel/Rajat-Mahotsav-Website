@@ -48,11 +48,12 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  useEffect(() => {
-    if (pathname !== '/') {
-      fadeOut(1500)
-    }
-  }, [pathname])
+  // commenting to maintain audio through webpages if on already. audio butotn will be present at all times to user to turn off.
+  // useEffect(() => {
+  //   if (pathname !== '/') {
+  //     fadeOut(1500)
+  //   }
+  // }, [pathname])
 
   const grantConsent = () => {
     hasUserConsentRef.current = true
