@@ -8,7 +8,7 @@ export const timelineData = [
   { year: "1995", title: "Acharya Swamishree Maharaj establishes New Jersey Hari Mandir", description: "", speed: -3, image: getCloudflareImage("4abea43e-77ef-4afd-3b01-4eca68dd9500") },
   { year: "1998", title: "Secaucus Temple Ground Breaking", description: "", speed: 3, image: getCloudflareImage("ca84f8d6-6405-4472-e2df-6dab2fc9e900") },
   { year: "1999", title: "Acharya Swamishree Maharaj Visits Temple Construction Site", description: "", speed: -3, image: getCloudflareImage("311d238e-8de7-4d33-f243-a52bb2a99d00") },
-  { year: "2001", title: "Suvarna Tula Murti Pratishta Opening", description: "", speed: -3, image: getCloudflareImage("1742c4b3-44e1-4604-6dde-73a9dc83cf00") },
+  { year: "2001", title: "Suvarna Tula Murti Pratishtha Opening", description: "", speed: -3, image: getCloudflareImage("1742c4b3-44e1-4604-6dde-73a9dc83cf00") },
   { year: "2002", title: "Muktajeevan Swamibapa Community Hall Opening", description: "", speed: 3, image: getCloudflareImage("8258116b-05d1-48ac-5a16-0ef54a92a900") },
   { year: "2003", title: "First Youth Satsang Shibir USA", description: "", speed: -3, image: getCloudflareImage("a6a83ca4-f78d-48ca-585f-0418eff36700") },
   { year: "2004", title: "Acharya Swamishree Maharaj Helicopter Arrival", description: "", speed: 3, image: getCloudflareImage("bc892f88-7f0b-4e50-d0fa-d4bcd9090000") },
