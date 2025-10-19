@@ -77,12 +77,11 @@ export default function ShaderShowcase() {
   }, [])
 
   useEffect(() => {
-    const isMobile = window.innerWidth < 768;
     const observer = new IntersectionObserver(
       ([entry]) => {
         setCardsVisible(entry.isIntersecting)
       },
-      { threshold: isMobile ? 0.1 : 0.2, rootMargin: isMobile ? '50px' : '0px' }
+      { threshold: 0.2 }
     )
 
     if (cardsRef.current) {
@@ -93,12 +92,11 @@ export default function ShaderShowcase() {
   }, [])
 
   useEffect(() => {
-    const isMobile = window.innerWidth < 768;
     const observer = new IntersectionObserver(
       ([entry]) => {
         setMobileGuruVisible(entry.isIntersecting)
       },
-      { threshold: isMobile ? 0.1 : 0.2, rootMargin: isMobile ? '50px' : '0px' }
+      { threshold: 0.2 }
     )
 
     if (mobileGuruRef.current) {
@@ -178,7 +176,7 @@ export default function ShaderShowcase() {
           <AashirwadSection />
           
           {/* Staggered Guru Cards */}
-          <div ref={mobileGuruRef} className="min-h-screen w-full pb-40 px-4 flex flex-col items-center justify-center mobile-optimized">
+          <div ref={mobileGuruRef} className="min-h-screen w-full pb-40 px-4 flex flex-col items-center justify-center">
             <motion.h2
               initial={{ opacity: 0, y: 50 }}
               animate={mobileGuruVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}

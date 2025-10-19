@@ -48,8 +48,7 @@ export default function PratisthaStory() {
   const containerRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
   const rowRefs = useRef<(HTMLDivElement | null)[]>([])
-  const { fadeToVolume, fadeOut, play, hasUserConsent, isPlaying } = useAudioContext()
-  const wasPlayingRef = useRef(false)
+  const { fadeToVolume, fadeOut, play, hasUserConsent } = useAudioContext()
 
   useEffect(() => {
     setAnimDuration(window.innerWidth < 768 ? 0.8 : 1.2)
@@ -66,7 +65,7 @@ export default function PratisthaStory() {
             return newState
           })
         },
-        { threshold: isMobile ? 0.1 : 0.5, rootMargin: isMobile ? '50px' : '0px' }
+        { threshold: isMobile ? 0.3 : 0.5 }
       )
       if (row) observer.observe(row)
       return observer
@@ -76,30 +75,27 @@ export default function PratisthaStory() {
   }, [])
 
   useEffect(() => {
-    const isMobile = window.innerWidth < 768;
     const observer = new IntersectionObserver(
       ([entry]) => setVideoSectionVisible(entry.isIntersecting),
-      { threshold: isMobile ? 0.1 : 0.2, rootMargin: isMobile ? '50px' : '0px' }
+      { threshold: 0.2 }
     )
     if (videoSectionRef.current) observer.observe(videoSectionRef.current)
     return () => observer.disconnect()
   }, [])
 
   useEffect(() => {
-    const isMobile = window.innerWidth < 768;
     const observer = new IntersectionObserver(
       ([entry]) => setClosingTextVisible(entry.isIntersecting),
-      { threshold: isMobile ? 0.1 : 0.2, rootMargin: isMobile ? '50px' : '0px' }
+      { threshold: 0.2 }
     )
     if (closingTextRef.current) observer.observe(closingTextRef.current)
     return () => observer.disconnect()
   }, [])
 
   useEffect(() => {
-    const isMobile = window.innerWidth < 768;
     const observer = new IntersectionObserver(
       ([entry]) => setInvitationVisible(entry.isIntersecting),
-      { threshold: isMobile ? 0.1 : 0.2, rootMargin: isMobile ? '50px' : '0px' }
+      { threshold: 0.2 }
     )
     if (invitationRef.current) observer.observe(invitationRef.current)
     return () => observer.disconnect()
@@ -142,13 +138,8 @@ export default function PratisthaStory() {
       trigger: videoSectionRef.current,
       start: 'top bottom',
       end: 'bottom top',
-      onEnter: () => {
-        wasPlayingRef.current = isPlaying
-        fadeOut(1500)
-      },
-      onLeaveBack: () => {
-        if (wasPlayingRef.current) play()
-      },
+      onEnter: () => fadeOut(1500),
+      onLeaveBack: () => play(),
     })
 
     return () => {
@@ -205,7 +196,7 @@ export default function PratisthaStory() {
   return (
     <div ref={containerRef} className="bg-title-section-bg relative">
       <div ref={triggerRef} style={{ minHeight: '120vh' }}>
-        <div ref={sectionRef} className="w-full py-32 pb-8 mobile-optimized">
+        <div ref={sectionRef} className="w-full py-32 pb-8">
       <div className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 mb-20">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -278,7 +269,7 @@ export default function PratisthaStory() {
       </div>
       
       {/* Video Section - Separate */}
-      <div ref={videoSectionRef} className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 py-16 md:py-24 mobile-optimized">
+      <div ref={videoSectionRef} className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 py-16 md:py-24">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -349,7 +340,7 @@ export default function PratisthaStory() {
       </div>
       
       {/* Closing Text */}
-      <div ref={closingTextRef} className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 pt-8 md:pt-12 pb-16 md:pb-20 mobile-optimized">
+      <div ref={closingTextRef} className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 pt-8 md:pt-12 pb-16 md:pb-20">
         <motion.h3
           initial={{ opacity: 0, y: 30 }}
           animate={closingTextVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -384,7 +375,7 @@ export default function PratisthaStory() {
       </div>
       
       {/* Final Invitation Text */}
-      <div ref={invitationRef} className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 py-16 md:py-20 mobile-optimized">
+      <div ref={invitationRef} className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 py-16 md:py-20">
         <motion.h3
           initial={{ opacity: 0, y: 30 }}
           animate={invitationVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
