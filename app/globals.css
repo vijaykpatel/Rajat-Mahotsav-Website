@@ -369,6 +369,15 @@
     line-height: 1.2;
   }
   
+  /* Mobile scroll performance optimizations */
+  @media (max-width: 768px) {
+    .mobile-optimized {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 500px;
+      will-change: transform, opacity;
+    }
+  }
+  
 }
 
 @keyframes pan-right {
