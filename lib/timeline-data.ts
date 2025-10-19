@@ -18,7 +18,7 @@ export const timelineData = [
   { year: "2007", title: "Shatabdi Mahotsav", description: "", speed: -3, image: getCloudflareImage("a9abc118-d032-4510-8ffa-72f571480300") },
   { year: "2008", title: "Buchmuller Park Cultural Program", description: "", speed: 3, image: getCloudflareImage("aa8c50b5-c57b-4738-4ad9-9430b31aa900") },
   { year: "2009", title: "Diwali Annakut", description: "", speed: -3, image: getCloudflareImage("be440c89-3d9c-410a-f29b-0e77c0d65700") },
-  { year: "2010", title: "Jungle Themed Cultural Program", description: "", speed: 3, image: getCloudflareImage("27158db8-bed9-4f88-c499-af438fc0e200") },
+  { year: "2010", title: "Father's Day Celebration", description: "", speed: 3, image: getCloudflareImage("27158db8-bed9-4f88-c499-af438fc0e200") },
   { year: "2011", title: "New Jersey Dashabdi Mahotsav", description: "", speed: -3, image: getCloudflareImage("1c4485c9-0b8c-44c7-e8f0-0ae5b934cb00") },
   { year: "2012", title: "Platinum Tula", description: "", speed: 3, image: getCloudflareImage("4b847da5-6b9c-4225-4623-c5fc55dd7300") },
   { year: "2013", title: "Swamibapa Pipe Band USA 10th Anniversary", description: "", speed: -3, image: getCloudflareImage("5d1c000e-16ee-4a73-f101-095fcebd4400") },
