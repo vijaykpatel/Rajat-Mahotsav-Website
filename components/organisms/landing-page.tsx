@@ -83,7 +83,7 @@ export default function TitleSection() {
             transition={{ duration: 0.8, delay: !isLoading ? 1.4 : 0, ease: "easeOut" }}
             className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
           >
-            Rajat Pratishta Mahotsav
+            Rajat Pratishtha Mahotsav
           </motion.h3>
           <motion.p 
             initial={{ opacity: 0, x: 50 }}

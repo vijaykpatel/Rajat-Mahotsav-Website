@@ -5,10 +5,8 @@ import { useRouter, usePathname } from "next/navigation"
 import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image as ImageIcon, Menu, X } from "lucide-react"
 import { PiHandsPraying } from "react-icons/pi"
 import { useDeviceType } from "@/hooks/use-device-type"
-import { motion, AnimatePresence } from "framer-motion"
 import { NavBar } from "@/components/organisms/tubelight-navbar"
 import { CDN_ASSETS } from "@/lib/cdn-assets"
-import { AudioPlayButton } from "@/components/audio-play-button"
 
 const menuItems = [
   {
@@ -168,7 +166,6 @@ export function Navigation() {
           </div>
         </div>
       </nav>
-      <AudioPlayButton />
     </>
   )
 }

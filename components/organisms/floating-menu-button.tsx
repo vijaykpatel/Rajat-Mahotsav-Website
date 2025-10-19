@@ -95,7 +95,7 @@ export function FloatingMenuButton() {
         className="fixed bottom-6 left-6 z-40"
         aria-label="Toggle menu"
       >
-        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
       </FloatingButton>
 
       <AnimatePresence>
