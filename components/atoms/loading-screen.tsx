@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import { Volume2, VolumeX, ArrowRight } from "lucide-react"
+import { Volume2, VolumeX } from "lucide-react"
 import ShaderBackground from "@/components/organisms/shader-background"
 import { useLoading } from "@/hooks/use-loading"
 import { useAudioContext } from "@/contexts/audio-context"
@@ -125,7 +125,7 @@ export default function LoadingScreen() {
                   </h2>
 
                   {/* Audio Choice Buttons - Desktop Only */}
-                  <div className="hidden lg:flex w-full flex-row pt-6 pb-2 gap-3 md:gap-6 justify-center mt-2">
+                  <div className="flex w-full flex-row pt-6 pb-2 gap-3 md:gap-6 justify-center mt-2">
                     <AudioChoiceButton
                       icon={Volume2}
                       label="Audio"
@@ -137,16 +137,6 @@ export default function LoadingScreen() {
                       label="Silent"
                       onClick={() => handleEnter(false)}
                       delay={0.6}
-                    />
-                  </div>
-                  
-                  {/* Enter Site Button - Mobile/Tablet Only */}
-                  <div className="lg:hidden w-full flex justify-center pt-6 pb-2 mt-2">
-                    <AudioChoiceButton
-                      icon={ArrowRight}
-                      label="Enter Site"
-                      onClick={() => handleEnter(false)}
-                      delay={0.5}
                     />
                   </div>
                   </div>
