@@ -58,7 +58,7 @@ const communityStats = [
     icon: Users,
     label: "Meals Served",
     current: 0,
-    target: 25000,
+    target: 10000,
     suffix: ""
   },
   // {

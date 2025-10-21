@@ -17,7 +17,7 @@ const initiatives = [
     details: {
       overview: "Our food distribution program serves over 500 families weekly, providing nutritious meals and groceries to those facing food insecurity in our community.",
       achievements: [
-        "25,000+ meals served this year",
+        "10,000+ meals served this year",
         "15 distribution centers established",
         "200+ volunteer hours weekly",
         "Partnership with 8 local food banks"
