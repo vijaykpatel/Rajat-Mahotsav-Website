@@ -31,7 +31,7 @@ export const timelineData = [
   { year: "2020", title: "Acharya Swamishree Maharaj Memorial", description: "", speed: 3, image: getCloudflareImage("499adb00-9856-46e0-8760-7aa448a98b00") },
   { year: "2021", title: "20th Patotsav Celebrations", description: "", speed: -3, image: getCloudflareImage("7bbd3e6a-7bc3-4f42-9ad5-e666e51d2500") },
   { year: "2022", title: "Acharya Swamishree Maharaj Asthi", description: "", speed: 3, image: getCloudflareImage("3c78cd6b-6412-4b5c-2669-d13ad638c700") },
-  { year: "2023", title: "22nd Patotsav Samuh Raas Celebrations", description: "", speed: -3, image: getCloudflareImage("6016a349-d49b-4f9f-5b5b-2dc1b2178e00") },
+  { year: "2023", title: "Chandan Darshan", description: "", speed: -3, image: getCloudflareImage("0c088b93-cb79-456d-83a7-3bb3901b3a00") },
   { year: "2024", title: "Guruparampara Grand Hindolo", description: "", speed: 3, image: getCloudflareImage("d5b57d06-27aa-4c6e-b063-30ea4a449500") },
   { year: "2025", title: "Acharya Swamiji Maharaj is showered with flower petals", description: "", speed: -3, image: getCloudflareImage("263ba23e-efbd-43e7-b8fa-e9f971d6dd00") },
   { year: "2026", title: "Something Extraordinary Awaits...", description: "", speed: 3, image: "https://cdn.njrajatmahotsav.com/main_logo.png" },
