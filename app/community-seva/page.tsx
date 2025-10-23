@@ -19,6 +19,7 @@ import { AnimatedTextSection } from "@/components/organisms/animated-text-sectio
 import { useToast } from "@/hooks/use-toast"
 import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { PathOfServiceStory } from "@/components/organisms/path-of-service-story"
+import { supabase } from "@/utils/supabase/client"
 import "@/styles/community-service-theme.css"
 
 const firstRowImages = [
@@ -46,47 +47,23 @@ const secondRowImages = [
   { src: getCloudflareImage("ee07b747-ecc9-4437-e620-348a2e9c8d00"), alt: "Community Service Event 16" }, // blood donation sign
 ]
 
-const communityStats = [
-  {
-    icon: Clock,
-    label: "Volunteer Hours",
-    current: 50,
-    target: 2500,
-    suffix: "hrs"
-  },
-  {
-    icon: Users,
-    label: "Meals Served",
-    current: 0,
-    target: 10000,
-    suffix: ""
-  },
-  // {
-  //   icon: MapPin,
-  //   label: "Distance Walked",
-  //   current: 80,
-  //   target: 2500,
-  //   suffix: "km"
-  // },
-  {
-    icon: Heart,
-    label: "Community Events",
-    current: 5,
-    target: 25,
-    suffix: ""
-  },
-  {
-    icon: DollarSign,
-    label: "Funds Raised",
-    current: 1200,
-    target: 25000,
-    prefix: "$",
-    suffix: "",
-    formatWithComma: true
-  }
-]
+async function fetchCommunityStats() {
+  const { data } = await supabase
+    .from('community_seva_records')
+    .select('volunteer_hours, meals_served, community_events, funds_raised')
+  
+  if (!data) return { volunteer_hours: 0, meals_served: 0, community_events: 0, funds_raised: 0 }
+  
+  return data.reduce((acc, record) => ({
+    volunteer_hours: acc.volunteer_hours + (record.volunteer_hours || 0),
+    meals_served: acc.meals_served + (record.meals_served || 0),
+    community_events: acc.community_events + (record.community_events || 0),
+    funds_raised: acc.funds_raised + (record.funds_raised || 0)
+  }), { volunteer_hours: 0, meals_served: 0, community_events: 0, funds_raised: 0 })
+}
 
 export default function CommunityServicePage() {
+  const [statsData, setStatsData] = useState({ volunteer_hours: 0, meals_served: 0, community_events: 0, funds_raised: 0 })
   const { toast } = useToast()
 
   const deviceType = useDeviceType()
@@ -105,8 +82,42 @@ export default function CommunityServicePage() {
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 200)
+    fetchCommunityStats().then(setStatsData)
     return () => clearTimeout(timer)
   }, [])
+
+  const communityStats = [
+    {
+      icon: Clock,
+      label: "Volunteer Hours",
+      current: statsData.volunteer_hours,
+      target: 2500,
+      suffix: "hrs"
+    },
+    {
+      icon: Users,
+      label: "Meals Served",
+      current: statsData.meals_served,
+      target: 10000,
+      suffix: ""
+    },
+    {
+      icon: Heart,
+      label: "Community Events",
+      current: statsData.community_events,
+      target: 25,
+      suffix: ""
+    },
+    {
+      icon: DollarSign,
+      label: "Funds Raised",
+      current: statsData.funds_raised,
+      target: 25000,
+      prefix: "$",
+      suffix: "",
+      formatWithComma: true
+    }
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
