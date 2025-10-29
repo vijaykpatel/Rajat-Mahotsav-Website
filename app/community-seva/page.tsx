@@ -1,15 +1,18 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useForm, Controller } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+import { isValidPhoneNumber, parsePhoneNumber } from "react-phone-number-input"
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/atoms/card"
 import { Button } from "@/components/atoms/button"
 import { Input } from "@/components/atoms/input"
 import { Label } from "@/components/atoms/label"
-import { Textarea } from "@/components/atoms/textarea"
-import { Heart, Users, Clock, MapPin, DollarSign, Mail, Phone, Send } from "lucide-react"
-
+import { Heart, Users, Clock, MapPin, DollarSign, Send, Loader2 } from "lucide-react"
+import LazyPhoneInput from "@/components/molecules/lazy-phone-input"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { ImageMarquee } from "@/components/organisms/image-marquee"
 import { getCloudflareImage } from "@/lib/cdn-assets"
@@ -21,6 +24,7 @@ import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { PathOfServiceStory } from "@/components/organisms/path-of-service-story"
 import { supabase } from "@/utils/supabase/client"
 import "@/styles/community-service-theme.css"
+import "@/styles/registration-theme.css"
 
 const firstRowImages = [
   { src: getCloudflareImage("001591ef-616d-40ae-7102-30f4bad78b00"), alt: "Community Service Event 1" }, // local police 5k
@@ -47,6 +51,22 @@ const secondRowImages = [
   { src: getCloudflareImage("ee07b747-ecc9-4437-e620-348a2e9c8d00"), alt: "Community Service Event 16" }, // blood donation sign
 ]
 
+const SevaFormSchema = z.object({
+  firstName: z.string().min(1, "First name is required").regex(/^[A-Za-z]+$/, "First name must contain only letters"),
+  lastName: z.string().min(1, "Last name is required").regex(/^[A-Za-z]+$/, "Last name must contain only letters"),
+  phone: z
+    .string()
+    .min(1, "Phone number is required")
+    .refine((value) => value && isValidPhoneNumber(value), {
+      message: "Invalid phone number",
+    }),
+  activityName: z.string().min(1, "Activity name is required"),
+  hoursVolunteered: z.string().min(1, "Hours are required").refine((val) => {
+    const num = parseFloat(val)
+    return !isNaN(num) && num > 0
+  }, "Must be a valid number greater than 0"),
+})
+
 async function fetchCommunityStats() {
   const { data } = await supabase
     .from('community_seva_records')
@@ -62,23 +82,40 @@ async function fetchCommunityStats() {
   }), { volunteer_hours: 0, meals_served: 0, community_events: 0, funds_raised: 0 })
 }
 
+type SevaFormData = z.infer<typeof SevaFormSchema>
+
 export default function CommunityServicePage() {
   const [statsData, setStatsData] = useState({ volunteer_hours: 0, meals_served: 0, community_events: 0, funds_raised: 0 })
   const { toast } = useToast()
 
   const deviceType = useDeviceType()
   const [isLoaded, setIsLoaded] = useState(false)
-  const [navbarVisible, setNavbarVisible] = useState(true)
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: ""
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSevaSubmitting, setIsSevaSubmitting] = useState(false)
 
   const statsRef = useRef(null)
   const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" })
+
+  const {
+    control: sevaControl,
+    handleSubmit: handleSevaSubmit,
+    formState: { errors: sevaErrors },
+    reset: resetSevaForm,
+  } = useForm<SevaFormData>({
+    resolver: zodResolver(SevaFormSchema),
+    mode: "onBlur",
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      phone: "",
+      activityName: "",
+      hoursVolunteered: "",
+    },
+  })
+
+  const onSevaSubmit = async (data: SevaFormData) => {
+    // Backend submission logic will go here
+    console.log("Personal Seva Submission:", data)
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 200)
@@ -118,45 +155,6 @@ export default function CommunityServicePage() {
       formatWithComma: true
     }
   ]
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY
-      const shouldShow = scrollTop < 100
-      setNavbarVisible(shouldShow)
-      
-      // Update navbar opacity
-      const navbar = document.querySelector('[data-navbar]')
-      if (navbar) {
-        navbar.style.opacity = shouldShow ? '1' : '0'
-        navbar.style.pointerEvents = shouldShow ? 'auto' : 'none'
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [isLoaded])
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    toast({
-      title: "Thank you for your interest!",
-      description: "We'll be in touch soon about volunteer opportunities.",
-      className: "bg-green-500 text-white border-green-400 shadow-xl font-medium",
-    })
-    
-    setFormData({ name: "", email: "", phone: "", message: "" })
-    setIsSubmitting(false)
-  }
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
-  }
 
   return (
     <div 
@@ -385,6 +383,185 @@ export default function CommunityServicePage() {
             </div>
           </motion.div>
 
+          {/* Record Your Seva */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="text-center mb-12">
+              <motion.h3 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className="text-2xl lg:text-3xl font-semibold text-orange-600 mb-6"
+              >
+                Record your seva!
+              </motion.h3>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-xl community-text-secondary max-w-4xl mb-6 mx-auto leading-relaxed"
+              >
+                Have you completed community service on your own? Let us know! Your efforts count towards our collective goal.
+              </motion.p>
+            </div>
+            <div className="max-w-3xl mx-auto">
+              <motion.div
+                className="relative"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              >
+                {/* Subtle glow effect */}
+                <div className="absolute -inset-4 bg-gradient-to-r from-orange-200/30 via-white/20 to-red-200/30 rounded-[2rem] blur-xl opacity-40 will-change-transform"></div>
+                <div className="relative">
+                  <Card className="reg-card rounded-3xl overflow-hidden relative">
+                    <CardHeader className="text-center pb-6 lg:pb-8">
+                      <CardTitle className="text-xl lg:text-2xl font-semibold reg-text-primary">Personal Seva Submission</CardTitle>
+                      <CardDescription className="reg-text-secondary text-base">Please fill in your details to record your seva</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <form onSubmit={handleSevaSubmit(onSevaSubmit)} className="space-y-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="firstName" className="reg-label">First Name *</Label>
+                            <Controller
+                              name="firstName"
+                              control={sevaControl}
+                              render={({ field }) => (
+                                <Input
+                                  {...field}
+                                  id="firstName"
+                                  type="text"
+                                  placeholder="First name"
+                                  className="reg-input rounded-md"
+                                />
+                              )}
+                            />
+                            {sevaErrors.firstName && (
+                              <p className="reg-error-text">{sevaErrors.firstName.message}</p>
+                            )}
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="lastName" className="reg-label">Last Name *</Label>
+                            <Controller
+                              name="lastName"
+                              control={sevaControl}
+                              render={({ field }) => (
+                                <Input
+                                  {...field}
+                                  id="lastName"
+                                  type="text"
+                                  placeholder="Last name"
+                                  className="reg-input rounded-md"
+                                />
+                              )}
+                            />
+                            {sevaErrors.lastName && (
+                              <p className="reg-error-text">{sevaErrors.lastName.message}</p>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="phone" className="reg-label">Phone Number *</Label>
+                          <Controller
+                            name="phone"
+                            control={sevaControl}
+                            render={({ field }) => (
+                              <LazyPhoneInput
+                                value={field.value}
+                                id="phone"
+                                placeholder="Enter a phone number"
+                                defaultCountry="US"
+                                onChange={field.onChange}
+                              />
+                            )}
+                          />
+                          {sevaErrors.phone && (
+                            <p className="reg-error-text">{sevaErrors.phone.message}</p>
+                          )}
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="activityName" className="reg-label">Activity Name *</Label>
+                            <Controller
+                              name="activityName"
+                              control={sevaControl}
+                              render={({ field }) => (
+                                <Input
+                                  {...field}
+                                  id="activityName"
+                                  type="text"
+                                  placeholder="e.g. Local food bank volunteering"
+                                  className="reg-input rounded-md"
+                                />
+                              )}
+                            />
+                            {sevaErrors.activityName && (
+                              <p className="reg-error-text">{sevaErrors.activityName.message}</p>
+                            )}
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="hoursVolunteered" className="reg-label">Hours Volunteered *</Label>
+                            <Controller
+                              name="hoursVolunteered"
+                              control={sevaControl}
+                              render={({ field }) => (
+                                <Input
+                                  {...field}
+                                  id="hoursVolunteered"
+                                  type="number"
+                                  min="0.1"
+                                  step="0.1"
+                                  placeholder="e.g. 2.5"
+                                  className="reg-input rounded-md"
+                                />
+                              )}
+                            />
+                            {sevaErrors.hoursVolunteered && (
+                              <p className="reg-error-text">{sevaErrors.hoursVolunteered.message}</p>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="pt-4 space-y-4">
+                          <button
+                            type="submit"
+                            disabled={isSevaSubmitting}
+                            className="reg-button relative w-full h-14 inline-flex items-center justify-center text-center px-4 py-2 text-base rounded-lg overflow-hidden"
+                          >
+                            <div className={`absolute inset-0 bg-gradient-to-b from-white/20 to-transparent transform transition-transform duration-500 ${isSevaSubmitting ? 'translate-y-0' : 'translate-y-full'}`}></div>
+                            <div className="relative z-10 flex items-center justify-center gap-2">
+                              {isSevaSubmitting ? (
+                                <>
+                                  <Loader2 className="w-5 h-5 animate-spin" />
+                                  Please wait
+                                </>
+                              ) : (
+                                <>
+                                  <Send className="w-5 h-5" />
+                                  Submit Seva
+                                </>
+                              )}
+                            </div>
+                          </button>
+                        </div>
+                      </form>
+                    </CardContent>
+                  </Card>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+
           {/* Mission in Action - YouTube Shorts */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -438,118 +615,6 @@ export default function CommunityServicePage() {
           </motion.div>
         </div>
       </section>
-
-      {/* Section 6: Get Involved - COMMENTED OUT FOR NOW */}
-      {/* <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-              <div className="grid lg:grid-cols-2 gap-8 items-start">
-                
-                <Card className="community-card rounded-3xl overflow-hidden">
-                  <CardHeader className="text-center pb-6">
-                    <CardTitle className="text-2xl lg:text-3xl font-semibold community-text-primary">
-                      Get Involved
-                    </CardTitle>
-                    <CardDescription className="community-text-secondary">
-                      Join us in making a positive impact
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    <p className="text-justify community-text-secondary leading-relaxed">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-                    </p>
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3">
-                        <Mail className="h-5 w-5 community-text-accent" />
-                        <span className="community-text-secondary">volunteer@temple.org</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Phone className="h-5 w-5 community-text-accent" />
-                        <span className="community-text-secondary">(555) 123-4567</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="community-card rounded-3xl overflow-hidden">
-                  <CardHeader className="text-center pb-6">
-                    <CardTitle className="text-2xl font-semibold community-text-primary">
-                      Volunteer Interest Form
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name" className="community-label">Full Name *</Label>
-                        <Input
-                          id="name"
-                          type="text"
-                          placeholder="Your full name"
-                          value={formData.name}
-                          onChange={(e) => handleInputChange("name", e.target.value)}
-                          className="community-input rounded-md"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="email" className="community-label">Email Address *</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="your@email.com"
-                          value={formData.email}
-                          onChange={(e) => handleInputChange("email", e.target.value)}
-                          className="community-input rounded-md"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="phone" className="community-label">Phone Number</Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          placeholder="(555) 123-4567"
-                          value={formData.phone}
-                          onChange={(e) => handleInputChange("phone", e.target.value)}
-                          className="community-input rounded-md"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="message" className="community-label">Message</Label>
-                        <Textarea
-                          id="message"
-                          placeholder="Tell us about your interests and availability..."
-                          value={formData.message}
-                          onChange={(e) => handleInputChange("message", e.target.value)}
-                          className="community-input rounded-md min-h-[100px]"
-                          rows={4}
-                        />
-                      </div>
-
-                      <Button 
-                        type="submit" 
-                        disabled={isSubmitting}
-                        className="community-button w-full h-12 rounded-lg"
-                      >
-                        <div className="flex items-center justify-center gap-2">
-                          <Send className="w-4 h-4" />
-                          {isSubmitting ? "Sending..." : "Send Message"}
-                        </div>
-                      </Button>
-                    </form>
-                  </CardContent>
-                </Card>
-          </div>
-        </motion.div>
-      </div> */}
     </div>
   )
 }
