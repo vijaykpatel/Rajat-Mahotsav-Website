@@ -14,6 +14,7 @@ import { Label } from "@/components/atoms/label"
 import { Heart, Users, Clock, MapPin, DollarSign, Send, Loader2 } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/atoms/select"
 import LazyPhoneInput from "@/components/molecules/lazy-phone-input"
+import { CountrySelector } from "@/components/molecules/country-selector"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { ImageMarquee } from "@/components/organisms/image-marquee"
 import { getCloudflareImage } from "@/lib/cdn-assets"
@@ -62,6 +63,8 @@ const SevaFormSchema = z.object({
       message: "Invalid phone number",
     }),
   activityName: z.string().min(1, "Activity name is required"),
+  country: z.string().min(1, "Country is required"),
+  mandal: z.string().min(1, "Mandal is required"),
   hoursVolunteered: z.string().min(1, "Hours are required").refine((val) => {
     const validHours = ["0.5", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     return validHours.includes(val)
@@ -87,6 +90,10 @@ type SevaFormData = z.infer<typeof SevaFormSchema>
 
 export default function CommunityServicePage() {
   const [statsData, setStatsData] = useState({ volunteer_hours: 0, meals_served: 0, community_events: 0, funds_raised: 0 })
+  const [sevaFormData, setSevaFormData] = useState({
+    country: "",
+    mandal: "",
+  })
   const { toast } = useToast()
 
   const deviceType = useDeviceType()
@@ -100,6 +107,7 @@ export default function CommunityServicePage() {
     control: sevaControl,
     handleSubmit: handleSevaSubmit,
     formState: { errors: sevaErrors },
+    setValue: setSevaValue,
     reset: resetSevaForm,
   } = useForm<SevaFormData>({
     resolver: zodResolver(SevaFormSchema),
@@ -109,6 +117,8 @@ export default function CommunityServicePage() {
       lastName: "",
       phone: "",
       activityName: "",
+      country: "",
+      mandal: "",
       hoursVolunteered: "",
     },
   })
@@ -116,6 +126,44 @@ export default function CommunityServicePage() {
   const onSevaSubmit = async (data: SevaFormData) => {
     // Backend submission logic will go here
     console.log("Personal Seva Submission:", data)
+  }
+
+  const updateSevaFormData = (field: keyof typeof sevaFormData, value: string) => {
+    setSevaFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }))
+    setSevaValue(field, value)
+  }
+
+  const getMandals = (country: string) => {
+    const mandalOptions: { [key: string]: string[] } = {
+      "england": [
+        "Bolton",
+        "London"
+      ],
+      "usa": [
+        "Alabama",
+        "California",
+        "Chicago",
+        "Delaware",
+        "Georgia",
+        "Horseheads",
+        "Kentucky",
+        "New Jersey",
+        "Ocala",
+        "Ohio",
+        "Seattle",
+        "Tennessee",
+        "Toronto"
+      ]
+    }
+    return mandalOptions[country] || []
+  }
+
+  const specialMandalCountries = ["india", "australia", "canada", "kenya"]
+  const isSpecialMandalCountry = (country: string) => {
+    return specialMandalCountries.includes(country)
   }
 
   useEffect(() => {
@@ -301,116 +349,11 @@ export default function CommunityServicePage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-xl community-text-secondary max-w-4xl mb-6 mx-auto leading-relaxed"
               >
-                There are ways for everyone to get involved, whether that means joining us on our community seva or even helping out your community in Swaminarayan Bhagwan's name. We will soon provide more information on how you can get involved and join the efforts along with a tool to record your seva!
-              </motion.p>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-2xl lg:text-3xl font-semibold text-orange-600"
-              >
-                Your Gift, Doubled
+                There are many ways to get involved, from joining our organized community seva events to helping out in your own community in Swaminarayan Bhagwan's name. If you've completed community service on your own, please let us know by filling out the form below. Your efforts count towards our collective goal!
               </motion.p>
             </div>
             
-            <div className="max-w-4xl mx-auto space-y-8 -mt-2">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="bg-gradient-to-br from-orange-50 to-red-50 rounded-3xl shadow-xl p-8 border-2 border-orange-200"
-              >
-                <div className="space-y-6 text-lg community-text-secondary leading-relaxed">
-                  <p>
-                    A few generous donors have stepped forward to match every dollar donated, up to $10,000. That means your $50 becomes $100. Your $250 becomes $500. Every contribution you make will have twice the impact in feeding the hungry, sheltering the homeless, and caring for our community.
-                  </p>
-                  <p className="font-semibold text-orange-600">
-                    Together, we can turn $10,000 into $20,000—and reach our full goal of $25,000 to fund a year of transformative service.
-                  </p>
-                  <p>
-                    Your financial support helps us purchase supplies, organize events, and reach more people in need. Every dollar goes directly toward feeding, sheltering, and caring for our community.
-                  </p>
-                  <p className="font-semibold">
-                    This is your chance to double your impact. Will you help us unlock this match?
-                  </p>
-                </div>
-                
-                <div className="flex justify-center mt-8">
-                  <a
-                    href="https://ssssmusa.breezechms.com/give/online"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-orange-600 to-red-600 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 hover:from-orange-700 hover:to-red-700"
-                  >
-                    <Heart className="w-6 h-6 mr-3" />
-                    DONATE NOW - DOUBLE YOUR IMPACT
-                  </a>
-                </div>
-                
-                <div className="mt-8 pt-8 border-t-2 border-orange-200">
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-6 text-center">
-                    Where Your Support Goes
-                  </h3>
-                  <ul className="space-y-2 text-lg community-text-secondary">
-                    <li className="flex items-center gap-3">
-                      <Heart className="w-5 h-5 text-orange-600 flex-shrink-0" />
-                      <span>Homeless shelter care kits with essential hygiene items</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Users className="w-5 h-5 text-orange-600 flex-shrink-0" />
-                      <span>Hot meals for families facing food insecurity</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Heart className="w-5 h-5 text-orange-600 flex-shrink-0" />
-                      <span>Health camps and wellness programs</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <MapPin className="w-5 h-5 text-orange-600 flex-shrink-0" />
-                      <span>Environmental restoration projects</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Users className="w-5 h-5 text-orange-600 flex-shrink-0" />
-                      <span>Educational support for underserved youth</span>
-                    </li>
-                  </ul>
-                </div>
-                
-                <p className="text-base community-text-secondary text-center mt-8 italic">
-                  All donations are tax-deductible. The matching gift is available on a first-come, first-served basis until we reach the $10,000 match limit. We're grateful for any amount you can share.
-                </p>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Record Your Seva */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <div className="text-center mb-12">
-              <motion.h3 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.1 }}
-                className="text-2xl lg:text-3xl font-semibold text-orange-600 mb-6"
-              >
-                Record your seva!
-              </motion.h3>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl community-text-secondary max-w-4xl mb-6 mx-auto leading-relaxed"
-              >
-                Have you completed community service on your own? Let us know! Your efforts count towards our collective goal.
-              </motion.p>
-            </div>
+            {/* Record Your Seva Form */}
             <div className="max-w-3xl mx-auto">
               <motion.div
                 className="relative"
@@ -492,6 +435,85 @@ export default function CommunityServicePage() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div className="space-y-2">
+                            <Label htmlFor="country" className="reg-label">Country *</Label>
+                            <Controller
+                              name="country"
+                              control={sevaControl}
+                              render={({ field }) => (
+                                <CountrySelector
+                                  value={field.value}
+                                  onChange={(value) => {
+                                    field.onChange(value)
+                                    updateSevaFormData("country", value)
+                                    if (value === "india") {
+                                      updateSevaFormData("mandal", "Maninagar")
+                                      setSevaValue("mandal", "Maninagar", { shouldValidate: true })
+                                    } else if (value === "australia") {
+                                      updateSevaFormData("mandal", "Sydney")
+                                      setSevaValue("mandal", "Sydney", { shouldValidate: true })
+                                    } else if (value === "canada") {
+                                      updateSevaFormData("mandal", "Toronto")
+                                      setSevaValue("mandal", "Toronto", { shouldValidate: true })
+                                    } else if (value === "kenya") {
+                                      updateSevaFormData("mandal", "Nairobi")
+                                      setSevaValue("mandal", "Nairobi", { shouldValidate: true })
+                                    } else {
+                                      updateSevaFormData("mandal", "")
+                                      setSevaValue("mandal", "", { shouldValidate: true })
+                                    }
+                                  }}
+                                  placeholder="Select your country"
+                                />
+                              )}
+                            />
+                            {sevaErrors.country && (
+                              <p className="reg-error-text">{sevaErrors.country.message}</p>
+                            )}
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="mandal" className="reg-label">Mandal *</Label>
+                            <Controller
+                              name="mandal"
+                              control={sevaControl}
+                              render={({ field }) =>
+                                isSpecialMandalCountry(sevaFormData.country) ? (
+                                  <Input
+                                    {...field}
+                                    value={sevaFormData.mandal}
+                                    disabled
+                                    className="reg-input rounded-md"
+                                  />
+                                ) : (
+                                  <Select
+                                    value={field.value}
+                                    onValueChange={(value) => {
+                                      field.onChange(value)
+                                      setSevaValue("mandal", value, { shouldValidate: true })
+                                    }}
+                                    disabled={!sevaFormData.country}
+                                  >
+                                    <SelectTrigger className="reg-input rounded-md">
+                                      <SelectValue placeholder={sevaFormData.country ? "Select mandal" : "Select country first"} />
+                                    </SelectTrigger>
+                                    <SelectContent className="reg-popover rounded-xl">
+                                      {getMandals(sevaFormData.country).map((mandal) => (
+                                        <SelectItem key={mandal} value={mandal.toLowerCase().replace(/ /g, '-')} className="reg-popover-item rounded-lg">
+                                          {mandal}
+                                        </SelectItem>
+                                      ))}
+                                    </SelectContent>
+                                  </Select>
+                                )
+                              }
+                            />
+                            {sevaErrors.mandal && (
+                              <p className="reg-error-text">{sevaErrors.mandal.message}</p>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
                             <Label htmlFor="activityName" className="reg-label">Activity Name *</Label>
                             <Controller
                               name="activityName"
@@ -568,6 +590,87 @@ export default function CommunityServicePage() {
                     </CardContent>
                   </Card>
                 </div>
+              </motion.div>
+            </div>
+            
+            <div className="text-center mt-20 mb-10">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-2xl lg:text-3xl font-semibold text-orange-600"
+              >
+                Your Gift, Doubled
+              </motion.p>  
+            </div>
+            
+            <div className="max-w-4xl mx-auto space-y-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-gradient-to-br from-orange-50 to-red-50 rounded-3xl shadow-xl p-8 border-2 border-orange-200"
+              >
+                <div className="space-y-6 text-lg community-text-secondary leading-relaxed">
+                  <p>
+                    A few generous donors have stepped forward to match every dollar donated, up to $10,000. That means your $50 becomes $100. Your $250 becomes $500. Every contribution you make will have twice the impact in feeding the hungry, sheltering the homeless, and caring for our community.
+                  </p>
+                  <p className="font-semibold text-orange-600">
+                    Together, we can turn $10,000 into $20,000—and reach our full goal of $25,000 to fund a year of transformative service.
+                  </p>
+                  <p>
+                    Your financial support helps us purchase supplies, organize events, and reach more people in need. Every dollar goes directly toward feeding, sheltering, and caring for our community.
+                  </p>
+                  <p className="font-semibold">
+                    This is your chance to double your impact. Will you help us unlock this match?
+                  </p>
+                </div>
+                
+                <div className="flex justify-center mt-8">
+                  <a
+                    href="https://ssssmusa.breezechms.com/give/online"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-orange-600 to-red-600 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 hover:from-orange-700 hover:to-red-700"
+                  >
+                    <Heart className="w-6 h-6 mr-3" />
+                    DONATE NOW - DOUBLE YOUR IMPACT
+                  </a>
+                </div>
+                
+                <div className="mt-8 pt-8 border-t-2 border-orange-200">
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent mb-6 text-center">
+                    Where Your Support Goes
+                  </h3>
+                  <ul className="space-y-2 text-lg community-text-secondary">
+                    <li className="flex items-center gap-3">
+                      <Heart className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                      <span>Homeless shelter care kits with essential hygiene items</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <Users className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                      <span>Hot meals for families facing food insecurity</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <Heart className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                      <span>Health camps and wellness programs</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <MapPin className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                      <span>Environmental restoration projects</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <Users className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                      <span>Educational support for underserved youth</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <p className="text-base community-text-secondary text-center mt-8 italic">
+                  All donations are tax-deductible. The matching gift is available on a first-come, first-served basis until we reach the $10,000 match limit. We're grateful for any amount you can share.
+                </p>
               </motion.div>
             </div>
           </motion.div>
