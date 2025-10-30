@@ -12,6 +12,7 @@ import { Button } from "@/components/atoms/button"
 import { Input } from "@/components/atoms/input"
 import { Label } from "@/components/atoms/label"
 import { Heart, Users, Clock, MapPin, DollarSign, Send, Loader2 } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/atoms/select"
 import LazyPhoneInput from "@/components/molecules/lazy-phone-input"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { ImageMarquee } from "@/components/organisms/image-marquee"
@@ -62,9 +63,9 @@ const SevaFormSchema = z.object({
     }),
   activityName: z.string().min(1, "Activity name is required"),
   hoursVolunteered: z.string().min(1, "Hours are required").refine((val) => {
-    const num = parseFloat(val)
-    return !isNaN(num) && num > 0
-  }, "Must be a valid number greater than 0"),
+    const validHours = ["0.5", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+    return validHours.includes(val)
+  }, "Please select valid hours"),
 })
 
 async function fetchCommunityStats() {
@@ -515,15 +516,24 @@ export default function CommunityServicePage() {
                               name="hoursVolunteered"
                               control={sevaControl}
                               render={({ field }) => (
-                                <Input
-                                  {...field}
-                                  id="hoursVolunteered"
-                                  type="number"
-                                  min="0.1"
-                                  step="0.1"
-                                  placeholder="e.g. 2.5"
-                                  className="reg-input rounded-md"
-                                />
+                                <Select value={field.value} onValueChange={field.onChange}>
+                                  <SelectTrigger className="reg-input rounded-md">
+                                    <SelectValue placeholder="Select hours volunteered" />
+                                  </SelectTrigger>
+                                  <SelectContent className="reg-popover rounded-xl">
+                                    <SelectItem value="0.5" className="reg-popover-item rounded-lg">0.5 hours</SelectItem>
+                                    <SelectItem value="1" className="reg-popover-item rounded-lg">1 hour</SelectItem>
+                                    <SelectItem value="2" className="reg-popover-item rounded-lg">2 hours</SelectItem>
+                                    <SelectItem value="3" className="reg-popover-item rounded-lg">3 hours</SelectItem>
+                                    <SelectItem value="4" className="reg-popover-item rounded-lg">4 hours</SelectItem>
+                                    <SelectItem value="5" className="reg-popover-item rounded-lg">5 hours</SelectItem>
+                                    <SelectItem value="6" className="reg-popover-item rounded-lg">6 hours</SelectItem>
+                                    <SelectItem value="7" className="reg-popover-item rounded-lg">7 hours</SelectItem>
+                                    <SelectItem value="8" className="reg-popover-item rounded-lg">8 hours</SelectItem>
+                                    <SelectItem value="9" className="reg-popover-item rounded-lg">9 hours</SelectItem>
+                                    <SelectItem value="10" className="reg-popover-item rounded-lg">10 hours</SelectItem>
+                                  </SelectContent>
+                                </Select>
                               )}
                             />
                             {sevaErrors.hoursVolunteered && (
