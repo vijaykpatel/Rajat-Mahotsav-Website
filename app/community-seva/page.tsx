@@ -24,6 +24,7 @@ import { AnimatedTextSection } from "@/components/organisms/animated-text-sectio
 import { useToast } from "@/hooks/use-toast"
 import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { PathOfServiceStory } from "@/components/organisms/path-of-service-story"
+import { Toaster } from "@/components/molecules/toaster"
 import { supabase } from "@/utils/supabase/client"
 import "@/styles/community-service-theme.css"
 import "@/styles/registration-theme.css"
@@ -124,8 +125,45 @@ export default function CommunityServicePage() {
   })
 
   const onSevaSubmit = async (data: SevaFormData) => {
-    // Backend submission logic will go here
-    console.log("Personal Seva Submission:", data)
+    setIsSevaSubmitting(true)
+    try {
+      let nationalNumber = data.phone
+      if (data.phone && isValidPhoneNumber(data.phone)) {
+        const parsed = parsePhoneNumber(data.phone)
+        if (parsed) nationalNumber = parsed.nationalNumber
+      }
+
+      const dbData = {
+        first_name: data.firstName,
+        last_name: data.lastName,
+        mobile_number: nationalNumber,
+        country: data.country,
+        mandal: data.mandal,
+        activity_name: data.activityName,
+        volunteer_hours: parseFloat(data.hoursVolunteered),
+      }
+
+      const { error } = await supabase.from('personal_seva_submission').insert([dbData])
+
+      if (!error) {
+        toast({
+          title: `Seva recorded, ${data.firstName}!`,
+          description: "Jay Shree Swaminarayan. Thank you for your contribution.",
+          className: "bg-green-500 text-white border-green-400 shadow-xl font-medium",
+        })
+        resetSevaForm()
+      } else {
+        throw error
+      }
+    } catch (error: any) {
+      toast({
+        title: "Submission failed",
+        description: error.message || "Please check your connection and try again.",
+        className: "bg-red-500 text-white border-red-400 shadow-xl font-medium",
+      })
+    } finally {
+      setIsSevaSubmitting(false)
+    }
   }
 
   const updateSevaFormData = (field: keyof typeof sevaFormData, value: string) => {
@@ -744,6 +782,7 @@ export default function CommunityServicePage() {
           <ImageMarquee firstRow={firstRowImages} secondRow={secondRowImages} />
         </div>
       </section>
+      <Toaster />
     </div>
   )
 }
