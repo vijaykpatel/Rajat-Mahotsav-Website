@@ -413,7 +413,7 @@ export default function CommunityServicePage() {
               </motion.p>
             </div>
             
-            <div className="flex justify-center">
+            <div className="flex justify-center gap-6 flex-wrap">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -432,6 +432,26 @@ export default function CommunityServicePage() {
                 </div>
                 <p className="text-center text-sm community-text-secondary leading-relaxed">
                   Shree Swaminarayan Gadi Secaucus Temple celebrates 25 years while supporting the local Secaucus PD fundraiser for Special Olympics NJ with a 5k run.
+                </p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="bg-gradient-to-br from-orange-50 via-white to-blue-50 rounded-3xl shadow-xl p-6 max-w-sm flex flex-col items-center border-2 border-gray-200 hover:border-orange-500/30 hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="rounded-2xl overflow-hidden shadow-lg mb-4 aspect-[9/16] max-h-[560px] w-full max-w-[315px]">
+                  <iframe
+                    src="https://www.youtube.com/embed/eJPBUDgnb2A?rel=0&modestbranding=1"
+                    title="Community Service Event"
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+                <p className="text-center text-sm community-text-secondary leading-relaxed">
+                  Shree Swaminarayan Temple - Secaucus, New Jersey partnered with Beat to Breathe to host a CPR workshop. Fifty volunteers gathered in Shree Muktajeevan Swamibapa Community Hall to learn life saving medical skills.
                 </p>
               </motion.div>
             </div>
