@@ -170,10 +170,9 @@ export default function CommunityServicePage() {
       `}</style>
       
       {/* Section 1: Hero + Our Community in Action */}
-      <section className="min-h-screen">
-        <div className="relative z-10">
+        <div className="z-10">
           {/* Hero Content */}
-          <div className="mb-36">
+          <div className="">
             <StandardPageHeader
               title="Community Seva"
               subtitle="Seva in Action"
@@ -186,7 +185,7 @@ export default function CommunityServicePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="flex justify-center px-4"
+              className="flex justify-center"
             >
               <div className="text-left text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed space-y-1">
                 <p><span className="underline decoration-2 decoration-orange-600 text-orange-600 font-semibold">Twenty-Five Years</span> of Devotion.</p>
@@ -208,66 +207,55 @@ export default function CommunityServicePage() {
               </p>
             </motion.div>
           </div>
-          
-
-          {/* Image Marquee - Full Width */}
-          <ImageMarquee firstRow={firstRowImages} secondRow={secondRowImages} />
-
-          {/* Path of Service Story - Sticky Scroll Sections */}
-          <div>
-            <PathOfServiceStory />
-          </div>
         </div>
-      </section>
-
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 py-8">
+            <motion.div
+              ref={statsRef}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+            >
+              <div className="text-center mb-12">
+                <motion.h2 
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className="text-3xl lg:text-4xl font-bold community-text-primary mb-4"
+                >
+                  Our Progress So Far
+                </motion.h2>
+                {/* <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="text-xl community-text-secondary"
+                >
+                  Together, we're making a difference in our community. Here's a live tracker of us on our way to meeting our Rajat Mahotsav Community Service Goals!
+                </motion.p> */}
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {communityStats.map((stat, index) => (
+                  <ProgressCounter
+                    key={stat.label}
+                    {...stat}
+                    delay={index * 0.2}
+                    inView={isStatsInView}
+                  />
+                ))}
+              </div>
+          </motion.div>
+      </div>
+      
       {/* Sections 2 & 3: Why We Serve + Our 25-Year Mission - With snap */}
       <AnimatedTextSection />
       
       {/* Section 4: Community Initiatives + Impact Statistics + Mission in Action */}
       <section className="min-h-screen">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center pb-20 space-y-20">
-          {/* <BentoInitiatives /> */}
-          
-          {/* Progress Statistics */}
-          <motion.div
-            ref={statsRef}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-          >
-            <div className="text-center mb-12">
-              <motion.h2 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="text-3xl lg:text-4xl font-bold community-text-primary mb-4"
-              >
-                Our Impact So Far
-              </motion.h2>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl community-text-secondary"
-              >
-                Together, we're making a difference in our community. Here's a live tracker of us on our way to meeting our Rajat Mahotsav Community Service Goals!
-              </motion.p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {communityStats.map((stat, index) => (
-                <ProgressCounter
-                  key={stat.label}
-                  {...stat}
-                  delay={index * 0.2}
-                  inView={isStatsInView}
-                />
-              ))}
-            </div>
-          </motion.div>
 
           {/* Support Our Mission - Donations */}
           <motion.div
@@ -457,119 +445,15 @@ export default function CommunityServicePage() {
             </div>
           </motion.div>
         </div>
+
+        <div>
+          <PathOfServiceStory />
+        </div>
+
+        <div className="pb-20">
+          <ImageMarquee firstRow={firstRowImages} secondRow={secondRowImages} />
+        </div>
       </section>
-
-      {/* Section 6: Get Involved - COMMENTED OUT FOR NOW */}
-      {/* <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-              <div className="grid lg:grid-cols-2 gap-8 items-start">
-                
-                <Card className="community-card rounded-3xl overflow-hidden">
-                  <CardHeader className="text-center pb-6">
-                    <CardTitle className="text-2xl lg:text-3xl font-semibold community-text-primary">
-                      Get Involved
-                    </CardTitle>
-                    <CardDescription className="community-text-secondary">
-                      Join us in making a positive impact
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    <p className="text-justify community-text-secondary leading-relaxed">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-                    </p>
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3">
-                        <Mail className="h-5 w-5 community-text-accent" />
-                        <span className="community-text-secondary">volunteer@temple.org</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Phone className="h-5 w-5 community-text-accent" />
-                        <span className="community-text-secondary">(555) 123-4567</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="community-card rounded-3xl overflow-hidden">
-                  <CardHeader className="text-center pb-6">
-                    <CardTitle className="text-2xl font-semibold community-text-primary">
-                      Volunteer Interest Form
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name" className="community-label">Full Name *</Label>
-                        <Input
-                          id="name"
-                          type="text"
-                          placeholder="Your full name"
-                          value={formData.name}
-                          onChange={(e) => handleInputChange("name", e.target.value)}
-                          className="community-input rounded-md"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="email" className="community-label">Email Address *</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="your@email.com"
-                          value={formData.email}
-                          onChange={(e) => handleInputChange("email", e.target.value)}
-                          className="community-input rounded-md"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="phone" className="community-label">Phone Number</Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          placeholder="(555) 123-4567"
-                          value={formData.phone}
-                          onChange={(e) => handleInputChange("phone", e.target.value)}
-                          className="community-input rounded-md"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="message" className="community-label">Message</Label>
-                        <Textarea
-                          id="message"
-                          placeholder="Tell us about your interests and availability..."
-                          value={formData.message}
-                          onChange={(e) => handleInputChange("message", e.target.value)}
-                          className="community-input rounded-md min-h-[100px]"
-                          rows={4}
-                        />
-                      </div>
-
-                      <Button 
-                        type="submit" 
-                        disabled={isSubmitting}
-                        className="community-button w-full h-12 rounded-lg"
-                      >
-                        <div className="flex items-center justify-center gap-2">
-                          <Send className="w-4 h-4" />
-                          {isSubmitting ? "Sending..." : "Send Message"}
-                        </div>
-                      </Button>
-                    </form>
-                  </CardContent>
-                </Card>
-          </div>
-        </motion.div>
-      </div> */}
     </div>
   )
 }
