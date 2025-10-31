@@ -73,18 +73,32 @@ const SevaFormSchema = z.object({
 })
 
 async function fetchCommunityStats() {
-  const { data } = await supabase
-    .from('community_seva_records')
-    .select('volunteer_hours, meals_served, community_events, funds_raised')
+  const [communityRes, personalRes] = await Promise.all([
+    supabase
+      .from('community_seva_records')
+      .select('volunteer_hours, meals_served, community_events, funds_raised'),
+    supabase
+      .from('personal_seva_submission')
+      .select('volunteer_hours')
+  ])
   
-  if (!data) return { volunteer_hours: 0, meals_served: 0, community_events: 0, funds_raised: 0 }
+  const communityTotals = communityRes.data
+    ? communityRes.data.reduce((acc, record) => ({
+        volunteer_hours: acc.volunteer_hours + (record.volunteer_hours || 0),
+        meals_served: acc.meals_served + (record.meals_served || 0),
+        community_events: acc.community_events + (record.community_events || 0),
+        funds_raised: acc.funds_raised + (record.funds_raised || 0)
+      }), { volunteer_hours: 0, meals_served: 0, community_events: 0, funds_raised: 0 })
+    : { volunteer_hours: 0, meals_served: 0, community_events: 0, funds_raised: 0 }
+
+  const personalVolunteerHours = personalRes.data
+    ? personalRes.data.reduce((sum, record) => sum + (record.volunteer_hours || 0), 0)
+    : 0
   
-  return data.reduce((acc, record) => ({
-    volunteer_hours: acc.volunteer_hours + (record.volunteer_hours || 0),
-    meals_served: acc.meals_served + (record.meals_served || 0),
-    community_events: acc.community_events + (record.community_events || 0),
-    funds_raised: acc.funds_raised + (record.funds_raised || 0)
-  }), { volunteer_hours: 0, meals_served: 0, community_events: 0, funds_raised: 0 })
+  return {
+    ...communityTotals,
+    volunteer_hours: communityTotals.volunteer_hours + personalVolunteerHours,
+  }
 }
 
 type SevaFormData = z.infer<typeof SevaFormSchema>
@@ -309,7 +323,7 @@ export default function CommunityServicePage() {
                   transition={{ duration: 0.8 }}
                   className="text-3xl lg:text-4xl font-bold community-text-primary mb-4"
                 >
-                  Our Progress So Far
+                  Our Progress Towards Our Rajat Mahotsav Goals
                 </motion.h2>
                 {/* <motion.p 
                   initial={{ opacity: 0, y: 20 }}
