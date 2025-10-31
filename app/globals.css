@@ -291,7 +291,7 @@
   } */
   
   .page-header-spacing {
-    @apply mb-16 md:mb-20 lg:mb-24;
+    @apply mb-12 md:mb-12 lg:mb-12;
   }
   
   /* UNUSED - Page title desc spacing */

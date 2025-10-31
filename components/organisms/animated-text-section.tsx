@@ -48,9 +48,6 @@ const missionContent = {
 }
 
 export function AnimatedTextSection() {
-  const statsRef = useRef(null)
-  const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" })
-
   return (
     <>
       {/* Section 2: Why We Serve */}

@@ -217,10 +217,9 @@ export default function CommunityServicePage() {
       `}</style>
       
       {/* Section 1: Hero + Our Community in Action */}
-      <section className="min-h-screen">
-        <div className="relative z-10">
+        <div className="z-10">
           {/* Hero Content */}
-          <div className="mb-36">
+          <div className="">
             <StandardPageHeader
               title="Community Seva"
               subtitle="Seva in Action"
@@ -233,7 +232,7 @@ export default function CommunityServicePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="flex justify-center px-4"
+              className="flex justify-center"
             >
               <div className="text-left text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed space-y-1">
                 <p><span className="underline decoration-2 decoration-orange-600 text-orange-600 font-semibold">Twenty-Five Years</span> of Devotion.</p>
@@ -255,66 +254,55 @@ export default function CommunityServicePage() {
               </p>
             </motion.div>
           </div>
-          
-
-          {/* Image Marquee - Full Width */}
-          <ImageMarquee firstRow={firstRowImages} secondRow={secondRowImages} />
-
-          {/* Path of Service Story - Sticky Scroll Sections */}
-          <div>
-            <PathOfServiceStory />
-          </div>
         </div>
-      </section>
-
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 py-8">
+            <motion.div
+              ref={statsRef}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+            >
+              <div className="text-center mb-12">
+                <motion.h2 
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className="text-3xl lg:text-4xl font-bold community-text-primary mb-4"
+                >
+                  Our Progress So Far
+                </motion.h2>
+                {/* <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="text-xl community-text-secondary"
+                >
+                  Together, we're making a difference in our community. Here's a live tracker of us on our way to meeting our Rajat Mahotsav Community Service Goals!
+                </motion.p> */}
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {communityStats.map((stat, index) => (
+                  <ProgressCounter
+                    key={stat.label}
+                    {...stat}
+                    delay={index * 0.2}
+                    inView={isStatsInView}
+                  />
+                ))}
+              </div>
+          </motion.div>
+      </div>
+      
       {/* Sections 2 & 3: Why We Serve + Our 25-Year Mission - With snap */}
       <AnimatedTextSection />
       
       {/* Section 4: Community Initiatives + Impact Statistics + Mission in Action */}
       <section className="min-h-screen">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center pb-20 space-y-20">
-          {/* <BentoInitiatives /> */}
-          
-          {/* Progress Statistics */}
-          <motion.div
-            ref={statsRef}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-          >
-            <div className="text-center mb-12">
-              <motion.h2 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="text-3xl lg:text-4xl font-bold community-text-primary mb-4"
-              >
-                Our Impact So Far
-              </motion.h2>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl community-text-secondary"
-              >
-                Together, we're making a difference in our community. Here's a live tracker of us on our way to meeting our Rajat Mahotsav Community Service Goals!
-              </motion.p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {communityStats.map((stat, index) => (
-                <ProgressCounter
-                  key={stat.label}
-                  {...stat}
-                  delay={index * 0.2}
-                  inView={isStatsInView}
-                />
-              ))}
-            </div>
-          </motion.div>
 
           {/* Support Our Mission - Donations */}
           <motion.div
@@ -703,7 +691,7 @@ export default function CommunityServicePage() {
               </motion.p>
             </div>
             
-            <div className="flex justify-center">
+            <div className="flex justify-center gap-6 flex-wrap">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -724,8 +712,36 @@ export default function CommunityServicePage() {
                   Shree Swaminarayan Gadi Secaucus Temple celebrates 25 years while supporting the local Secaucus PD fundraiser for Special Olympics NJ with a 5k run.
                 </p>
               </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="bg-gradient-to-br from-orange-50 via-white to-blue-50 rounded-3xl shadow-xl p-6 max-w-sm flex flex-col items-center border-2 border-gray-200 hover:border-orange-500/30 hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="rounded-2xl overflow-hidden shadow-lg mb-4 aspect-[9/16] max-h-[560px] w-full max-w-[315px]">
+                  <iframe
+                    src="https://www.youtube.com/embed/eJPBUDgnb2A?rel=0&modestbranding=1"
+                    title="Community Service Event"
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+                <p className="text-center text-sm community-text-secondary leading-relaxed">
+                  Shree Swaminarayan Temple - Secaucus, New Jersey partnered with Beat to Breathe to host a CPR workshop. Fifty volunteers gathered in Shree Muktajeevan Swamibapa Community Hall to learn life saving medical skills.
+                </p>
+              </motion.div>
             </div>
           </motion.div>
+        </div>
+
+        <div>
+          <PathOfServiceStory />
+        </div>
+
+        <div className="pb-20">
+          <ImageMarquee firstRow={firstRowImages} secondRow={secondRowImages} />
         </div>
       </section>
     </div>
