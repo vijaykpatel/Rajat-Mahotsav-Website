@@ -1,14 +1,13 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useForm, Controller } from "react-hook-form"
+import { useForm, Controller, FormProvider } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { isValidPhoneNumber, parsePhoneNumber } from "react-phone-number-input"
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, AnimatePresence } from "framer-motion"
 import { useRef } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/atoms/card"
-import { Button } from "@/components/atoms/button"
 import { Input } from "@/components/atoms/input"
 import { Label } from "@/components/atoms/label"
 import { Heart, Users, Clock, MapPin, DollarSign, Send, Loader2 } from "lucide-react"
@@ -115,6 +114,7 @@ export default function CommunityServicePage() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isSevaSubmitting, setIsSevaSubmitting] = useState(false)
 
+  const [isFormVisible, setIsFormVisible] = useState(false)
   const statsRef = useRef(null)
   const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" })
 
@@ -222,6 +222,15 @@ export default function CommunityServicePage() {
     const timer = setTimeout(() => setIsLoaded(true), 200)
     fetchCommunityStats().then(setStatsData)
     return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash === '#personal-seva-submission') {
+      const element = document.getElementById('personal-seva-submission')
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
   }, [])
 
   const communityStats = [
@@ -354,15 +363,15 @@ export default function CommunityServicePage() {
       
       {/* Section 4: Community Initiatives + Impact Statistics + Mission in Action */}
       <section className="min-h-screen">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center pb-20 space-y-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center pb-10">
 
-          {/* Support Our Mission - Donations */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+            {/* Support Our Mission - Donations */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
             <div className="text-center mb-12">
               <motion.h2 
                 initial={{ opacity: 0, y: 30 }}
@@ -380,9 +389,9 @@ export default function CommunityServicePage() {
                 transition={{ duration: 0.8, delay: 0.1 }}
                 className="text-2xl lg:text-3xl font-semibold text-orange-600 mb-6"
               >
-                Volunteer With Us
+                International Charity Challenge - SEVA25
               </motion.h3>
-              <motion.p 
+              {/* <motion.p 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -390,250 +399,288 @@ export default function CommunityServicePage() {
                 className="text-xl community-text-secondary max-w-4xl mb-6 mx-auto leading-relaxed"
               >
                 There are many ways to get involved, from joining our organized community seva events to helping out in your own community in Swaminarayan Bhagwan's name. If you've completed community service on your own, please let us know by filling out the form below. Your efforts count towards our collective goal!
-              </motion.p>
-            </div>
-            
-            {/* Record Your Seva Form */}
-            <div className="max-w-3xl mx-auto">
+              </motion.p> */}
               <motion.div
-                className="relative"
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="bg-gradient-to-br from-orange-50 to-red-50 rounded-3xl shadow-xl p-8 border-2 border-orange-200 max-w-4xl mx-auto"
               >
-                {/* Subtle glow effect */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-orange-200/30 via-white/20 to-red-200/30 rounded-[2rem] blur-xl opacity-40 will-change-transform"></div>
-                <div className="relative">
-                  <Card className="reg-card rounded-3xl overflow-hidden relative">
-                    <CardHeader className="text-center pb-6 lg:pb-8">
-                      <CardTitle className="text-xl lg:text-2xl font-semibold reg-text-primary">Personal Seva Submission</CardTitle>
-                      <CardDescription className="reg-text-secondary text-base">Please fill in your details to record your seva</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <form onSubmit={handleSevaSubmit(onSevaSubmit)} className="space-y-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                            <Label htmlFor="firstName" className="reg-label">First Name *</Label>
-                            <Controller
-                              name="firstName"
-                              control={sevaControl}
-                              render={({ field }) => (
-                                <Input
-                                  {...field}
-                                  id="firstName"
-                                  type="text"
-                                  placeholder="First name"
-                                  className="reg-input rounded-md"
-                                />
-                              )}
-                            />
-                            {sevaErrors.firstName && (
-                              <p className="reg-error-text">{sevaErrors.firstName.message}</p>
-                            )}
-                          </div>
-                          <div className="space-y-2">
-                            <Label htmlFor="lastName" className="reg-label">Last Name *</Label>
-                            <Controller
-                              name="lastName"
-                              control={sevaControl}
-                              render={({ field }) => (
-                                <Input
-                                  {...field}
-                                  id="lastName"
-                                  type="text"
-                                  placeholder="Last name"
-                                  className="reg-input rounded-md"
-                                />
-                              )}
-                            />
-                            {sevaErrors.lastName && (
-                              <p className="reg-error-text">{sevaErrors.lastName.message}</p>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="phone" className="reg-label">Phone Number *</Label>
-                          <Controller
-                            name="phone"
-                            control={sevaControl}
-                            render={({ field }) => (
-                              <LazyPhoneInput
-                                value={field.value}
-                                id="phone"
-                                placeholder="Enter a phone number"
-                                defaultCountry="US"
-                                onChange={field.onChange}
-                              />
-                            )}
-                          />
-                          {sevaErrors.phone && (
-                            <p className="reg-error-text">{sevaErrors.phone.message}</p>
-                          )}
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                            <Label htmlFor="country" className="reg-label">Country *</Label>
-                            <Controller
-                              name="country"
-                              control={sevaControl}
-                              render={({ field }) => (
-                                <CountrySelector
-                                  value={field.value}
-                                  onChange={(value) => {
-                                    field.onChange(value)
-                                    updateSevaFormData("country", value)
-                                    if (value === "india") {
-                                      updateSevaFormData("mandal", "Maninagar")
-                                      setSevaValue("mandal", "Maninagar", { shouldValidate: true })
-                                    } else if (value === "australia") {
-                                      updateSevaFormData("mandal", "Sydney")
-                                      setSevaValue("mandal", "Sydney", { shouldValidate: true })
-                                    } else if (value === "canada") {
-                                      updateSevaFormData("mandal", "Toronto")
-                                      setSevaValue("mandal", "Toronto", { shouldValidate: true })
-                                    } else if (value === "kenya") {
-                                      updateSevaFormData("mandal", "Nairobi")
-                                      setSevaValue("mandal", "Nairobi", { shouldValidate: true })
-                                    } else {
-                                      updateSevaFormData("mandal", "")
-                                      setSevaValue("mandal", "", { shouldValidate: true })
-                                    }
-                                  }}
-                                  placeholder="Select your country"
-                                />
-                              )}
-                            />
-                            {sevaErrors.country && (
-                              <p className="reg-error-text">{sevaErrors.country.message}</p>
-                            )}
-                          </div>
-                          <div className="space-y-2">
-                            <Label htmlFor="mandal" className="reg-label">Mandal *</Label>
-                            <Controller
-                              name="mandal"
-                              control={sevaControl}
-                              render={({ field }) =>
-                                isSpecialMandalCountry(sevaFormData.country) ? (
-                                  <Input
-                                    {...field}
-                                    value={sevaFormData.mandal}
-                                    disabled
-                                    className="reg-input rounded-md"
-                                  />
-                                ) : (
-                                  <Select
-                                    value={field.value}
-                                    onValueChange={(value) => {
-                                      field.onChange(value)
-                                      setSevaValue("mandal", value, { shouldValidate: true })
-                                    }}
-                                    disabled={!sevaFormData.country}
-                                  >
-                                    <SelectTrigger className="reg-input rounded-md">
-                                      <SelectValue placeholder={sevaFormData.country ? "Select mandal" : "Select country first"} />
-                                    </SelectTrigger>
-                                    <SelectContent className="reg-popover rounded-xl">
-                                      {getMandals(sevaFormData.country).map((mandal) => (
-                                        <SelectItem key={mandal} value={mandal.toLowerCase().replace(/ /g, '-')} className="reg-popover-item rounded-lg">
-                                          {mandal}
-                                        </SelectItem>
-                                      ))}
-                                    </SelectContent>
-                                  </Select>
-                                )
-                              }
-                            />
-                            {sevaErrors.mandal && (
-                              <p className="reg-error-text">{sevaErrors.mandal.message}</p>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                            <Label htmlFor="activityName" className="reg-label">Activity Name *</Label>
-                            <Controller
-                              name="activityName"
-                              control={sevaControl}
-                              render={({ field }) => (
-                                <Input
-                                  {...field}
-                                  id="activityName"
-                                  type="text"
-                                  placeholder="e.g. Local food bank volunteering"
-                                  className="reg-input rounded-md"
-                                />
-                              )}
-                            />
-                            {sevaErrors.activityName && (
-                              <p className="reg-error-text">{sevaErrors.activityName.message}</p>
-                            )}
-                          </div>
-                          <div className="space-y-2">
-                            <Label htmlFor="hoursVolunteered" className="reg-label">Hours Volunteered *</Label>
-                            <Controller
-                              name="hoursVolunteered"
-                              control={sevaControl}
-                              render={({ field }) => (
-                                <Select value={field.value} onValueChange={field.onChange}>
-                                  <SelectTrigger className="reg-input rounded-md">
-                                    <SelectValue placeholder="Select hours volunteered" />
-                                  </SelectTrigger>
-                                  <SelectContent className="reg-popover rounded-xl">
-                                    <SelectItem value="0.5" className="reg-popover-item rounded-lg">0.5 hours</SelectItem>
-                                    <SelectItem value="1" className="reg-popover-item rounded-lg">1 hour</SelectItem>
-                                    <SelectItem value="2" className="reg-popover-item rounded-lg">2 hours</SelectItem>
-                                    <SelectItem value="3" className="reg-popover-item rounded-lg">3 hours</SelectItem>
-                                    <SelectItem value="4" className="reg-popover-item rounded-lg">4 hours</SelectItem>
-                                    <SelectItem value="5" className="reg-popover-item rounded-lg">5 hours</SelectItem>
-                                    <SelectItem value="6" className="reg-popover-item rounded-lg">6 hours</SelectItem>
-                                    <SelectItem value="7" className="reg-popover-item rounded-lg">7 hours</SelectItem>
-                                    <SelectItem value="8" className="reg-popover-item rounded-lg">8 hours</SelectItem>
-                                    <SelectItem value="9" className="reg-popover-item rounded-lg">9 hours</SelectItem>
-                                    <SelectItem value="10" className="reg-popover-item rounded-lg">10 hours</SelectItem>
-                                  </SelectContent>
-                                </Select>
-                              )}
-                            />
-                            {sevaErrors.hoursVolunteered && (
-                              <p className="reg-error-text">{sevaErrors.hoursVolunteered.message}</p>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="pt-4 space-y-4">
-                          <button
-                            type="submit"
-                            disabled={isSevaSubmitting}
-                            className="reg-button relative w-full h-14 inline-flex items-center justify-center text-center px-4 py-2 text-base rounded-lg overflow-hidden"
-                          >
-                            <div className={`absolute inset-0 bg-gradient-to-b from-white/20 to-transparent transform transition-transform duration-500 ${isSevaSubmitting ? 'translate-y-0' : 'translate-y-full'}`}></div>
-                            <div className="relative z-10 flex items-center justify-center gap-2">
-                              {isSevaSubmitting ? (
-                                <>
-                                  <Loader2 className="w-5 h-5 animate-spin" />
-                                  Please wait
-                                </>
-                              ) : (
-                                <>
-                                  <Send className="w-5 h-5" />
-                                  Submit Seva
-                                </>
-                              )}
-                            </div>
-                          </button>
-                        </div>
-                      </form>
-                    </CardContent>
-                  </Card>
+                <div className="space-y-4 text-lg community-text-secondary leading-relaxed text-left">
+                  <p>All devotees of Maninagar Shree Swaminarayan Gadi Sansthan are invited to participate in an <span className="font-semibold text-orange-600">International Charity Challenge</span> - a collective global mission of compassion, community service, and spiritual growth. All Mandals & All Ages are challenged to participate!</p>
+                  <p><span className="font-semibold text-orange-600">Each devotee is challenged to complete a minimum of 25 hours of service in your local community!</span> Mandals are encouraged to come together and organize service projects in their surrounding communities.</p>
+                  <p>All Community Service activities completed <span className="font-semibold text-orange-600">starting August 1, 2025</span> can be submitted and will be counted towards your individual and mandal total hour count.</p>
+                  <p>All devotees and mandals who complete the SEVA25 challenge will be recognized during the Rajat Mahotsav, but <span className="font-semibold text-orange-600">special recognition will go to the devotee and mandal with the highest number of community service hours completed.</span></p>
+                  <div className="border-t-2 border-orange-200"></div>
+                  <div className="pt-4">
+                    <h4 className="font-semibold text-lg text-orange-600 mb-2">Some Examples of Service Projects:</h4>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-lg list-disc list-inside">
+                      <li>Fundraise for a charity</li>
+                      <li>Plant trees</li>
+                      <li>Participate in a local 5K/walk</li>
+                      <li>Organize community clean-ups</li>
+                      <li>Clothing, toy, or food drives</li>
+                      <li>Volunteer at food banks/shelters</li>
+                      <li>Organize a blood drive</li>
+                      <li>Support health fairs</li>
+                    </ul>
+                  </div>
+                  <div className="flex justify-center pt-6">
+                    <button
+                      onClick={() => setIsFormVisible(!isFormVisible)}
+                      className="inline-flex items-center justify-center px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-orange-600 to-red-600 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 hover:from-orange-700 hover:to-red-700"
+                    >
+                      <Send className="w-6 h-6 mr-3" />
+                      SUBMIT YOUR SEVA!
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             </div>
-            
-            <div className="text-center mt-20 mb-10">
+
+            <AnimatePresence>
+              {isFormVisible && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                  animate={{ opacity: 1, height: 'auto', marginTop: '2rem' }}
+                  exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <div className="mb-10 max-w-3xl mx-auto">
+                    <div className="relative">
+                      <Card className="reg-card rounded-3xl overflow-hidden relative">
+                        <CardHeader className="text-center pb-6 lg:pb-8">
+                          <CardTitle className="text-xl lg:text-2xl font-semibold reg-text-primary">Personal Seva Submission</CardTitle>
+                          <CardDescription className="reg-text-secondary text-base">Please fill in your details to record your seva</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <form onSubmit={handleSevaSubmit(onSevaSubmit)} className="space-y-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div className="space-y-2">
+                                <Label htmlFor="firstName" className="reg-label">First Name *</Label>
+                                <Controller
+                                  name="firstName"
+                                  control={sevaControl}
+                                  render={({ field }) => (
+                                    <Input
+                                      {...field}
+                                      id="firstName"
+                                      type="text"
+                                      placeholder="First name"
+                                      className="reg-input rounded-md"
+                                    />
+                                  )}
+                                />
+                                {sevaErrors.firstName && (
+                                  <p className="reg-error-text">{sevaErrors.firstName.message}</p>
+                                )}
+                              </div>
+                              <div className="space-y-2">
+                                <Label htmlFor="lastName" className="reg-label">Last Name *</Label>
+                                <Controller
+                                  name="lastName"
+                                  control={sevaControl}
+                                  render={({ field }) => (
+                                    <Input
+                                      {...field}
+                                      id="lastName"
+                                      type="text"
+                                      placeholder="Last name"
+                                      className="reg-input rounded-md"
+                                    />
+                                  )}
+                                />
+                                {sevaErrors.lastName && (
+                                  <p className="reg-error-text">{sevaErrors.lastName.message}</p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="space-y-2">
+                              <Label htmlFor="phone" className="reg-label">Phone Number *</Label>
+                              <Controller
+                                name="phone"
+                                control={sevaControl}
+                                render={({ field }) => (
+                                  <LazyPhoneInput
+                                    value={field.value}
+                                    id="phone"
+                                    placeholder="Enter a phone number"
+                                    defaultCountry="US"
+                                    onChange={field.onChange}
+                                  />
+                                )}
+                              />
+                              {sevaErrors.phone && (
+                                <p className="reg-error-text">{sevaErrors.phone.message}</p>
+                              )}
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div className="space-y-2">
+                                <Label htmlFor="country" className="reg-label">Country *</Label>
+                                <Controller
+                                  name="country"
+                                  control={sevaControl}
+                                  render={({ field }) => (
+                                    <CountrySelector
+                                      value={field.value}
+                                      onChange={(value) => {
+                                        field.onChange(value)
+                                        updateSevaFormData("country", value)
+                                        if (value === "india") {
+                                          updateSevaFormData("mandal", "Maninagar")
+                                          setSevaValue("mandal", "Maninagar", { shouldValidate: true })
+                                        } else if (value === "australia") {
+                                          updateSevaFormData("mandal", "Sydney")
+                                          setSevaValue("mandal", "Sydney", { shouldValidate: true })
+                                        } else if (value === "canada") {
+                                          updateSevaFormData("mandal", "Toronto")
+                                          setSevaValue("mandal", "Toronto", { shouldValidate: true })
+                                        } else if (value === "kenya") {
+                                          updateSevaFormData("mandal", "Nairobi")
+                                          setSevaValue("mandal", "Nairobi", { shouldValidate: true })
+                                        } else {
+                                          updateSevaFormData("mandal", "")
+                                          setSevaValue("mandal", "", { shouldValidate: true })
+                                        }
+                                      }}
+                                      placeholder="Select your country"
+                                    />
+                                  )}
+                                />
+                                {sevaErrors.country && (
+                                  <p className="reg-error-text">{sevaErrors.country.message}</p>
+                                )}
+                              </div>
+                              <div className="space-y-2">
+                                <Label htmlFor="mandal" className="reg-label">Mandal *</Label>
+                                <Controller
+                                  name="mandal"
+                                  control={sevaControl}
+                                  render={({ field }) =>
+                                    isSpecialMandalCountry(sevaFormData.country) ? (
+                                      <Input
+                                        {...field}
+                                        value={sevaFormData.mandal}
+                                        disabled
+                                        className="reg-input rounded-md"
+                                      />
+                                    ) : (
+                                      <Select
+                                        value={field.value}
+                                        onValueChange={(value) => {
+                                          field.onChange(value)
+                                          setSevaValue("mandal", value, { shouldValidate: true })
+                                        }}
+                                        disabled={!sevaFormData.country}
+                                      >
+                                        <SelectTrigger className="reg-input rounded-md">
+                                          <SelectValue placeholder={sevaFormData.country ? "Select mandal" : "Select country first"} />
+                                        </SelectTrigger>
+                                        <SelectContent className="reg-popover rounded-xl">
+                                          {getMandals(sevaFormData.country).map((mandal) => (
+                                            <SelectItem key={mandal} value={mandal.toLowerCase().replace(/ /g, '-')} className="reg-popover-item rounded-lg">
+                                              {mandal}
+                                            </SelectItem>
+                                          ))}
+                                        </SelectContent>
+                                      </Select>
+                                    )
+                                  }
+                                />
+                                {sevaErrors.mandal && (
+                                  <p className="reg-error-text">{sevaErrors.mandal.message}</p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div className="space-y-2">
+                                <Label htmlFor="activityName" className="reg-label">Activity Name *</Label>
+                                <Controller
+                                  name="activityName"
+                                  control={sevaControl}
+                                  render={({ field }) => (
+                                    <Input
+                                      {...field}
+                                      id="activityName"
+                                      type="text"
+                                      placeholder="e.g. Local food bank volunteering"
+                                      className="reg-input rounded-md"
+                                    />
+                                  )}
+                                />
+                                {sevaErrors.activityName && (
+                                  <p className="reg-error-text">{sevaErrors.activityName.message}</p>
+                                )}
+                              </div>
+                              <div className="space-y-2">
+                                <Label htmlFor="hoursVolunteered" className="reg-label">Hours Volunteered *</Label>
+                                <Controller
+                                  name="hoursVolunteered"
+                                  control={sevaControl}
+                                  render={({ field }) => (
+                                    <Select value={field.value} onValueChange={field.onChange}>
+                                      <SelectTrigger className="reg-input rounded-md">
+                                        <SelectValue placeholder="Select hours volunteered" />
+                                      </SelectTrigger>
+                                      <SelectContent className="reg-popover rounded-xl">
+                                        <SelectItem value="0.5" className="reg-popover-item rounded-lg">0.5 hours</SelectItem>
+                                        <SelectItem value="1" className="reg-popover-item rounded-lg">1 hour</SelectItem>
+                                        <SelectItem value="2" className="reg-popover-item rounded-lg">2 hours</SelectItem>
+                                        <SelectItem value="3" className="reg-popover-item rounded-lg">3 hours</SelectItem>
+                                        <SelectItem value="4" className="reg-popover-item rounded-lg">4 hours</SelectItem>
+                                        <SelectItem value="5" className="reg-popover-item rounded-lg">5 hours</SelectItem>
+                                        <SelectItem value="6" className="reg-popover-item rounded-lg">6 hours</SelectItem>
+                                        <SelectItem value="7" className="reg-popover-item rounded-lg">7 hours</SelectItem>
+                                        <SelectItem value="8" className="reg-popover-item rounded-lg">8 hours</SelectItem>
+                                        <SelectItem value="9" className="reg-popover-item rounded-lg">9 hours</SelectItem>
+                                        <SelectItem value="10" className="reg-popover-item rounded-lg">10 hours</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  )}
+                                />
+                                {sevaErrors.hoursVolunteered && (
+                                  <p className="reg-error-text">{sevaErrors.hoursVolunteered.message}</p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="pt-4 space-y-4">
+                              <button
+                                type="submit"
+                                disabled={isSevaSubmitting}
+                                className="reg-button relative w-full h-14 inline-flex items-center justify-center text-center px-4 py-2 text-base rounded-lg overflow-hidden"
+                              >
+                                <div className={`absolute inset-0 bg-gradient-to-b from-white/20 to-transparent transform transition-transform duration-500 ${isSevaSubmitting ? 'translate-y-0' : 'translate-y-full'}`}></div>
+                                <div className="relative z-10 flex items-center justify-center gap-2">
+                                  {isSevaSubmitting ? (
+                                    <>
+                                      <Loader2 className="w-5 h-5 animate-spin" />
+                                      Please wait
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Send className="w-5 h-5" />
+                                      Submit Seva
+                                    </>
+                                  )}
+                                </div>
+                              </button>
+                            </div>
+                          </form>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            </motion.div>
+              <div className="text-center mb-6">
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -713,7 +760,7 @@ export default function CommunityServicePage() {
                 </p>
               </motion.div>
             </div>
-          </motion.div>
+          
 
           {/* Mission in Action - YouTube Shorts */}
           <motion.div
@@ -722,7 +769,7 @@ export default function CommunityServicePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="text-center mb-12">
+            <div className="text-center mb-12 mt-20">
               <motion.h2 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
