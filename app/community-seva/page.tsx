@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useForm, Controller, FormProvider } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -8,15 +8,17 @@ import { isValidPhoneNumber, parsePhoneNumber } from "react-phone-number-input"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { useRef } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/atoms/card"
-import { Input } from "@/components/atoms/input"
+import { Input, inputVariants } from "@/components/atoms/input"
 import { Label } from "@/components/atoms/label"
-import { Heart, Users, Clock, MapPin, DollarSign, Send, Loader2 } from "lucide-react"
+import { Heart, Users, Clock, MapPin, DollarSign, Send, Loader2, X, FileImage } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/atoms/select"
 import LazyPhoneInput from "@/components/molecules/lazy-phone-input"
 import { CountrySelector } from "@/components/molecules/country-selector"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { ImageMarquee } from "@/components/organisms/image-marquee"
 import { getCloudflareImage } from "@/lib/cdn-assets"
+import { Button } from "@/components/ui/button"
+import { Dropzone, DropzoneContent, DropzoneEmptyState } from '@/components/ui/shadcn-io/dropzone';
 import { ProgressCounter } from "@/components/molecules/progress-counter"
 import { BentoInitiatives } from "@/components/organisms/bento-initiatives"
 import { AnimatedTextSection } from "@/components/organisms/animated-text-section"
@@ -24,6 +26,7 @@ import { useToast } from "@/hooks/use-toast"
 import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { PathOfServiceStory } from "@/components/organisms/path-of-service-story"
 import { Toaster } from "@/components/molecules/toaster"
+import { cn } from "@/lib/utils"
 import { supabase } from "@/utils/supabase/client"
 import "@/styles/community-service-theme.css"
 import "@/styles/registration-theme.css"
@@ -69,6 +72,7 @@ const SevaFormSchema = z.object({
     const validHours = ["0.5", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     return validHours.includes(val)
   }, "Please select valid hours"),
+  images: z.array(z.instanceof(File)).max(10, "You can upload a maximum of 10 images.").optional(),
 })
 
 async function fetchCommunityStats() {
@@ -115,6 +119,7 @@ export default function CommunityServicePage() {
   const [isSevaSubmitting, setIsSevaSubmitting] = useState(false)
 
   const [isFormVisible, setIsFormVisible] = useState(false)
+  const [sevaImages, setSevaImages] = useState<File[] | undefined>();
   const statsRef = useRef(null)
   const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" })
 
@@ -135,6 +140,7 @@ export default function CommunityServicePage() {
       country: "",
       mandal: "",
       hoursVolunteered: "",
+      images: undefined,
     },
   })
 
@@ -165,6 +171,7 @@ export default function CommunityServicePage() {
           description: "Jay Shree Swaminarayan. Thank you for your contribution.",
           className: "bg-green-500 text-white border-green-400 shadow-xl font-medium",
         })
+        setSevaImages(undefined)
         resetSevaForm()
       } else {
         throw error
@@ -217,6 +224,29 @@ export default function CommunityServicePage() {
   const isSpecialMandalCountry = (country: string) => {
     return specialMandalCountries.includes(country)
   }
+
+  const removeSevaImage = (index: number) => {
+    const newImages = sevaImages ? [...sevaImages] : [];
+    newImages.splice(index, 1);
+    setSevaImages(newImages);
+    setSevaValue("images", newImages.length > 0 ? newImages : undefined, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+  };
+
+  const handleSevaImageDrop = useCallback((acceptedFiles: File[]) => {
+    const currentFiles = sevaImages || [];
+    const newFiles = acceptedFiles.filter(
+      (file) => !currentFiles.some((existingFile) => existingFile.name === file.name)
+    );
+
+    if (newFiles.length > 0) {
+      const updatedFiles = [...currentFiles, ...newFiles];
+      setSevaImages(updatedFiles);
+      setSevaValue("images", updatedFiles, { shouldValidate: true, shouldDirty: true });
+    }
+  }, [sevaImages, setSevaValue]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 200)
@@ -647,6 +677,69 @@ export default function CommunityServicePage() {
                                   <p className="reg-error-text">{sevaErrors.hoursVolunteered.message}</p>
                                 )}
                               </div>
+                            </div>
+
+                            <div className="space-y-2">
+                              <Label className="reg-label">Attach Images (Optional)</Label>
+                              <Controller
+                                name="images"
+                                control={sevaControl}
+                                render={({ field }) => {
+                                  const currentFiles = sevaImages || [];
+                                  const remainingFiles = 10 - currentFiles.length;
+
+                                  return (
+                                    <>
+                                      <Dropzone
+                                        maxFiles={remainingFiles > 0 ? remainingFiles : 0}
+                                        accept={{ 'image/*': [] }}
+                                        onDrop={handleSevaImageDrop}
+                                        disabled={remainingFiles <= 0}
+                                        className={cn("reg-input flex cursor-pointer items-center justify-center text-sm h-12 rounded-md", { "cursor-not-allowed opacity-50": remainingFiles <= 0 })}
+                                      >
+                                        <span className="text-gray-500/80">{remainingFiles > 0 ? `Click or drag to add up to ${remainingFiles} more image(s)` : 'Maximum of 10 images reached'}</span>
+                                      </Dropzone>
+                                      {currentFiles.length > 0 && (
+                                        <div className="mt-4">
+                                          <p className="reg-label mb-2">Selected files:</p>
+                                          <div className="grid grid-cols-2 gap-4">
+                                            {currentFiles.map((file, index) => (
+                                              <div key={index} className="relative group bg-muted/50 border border-border/50 rounded-lg overflow-hidden">
+                                                <div className="relative aspect-video">
+                                                  <img
+                                                    src={URL.createObjectURL(file)}
+                                                    alt={`Preview of ${file.name}`}
+                                                    className="w-full h-full object-cover"
+                                                    onLoad={(e) => URL.revokeObjectURL(e.currentTarget.src)}
+                                                  />
+                                                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                </div>
+                                                <div className="absolute top-1 right-1">
+                                                  <Button
+                                                    type="button"
+                                                    variant="destructive"
+                                                    size="icon-sm"
+                                                    onClick={() => removeSevaImage(index)}
+                                                    className="h-6 w-6 rounded-full opacity-70 group-hover:opacity-100 transition-opacity"
+                                                  >
+                                                    <X className="h-4 w-4" />
+                                                  </Button>
+                                                </div>
+                                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2">
+                                                  <p className="text-xs text-white truncate font-medium">{file.name}</p>
+                                                </div>
+                                              </div>
+                                            ))}
+                                          </div>
+                                        </div>
+                                      )}
+                                    </>
+                                  );
+                                }}
+                              />
+                              {sevaErrors.images && (
+                                <p className="reg-error-text">{sevaErrors.images.message}</p>
+                              )}
                             </div>
 
                             <div className="pt-4 space-y-4">
