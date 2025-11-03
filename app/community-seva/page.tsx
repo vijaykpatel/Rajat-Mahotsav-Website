@@ -8,7 +8,7 @@ import { isValidPhoneNumber, parsePhoneNumber } from "react-phone-number-input"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { useRef } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/atoms/card"
-import { Input, inputVariants } from "@/components/atoms/input"
+import { Input } from "@/components/atoms/input"
 import { Label } from "@/components/atoms/label"
 import { Heart, Users, Clock, MapPin, DollarSign, Send, Loader2, X, FileImage } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/atoms/select"
@@ -162,10 +162,79 @@ export default function CommunityServicePage() {
         activity_name: data.activityName,
         volunteer_hours: parseFloat(data.hoursVolunteered),
       }
+      const { data: submissionData, error } = await supabase.from('personal_seva_submission').insert([dbData]).select('id').single()
 
-      const { error } = await supabase.from('personal_seva_submission').insert([dbData])
+      if (!error && submissionData) {
+        const submissionId = submissionData.id;
+        // Handle image uploads if present
+        if (data.images && data.images.length > 0) {
+          // Create filePayload based on FileMetadata from data.images
+          const filePayload = data.images.map(file => ({
+            name: file.name,
+            type: file.type,
+          }));
 
-      if (!error) {
+          // Call Vercel serverless function
+          const response = await fetch('/api/generate-cs-personal-submision-upload-urls', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              submissionId: submissionId,
+              activityName: data.activityName,   // Using activityName
+              files: filePayload,
+              folderName: "cs_personal_submissions" // Dynamic folder
+            })
+          });
+
+          // Define the expected response type
+          type UploadInfo = {
+            url: string;
+            key: string;
+            filename: string;
+          };
+
+          const { uploadUrls }: { uploadUrls: UploadInfo[] } = await response.json();
+
+          if (!response.ok) {
+            throw new Error('Failed to generate upload URLs');
+          }
+
+          // Upload each file to its signed URL
+          const uploadPromises = data.images.map(async (file, index) => {
+            const uploadInfo = uploadUrls[index];
+            const uploadResponse = await fetch(uploadInfo.url, {
+              method: 'PUT',
+              body: file,
+              headers: {
+                'Content-Type': file.type,
+              },
+            });
+
+            if (!uploadResponse.ok) {
+              throw new Error(`Failed to upload ${file.name}`);
+            }
+
+            return uploadInfo;
+          });
+
+          await Promise.all(uploadPromises);
+
+          // Update Supabase row with upload status
+          const cleanActivityName = data.activityName.trim().replace(/\s+/g, '_');
+          const imagesPath = `/${submissionId}_${cleanActivityName}/`;
+
+          const { error: updateError } = await supabase
+            .from('personal_seva_submission')
+            .update({
+              images_uploaded: true,
+              images_path: imagesPath
+            })
+            .eq('id', submissionId);
+
+          if (updateError) {
+            throw new Error('Failed to update submission with image upload status');
+          }
+        }
         toast({
           title: `Seva recorded, ${data.firstName}!`,
           description: "Jay Shree Swaminarayan. Thank you for your contribution.",
