@@ -32,7 +32,7 @@ const gurus = [
 ]
 
 export default function ShaderShowcase() {
-  const targetDate = '2026-07-28T17:00:00-05:00';
+  const targetDate = '2026-08-02T00:00:00';
   const deviceType = useDeviceType();
 
   const { isLoading } = useLoading();
@@ -43,7 +43,7 @@ export default function ShaderShowcase() {
   const sihasanRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
   const mobileGuruRef = useRef<HTMLDivElement>(null)
-  
+
   const backgroundImageUrl = `${getCloudflareImageBiggest("5aeb6c7e-f6ea-45b1-da4a-823279172400")}&width=2560`
   const sihasan_trimmed = `${getCloudflareImageBiggest("c7853ba8-25d7-4097-b754-53d5ff3adb00")}&width=2560`
 
@@ -108,72 +108,72 @@ export default function ShaderShowcase() {
   return (
     <>
       <LoadingScreen />
-                  {/* Title section - Scrollable overlay */}
-          <div className="relative z-10 bg-title-section-bg h-screen block">
-            <TitleSection />
-          </div>
-          
-          {/* Video background - Fixed underneath */}
-          <div className="z-0 block">
-            <VideoBackgroundSection />
-          </div>
-          
-          {/* Title section - Scrollable overlay */}
-          {/* <div className="relative z-10 bg-title-section-bg" style={{ minHeight: '100vh' }}>
+      {/* Title section - Scrollable overlay */}
+      <div className="relative z-10 bg-title-section-bg h-screen block">
+        <TitleSection targetDate={targetDate} />
+      </div>
+
+      {/* Video background - Fixed underneath */}
+      <div className="z-0 block">
+        <VideoBackgroundSection />
+      </div>
+
+      {/* Title section - Scrollable overlay */}
+      {/* <div className="relative z-10 bg-title-section-bg" style={{ minHeight: '100vh' }}>
             <TitleSection />
           </div>
            */}
-          {/* Video reveal spacer */}
-          {/* <div className="relative z-10" style={{ minHeight: '125vh' }} /> */}
-          
-          <div className="relative z-10 bg-slate-900" style={{ pointerEvents: 'auto' }}>
-          
-          {/* Full background Sihasan image section with fade transition */}
-          <div ref={sihasanRef} data-section="sihasan" className="w-screen relative overflow-hidden flex flex-col bg-slate-900" style={{ minHeight: '100vh' }}>
-            {/* Top gradient overlay for smooth transition from title */}
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%' }} />
-            
-            {/* Bottom gradient overlay for smooth transition to next section */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%', top: 'auto', bottom: 0 }} />
-            
-            {/* Glassmorphic overlay for lower section */}
-            {/* git <div className="absolute inset-x-0 bottom-0 h-[30%] md:h-[30%] bg-white/45 backdrop-blur-sm z-[5] pointer-events-none" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%)' }} /> */}
-            
-            {/* Desktop: Static Image (> 1280px) */}
-            <img
-              src={backgroundImageUrl}
-              alt="Background"
-              className="hidden xl:block absolute inset-0 w-full h-full object-cover brightness-115"
-            />
-            
-            {/* Mobile/Tablet: Panning Sihasan Image (<= 1280px, includes iPad Pro) */}
-            <img
-              src={backgroundImageUrl}
-              alt="Background"
-              className="xl:hidden absolute inset-0 h-full object-cover animate-pan-right brightness-115"
-              style={{ 
-                animationPlayState: isPanActive ? 'running' : 'paused',
-                objectPosition: 'left center'
-              }}
-            />
-            
-            {/* Glassmorphic Feature Card */}
-            {/* <div className="flex items-end md:items-center justify-center w-full mt-auto relative z-20" style={{ paddingBottom: 'calc(clamp(2.5rem, 8vh, 4rem) + env(safe-area-inset-bottom))' }}>
+      {/* Video reveal spacer */}
+      {/* <div className="relative z-10" style={{ minHeight: '125vh' }} /> */}
+
+      <div className="relative z-10 bg-slate-900" style={{ pointerEvents: 'auto' }}>
+
+        {/* Full background Sihasan image section with fade transition */}
+        <div ref={sihasanRef} data-section="sihasan" className="w-screen relative overflow-hidden flex flex-col bg-slate-900" style={{ minHeight: '100vh' }}>
+          {/* Top gradient overlay for smooth transition from title */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%' }} />
+
+          {/* Bottom gradient overlay for smooth transition to next section */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%', top: 'auto', bottom: 0 }} />
+
+          {/* Glassmorphic overlay for lower section */}
+          {/* git <div className="absolute inset-x-0 bottom-0 h-[30%] md:h-[30%] bg-white/45 backdrop-blur-sm z-[5] pointer-events-none" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%)' }} /> */}
+
+          {/* Desktop: Static Image (> 1280px) */}
+          <img
+            src={backgroundImageUrl}
+            alt="Background"
+            className="hidden xl:block absolute inset-0 w-full h-full object-cover brightness-115"
+          />
+
+          {/* Mobile/Tablet: Panning Sihasan Image (<= 1280px, includes iPad Pro) */}
+          <img
+            src={backgroundImageUrl}
+            alt="Background"
+            className="xl:hidden absolute inset-0 h-full object-cover animate-pan-right brightness-115"
+            style={{
+              animationPlayState: isPanActive ? 'running' : 'paused',
+              objectPosition: 'left center'
+            }}
+          />
+
+          {/* Glassmorphic Feature Card */}
+          {/* <div className="flex items-end md:items-center justify-center w-full mt-auto relative z-20" style={{ paddingBottom: 'calc(clamp(2.5rem, 8vh, 4rem) + env(safe-area-inset-bottom))' }}>
               <div className="px-4 text-center">
                 <h3 className="font-bold leading-[1.4] relative z-10" style={{ color: 'var(--title-section-bg)', fontSize: 'clamp(3rem, 14vw, 12rem)', fontFamily: 'var(--font-gujarati)' }}>સુવર્ણ યુગ નો રજત મહોત્સવ</h3>
               </div>
             </div> */}
-          </div>
-          
-          {/* Text Sections */}
-          <PratisthaStory/>
-          
-          
-          <div className="bg-main-page-bg">
-          
+        </div>
+
+        {/* Text Sections */}
+        <PratisthaStory />
+
+
+        <div className="bg-main-page-bg">
+
           {/* Aashirwad Section */}
           <AashirwadSection />
-          
+
           {/* Staggered Guru Cards */}
           <div ref={mobileGuruRef} className="min-h-screen w-full pb-40 px-4 flex flex-col items-center justify-center">
             <motion.h2
@@ -184,7 +184,7 @@ export default function ShaderShowcase() {
             >
               Our Beloved Gurus
             </motion.h2>
-            
+
             {/* Desktop: Staggered layout */}
             <div ref={cardsRef} className="hidden md:flex gap-16 items-end">
               <motion.div
@@ -212,7 +212,7 @@ export default function ShaderShowcase() {
                 <GuruCard imageId={gurus[2].imageId} name={gurus[2].name} />
               </motion.div>
             </div>
-            
+
             {/* Mobile: Carousel */}
             <motion.div
               initial={{ opacity: 0, y: 80 }}
@@ -223,11 +223,11 @@ export default function ShaderShowcase() {
               <GuruCarousel gurus={gurus} />
             </motion.div>
           </div>
-          
+
           {/* Video section */}
           <VideoSection />
-          </div>
-          </div>
+        </div>
+      </div>
     </>
   )
 }

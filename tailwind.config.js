@@ -12,6 +12,11 @@ module.exports = {
         'page-title-desc': 'var(--page-title-description-spacing)',
         'page-bottom': 'var(--page-bottom-spacing)',
       },
+      fontFamily: {
+        sans: ['var(--font-figtree)'],
+        'instrument-serif': ['var(--font-instrument-serif)'],
+        gujarati: ['var(--font-gujarati)'],
+      },
       backgroundImage: {
         'preset-gradient-very-light-gray-to-bluish-gray': 'linear-gradient(135deg, rgb(238, 238, 238) 0%, rgb(169, 184, 195) 100%)',
         'preset-gradient-topper': 'linear-gradient(0deg, #0D132D 24.28%, #0B1B33 100%)',
