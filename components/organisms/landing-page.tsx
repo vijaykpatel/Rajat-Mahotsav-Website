@@ -45,7 +45,7 @@ export default function TitleSection({ targetDate = "2026-08-02T00:00:00" }: Tit
   const { isLoading } = useLoading()
 
   return (
-    <div className="bg-title-section-bg h-full flex items-end justify-end relative pb-16 sm:pb-28 md:pb-28 lg:pb-28 xl:pb-28">
+    <div className="bg-title-section-bg h-full flex items-end justify-end relative pb-16 sm:pb-16 md:pb-16 lg:pb-16 xl:pb-16">
       {/* Slider columns on left side - Desktop only (>1280px) */}
       <div className="hidden xl:flex absolute left-4 top-0 w-auto xl:max-w-[45vw] 2xl:max-w-[50vw] h-full z-20 gap-4">
         {columnImages.map((images, col) => (
