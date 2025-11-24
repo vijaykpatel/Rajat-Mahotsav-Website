@@ -20,51 +20,52 @@ interface ScheduleDay {
 
 const scheduleData: ScheduleDay[] = [
   {
-    date: "25",
-    dayName: "Saturday",
-    month: "July",
-    events: [{ time: "All Day", title: "Sports Program" }]
-  },
-  {
-    date: "26",
-    dayName: "Sunday", 
-    month: "July",
-    events: [{ time: "All Day", title: "Sports Program" }]
-  },
-  {
     date: "27",
     dayName: "Monday",
-    month: "July", 
-    events: [{ time: "All Day", title: "Sports Program" }]
+    month: "July",
+    events: [
+      { time: "Morning", title: "Welcome Program" },
+      { time: "Afternoon", title: "Lunch" },
+      { time: "Afternoon", title: "All Parayan Mahapooja" },
+      { time: "Evening", title: "Dinner" },
+      { time: "Evening", title: "Opening Ceremony" }
+    ],
+    isHighlight: true
   },
   {
     date: "28",
     dayName: "Tuesday",
     month: "July",
     events: [
-      { time: "Morning", title: "Ladies Program" },
-      { time: "Evening", title: "Opening Ceremony" }
+      { time: "Morning", title: "Gnan Sathe Gamat" },
+      { time: "Afternoon", title: "Lunch" },
+      { time: "Afternoon", title: "Ladies Program" },
+      { time: "Evening", title: "Dinner" },
+      { time: "Evening", title: "Shakotsav" }
     ],
     isHighlight: true
   },
   {
-    date: "29", 
+    date: "29",
     dayName: "Wednesday",
     month: "July",
     events: [
-      { time: "Morning", title: "Gurupoornima" },
+      { time: "Morning", title: "Gurupoonam" },
+      { time: "Afternoon", title: "Lunch" },
+      { time: "Evening", title: "Dinner" },
       { time: "Evening", title: "Bhakti Sandhya" }
     ],
     isHighlight: true
   },
   {
     date: "30",
-    dayName: "Thursday", 
+    dayName: "Thursday",
     month: "July",
     events: [
-      { time: "Morning", title: "Patriotic Ceremony" },
-      { time: "2pm - 4pm", title: "Mahila Program" },
-      { time: "4pm - 6pm", title: "Afternoon Katha" },
+      { time: "Morning", title: "Morning Program" },
+      { time: "Afternoon", title: "Lunch" },
+      { time: "Afternoon", title: "Ladies Program" },
+      { time: "Evening", title: "Dinner" },
       { time: "Evening", title: "Samuh Raas" }
     ],
     isHighlight: true
@@ -72,11 +73,12 @@ const scheduleData: ScheduleDay[] = [
   {
     date: "31",
     dayName: "Friday",
-    month: "July", 
+    month: "July",
     events: [
-      { time: "Morning", title: "Katha Varta and Ashiwaad" },
-      { time: "2pm - 4pm", title: "Mahila Program" },
-      { time: "4pm - 6pm", title: "Afternoon Katha" },
+      { time: "Morning", title: "Morning Program" },
+      { time: "Afternoon", title: "Lunch" },
+      { time: "Afternoon", title: "Hindola Program" },
+      { time: "Evening", title: "Dinner" },
       { time: "Evening", title: "Bhakti Nrutya" }
     ],
     isHighlight: true
@@ -87,17 +89,20 @@ const scheduleData: ScheduleDay[] = [
     month: "August",
     events: [
       { time: "Morning", title: "Nagaryatra" },
-      { time: "4pm - 6pm", title: "Afternoon Katha" },
-      { time: "Evening", title: "Naatika" }
+      { time: "Afternoon", title: "Lunch" },
+      { time: "Afternoon", title: "Abhishek Program" },
+      { time: "Evening", title: "Dinner" },
+      { time: "Evening", title: "Sanskrutik Drama" }
     ],
     isHighlight: true
   },
   {
-    date: "2", 
+    date: "2",
     dayName: "Sunday",
     month: "August",
     events: [
-      { time: "Morning", title: "Patotsav" }
+      { time: "Morning", title: "Patotsav Celebrations" },
+      { time: "Afternoon", title: "Lunch" }
     ],
     isHighlight: true
   }
@@ -147,7 +152,7 @@ export default function SchedulePage() {
 
     const observers = cardRefs.current.map((ref, index) => {
       if (!ref) return null
-      
+
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
@@ -156,7 +161,7 @@ export default function SchedulePage() {
         },
         { threshold: 0.3, rootMargin: '0px 0px -10% 0px' }
       )
-      
+
       observer.observe(ref)
       return observer
     })
@@ -165,6 +170,7 @@ export default function SchedulePage() {
       observers.forEach(observer => observer?.disconnect())
     }
   }, [isMobile, isLoaded])
+
 
   return (
     <div className={`min-h-screen ${theme.gradients.background} page-bg-extend`}>
@@ -182,17 +188,17 @@ export default function SchedulePage() {
           {scheduleData.map((day, index) => {
             const isCardVisible = isMobile ? visibleCards.has(index) : false
             const shouldAnimate = !isMobile ? hoveredCard === index : isCardVisible
-            
+
             return (
             <div
               key={`${day.month}-${day.date}`}
-              ref={el => cardRefs.current[index] = el}
+              ref={el => { cardRefs.current[index] = el }}
               className={`group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer overflow-hidden ${
                 day.isHighlight ? `ring-2 ${theme.colors.ring}` : ''
               } ${
                 isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
               }`}
-              style={{ 
+              style={{
                 transitionDelay: `${800 + index * 100}ms`,
                 transform: shouldAnimate ? 'translateY(-8px)' : undefined
               }}
@@ -205,7 +211,7 @@ export default function SchedulePage() {
                   shouldAnimate ? 'opacity-100' : 'opacity-0'
                 }`} />
               )}
-              
+
               {/* Date Header */}
               <div className="relative p-6 pb-4">
                 <div className="flex items-center justify-between mb-4">
@@ -234,7 +240,7 @@ export default function SchedulePage() {
                     <div
                       key={eventIndex}
                       className={`p-3 rounded-lg transition-all duration-200 ${
-                        day.isHighlight 
+                        day.isHighlight
                           ? shouldAnimate
                             ? theme.gradients.eventHighlight
                             : theme.gradients.eventHighlightStatic
@@ -264,7 +270,7 @@ export default function SchedulePage() {
                           )}
                         </div>
                         <div className={`w-2 h-2 rounded-full ml-3 mt-1 transition-all duration-200 ${
-                          day.isHighlight 
+                          day.isHighlight
                             ? shouldAnimate ? 'bg-orange-500' : 'bg-orange-400'
                             : shouldAnimate ? 'bg-gray-400' : 'bg-gray-300'
                         }`} />
@@ -277,8 +283,8 @@ export default function SchedulePage() {
               {/* Hover effect border */}
               <div className={`absolute inset-0 rounded-2xl border-2 transition-all duration-200 pointer-events-none ${
                 shouldAnimate
-                  ? day.isHighlight 
-                    ? theme.colors.border 
+                  ? day.isHighlight
+                    ? theme.colors.border
                     : 'border-gray-300'
                   : 'border-transparent'
               }`} />
