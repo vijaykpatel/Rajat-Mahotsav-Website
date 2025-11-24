@@ -40,8 +40,8 @@ const scheduleData: ScheduleDay[] = [
       { time: "Morning", title: "Gnan Sathe Gamat" },
       { time: "Afternoon", title: "Lunch" },
       { time: "Afternoon", title: "Ladies Program" },
-      { time: "Evening", title: "Dinner" },
-      { time: "Evening", title: "Shakotsav" }
+      { time: "Evening", title: "Shakotsav" },
+      { time: "Evening", title: "Dinner" }
     ],
     isHighlight: true
   },
@@ -178,7 +178,7 @@ export default function SchedulePage() {
         {/* Header */}
         <StandardPageHeader
           title="Calendar of Events"
-          subtitle="July 25 - August 2, 2026"
+          subtitle="July 27 - August 2, 2026"
           description="Come celebrate 25 years of community, faith, and fellowship! Join us for this special milestone event designed for all ages."
           isLoaded={isLoaded}
         />
