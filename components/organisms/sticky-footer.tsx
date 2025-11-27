@@ -15,9 +15,9 @@ export default function StickyFooter() {
           </div>
         </div>
 
-        {/* Center Column */}
+        {/* Center Column  */}
         <div className="text-center pt-1">
-          <span className="text-base text-white">
+          <span className="text-base text-white whitespace-nowrap">
             Inspired by His Divine Holiness Acharya Shree Jitendriyapriyadasji Swamiji Maharaj
           </span>
         </div>

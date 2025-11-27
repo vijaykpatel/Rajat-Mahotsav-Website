@@ -620,7 +620,7 @@ export function ScheduleHeader() {
         isLoaded={isLoaded}
       />
       <AnimatedSubtitle 
-        text="July 25 - August 2, 2026"
+        text="July 27 - August 2, 2026"
         isLoaded={isLoaded}
         delay={200}
       />
@@ -750,7 +750,7 @@ export default function SchedulePage() {
       <header className="schedule-header">
         <h1>Calendar of Events</h1>
         <p className="schedule-subtitle" aria-label="Event dates">
-          July 25 - August 2, 2026
+          July 27 - August 2, 2026
         </p>
       </header>
       

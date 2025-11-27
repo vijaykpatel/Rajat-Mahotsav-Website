@@ -73,7 +73,7 @@ function VideoCard({ videoId, title, thumbnail, onPlay, isPlaying: externalIsPla
             alt={title}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          
+
           <motion.div
             className="absolute bottom-4 right-4"
             animate={{
@@ -81,7 +81,7 @@ function VideoCard({ videoId, title, thumbnail, onPlay, isPlaying: externalIsPla
               opacity: isHovered ? 1 : [0.7, 0.9, 0.7],
               rotate: isHovered ? 360 : 0,
             }}
-            transition={{ 
+            transition={{
               duration: 0.2,
               ease: "easeOut",
               rotate: { duration: 0.6, ease: "easeInOut" },
@@ -123,7 +123,7 @@ export default function VideoSection() {
   const [playingVideoIndex, setPlayingVideoIndex] = useState<number | null>(null)
   const [videoSectionVisible, setVideoSectionVisible] = useState(false)
   const videoSectionRef = useRef<HTMLDivElement>(null)
-  
+
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApiMobile)
 
   useEffect(() => {
@@ -184,10 +184,10 @@ export default function VideoSection() {
             href="https://www.youtube.com/playlist?list=PLqKpGEY54C-1OklTqKwLh6JWYCDQpn5MC"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-2xl rounded-full hover:from-orange-600 hover:to-red-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+            className="inline-flex items-center gap-3 sm:gap-4 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-lg sm:text-2xl rounded-full hover:from-orange-600 hover:to-red-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
           >
-            <svg className="w-10 h-10" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            <svg className="w-8 h-8 sm:w-10 sm:h-10" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
             </svg>
             <span>Check out our Youtube Playlist!</span>
           </a>
@@ -201,9 +201,9 @@ export default function VideoSection() {
           className="hidden xl:grid xl:grid-cols-3 gap-8 max-w-[110rem] mx-auto"
         >
           {videos.map((video, index) => (
-            <VideoCard 
+            <VideoCard
               key={video.videoId}
-              {...video} 
+              {...video}
               onPlay={() => setPlayingVideoIndex(index)}
               isPlaying={playingVideoIndex === index}
             />
@@ -221,8 +221,8 @@ export default function VideoSection() {
             <div className="flex">
               {videos.map((video, index) => (
                 <div key={video.videoId} className="flex-[0_0_100%] min-w-0">
-                  <VideoCard 
-                    {...video} 
+                  <VideoCard
+                    {...video}
                     onPlay={() => setPlayingVideoIndex(index)}
                     isPlaying={playingVideoIndex === index}
                   />
@@ -230,16 +230,15 @@ export default function VideoSection() {
               ))}
             </div>
           </div>
-          
+
           {/* Mobile dots navigation */}
           <div className="flex justify-center gap-2 mt-8">
             {scrollSnaps.map((_, index) => (
               <DotButton
                 key={index}
                 onClick={() => onDotButtonClick(index)}
-                className={`w-3 h-3 rounded-full transition-colors ${
-                  index === selectedIndex ? 'bg-orange-500' : 'bg-gray-300'
-                }`}
+                className={`w-3 h-3 rounded-full transition-colors ${index === selectedIndex ? 'bg-orange-500' : 'bg-gray-300'
+                  }`}
               />
             ))}
           </div>
