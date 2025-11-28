@@ -324,8 +324,8 @@ export default function CommunityServicePage() {
   }, [])
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.location.hash === '#personal-seva-submission') {
-      const element = document.getElementById('personal-seva-submission')
+    if (typeof window !== 'undefined' && window.location.hash === '#seva25') {
+      const element = document.getElementById('seva25')
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
@@ -472,7 +472,8 @@ export default function CommunityServicePage() {
               transition={{ duration: 0.8 }}
             >
             <div className="text-center mb-12">
-              <motion.h2 
+              <motion.h2
+                id="seva25"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -488,7 +489,7 @@ export default function CommunityServicePage() {
                 transition={{ duration: 0.8, delay: 0.1 }}
                 className="text-2xl lg:text-3xl font-semibold text-orange-600 mb-6"
               >
-                International Charity Challenge - SEVA25
+                Seva25 Charity Challenge
               </motion.h3>
               {/* <motion.p 
                 initial={{ opacity: 0, y: 20 }}
