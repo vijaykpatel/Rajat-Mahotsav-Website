@@ -347,7 +347,7 @@ export default function GuestServicesPage() {
                       <span className="text-xs text-orange-500">{isStreetView ? "Satellite" : "Map"}</span>
                     </button>
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-orange-400 mb-2 pr-20 md:pr-32">Shree Swaminarayan Temple Secaucaus, NJ</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-orange-400 mb-2 pr-20 md:pr-32">Shree Swaminarayan Temple Secaucus, NJ</h3>
                   <p className="text-gray-600 flex items-center gap-2 mt-5 md:mt-0">
                     <MapPin className="h-4 w-4 text-orange-400" />
                     200 Swamibapa Way, Secaucus, NJ 07094
@@ -406,7 +406,7 @@ export default function GuestServicesPage() {
                       <span className="text-xs text-orange-500">{isStreetView ? "Satellite" : "Map"}</span>
                     </button>
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-orange-400 mb-2 pr-20 md:pr-32">Shree Swaminarayan Temple Secaucaus, NJ</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-orange-400 mb-2 pr-20 md:pr-32">Shree Swaminarayan Temple Secaucus, NJ</h3>
                   <p className="text-gray-600 flex items-center gap-2 mt-5 md:mt-0">
                     <MapPin className="h-4 w-4 text-orange-400" />
                     200 Swamibapa Way, Secaucus, NJ 07094
