@@ -489,7 +489,7 @@ export default function CommunityServicePage() {
                 transition={{ duration: 0.8, delay: 0.1 }}
                 className="text-2xl lg:text-3xl font-semibold text-orange-600 mb-6"
               >
-                Seva25 Charity Challenge
+                The SEVA25 Challenge
               </motion.h3>
               {/* <motion.p 
                 initial={{ opacity: 0, y: 20 }}
@@ -508,7 +508,7 @@ export default function CommunityServicePage() {
                 className="bg-gradient-to-br from-orange-50 to-red-50 rounded-3xl shadow-xl p-8 border-2 border-orange-200 max-w-4xl mx-auto"
               >
                 <div className="space-y-4 text-lg community-text-secondary leading-relaxed text-left">
-                  <p>All devotees of Maninagar Shree Swaminarayan Gadi Sansthan are invited to participate in an <span className="font-semibold text-orange-600">International Charity Challenge</span> - a collective global mission of compassion, community service, and spiritual growth. All Mandals & All Ages are challenged to participate!</p>
+                  <p>All devotees of Maninagar Shree Swaminarayan Gadi Sansthan are invited to participate in <span className="font-semibold text-orange-600">The SEVA25 Challenge</span> - a collective global mission of compassion, community service, and spiritual growth. All Mandals & All Ages are challenged to participate!</p>
                   <p><span className="font-semibold text-orange-600">Each devotee is challenged to complete a minimum of 25 hours of service in your local community!</span> Mandals are encouraged to come together and organize service projects in their surrounding communities.</p>
                   <p>All Community Service activities completed <span className="font-semibold text-orange-600">starting August 1, 2025</span> can be submitted and will be counted towards your individual and mandal total hour count.</p>
                   <p>All devotees and mandals who complete the SEVA25 challenge will be recognized during the Rajat Mahotsav, but <span className="font-semibold text-orange-600">special recognition will go to the devotee and mandal with the highest number of community service hours completed.</span></p>
