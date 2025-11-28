@@ -52,54 +52,74 @@ export default function GuestServicesPage() {
       address: "460 Harmon Meadow Blvd., Secaucus, NJ 07094",
       phone: "(201) 809-1000",
       hotelCode: "ALF-SEC",
-      bookingLink: "https://www.marriott.com/hotels/travel/ewral-aloft-secaucus-meadowlands/",
-      blockDates: "July 28 - Aug 3, 2026",
+      bookingLink: "https://app.marriott.com/reslink?id=1763738659091&key=GRP&app=resvlink",
+      blockDates: "July 25 - Aug 2, 2026",
       travelTime: "8 min drive",
       directionsLink: "https://maps.app.goo.gl/CVaAykRG1HQRv9hA9",
-      walkable: false,
-      pricePerNight: "$169",
+      lastDay: "Friday, June 26, 2026",
+      pricePerNight: "$189 - $199",
+
       amenities: ["Free WiFi", "Fitness Center", "Pool"],
       images: [
-        "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
-        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
-        "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800"
+        "https://cdn.njrajatmahotsav.com/hotels/aloft/IMG_6217.jpg",
+        "https://cdn.njrajatmahotsav.com/hotels/aloft/IMG_6218.jpg",
+        "https://cdn.njrajatmahotsav.com/hotels/aloft/IMG_6219.jpg",
+        "https://cdn.njrajatmahotsav.com/hotels/aloft/IMG_6220.jpg",
       ]
     },
     {
-      name: "Residence Inn by Marriott Secaucus Meadowlands",
-      address: "800 Plaza Dr, Secaucus, NJ 07094", 
-      phone: "(201) 223-9901",
-      hotelCode: "RI-SEC",
-      bookingLink: "https://www.marriott.com/hotels/travel/ewrrs-residence-inn-secaucus-meadowlands/",
-      blockDates: "July 28 - Aug 3, 2026",
+      name: "Courtyard by Marriott Secaucus Meadowlands",
+      address: "455 Harmon Meadow Blvd., Secaucus, NJ 07094",
+      phone: "(201) 617-8888",
+      hotelCode: "ALF-SEC",
+      bookingLink: "https://app.marriott.com/reslink?id=1763076780024&key=GRP&app=resvlink",
+      blockDates: "July 25 - Aug 2, 2026",
       travelTime: "8 min drive",
-      directionsLink: "https://maps.app.goo.gl/Rjs8h1mmprAywhrM8",
-      walkable: false,
-      pricePerNight: "$179",
-      amenities: ["Free Breakfast", "Kitchen"],
+      directionsLink: "https://maps.app.goo.gl/CVaAykRG1HQRv9hA9",
+      lastDay: "Friday, June 12, 2026",
+      pricePerNight: "$198",
+      amenities: ["Free WiFi", "Fitness Center", "Pool"],
       images: [
-        "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
-        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800"
+        "https://cdn.njrajatmahotsav.com/hotels/courtyard/IMG_6229.jpg",
+        "https://cdn.njrajatmahotsav.com/hotels/courtyard/IMG_6230.jpg",
+        "https://cdn.njrajatmahotsav.com/hotels/courtyard/IMG_6231.jpg"
       ]
     },
-    {
-      name: "Renaissance Meadowlands Hotel",
-      address: "801 Rutherford Ave, Rutherford, NJ 07070",
-      phone: "(201) 231-3100", 
-      hotelCode: "REN-MDW",
-      bookingLink: "https://www.marriott.com/hotels/travel/ewrrn-renaissance-meadowlands-hotel/",
-      blockDates: "July 28 - Aug 3, 2026",
-      travelTime: "13 min drive",
-      directionsLink: "https://maps.app.goo.gl/kB48Wc8kxTHA61ns9",
-      walkable: false,
-      pricePerNight: "$189",
-      amenities: ["Restaurant", "Fitness Center", "Business Center"],
-      images: [
-        "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800",
-        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800",
-        "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800"
-      ]
-    }
+    // {
+    //   name: "Residence Inn by Marriott Secaucus Meadowlands",
+    //   address: "800 Plaza Dr, Secaucus, NJ 07094", 
+    //   phone: "(201) 223-9901",
+    //   hotelCode: "RI-SEC",
+    //   bookingLink: "https://www.marriott.com/hotels/travel/ewrrs-residence-inn-secaucus-meadowlands/",
+    //   blockDates: "July 28 - Aug 3, 2026",
+    //   travelTime: "8 min drive",
+    //   directionsLink: "https://maps.app.goo.gl/Rjs8h1mmprAywhrM8",
+    //   lastDay: "Friday, June 26, 2026",
+    //   pricePerNight: "$179",
+    //   amenities: ["Free Breakfast", "Kitchen"],
+    //   images: [
+    //     "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
+    //     "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800"
+    //   ]
+    // },
+    // {
+    //   name: "Renaissance Meadowlands Hotel",
+    //   address: "801 Rutherford Ave, Rutherford, NJ 07070",
+    //   phone: "(201) 231-3100", 
+    //   hotelCode: "REN-MDW",
+    //   bookingLink: "https://www.marriott.com/hotels/travel/ewrrn-renaissance-meadowlands-hotel/",
+    //   blockDates: "July 28 - Aug 3, 2026",
+    //   travelTime: "13 min drive",
+    //   directionsLink: "https://maps.app.goo.gl/kB48Wc8kxTHA61ns9",
+    //   lastDay: "Friday, June 26, 2026",
+    //   pricePerNight: "$189",
+    //   amenities: ["Restaurant", "Fitness Center", "Business Center"],
+    //   images: [
+    //     "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800",
+    //     "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800",
+    //     "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800"
+    //   ]
+    // }
   ]
 
   const transportation = [
@@ -577,7 +597,7 @@ export default function GuestServicesPage() {
             <Hotel className="h-8 w-8 text-purple-500" />
             <h2 className="text-3xl font-bold">Recommended Hotels</h2>
           </div>
-          <motion.div
+          {/* <motion.div
             initial={{ y: 20 }}
             whileInView={{ y: 0 }}
             viewport={{ once: false }}
@@ -588,8 +608,8 @@ export default function GuestServicesPage() {
               <span className="font-semibold">Note:</span> We are currently working on securing hotel group rates for our guests. 
               This page will be updated as soon as the information is ready.
             </p>
-          </motion.div>
-          {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          </motion.div> */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {hotels.map((hotel, index) => (
               <motion.div
                 key={index}
@@ -601,10 +621,6 @@ export default function GuestServicesPage() {
               >
                 <h3 className="acc-card-title mb-3 min-h-[3.5rem]">{hotel.name}</h3>
                 <div className="space-y-2 text-gray-600">
-                  <div className="flex items-center gap-2">
-                    <Hash className="h-4 w-4 text-purple-400" />
-                    <span className="acc-card-base font-medium">{hotel.hotelCode}</span>
-                  </div>
                   <div className="flex items-start gap-2">
                     <MapPin className="h-4 w-4 mt-1 text-purple-400" />
                     <span className="acc-card-base">{hotel.address}</span>
@@ -616,20 +632,23 @@ export default function GuestServicesPage() {
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4 text-purple-400" />
                     <span className="acc-card-base font-medium">{hotel.travelTime}</span>
-                    <a 
-                      href={hotel.directionsLink} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
+                    <a
+                      href={hotel.directionsLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="acc-card-caption text-blue-600 hover:underline"
                       onClick={(e) => e.stopPropagation()}
                     >
                       (Directions)
                     </a>
-                    {hotel.walkable && <span className="acc-card-caption bg-green-500/20 text-green-600 px-2 py-1 rounded">Walkable</span>}
                   </div>
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-purple-400" />
                     <span className="acc-card-base">{hotel.blockDates}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4 text-purple-400" />
+                    <span className="acc-card-base">Last Day to Book: {hotel.lastDay}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <DollarSign className="h-4 w-4 text-purple-400" />
@@ -675,7 +694,7 @@ export default function GuestServicesPage() {
               open={selectedHotel !== null}
               onOpenChange={(open) => !open && setSelectedHotel(null)}
             />
-          )} */}
+          )}
         </motion.section>
 
         {/* Transportation Section */}
