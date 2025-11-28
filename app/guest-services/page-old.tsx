@@ -101,6 +101,23 @@ export default function AccommodationsPage() {
   const [activeTab, setActiveTab] = useState('nyc')
 
   const sightseeingData = {
+    shopping: [
+      {
+        name: "The Mills at Jersey Gardens",
+        distance: "30 min",
+        description: "Shopping mall near Secaucus, NJ"
+      },
+      {
+        name: "American Dream",
+        distance: "15 min", 
+        description: "Mega-entertainment complex with shopping, entertainment, and a waterpark"
+      },
+      {
+        name: "Woodbury Common Premium Outlets",
+        distance: "1 hour",
+        description: "World Class outdoor outlets for luxury brands"
+      }
+    ],
     nyc: [
       {
         name: "Statue of Liberty & Ellis Island",
@@ -113,15 +130,30 @@ export default function AccommodationsPage() {
         description: "Heart of NYC entertainment district"
       },
       {
+        name: "Empire State Building",
+        distance: "30 min", 
+        description: "Most famous skyscraper in the world"
+      },
+      {
         name: "Central Park",
         distance: "40 min",
         description: "NYC's premier urban park"
       },
       {
+        name: "The High Line",
+        distance: "30 min", 
+        description: "Urban Park through the Manhattan west side, featuring urban city scenery"
+      },
+      {
         name: "9/11 Memorial & Museum", 
         distance: "50 min",
         description: "Moving tribute to September 11th victims"
-      }
+      },
+      {
+        name: "The Vessel & Hudson Yards",
+        distance: "30 min", 
+        description: "Honeycomb like structure and luxury shopping in NYC"
+      },
     ],
     hoboken: [
       {
@@ -155,6 +187,11 @@ export default function AccommodationsPage() {
         name: "Capitol Building",
         distance: "4 hours",
         description: "Historic seat of US government"
+      },
+      {
+        name: "The White House",
+        distance: "4 hours",
+        description: "Residence of the President of the United States"
       }
     ],
     niagara: [
@@ -177,6 +214,7 @@ export default function AccommodationsPage() {
   }
 
   const tabLabels = {
+    shopping: 'Shopping',
     nyc: 'NYC',
     hoboken: 'Hoboken',
     dc: 'Washington D.C.',
@@ -529,7 +567,8 @@ export default function AccommodationsPage() {
               <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 px-4 py-2 rounded-full border border-green-200">
                 <Clock className="h-4 w-4 text-green-600" />
                 <span className="text-sm font-medium text-green-700">
-                  From Secaucus, NJ: {activeTab === 'nyc' ? 'Train 15 min | Drive 20 min - 1 hour' : 
+                  From Secaucus, NJ: {activeTab === 'nyc' ? 'Train 15 min | Drive 20 min - 1 hour' :
+                    activeTab === 'shopping' ? 'Drive 15 min - 1 hour' :
                     activeTab === 'hoboken' ? 'Drive 20-30 min' :
                     activeTab === 'dc' ? 'Drive 4-5 hours' :
                     'Drive 5-6 hours'}
