@@ -256,7 +256,7 @@ export default function VideoSection() {
           Join Us for the Rajat Mahotsav
         </h3>
         <p className="text-lg md:text-xl reg-text-primary mb-8 leading-relaxed">
-          Be a part of the Shree Ghanshyam Maharaj Rajat Pratishta Mahotsav New Jersey. Register now for this momentous occasion from July 25 through August 2, 2026.
+          Be a part of the Shree Ghanshyam Maharaj Rajat Pratishta Mahotsav New Jersey. Register now for this momentous occasion from July 2 through August 2, 2026.
         </p>
         <a
           href="/registration"
