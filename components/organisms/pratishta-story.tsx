@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Skiper54 } from "@/components/templates/skiper54"
 import { getCloudflareImage } from "@/lib/cdn-assets"
 import { useAudioContext } from '@/contexts/audio-context'
+import ParallaxDivider from "@/components/organisms/parallax-divider"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -338,7 +339,7 @@ export default function PratisthaStory() {
           </motion.div>
         </div>
       </div>
-      
+
       {/* Closing Text */}
       <div ref={closingTextRef} className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 pt-8 md:pt-12 pb-16 md:pb-20">
         <motion.h3
@@ -401,10 +402,10 @@ export default function PratisthaStory() {
           }}
         >
           <p>
-            The Shree Ghanshyam Maharaj Rajat Pratishtha Mahotsav, which will take place from July 25 through August 2, 2026, will celebrate the 25th anniversary of the murti pratishtha of Lord Shree Swaminarayan, Jeevanpran Shree Abji Bapashree, and Jeevanpran Shree Muktajeevan Swamibapa, and the opening of Shree Swaminarayan Temple - Secaucus, New Jersey.
+            The Shree Ghanshyam Maharaj Rajat Pratishtha Mahotsav, which will take place from July 27 through August 2, 2026, will celebrate the 25th anniversary of the murti pratishtha of Lord Shree Swaminarayan, Jeevanpran Shree Abji Bapashree, and Jeevanpran Shree Muktajeevan Swamibapa, and the opening of Shree Swaminarayan Temple - Secaucus, New Jersey.
           </p>
           <p>
-            This grand occasion will celebrate the past twenty-five years of faith, community, and fellowship at our temple, with scripture recitals, divine blessings from Acharya Swamiji Maharaj, cultural programs, special women's events, and a sports shibir.
+            The Rajat Mahotsav is not merely an event; it is a tapestry woven from countless prayers, millions of smiles, and twenty-five years of unwavering community spirit. This grand occasion will celebrate the past twenty-five years of faith, community, and fellowship at our temple, with scripture recitals, divine blessings from Acharya Swamiji Maharaj, cultural programs, special women's events, and a sports shibir.
           </p>
           <p>
             We pray to Lord Swaminarayanbapa Swamibapa to bless our efforts as we celebrate this momentous occasion. Through His divine guidance, grace, and strength, the devotees of Shree Swaminarayan Temple - Secaucus, NJ are honored to host an unforgettable mahotsav.
@@ -414,7 +415,9 @@ export default function PratisthaStory() {
           </p>
         </motion.div>
       </div>
-        </div>
+      {/* Parallax Divider */}
+      <ParallaxDivider />
+      </div>
       </div>
     </div>
   )

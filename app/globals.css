@@ -358,7 +358,7 @@
   /* Section Title Utility Class */
   .section-title {
     @apply font-bold mb-12 md:mb-24 relative z-10 text-center;
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;

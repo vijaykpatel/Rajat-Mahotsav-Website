@@ -36,6 +36,7 @@ export default function AashirwadSection() {
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="rounded-xl overflow-hidden shadow-2xl"
+          style={{ maxWidth: '80%', margin: '0 auto' }}
         >
           <div style={{ position: "relative", paddingTop: "56.25%" }}>
             <iframe
@@ -51,3 +52,4 @@ export default function AashirwadSection() {
     </section>
   )
 }
+
