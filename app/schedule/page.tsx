@@ -1,13 +1,15 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { StandardPageHeader } from "@/components/organisms/standard-page-header"
-import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
+import { motion, AnimatePresence } from "framer-motion"
+import { Clock, MapPin, ChevronRight } from "lucide-react"
 
 interface Event {
   time: string
   title: string
   description?: string
+  location?: string
 }
 
 interface ScheduleDay {
@@ -109,29 +111,9 @@ const scheduleData: ScheduleDay[] = [
 ]
 
 export default function SchedulePage() {
-
   const [isLoaded, setIsLoaded] = useState(false)
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null)
-  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
+  const [selectedDay, setSelectedDay] = useState<number>(0)
   const [isMobile, setIsMobile] = useState(false)
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
-
-  // Theme constants for easy customization
-  const theme = {
-    gradients: {
-      title: 'bg-gradient-to-r from-orange-600 to-red-600',
-      subtitle: 'bg-gradient-to-r from-orange-500 to-red-500',
-      background: 'bg-gradient-to-br from-orange-50 via-white to-red-50',
-      cardOverlay: 'bg-gradient-to-br from-orange-100/20 to-red-100/20',
-      eventHighlight: 'bg-gradient-to-r from-orange-100 to-red-100',
-      eventHighlightStatic: 'bg-gradient-to-r from-orange-50 to-red-50'
-    },
-    colors: {
-      highlight: 'text-orange-600',
-      ring: 'ring-orange-200',
-      border: 'border-orange-300'
-    }
-  }
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 300)
@@ -147,30 +129,20 @@ export default function SchedulePage() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  useEffect(() => {
-    if (!isMobile) return
-
-    const observers = cardRefs.current.map((ref, index) => {
-      if (!ref) return null
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setVisibleCards(prev => new Set([...prev, index]))
-          }
-        },
-        { threshold: 0.3, rootMargin: '0px 0px -10% 0px' }
-      )
-
-      observer.observe(ref)
-      return observer
-    })
-
-    return () => {
-      observers.forEach(observer => observer?.disconnect())
+  // Theme constants matching original design
+  const theme = {
+    gradients: {
+      background: 'bg-gradient-to-br from-orange-50 via-white to-red-50',
+      cardOverlay: 'bg-gradient-to-br from-orange-100/20 to-red-100/20',
+      eventHighlight: 'bg-gradient-to-r from-orange-100 to-red-100',
+      eventHighlightStatic: 'bg-gradient-to-r from-orange-50 to-red-50'
+    },
+    colors: {
+      highlight: 'text-orange-600',
+      ring: 'ring-orange-200',
+      border: 'border-orange-300'
     }
-  }, [isMobile, isLoaded])
-
+  }
 
   return (
     <div className={`min-h-screen ${theme.gradients.background} page-bg-extend`}>
@@ -183,121 +155,275 @@ export default function SchedulePage() {
           isLoaded={isLoaded}
         />
 
-        {/* Calendar Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {scheduleData.map((day, index) => {
-            const isCardVisible = isMobile ? visibleCards.has(index) : false
-            const shouldAnimate = !isMobile ? hoveredCard === index : isCardVisible
-
-            return (
-            <div
-              key={`${day.month}-${day.date}`}
-              ref={el => { cardRefs.current[index] = el }}
-              className={`group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer overflow-hidden ${
-                day.isHighlight ? `ring-2 ${theme.colors.ring}` : ''
-              } ${
-                isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-              }`}
-              style={{
-                transitionDelay: `${800 + index * 100}ms`,
-                transform: shouldAnimate ? 'translateY(-8px)' : undefined
-              }}
-              onMouseEnter={() => !isMobile && setHoveredCard(index)}
-              onMouseLeave={() => !isMobile && setHoveredCard(null)}
+        {/* Desktop: Calendar Grid View */}
+        {!isMobile && (
+          <div className="max-w-7xl mx-auto">
+            {/* Calendar Grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="grid grid-cols-7 gap-3 mb-6"
             >
-              {/* Gradient overlay for highlight days */}
-              {day.isHighlight && (
-                <div className={`absolute inset-0 ${theme.gradients.cardOverlay} transition-opacity duration-200 ${
-                  shouldAnimate ? 'opacity-100' : 'opacity-0'
-                }`} />
-              )}
+              {scheduleData.map((day, index) => (
+                <motion.button
+                  key={index}
+                  onClick={() => setSelectedDay(index)}
+                  className={`group relative aspect-square rounded-2xl overflow-hidden transition-all duration-300 ${
+                    selectedDay === index
+                      ? `ring-2 ${theme.colors.ring} shadow-2xl scale-105`
+                      : 'hover:scale-102 hover:shadow-lg'
+                  }`}
+                  whileHover={{ y: -4 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {/* Background */}
+                  <div className={`absolute inset-0 ${
+                    selectedDay === index
+                      ? theme.gradients.eventHighlight
+                      : 'bg-white hover:bg-gradient-to-br hover:from-orange-50 hover:to-red-50'
+                  }`} />
 
-              {/* Date Header */}
-              <div className="relative p-6 pb-4">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="text-center">
-                    <div className={`text-5xl font-bold transition-colors duration-300 ${
-                      day.isHighlight ? theme.colors.highlight : 'text-gray-800'
+                  {/* Month Label */}
+                  <div className={`absolute top-3 left-3 font-bold tracking-wider uppercase ${
+                    selectedDay === index ? 'text-lg text-orange-700' : 'text-base text-gray-400 group-hover:text-orange-400'
+                  }`}>
+                    {day.month}
+                  </div>
+
+                  {/* Event Count Badge */}
+                  <div className={`absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
+                    selectedDay === index
+                      ? 'bg-orange-500 text-white shadow-md'
+                      : 'bg-orange-100 text-orange-600 group-hover:bg-orange-200'
+                  }`}>
+                    {day.events.length}
+                  </div>
+
+                  {/* Date & Day */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center pt-6">
+                    <div className={`font-black tracking-tighter mb-1 leading-none ${
+                      selectedDay === index ? 'text-7xl text-orange-600' : 'text-5xl text-gray-800 group-hover:text-orange-600'
                     }`}>
                       {day.date}
                     </div>
-                    <div className="text-base text-gray-500 font-medium">
-                      {day.month}
+                    <div className={`font-bold tracking-wide mt-1 ${
+                      selectedDay === index ? 'text-lg text-orange-700' : 'text-sm text-gray-500 group-hover:text-orange-500'
+                    }`}>
+                      {day.dayName.slice(0, 3).toUpperCase()}
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="text-xl font-semibold text-gray-800">
-                      {day.dayName}
+
+                  {/* Selection Indicator */}
+                  {selectedDay === index && (
+                    <motion.div
+                      layoutId="selectedIndicator"
+                      className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-orange-500 to-red-500 shadow-sm"
+                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    />
+                  )}
+                </motion.button>
+              ))}
+            </motion.div>
+
+            {/* Event Details Panel */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedDay}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white rounded-3xl shadow-2xl overflow-hidden"
+              >
+                {/* Day Header */}
+                <div className="relative px-8 py-6 bg-white">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-sm font-bold tracking-widest uppercase text-gray-500 mb-1">
+                        {scheduleData[selectedDay].month}
+                      </div>
+                      <div className={`text-5xl font-black tracking-tight ${theme.colors.highlight}`}>
+                        {scheduleData[selectedDay].date}
+                      </div>
+                      <div className="text-xl font-medium mt-1 text-gray-800">
+                        {scheduleData[selectedDay].dayName}
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm font-semibold text-gray-500 mb-2">TOTAL EVENTS</div>
+                      <div className={`text-6xl font-black ${theme.colors.highlight}`}>
+                        {scheduleData[selectedDay].events.length}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Events */}
-              <div className="relative px-6 pb-6">
-                <div className="space-y-3">
-                  {day.events.map((event, eventIndex) => (
-                    <div
-                      key={eventIndex}
-                      className={`p-3 rounded-lg transition-all duration-200 ${
-                        day.isHighlight
-                          ? shouldAnimate
-                            ? theme.gradients.eventHighlight
-                            : theme.gradients.eventHighlightStatic
-                          : shouldAnimate
-                            ? 'bg-gray-100'
-                            : 'bg-gray-50'
-                      }`}
-                      style={{
-                        transform: shouldAnimate ? `translateX(${eventIndex * 2}px)` : undefined,
-                        transitionDelay: `${eventIndex * 30}ms`
-                      }}
-                    >
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <div className={`text-sm font-medium mb-1 ${
-                            day.isHighlight ? theme.colors.highlight : 'text-gray-500'
-                          }`}>
-                            {event.time}
+                {/* Events List */}
+                <div className="p-8">
+                  <div className="space-y-4">
+                    {scheduleData[selectedDay].events.map((event, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                        className={`group relative flex items-start gap-6 p-5 rounded-2xl transition-all duration-300 hover:shadow-lg border border-transparent ${
+                          theme.gradients.eventHighlightStatic
+                        } hover:${theme.gradients.eventHighlight}`}
+                      >
+                        {/* Time Badge */}
+                        <div className="flex-shrink-0 w-32">
+                          <div className={`flex items-center gap-2 px-4 py-2 rounded-xl bg-white shadow-sm border ${theme.colors.border}`}>
+                            <Clock className={`w-4 h-4 ${theme.colors.highlight}`} />
+                            <span className={`text-sm font-bold tracking-wide ${theme.colors.highlight}`}>{event.time}</span>
                           </div>
-                          <div className="text-base font-semibold text-gray-800 leading-tight">
+                        </div>
+
+                        {/* Event Info */}
+                        <div className="flex-grow">
+                          <h3 className="text-xl font-bold text-gray-800 mb-1 group-hover:text-orange-600 transition-colors">
                             {event.title}
-                          </div>
+                          </h3>
                           {event.description && (
-                            <div className="text-sm text-gray-600 mt-1 italic">
+                            <p className="text-sm text-gray-600 leading-relaxed">
                               {event.description}
+                            </p>
+                          )}
+                          {event.location && (
+                            <div className="flex items-center gap-1.5 mt-2 text-sm text-orange-600">
+                              <MapPin className="w-4 h-4" />
+                              <span className="font-medium">{event.location}</span>
                             </div>
                           )}
                         </div>
-                        <div className={`w-2 h-2 rounded-full ml-3 mt-1 transition-all duration-200 ${
-                          day.isHighlight
-                            ? shouldAnimate ? 'bg-orange-500' : 'bg-orange-400'
-                            : shouldAnimate ? 'bg-gray-400' : 'bg-gray-300'
-                        }`} />
-                      </div>
-                    </div>
-                  ))}
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        )}
 
-              {/* Hover effect border */}
-              <div className={`absolute inset-0 rounded-2xl border-2 transition-all duration-200 pointer-events-none ${
-                shouldAnimate
-                  ? day.isHighlight
-                    ? theme.colors.border
-                    : 'border-gray-300'
-                  : 'border-transparent'
-              }`} />
-            </div>
-          )})}
-        </div>
+        {/* Mobile: Accordion View */}
+        {isMobile && (
+          <div className="max-w-2xl mx-auto space-y-3">
+            {scheduleData.map((day, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden"
+              >
+                {/* Day Header - Clickable */}
+                <button
+                  onClick={() => setSelectedDay(selectedDay === index ? -1 : index)}
+                  className="w-full text-left"
+                >
+                  <div className={`p-5 transition-all duration-300 ${
+                    selectedDay === index
+                      ? theme.gradients.eventHighlight
+                      : 'bg-gradient-to-r from-orange-50 to-red-50 hover:from-orange-100 hover:to-red-100'
+                  }`}>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        {/* Date Circle */}
+                        <div className={`w-16 h-16 rounded-2xl flex flex-col items-center justify-center ${
+                          selectedDay === index
+                            ? 'bg-orange-500 shadow-lg'
+                            : 'bg-white shadow-sm'
+                        }`}>
+                          <div className={`text-2xl font-black ${
+                            selectedDay === index ? 'text-white' : 'text-orange-600'
+                          }`}>
+                            {day.date}
+                          </div>
+                          <div className={`text-[10px] font-bold tracking-wider uppercase ${
+                            selectedDay === index ? 'text-white/90' : 'text-gray-500'
+                          }`}>
+                            {day.month}
+                          </div>
+                        </div>
 
-        {/* Footer note */}
-        <div className={`text-center mt-8 transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: '800ms' }}>
-          <p className="text-gray-500 text-md">
-            * Highlighted days indicate major ceremony events
-          </p>
-        </div>
+                        {/* Day Name */}
+                        <div>
+                          <div className={`text-xl font-bold ${
+                            selectedDay === index ? 'text-orange-700' : 'text-gray-800'
+                          }`}>
+                            {day.dayName}
+                          </div>
+                          <div className={`text-sm font-medium ${
+                            selectedDay === index ? 'text-orange-600' : 'text-gray-500'
+                          }`}>
+                            {day.events.length} events scheduled
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Chevron */}
+                      <motion.div
+                        animate={{ rotate: selectedDay === index ? 90 : 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <ChevronRight className={`w-6 h-6 ${
+                          selectedDay === index ? 'text-orange-700' : 'text-orange-500'
+                        }`} />
+                      </motion.div>
+                    </div>
+                  </div>
+                </button>
+
+                {/* Expandable Events */}
+                <AnimatePresence>
+                  {selectedDay === index && (
+                    <motion.div
+                      initial={{ height: 0 }}
+                      animate={{ height: "auto" }}
+                      exit={{ height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="p-5 space-y-3 bg-gradient-to-br from-orange-50/30 to-rose-50/20">
+                        {day.events.map((event, eventIndex) => (
+                          <motion.div
+                            key={eventIndex}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: eventIndex * 0.05 }}
+                            className="flex items-start gap-3 p-4 rounded-xl bg-white shadow-sm border border-orange-100/50"
+                          >
+                            {/* Time */}
+                            <div className={`flex-shrink-0 px-3 py-1.5 rounded-lg bg-white shadow-sm border ${theme.colors.border}`}>
+                              <div className={`text-xs font-bold whitespace-nowrap ${theme.colors.highlight}`}>{event.time}</div>
+                            </div>
+
+                            {/* Event Details */}
+                            <div className="flex-grow min-w-0">
+                              <h4 className="text-base font-bold text-gray-800 leading-tight">
+                                {event.title}
+                              </h4>
+                              {event.description && (
+                                <p className="text-sm text-gray-600 mt-1">{event.description}</p>
+                              )}
+                              {event.location && (
+                                <div className="flex items-center gap-1 mt-1.5 text-xs text-orange-600">
+                                  <MapPin className="w-3 h-3" />
+                                  <span className="font-medium">{event.location}</span>
+                                </div>
+                              )}
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
