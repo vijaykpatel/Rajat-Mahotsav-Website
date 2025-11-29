@@ -28,7 +28,8 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname()
 
   useEffect(() => {
-    audioRef.current = new Audio('https://cdn.njrajatmahotsav.com/audio_files/prathna_audio.mp3')
+    // audioRef.current = new Audio('https://cdn.njrajatmahotsav.com/audio_files/prathna_audio.mp3')
+    audioRef.current = new Audio('https://cdn.njrajatmahotsav.com/audio_files/prathna%2Banthem.mp3')
     audioRef.current.preload = 'auto'
     audioRef.current.volume = 1
 
