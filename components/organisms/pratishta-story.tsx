@@ -402,7 +402,7 @@ export default function PratisthaStory() {
           }}
         >
           <p>
-            The Shree Ghanshyam Maharaj Rajat Pratishtha Mahotsav, which will take place from July 27 through August 2, 2026, will celebrate the 25th anniversary of the murti pratishtha of Lord Shree Swaminarayan, Jeevanpran Shree Abji Bapashree, and Jeevanpran Shree Muktajeevan Swamibapa, and the opening of Shree Swaminarayan Temple - Secaucus, New Jersey.
+            The Shree Ghanshyam Maharaj Rajat Pratishtha Mahotsav, which will take place from July 27 - August 2, 2026, will celebrate the 25th anniversary of the murti pratishtha of Lord Shree Swaminarayan, Jeevanpran Shree Abji Bapashree, and Jeevanpran Shree Muktajeevan Swamibapa, and the opening of Shree Swaminarayan Temple - Secaucus, New Jersey.
           </p>
           <p>
             The Rajat Mahotsav is not merely an event; it is a tapestry woven from countless prayers, millions of smiles, and twenty-five years of unwavering community spirit. This grand occasion will celebrate the past twenty-five years of faith, community, and fellowship at our temple, with scripture recitals, divine blessings from Acharya Swamiji Maharaj, cultural programs, special women's events, and a sports shibir.
