@@ -717,7 +717,7 @@ export default function GuestServicesPage() {
         >
           <div className="flex items-center gap-3 mb-8">
             <MapPin className="h-8 w-8 text-green-500" />
-            <h2 className="text-3xl font-bold">Sight-seeing</h2>
+            <h2 className="text-3xl font-bold">Tourism</h2>
           </div>
           
           {/* Tab Navigation */}
