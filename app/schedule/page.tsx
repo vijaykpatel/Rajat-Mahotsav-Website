@@ -145,7 +145,7 @@ export default function SchedulePage() {
   }
 
   return (
-    <div className={`min-h-screen ${theme.gradients.background} page-bg-extend`}>
+    <div className={`min-h-screen ${theme.gradients.background} page-bg-extend pb-20`}>
       <div className="container mx-auto px-4 page-bottom-spacing">
         {/* Header */}
         <StandardPageHeader
@@ -234,7 +234,7 @@ export default function SchedulePage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white rounded-3xl shadow-2xl overflow-hidden"
+                className="bg-white rounded-3xl shadow-2xl overflow-hidden min-h-[500px]"
               >
                 {/* Day Header */}
                 <div className="relative px-8 py-6 bg-white">
