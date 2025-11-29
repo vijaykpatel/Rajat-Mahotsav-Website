@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect, useMemo, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { EventsFilterBar } from "@/components/organisms/events-filter-bar"
@@ -9,7 +9,7 @@ import { PhotoAlbumModal } from "@/components/organisms/photo-album-modal"
 import { EventDetailsModal } from "@/components/organisms/event-details-modal"
 import { eventsData, EventPhoto, EventData } from "@/lib/events-data"
 
-export default function CurrentEventsPage() {
+function EventsPageContent() {
   const searchParams = useSearchParams()
   const [isLoaded, setIsLoaded] = useState(false)
   const [selectedTags, setSelectedTags] = useState<string[]>([])
@@ -139,5 +139,18 @@ export default function CurrentEventsPage() {
         />
       </div>
     </div>
+  )
+}
+
+export default function CurrentEventsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
+        <p className="text-gray-600">Loading events...</p>
+      </div>
+    </div>}>
+      <EventsPageContent />
+    </Suspense>
   )
 }
