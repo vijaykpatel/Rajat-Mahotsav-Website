@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { useDeviceType } from "@/hooks/use-device-type"
-import { Clock, Footprints, BookOpenText } from "lucide-react"
+import { Clock, Footprints, BookOpenText, Apple } from "lucide-react"
 import { GiPrayerBeads } from "react-icons/gi"
 import { PiHandsPraying } from "react-icons/pi"
 import { ImageMarquee } from "@/components/organisms/image-marquee"
@@ -19,6 +19,7 @@ const sevaGoals = [
   { icon: Footprints, label: "Pradakshinas", target: 250, description: "Clockwise devotion around the sihasan" },
   { icon: PiHandsPraying, label: "Dandvats", target: 250, description: "Physical devoation to Lord Swaminarayan" },
   { icon: Footprints, label: "Padyatras", target: 25, description: "Walks to the Mandir" },
+  { icon: Apple, label: "Upvas", target: 25, description: "Fast for a full day" },
 ]
 
 const parayans = [
@@ -141,10 +142,10 @@ export default function SpiritualSevaPage() {
                   transition={{ duration: 0.8, delay: 0.2 }}
                   className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify"
                 >
-                  Over a ten-month period (October 2025 – July 2026), each haribhakt is encouraged to complete monthly spiritual goals — including 250 Malas, 250 minutes of Dhyan, 250 Pradakshinas, 250 Dandvats, and 25 Padyatras to the Mandir.
+                  Over a ten-month period (October 2025 – July 2026), each haribhakt is encouraged to complete monthly spiritual goals — including 250 Malas, 250 minutes of Dhyan, 250 Pradakshinas, 250 Dandvats, 25 Padyatras to the Mandir, and 25 Upvas.
                 </motion.p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
                 {sevaGoals.map((goal, index) => {
                   const Icon = goal.icon
                   return (
