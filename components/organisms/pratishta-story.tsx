@@ -9,6 +9,7 @@ import { Skiper54 } from "@/components/templates/skiper54"
 import { getCloudflareImage } from "@/lib/cdn-assets"
 import { useAudioContext } from '@/contexts/audio-context'
 import ParallaxDivider from "@/components/organisms/parallax-divider"
+import ParallaxQuote from "./parallax-quote"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -268,6 +269,12 @@ export default function PratisthaStory() {
         ))}
         </div>
       </div>
+      {/* Parallax Quote Section */}
+      <ParallaxQuote
+        imageId="4073ee33-06b5-4df4-f427-831f07338400"
+        quote="From Gold to Silver: 25 Years of Blessings"
+        subtext="The Rajat Mahotsav Journey"
+      />
       
       {/* Video Section - Separate */}
       <div ref={videoSectionRef} className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20 py-16 md:py-24">

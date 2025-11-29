@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image } from "lucide-react"
+import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image, CalendarCheck } from "lucide-react"
 import { PiHandsPraying } from "react-icons/pi"
 import { useRouter, usePathname } from "next/navigation"
 import { FloatingButton } from "../atoms/floating-button"
@@ -14,15 +14,16 @@ const menuItems = [
   { icon: ClipboardPen, label: "Registration", href: "/registration" },
   { icon: Hotel, label: "Guest Services", href: "/guest-services" },
   { icon: CalendarDays, label: "Schedule", href: "/schedule" },
-  { 
-    icon: PiHandsPraying, 
-    label: "Seva", 
+  {
+    icon: PiHandsPraying,
+    label: "Seva",
     href: "#",
     subItems: [
       { icon: Heart, label: "Community Seva", href: "/community-seva" },
       { icon: PiHandsPraying, label: "Spiritual Seva", href: "/spiritual-seva" },
     ]
   },
+  { icon: CalendarCheck, label: "Latest Events", href: "/latest-events" },
   { icon: Image, label: "Media", href: "/media" },
 ]
 

@@ -129,13 +129,22 @@ export default function TitleSection({ targetDate = "2026-08-02T00:00:00" }: Tit
             initial={{ opacity: 0, scale: 0.9 }}
             animate={!isLoading ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.8, delay: !isLoading ? 2.4 : 0, ease: "easeOut" }}
-            className="mt-4 mb-4 flex justify-end"
+            className="mt-4 mb-4 flex flex-col sm:flex-row gap-3 justify-end"
           >
             <Link
               href="/registration"
               className="group relative inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-white/90 hover:bg-white text-slate-900 rounded-full font-bold font-instrument-serif text-lg sm:text-xl shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300 hover:scale-105 active:scale-95"
             >
               <span>Register Now</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:translate-x-1 transition-transform">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </Link>
+            <Link
+              href="/latest-events"
+              className="group relative inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-orange-600/90 hover:bg-orange-600 text-white rounded-full font-bold font-instrument-serif text-lg sm:text-xl shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300 hover:scale-105 active:scale-95"
+            >
+              <span>View Latest Events</span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:translate-x-1 transition-transform">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>

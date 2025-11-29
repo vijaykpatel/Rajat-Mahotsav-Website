@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
-import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image as ImageIcon, Menu, X } from "lucide-react"
+import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image as ImageIcon, CalendarCheck, Menu, X } from "lucide-react"
 import { PiHandsPraying } from "react-icons/pi"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { NavBar } from "@/components/organisms/tubelight-navbar"
@@ -68,6 +68,14 @@ const menuItems = [
         href: "/spiritual-seva",
       },
     ],
+  },
+  {
+    icon: CalendarCheck,
+    label: "Latest Events",
+    href: "/latest-events",
+    gradient:
+      "radial-gradient(circle, rgba(249,115,22,0.15) 0%, rgba(234,88,12,0.06) 50%, rgba(194,65,12,0) 100%)",
+    iconColor: "text-orange-500",
   },
   {
     icon: ImageIcon,

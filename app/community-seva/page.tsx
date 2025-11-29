@@ -942,15 +942,32 @@ export default function CommunityServicePage() {
               >
                 Our Mission in Action
               </motion.h2>
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-lg community-text-secondary"
               >
-                Highlights from our recent community service events
+                Highlights from some recent community seva events
               </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="flex justify-center mt-6"
+              >
+                <a
+                  href="/latest-events?tags=community%20seva"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                >
+                  <span>View All Community Seva Events</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:translate-x-1 transition-transform">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                </a>
+              </motion.div>
             </div>
             
             <div className="flex justify-center gap-6 flex-wrap">
@@ -1011,7 +1028,7 @@ export default function CommunityServicePage() {
                   />
                 </div>
                 <p className="text-center text-sm community-text-secondary leading-relaxed">
-                  Shree Swaminarayan Temple - Secaucus, New Jersey participates in the New York Giants 5k Charitable Walk at MEtlife Stadium.
+                  Shree Swaminarayan Temple - Secaucus, New Jersey participates in the New York Giants 5k Charitable Walk at Metlife Stadium.
                 </p>
               </motion.div>
             </div>

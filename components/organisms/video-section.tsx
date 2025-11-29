@@ -7,6 +7,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { NextButton, PrevButton, usePrevNextButtons } from '@/components/molecules/video-carousel-buttons'
 import { DotButton, useDotButton } from '@/components/molecules/video-carousel-dots'
 import { useAudioContext } from '@/contexts/audio-context'
+import ParallaxQuote from '@/components/organisms/parallax-quote'
 
 interface VideoCardProps {
   videoId: string
