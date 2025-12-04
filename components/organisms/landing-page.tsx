@@ -48,7 +48,7 @@ export default function TitleSection({ targetDate = "2026-08-02T00:00:00" }: Tit
   const backgroundImage = deviceType === 'mobile' ? getCloudflareImage("1112e22e-a7ba-4ca4-a05b-c9c9f8b17b00") : getCloudflareImageBiggest("1516f422-0e25-4258-e759-d8b94b773700")
 
   return (
-    <div className="h-full flex items-end justify-end relative pb-16 sm:pb-16 md:pb-16 lg:pb-16 xl:pb-16" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+    <div className="h-full flex items-end justify-end relative pb-16 sm:pb-16 md:pb-16 lg:pb-16 xl:pb-16" style={{ /* backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' */ }}>
       {/* Slider columns on left side - Desktop only (>1280px) */}
       <div className="hidden xl:flex absolute left-4 top-0 w-auto xl:max-w-[45vw] 2xl:max-w-[50vw] h-full z-20 gap-4">
         {columnImages.map((images, col) => (
