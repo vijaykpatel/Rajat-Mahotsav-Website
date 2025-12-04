@@ -3,9 +3,10 @@
 import { motion } from "framer-motion"
 
 import { useLoading } from "@/hooks/use-loading"
+import { useDeviceType } from "@/hooks/use-device-type"
 import { InfiniteSlider } from "@/components/ui/infinite-slider"
 import { timelineData } from "@/lib/timeline-data"
-import { getCloudflareImage } from "@/lib/cdn-assets"
+import { getCloudflareImage, getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import CountdownTimer from "@/components/molecules/countdown-timer"
 import Link from "next/link"
 
@@ -43,9 +44,11 @@ interface TitleSectionProps {
 
 export default function TitleSection({ targetDate = "2026-08-02T00:00:00" }: TitleSectionProps) {
   const { isLoading } = useLoading()
+  const deviceType = useDeviceType()
+  const backgroundImage = deviceType === 'mobile' ? getCloudflareImage("1112e22e-a7ba-4ca4-a05b-c9c9f8b17b00") : getCloudflareImageBiggest("1516f422-0e25-4258-e759-d8b94b773700")
 
   return (
-    <div className="bg-title-section-bg h-full flex items-end justify-end relative pb-16 sm:pb-16 md:pb-16 lg:pb-16 xl:pb-16">
+    <div className="h-full flex items-end justify-end relative pb-16 sm:pb-16 md:pb-16 lg:pb-16 xl:pb-16" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
       {/* Slider columns on left side - Desktop only (>1280px) */}
       <div className="hidden xl:flex absolute left-4 top-0 w-auto xl:max-w-[45vw] 2xl:max-w-[50vw] h-full z-20 gap-4">
         {columnImages.map((images, col) => (
