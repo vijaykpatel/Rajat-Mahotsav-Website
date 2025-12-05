@@ -15,7 +15,7 @@ export default function TitleSectionMobile({ targetDate = "2026-08-02T00:00:00" 
   const { isLoading } = useLoading()
 
   return (
-    <div className="relative h-full w-full overflow-hidden bg-gradient-to-b from-slate-950 via-slate-950/92 to-slate-900 hero-grain" style={{ paddingTop: "calc(var(--navbar-height) - 28px)" }}>
+    <div className="relative h-full w-full pb-16 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-950/92 to-slate-900 hero-grain" style={{ paddingTop: "calc(var(--navbar-height) - 28px)" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="hero-orb-base hero-orb-1" />
         <div className="hero-orb-base hero-orb-2" />
@@ -47,7 +47,7 @@ export default function TitleSectionMobile({ targetDate = "2026-08-02T00:00:00" 
                     initial={{ opacity: 0, y: 20 }}
                     animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.8, delay: !isLoading ? 0.9 : 0, ease: "easeOut" }}
-                    className="leading-tight text-4xl sm:text-5xl font-semibold text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+                    className="leading-tight text-3xl sm:text-4xl font-semibold text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
                   >
                     Shree Ghanshyam Maharaj
                   </motion.h1>
@@ -55,7 +55,7 @@ export default function TitleSectionMobile({ targetDate = "2026-08-02T00:00:00" 
                     initial={{ opacity: 0, y: 20 }}
                     animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.8, delay: !isLoading ? 1.05 : 0, ease: "easeOut" }}
-                    className="leading-tight text-4xl sm:text-5xl font-semibold text-amber-100 drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+                    className="leading-tight text-3xl sm:text-4xl font-semibold text-amber-100 drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
                   >
                     Rajat Pratishtha Mahotsav
                   </motion.h2>
