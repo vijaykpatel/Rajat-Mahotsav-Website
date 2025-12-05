@@ -8,6 +8,7 @@ import { timelineData } from "@/lib/timeline-data"
 import { getCloudflareImage, getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import CountdownTimer from "@/components/molecules/countdown-timer"
 import Link from "next/link"
+import { BackgroundPathsOverlay } from "@/components/ui/shadcn-io/background-paths"
 
 const allImages = Array.from(new Set([
   ...timelineData.map(item => item.image),
@@ -48,6 +49,7 @@ export default function TitleSection({ targetDate = "2026-08-02T00:00:00" }: Tit
 
   return (
     <div className="h-full flex items-end justify-end relative pb-16 sm:pb-16 md:pb-16 lg:pb-16 xl:pb-16" style={{ /* backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' */ }}>
+      <BackgroundPathsOverlay className="-z-10 opacity-45 scale-110 [mask-image:radial-gradient(82%_82%_at_70%_50%,#fff_70%,transparent)]" />
       {/* Slider columns on left side - Desktop only (>1280px) */}
       <div className="hidden xl:flex absolute left-4 top-0 w-auto xl:max-w-[45vw] 2xl:max-w-[50vw] h-full z-20 gap-4">
         {columnImages.map((images, col) => (

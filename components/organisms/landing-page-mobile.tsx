@@ -5,6 +5,7 @@ import Link from "next/link"
 
 import { useLoading } from "@/hooks/use-loading"
 import CountdownTimer from "@/components/molecules/countdown-timer"
+import { BackgroundPathsOverlay } from "@/components/ui/shadcn-io/background-paths"
 
 interface TitleSectionMobileProps {
   targetDate?: string
@@ -21,6 +22,7 @@ export default function TitleSectionMobile({ targetDate = "2026-08-02T00:00:00" 
       </div>
       <div className="hero-ambient" />
       <div className="hero-lines" />
+      <BackgroundPathsOverlay className="opacity-40 scale-[1.35] sm:scale-[1.18] translate-y-[-6%] [mask-image:radial-gradient(95%_85%_at_50%_40%,#fff_65%,transparent)]" />
       <div className="hero-noise" />
 
       <div className="relative z-20 flex h-full items-start pt-0 pb-8 sm:pb-10 lg:pb-12">
@@ -32,7 +34,9 @@ export default function TitleSectionMobile({ targetDate = "2026-08-02T00:00:00" 
         >
           <div className="hero-shell z-10">
             <div className="relative w-full max-w-5xl mx-auto rounded-[32px] border border-white/15 bg-white/[0.04] shadow-[0_40px_120px_rgba(0,0,0,0.35)] backdrop-blur-xl px-3 py-3 sm:px-4 sm:py-4">
-              <div className="relative w-full max-w-4xl mx-auto rounded-3xl bg-slate-900/80 border border-white/12 px-6 py-8 sm:px-10 sm:py-10 shadow-[0_30px_80px_rgba(0,0,0,0.35)] backdrop-blur-lg text-center flex flex-col gap-5 sm:gap-6">
+              <div className="relative w-full max-w-4xl mx-auto rounded-3xl bg-slate-900/80 border border-white/12 px-6 py-8 sm:px-10 sm:py-10 shadow-[0_30px_80px_rgba(0,0,0,0.35)] backdrop-blur-lg text-center flex flex-col gap-5 sm:gap-6 overflow-hidden">
+                <BackgroundPathsOverlay className="opacity-70 scale-[1.55] sm:scale-[1.3] translate-y-[-6%] mix-blend-screen" />
+                <div className="relative z-10 flex flex-col gap-5 sm:gap-6">
                 <motion.div
                   initial={{ opacity: 0, y: 18 }}
                   animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
@@ -117,6 +121,7 @@ export default function TitleSectionMobile({ targetDate = "2026-08-02T00:00:00" 
                     <CountdownTimer targetDate={targetDate} />
                   </div>
                 </motion.div>
+                </div>
               </div>
             </div>
           </div>
