@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import LoadingScreen from "@/components/atoms/loading-screen"
 import VideoSection from "@/components/organisms/video-section"
 import TitleSection from "@/components/organisms/landing-page"
+import TitleSectionMobile from "@/components/organisms/landing-page-mobile"
 import GuruCard from "@/components/molecules/guru-card"
 import GuruCarousel from "@/components/organisms/guru-carousel"
 import { useDeviceType } from "@/hooks/use-device-type"
@@ -110,7 +111,12 @@ export default function ShaderShowcase() {
       <LoadingScreen />
       {/* Title section - Scrollable overlay */}
       <div className="relative z-10 bg-title-section-bg h-screen block">
-        <TitleSection targetDate={targetDate} />
+        <div className="hidden md:block h-full">
+          <TitleSection targetDate={targetDate} />
+        </div>
+        <div className="md:hidden h-full">
+          <TitleSectionMobile targetDate={targetDate} />
+        </div>
       </div>
 
       {/* Video background - Fixed underneath */}

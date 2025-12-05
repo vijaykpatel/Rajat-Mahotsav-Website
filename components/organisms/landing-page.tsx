@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 
 import { useLoading } from "@/hooks/use-loading"
 import { useDeviceType } from "@/hooks/use-device-type"
-import { InfiniteSlider } from "@/components/ui/infinite-slider"
 import { timelineData } from "@/lib/timeline-data"
 import { getCloudflareImage, getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import CountdownTimer from "@/components/molecules/countdown-timer"
@@ -136,19 +135,19 @@ export default function TitleSection({ targetDate = "2026-08-02T00:00:00" }: Tit
           >
             <Link
               href="/registration"
-              className="group relative inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-white/90 hover:bg-white text-slate-900 rounded-full font-bold font-instrument-serif text-lg sm:text-xl shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300 hover:scale-105 active:scale-95"
+              className="w-full sm:w-[240px] inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 sm:px-6 sm:py-3.5 font-sans font-semibold text-base sm:text-lg text-white border border-white/35 bg-gradient-to-r from-white/25 via-white/12 to-white/10 backdrop-blur-xl shadow-[0_16px_50px_rgba(0,0,0,0.35)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.45)] transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5 whitespace-nowrap"
             >
               <span>Register Now</span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:translate-x-1 transition-transform">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 translate-x-[1px]">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
             </Link>
             <Link
               href="/latest-events"
-              className="group relative inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-orange-600/90 hover:bg-orange-600 text-white rounded-full font-bold font-instrument-serif text-lg sm:text-xl shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300 hover:scale-105 active:scale-95"
+              className="w-full sm:w-[240px] inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 sm:px-6 sm:py-3.5 font-sans font-semibold text-base sm:text-lg text-white border border-white/30 bg-gradient-to-r from-amber-200/12 via-white/8 to-white/6 backdrop-blur-xl shadow-[0_14px_45px_rgba(0,0,0,0.35)] hover:border-white/45 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5 whitespace-nowrap"
             >
               <span>View Latest Events</span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:translate-x-1 transition-transform">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 translate-x-[1px]">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
             </Link>
