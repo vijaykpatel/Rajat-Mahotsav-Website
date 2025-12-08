@@ -110,11 +110,11 @@ export default function ShaderShowcase() {
     <>
       <LoadingScreen />
       {/* Title section - Scrollable overlay */}
-      <div className="relative z-10 bg-title-section-bg h-screen block">
-        <div className="hidden md:block h-full">
+      <div className="relative z-10 bg-slate-900 min-h-screen block">
+        <div className="hidden md:block">
           <TitleSection targetDate={targetDate} />
         </div>
-        <div className="md:hidden h-full">
+        <div className="md:hidden h-screen">
           <TitleSectionMobile targetDate={targetDate} />
         </div>
       </div>

@@ -122,17 +122,6 @@ const HoverExpand_002 = ({
             onClick={() => setActiveImage(index)}
             onHoverStart={() => setActiveImage(index)}
           >
-            <AnimatePresence>
-              {activeImage === index && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10"
-                />
-              )}
-            </AnimatePresence>
-
             <img
               src={image.src}
               className="size-full object-cover"
