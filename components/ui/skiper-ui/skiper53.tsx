@@ -8,11 +8,11 @@ import "swiper/css/pagination";
 import "swiper/css/autoplay";
 
 import { cn } from "@/lib/utils";
+import { getCloudflareImageBiggest } from "@/lib/cdn-assets";
 
 interface SkiperImage {
   src: string;
   alt: string;
-  code: string;
 }
 
 interface Skiper53Props {
@@ -23,44 +23,36 @@ interface Skiper53Props {
 
 const defaultImages: SkiperImage[] = [
   {
-    src: "https://images.unsplash.com/photo-1604608672516-f1b9b1a2b6e0?w=800&h=600&fit=crop",
-    alt: "Temple celebration",
-    code: "# 01",
+    src: getCloudflareImageBiggest("1443ce4a-1e60-4a83-34d8-f8626fe74b00"),
+    alt: "Lord Shree Swaminarayan",
   },
   {
-    src: "https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=800&h=600&fit=crop",
+    src: getCloudflareImageBiggest("9dbe17dd-7e0b-49d1-984f-f8a4f20cd000"),
     alt: "Festival lights",
-    code: "# 02",
   },
   {
-    src: "https://images.unsplash.com/photo-1609619385002-f40f1df827eb?w=800&h=600&fit=crop",
+    src: getCloudflareImageBiggest("f3dcd6de-5334-48d0-c950-8d35e3f32f00"),
     alt: "Cultural celebration",
-    code: "# 03",
   },
   {
-    src: "https://images.unsplash.com/photo-1567443024551-f3e3cc2be870?w=800&h=600&fit=crop",
+    src: getCloudflareImageBiggest("9b13ec59-9484-4191-00db-04b31cda2a00"),
     alt: "Temple architecture",
-    code: "# 04",
   },
   {
-    src: "https://images.unsplash.com/photo-1590766940554-634f9d8c8f3f?w=800&h=600&fit=crop",
+    src: getCloudflareImageBiggest("6369e804-64ef-42fe-2bd7-ece677d9f200"),
     alt: "Prayer ceremony",
-    code: "# 05",
   },
   {
-    src: "https://images.unsplash.com/photo-1623944889288-cd147dbb517c?w=800&h=600&fit=crop",
+    src: getCloudflareImageBiggest("8e64636f-efca-468f-44a0-1004f7f7a600"),
     alt: "Devotional gathering",
-    code: "# 06",
   },
   {
-    src: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=800&h=600&fit=crop",
+    src: getCloudflareImageBiggest("b7366436-526c-437a-bf1b-6bae9cec4a00"),
     alt: "Sacred ceremony",
-    code: "# 07",
   },
   {
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+    src: getCloudflareImageBiggest("24e09951-0339-4eb7-b452-02aa945d2600"),
     alt: "Community event",
-    code: "# 08",
   },
 ];
 
@@ -140,23 +132,7 @@ const HoverExpand_002 = ({
                 />
               )}
             </AnimatePresence>
-            <AnimatePresence>
-              {activeImage === index && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  className="absolute flex h-full w-full flex-col items-end justify-end px-6 pb-8 z-20"
-                >
-                  <p className="text-left text-sm font-medium text-white/70">
-                    {image.alt}
-                  </p>
-                  <p className="text-left text-xs text-white/40 mt-1">
-                    {image.code}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+
             <img
               src={image.src}
               className="size-full object-cover"
