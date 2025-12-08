@@ -1,42 +1,10 @@
 "use client"
 
 import { motion } from "framer-motion"
-
 import { useLoading } from "@/hooks/use-loading"
-import { useDeviceType } from "@/hooks/use-device-type"
-import { timelineData } from "@/lib/timeline-data"
-import { getCloudflareImage, getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import CountdownTimer from "@/components/molecules/countdown-timer"
 import Link from "next/link"
-import { BackgroundPathsOverlay } from "@/components/ui/shadcn-io/background-paths"
-
-const allImages = Array.from(new Set([
-  ...timelineData.map(item => item.image),
-  getCloudflareImage("07f0293e-f384-4a9e-4364-4f7131263100"),
-  getCloudflareImage("f8a344b2-8045-4273-ceb7-bcd0a4f4de00"),
-  getCloudflareImage("1ea74bd4-3867-4016-8010-07622468a800"),
-  getCloudflareImage("dfea2296-fa83-4bdc-6b23-bb28434a5a00"),
-  getCloudflareImage("a8f9e2cb-feec-4bb0-15a5-29dd83648b00"),
-  getCloudflareImage("7e9de524-cfc3-49ca-96cf-105fba01ce00"),
-  getCloudflareImage("694c7ad0-74f9-4c2a-8b30-eb4dce7f8000"),
-  getCloudflareImage("b7160132-914d-4d1f-d6c4-48418b6aa000"),
-  getCloudflareImage("d1b8a1af-abfc-4a8c-b7e2-d4b1377ebf00"),
-  getCloudflareImage("bdf8f682-7bd3-4838-46c4-fe7ba1358b00"),
-  getCloudflareImage("a494c6be-02eb-4fc2-d6eb-9df81b294600"),
-  getCloudflareImage("8c1c0405-0c48-4f49-606b-a4260e2c5900"),
-  getCloudflareImage("001591ef-616d-40ae-7102-30f4bad78b00"),
-  getCloudflareImage("79c313ad-200d-448f-4609-0b70f44ac500"),
-  getCloudflareImage("944138d2-cc15-45f5-6eec-f4a6a3e30800"),
-  getCloudflareImage("1a01f892-a3ab-4715-496c-bd570de83b00"),
-  getCloudflareImage("428174c3-965c-4055-f941-381562cf8000"),
-  getCloudflareImage("b8af526f-08f9-4a68-9280-466597ed7400"),
-]))
-
-const columnImages = [
-  allImages.slice(0, 6),
-  allImages.slice(6, 12),
-  allImages.slice(12, 18),
-]
+import { Skiper53 } from "@/components/ui/skiper-ui/skiper53"
 
 interface TitleSectionProps {
   targetDate?: string
@@ -44,118 +12,232 @@ interface TitleSectionProps {
 
 export default function TitleSection({ targetDate = "2026-08-02T00:00:00" }: TitleSectionProps) {
   const { isLoading } = useLoading()
-  const deviceType = useDeviceType()
-  const backgroundImage = deviceType === 'mobile' ? getCloudflareImage("1112e22e-a7ba-4ca4-a05b-c9c9f8b17b00") : getCloudflareImageBiggest("1516f422-0e25-4258-e759-d8b94b773700")
 
   return (
-    <div className="h-full flex items-end justify-end relative pb-16 sm:pb-16 md:pb-16 lg:pb-16 xl:pb-16" style={{ /* backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' */ }}>
-      <BackgroundPathsOverlay className="-z-10 opacity-45 scale-110 [mask-image:radial-gradient(82%_82%_at_70%_50%,#fff_70%,transparent)]" />
-      {/* Slider columns on left side - Desktop only (>1280px) */}
-      <div className="hidden xl:flex absolute left-4 top-0 w-auto xl:max-w-[45vw] 2xl:max-w-[50vw] h-full z-20 gap-4">
-        {columnImages.map((images, col) => (
-          <div key={col} className="w-64 lg:w-72 xl:w-80 h-full overflow-hidden">
-            <div className={`flex flex-col gap-4 ${col === 1 ? 'animate-scroll-vertical-reverse' : 'animate-scroll-vertical-slower'}`} style={{ animationDelay: `${-col * 10}s` }}>
-              {images.concat(images).concat(images).map((image, idx) => (
-                <div key={`${col}-${idx}`} className="w-full h-64 sm:h-72 md:h-80 bg-white/10 backdrop-blur-sm rounded-lg flex-shrink-0 border border-white/20 overflow-hidden">
-                  <img src={image} alt="Gallery" className="w-full h-full object-cover" />
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className="relative h-screen overflow-hidden">
+      {/* Top fade overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800/40 to-transparent z-10 pointer-events-none" style={{ height: '20%' }} />
+
+      {/* Skiper53 - constrained to top 65% of viewport */}
       <motion.div
-        initial={{ opacity: 0, x: 100 }}
-        animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
-        transition={{ duration: 1, delay: !isLoading ? 0.8 : 0, ease: "easeOut" }}
-        className="pr-4 z-10 text-right sm:pr-8 w-full xl:max-w-[52vw] 2xl:max-w-[48vw] flex flex-col items-end"
+        initial={{ opacity: 0 }}
+        animate={!isLoading ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="absolute top-0 left-0 right-0 z-[1]"
+        style={{ height: "65vh" }}
       >
-        <div className="font-instrument-serif leading-tight">
-          <motion.h1
-            initial={{ opacity: 0, x: 50 }}
-            animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.8, delay: !isLoading ? 1 : 0, ease: "easeOut" }}
-            className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
-          >
-            Shree
-          </motion.h1>
-          <motion.h2
-            initial={{ opacity: 0, x: 50 }}
-            animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.8, delay: !isLoading ? 1.2 : 0, ease: "easeOut" }}
-            className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
-          >
-            Ghanshyam Maharaj
-          </motion.h2>
-          <motion.h3
-            initial={{ opacity: 0, x: 50 }}
-            animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.8, delay: !isLoading ? 1.4 : 0, ease: "easeOut" }}
-            className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
-          >
-            Rajat Pratishtha Mahotsav
-          </motion.h3>
-          <motion.p
-            initial={{ opacity: 0, x: 50 }}
-            animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.8, delay: !isLoading ? 1.6 : 0, ease: "easeOut" }}
-            className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
-          >
-            Shree Swaminarayan Temple
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, x: 50 }}
-            animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.8, delay: !isLoading ? 1.8 : 0, ease: "easeOut" }}
-            className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
-          >
-            Secaucus, New Jersey
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, x: 50 }}
-            animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.8, delay: !isLoading ? 1.8 : 0, ease: "easeOut" }}
-            className="leading-tight text-3xl font-semibold text-white drop-shadow-lg sm:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
-          >
-            celebrates 25 years
-          </motion.p>
+        <Skiper53 fullscreen className="bg-transparent" />
+      </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: !isLoading ? 2.2 : 0, ease: "easeOut" }}
-            className="mt-4 flex w-full sm:w-auto justify-end"
-          >
-            <CountdownTimer targetDate={targetDate} />
-          </motion.div>
+      {/* Smooth fade overlay on Skiper53 - blend edges to slate-900 */}
+      <div
+        className="absolute top-0 left-0 right-0 z-[2] pointer-events-none"
+        style={{
+          height: "60vh",
+          background: `
+            linear-gradient(to bottom, rgba(15, 23, 42, 0.6) 0%, transparent 12%, transparent 55%, rgba(15, 23, 42, 1) 100%),
+            linear-gradient(to right, rgba(15, 23, 42, 0.5) 0%, transparent 15%, transparent 85%, rgba(15, 23, 42, 0.5) 100%)
+          `
+        }}
+      />
 
+      {/* Bottom 40% - Glass card section */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 bg-slate-900" style={{ height: "40vh" }}>
+        <div className="h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
+          {/* MAIN CONTENT - Glass card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={!isLoading ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.8, delay: !isLoading ? 2.4 : 0, ease: "easeOut" }}
-            className="mt-4 mb-4 flex flex-col sm:flex-row gap-3 justify-end"
+            initial={{ y: 60, opacity: 0 }}
+            animate={!isLoading ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
+            transition={{ duration: 1.2, delay: !isLoading ? 0.6 : 0, ease: "easeOut" }}
+            className="w-full max-w-6xl xl:max-w-7xl pointer-events-none"
           >
-            <Link
-              href="/registration"
-              className="w-full sm:w-[240px] inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 sm:px-6 sm:py-3.5 font-sans font-semibold text-base sm:text-lg text-white border border-white/35 bg-gradient-to-r from-white/25 via-white/12 to-white/10 backdrop-blur-xl shadow-[0_16px_50px_rgba(0,0,0,0.35)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.45)] transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5 whitespace-nowrap"
-            >
-              <span>Register Now</span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 translate-x-[1px]">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </Link>
-            <Link
-              href="/latest-events"
-              className="w-full sm:w-[240px] inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 sm:px-6 sm:py-3.5 font-sans font-semibold text-base sm:text-lg text-white border border-white/30 bg-gradient-to-r from-amber-200/12 via-white/8 to-white/6 backdrop-blur-xl shadow-[0_14px_45px_rgba(0,0,0,0.35)] hover:border-white/45 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5 whitespace-nowrap"
-            >
-              <span>View Latest Events</span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 translate-x-[1px]">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </Link>
+            {/* Liquid Glass Card Container */}
+            <div className="relative">
+              {/* Subtle ambient glow effect behind card */}
+              <motion.div
+                animate={{
+                  opacity: [0.15, 0.25, 0.15],
+                  scale: [1, 1.01, 1],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute -inset-1 rounded-3xl blur-2xl opacity-30"
+                style={{
+                  background: "linear-gradient(135deg, rgba(255, 180, 50, 0.15) 0%, rgba(255, 140, 0, 0.1) 50%, rgba(212, 175, 55, 0.15) 100%)"
+                }}
+              />
+
+              {/* Main glass card - subtle blend with background */}
+              <div
+                className="relative rounded-2xl sm:rounded-3xl overflow-hidden"
+                style={{
+                  background: "linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.03) 100%)",
+                  backdropFilter: "blur(12px) saturate(130%)",
+                  WebkitBackdropFilter: "blur(12px) saturate(130%)",
+                  border: "1px solid rgba(255, 255, 255, 0.06)",
+                  boxShadow: `
+                    0 4px 20px rgba(0, 0, 0, 0.15),
+                    0 0 0 1px rgba(255, 255, 255, 0.02),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.04)
+                  `
+                }}
+              >
+
+                {/* Card content - Horizontal layout */}
+                <div className="relative px-4 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-6">
+                  {/* Two-column layout for desktop */}
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:gap-4 xl:gap-8">
+
+                    {/* LEFT COLUMN - Event info */}
+                    <div className="flex-1 lg:pr-4 xl:pr-6">
+                      {/* Badge */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.8, delay: !isLoading ? 0.8 : 0 }}
+                        className="flex justify-center lg:justify-start mb-3"
+                      >
+                        <span
+                          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase px-5 py-2 sm:px-6 sm:py-2.5 rounded-full border"
+                          style={{
+                            borderColor: "rgba(255, 180, 50, 0.4)",
+                            background: "rgba(255, 180, 50, 0.12)",
+                            color: "#FFB832",
+                            boxShadow: "0 4px 20px rgba(255, 180, 50, 0.15)"
+                          }}
+                        >
+                          ✦ Celebrating 25 Years ✦
+                        </span>
+                      </motion.div>
+
+                      {/* Main title */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                        transition={{ duration: 1, delay: !isLoading ? 1 : 0, ease: "easeOut" }}
+                        className="text-center lg:text-left mb-2"
+                      >
+                        <h1
+                          className="font-instrument-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight whitespace-nowrap"
+                          style={{
+                            background: "linear-gradient(135deg, #FFD700 0%, #FFA500 30%, #FF8C00 60%, #D4AF37 100%)",
+                            WebkitBackgroundClip: "text",
+                            WebkitTextFillColor: "transparent",
+                            backgroundClip: "text",
+                            filter: "drop-shadow(0 2px 20px rgba(255, 165, 0, 0.4))"
+                          }}
+                        >
+                          Shree Ghanshyam Maharaj
+                        </h1>
+                      </motion.div>
+
+                      {/* Event name */}
+                      <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.8, delay: !isLoading ? 1.2 : 0, ease: "easeOut" }}
+                        className="text-center lg:text-left text-xl sm:text-2xl md:text-3xl lg:text-4xl font-instrument-serif tracking-wide mb-2"
+                        style={{
+                          color: "rgba(255, 255, 255, 0.95)",
+                          textShadow: "0 2px 10px rgba(0, 0, 0, 0.3)"
+                        }}
+                      >
+                        Rajat Pratishtha Mahotsav
+                      </motion.p>
+
+                      {/* Location */}
+                      <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.8, delay: !isLoading ? 1.3 : 0, ease: "easeOut" }}
+                        className="text-center lg:text-left text-lg sm:text-xl md:text-2xl lg:text-3xl font-instrument-serif tracking-wide"
+                        style={{
+                          color: "rgba(255, 255, 255, 0.95)",
+                        }}
+                      >
+                        Shree Swaminarayan Temple
+                      </motion.p>
+                      <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.8, delay: !isLoading ? 1.3 : 0, ease: "easeOut" }}
+                        className="text-center lg:text-left text-lg sm:text-xl md:text-2xl lg:text-3xl font-instrument-serif tracking-wide"
+                        style={{
+                          color: "rgba(255, 255, 255, 0.95)",
+                        }}
+                      >
+                        Secaucus, New Jersey
+                      </motion.p>
+                    </div>
+
+                    {/* Vertical divider for desktop */}
+                    <div className="hidden lg:block w-px bg-white/10 self-stretch my-2" />
+
+                    {/* RIGHT COLUMN - Countdown & Buttons */}
+                    <div className="flex-shrink-0 lg:pl-6 mt-4 lg:mt-0">
+                      {/* Countdown timer */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.8, delay: !isLoading ? 1.4 : 0, ease: "easeOut" }}
+                        className="flex justify-center lg:justify-start mb-4"
+                      >
+                        <CountdownTimer targetDate={targetDate} />
+                      </motion.div>
+
+                      {/* CTA Buttons - stacked on right column */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.8, delay: !isLoading ? 1.5 : 0, ease: "easeOut" }}
+                        className="flex flex-row gap-3 justify-center lg:justify-start pointer-events-auto"
+                      >
+                        <Link
+                          href="/registration"
+                          className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 font-sans font-bold text-sm sm:text-base text-slate-900 overflow-hidden transition-all rounded-full border duration-300 hover:-translate-y-0.5 hover:scale-[1.02]"
+                          style={{
+                            borderColor: "rgba(255, 180, 50, 0.4)",
+                            background: "rgba(255, 180, 50, 0.12)",
+                            color: "#FFB832",
+                            boxShadow: "0 4px 20px rgba(255, 180, 50, 0.15)"
+                          }}
+                        >
+                          <span className="relative z-10">Register Now</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-1 transition-transform">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                          </svg>
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                        </Link>
+
+                        <Link
+                          href="/latest-events"
+                          className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 font-sans font-bold text-sm sm:text-base text-slate-900 overflow-hidden transition-all rounded-full border duration-300 hover:-translate-y-0.5 hover:scale-[1.02]"
+                          style={{
+                            borderColor: "rgba(255, 180, 50, 0.4)",
+                            background: "rgba(255, 180, 50, 0.12)",
+                            color: "#FFB832",
+                            boxShadow: "0 4px 20px rgba(255, 180, 50, 0.15)"
+                          }}
+                        >
+                          <span className="relative z-10">View Events</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-1 transition-transform">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                          </svg>
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                        </Link>
+                      </motion.div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
-      </motion.div>
-    </div >
+      </div>
+    </div>
   )
 }
