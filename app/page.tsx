@@ -114,7 +114,7 @@ export default function ShaderShowcase() {
         <div className="hidden md:block">
           <TitleSection targetDate={targetDate} />
         </div>
-        <div className="md:hidden h-screen">
+        <div className="md:hidden min-h-screen">
           <TitleSectionMobile targetDate={targetDate} />
         </div>
       </div>

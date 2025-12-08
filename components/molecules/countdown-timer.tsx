@@ -44,7 +44,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, staggerChildren: 0.1 }}
-            className="flex w-full justify-between sm:w-auto sm:justify-start sm:gap-3 text-white"
+            className="flex justify-center gap-2 sm:gap-3 text-white"
         >
             <TimeUnit value={timeLeft.days} label="Days" />
             <TimeUnit value={timeLeft.hours} label="Hours" />

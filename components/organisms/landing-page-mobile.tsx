@@ -2,130 +2,308 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { useState } from "react"
 
 import { useLoading } from "@/hooks/use-loading"
 import CountdownTimer from "@/components/molecules/countdown-timer"
-import { BackgroundPathsOverlay } from "@/components/ui/shadcn-io/background-paths"
+import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
 
 interface TitleSectionMobileProps {
   targetDate?: string
+}
+
+// Mobile image carousel images (same as Skiper53)
+const carouselImages = [
+  {
+    src: getCloudflareImageBiggest("1443ce4a-1e60-4a83-34d8-f8626fe74b00"),
+    alt: "Lord Shree Swaminarayan",
+  },
+  {
+    src: getCloudflareImageBiggest("9dbe17dd-7e0b-49d1-984f-f8a4f20cd000"),
+    alt: "Festival lights",
+  },
+  {
+    src: getCloudflareImageBiggest("f3dcd6de-5334-48d0-c950-8d35e3f32f00"),
+    alt: "Cultural celebration",
+  },
+  {
+    src: getCloudflareImageBiggest("9b13ec59-9484-4191-00db-04b31cda2a00"),
+    alt: "Temple architecture",
+  },
+  {
+    src: getCloudflareImageBiggest("6369e804-64ef-42fe-2bd7-ece677d9f200"),
+    alt: "Prayer ceremony",
+  },
+  {
+    src: getCloudflareImageBiggest("8e64636f-efca-468f-44a0-1004f7f7a600"),
+    alt: "Devotional gathering",
+  },
+  {
+    src: getCloudflareImageBiggest("b7366436-526c-437a-bf1b-6bae9cec4a00"),
+    alt: "Sacred ceremony",
+  },
+  {
+    src: getCloudflareImageBiggest("24e09951-0339-4eb7-b452-02aa945d2600"),
+    alt: "Community event",
+  },
+]
+
+// Mobile-optimized vertical image carousel with tap-to-expand
+function MobileImageCarousel({ className }: { className?: string }) {
+  const [activeIndex, setActiveIndex] = useState<number>(3)
+  const imageCount = carouselImages.length
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, delay: 0.3 }}
+      className={`flex flex-row w-full h-full overflow-hidden ${className}`}
+    >
+      {carouselImages.map((image, index) => {
+        const isActive = activeIndex === index
+        // Calculate widths: active gets 35%, others share rest
+        const activeWidth = 35
+        const inactiveWidth = (100 - activeWidth) / (imageCount - 1)
+
+        return (
+          <motion.div
+            key={index}
+            className="relative cursor-pointer overflow-hidden flex-shrink-0 h-full"
+            initial={{ width: `${100 / imageCount}%` }}
+            animate={{
+              width: isActive ? `${activeWidth}%` : `${inactiveWidth}%`
+            }}
+            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            onClick={() => setActiveIndex(index)}
+          >
+            <img
+              src={image.src}
+              className="w-full h-full object-cover"
+              alt={image.alt}
+            />
+          </motion.div>
+        )
+      })}
+    </motion.div>
+  )
 }
 
 export default function TitleSectionMobile({ targetDate = "2026-08-02T00:00:00" }: TitleSectionMobileProps) {
   const { isLoading } = useLoading()
 
   return (
-    <div className="relative h-full w-full pb-16 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-950/92 to-slate-900 hero-grain" style={{ paddingTop: "calc(var(--navbar-height) - 28px)" }}>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="hero-orb-base hero-orb-1" />
-        <div className="hero-orb-base hero-orb-2" />
-      </div>
-      <div className="hero-ambient" />
-      <div className="hero-lines" />
-      <BackgroundPathsOverlay className="opacity-40 scale-[1.35] sm:scale-[1.18] translate-y-[-6%] [mask-image:radial-gradient(95%_85%_at_50%_40%,#fff_65%,transparent)]" />
-      <div className="hero-noise" />
+    <div className="relative h-screen overflow-hidden">
+      {/* Top fade overlay */}
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800/40 to-transparent z-10 pointer-events-none"
+        style={{ height: '15%' }}
+      />
 
-      <div className="relative z-20 flex h-full items-start pt-0 pb-8 sm:pb-10 lg:pb-12">
-        <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          animate={!isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 60 }}
-          transition={{ duration: 0.9, delay: !isLoading ? 0.5 : 0, ease: "easeOut" }}
-          className="w-full"
-        >
-          <div className="hero-shell z-10">
-            <div className="relative w-full max-w-5xl mx-auto rounded-[32px] border border-white/15 bg-white/[0.04] shadow-[0_40px_120px_rgba(0,0,0,0.35)] backdrop-blur-xl px-3 py-3 sm:px-4 sm:py-4">
-              <div className="relative w-full max-w-4xl mx-auto rounded-3xl bg-slate-900/80 border border-white/12 px-6 py-8 sm:px-10 sm:py-10 shadow-[0_30px_80px_rgba(0,0,0,0.35)] backdrop-blur-lg text-center flex flex-col gap-5 sm:gap-6 overflow-hidden">
-                <BackgroundPathsOverlay className="opacity-70 scale-[1.55] sm:scale-[1.3] translate-y-[-6%] mix-blend-screen" />
-                <div className="relative z-10 flex flex-col gap-5 sm:gap-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-                  transition={{ duration: 0.7, delay: !isLoading ? 0.7 : 0, ease: "easeOut" }}
-                  className="flex flex-col gap-1.5 sm:gap-2 font-instrument-serif leading-tight"
-                >
-                  <motion.h1
+      {/* Mobile Image Carousel - constrained to top 45% of viewport */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={!isLoading ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="absolute top-0 left-0 right-0 z-[1]"
+        style={{ height: "45vh" }}
+      >
+        <MobileImageCarousel className="bg-transparent" />
+      </motion.div>
+
+      {/* Smooth fade overlay on carousel */}
+      <div
+        className="absolute top-0 left-0 right-0 z-[2] pointer-events-none"
+        style={{
+          height: "45vh",
+          background: `
+            linear-gradient(to bottom, rgba(15, 23, 42, 0.6) 0%, transparent 15%, transparent 50%, rgba(15, 23, 42, 1) 100%),
+            linear-gradient(to right, rgba(15, 23, 42, 0.4) 0%, transparent 10%, transparent 90%, rgba(15, 23, 42, 0.4) 100%)
+          `
+        }}
+      />
+
+      {/* Bottom 55% - Glass card section */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 bg-slate-900" style={{ height: "55vh" }}>
+        <div className="h-full flex items-start justify-center px-4 pt-4">
+          {/* MAIN CONTENT - Glass card */}
+          <motion.div
+            initial={{ y: 40, opacity: 0 }}
+            animate={!isLoading ? { y: 0, opacity: 1 } : { y: 40, opacity: 0 }}
+            transition={{ duration: 1.2, delay: !isLoading ? 0.6 : 0, ease: "easeOut" }}
+            className="w-full max-w-lg"
+          >
+            {/* Liquid Glass Card Container */}
+            <div className="relative">
+              {/* Subtle ambient glow effect behind card */}
+              <motion.div
+                animate={{
+                  opacity: [0.15, 0.25, 0.15],
+                  scale: [1, 1.01, 1],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="absolute -inset-1 rounded-3xl blur-2xl opacity-30"
+                style={{
+                  background: "linear-gradient(135deg, rgba(255, 180, 50, 0.15) 0%, rgba(255, 140, 0, 0.1) 50%, rgba(212, 175, 55, 0.15) 100%)"
+                }}
+              />
+
+              {/* Main glass card - subtle blend with background */}
+              <div
+                className="relative rounded-2xl overflow-hidden"
+                style={{
+                  background: "linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.03) 100%)",
+                  backdropFilter: "blur(12px) saturate(130%)",
+                  WebkitBackdropFilter: "blur(12px) saturate(130%)",
+                  border: "1px solid rgba(255, 255, 255, 0.06)",
+                  boxShadow: `
+                    0 4px 20px rgba(0, 0, 0, 0.15),
+                    0 0 0 1px rgba(255, 255, 255, 0.02),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.04)
+                  `
+                }}
+              >
+                {/* Card content */}
+                <div className="relative px-4 py-5">
+                  {/* Badge */}
+                  <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.8, delay: !isLoading ? 0.9 : 0, ease: "easeOut" }}
-                    className="leading-tight text-3xl sm:text-4xl font-semibold text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+                    transition={{ duration: 0.8, delay: !isLoading ? 0.8 : 0 }}
+                    className="flex justify-center mb-4"
                   >
-                    Shree Ghanshyam Maharaj
-                  </motion.h1>
-                  <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.8, delay: !isLoading ? 1.05 : 0, ease: "easeOut" }}
-                    className="leading-tight text-3xl sm:text-4xl font-semibold text-amber-100 drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+                    <span
+                      className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase px-4 py-2 rounded-full border"
+                      style={{
+                        borderColor: "rgba(255, 180, 50, 0.4)",
+                        background: "rgba(255, 180, 50, 0.12)",
+                        color: "#FFB832",
+                        boxShadow: "0 4px 20px rgba(255, 180, 50, 0.15)"
+                      }}
+                    >
+                      ✦ Celebrating 25 Years ✦
+                    </span>
+                  </motion.div>
+
+                  {/* Main title with gold gradient */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                    transition={{ duration: 1, delay: !isLoading ? 1 : 0, ease: "easeOut" }}
+                    className="text-center mb-2"
                   >
-                    Rajat Pratishtha Mahotsav
-                  </motion.h2>
+                    <h1
+                      className="font-instrument-serif text-3xl font-bold leading-tight"
+                      style={{
+                        background: "linear-gradient(135deg, #FFD700 0%, #FFA500 30%, #FF8C00 60%, #D4AF37 100%)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text",
+                        filter: "drop-shadow(0 2px 20px rgba(255, 165, 0, 0.4))"
+                      }}
+                    >
+                      Shree Ghanshyam Maharaj
+                    </h1>
+                  </motion.div>
+
+                  {/* Event name */}
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.8, delay: !isLoading ? 1.2 : 0, ease: "easeOut" }}
-                    className="leading-tight text-3xl sm:text-4xl font-semibold text-slate-100 drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+                    className="text-center text-2xl font-instrument-serif tracking-wide mb-1"
+                    style={{
+                      color: "rgba(255, 255, 255, 0.95)",
+                      textShadow: "0 2px 10px rgba(0, 0, 0, 0.3)"
+                    }}
+                  >
+                    Rajat Pratishtha Mahotsav
+                  </motion.p>
+
+                  {/* Location */}
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.8, delay: !isLoading ? 1.3 : 0, ease: "easeOut" }}
+                    className="text-center text-xl font-instrument-serif tracking-wide"
+                    style={{
+                      color: "rgba(255, 255, 255, 0.95)",
+                    }}
                   >
                     Shree Swaminarayan Temple
                   </motion.p>
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.8, delay: !isLoading ? 1.35 : 0, ease: "easeOut" }}
-                    className="leading-tight text-3xl sm:text-4xl font-semibold text-slate-100 drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+                    transition={{ duration: 0.8, delay: !isLoading ? 1.3 : 0, ease: "easeOut" }}
+                    className="text-center text-xl font-instrument-serif tracking-wide mb-5"
+                    style={{
+                      color: "rgba(255, 255, 255, 0.95)",
+                    }}
                   >
                     Secaucus, New Jersey
                   </motion.p>
-                  <motion.p
+
+                  {/* Countdown timer */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.8, delay: !isLoading ? 1.4 : 0, ease: "easeOut" }}
+                    className="flex justify-center mb-5"
+                  >
+                    <CountdownTimer targetDate={targetDate} />
+                  </motion.div>
+
+                  {/* CTA Buttons */}
+                  <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.8, delay: !isLoading ? 1.5 : 0, ease: "easeOut" }}
-                    className="leading-tight text-3xl sm:text-4xl font-semibold text-slate-200 drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+                    className="flex flex-row justify-center gap-5"
                   >
-                    Celebrates 25 years
-                  </motion.p>
-                </motion.div>
+                    <Link
+                      href="/registration"
+                      className="group relative inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-sans font-bold text-sm overflow-hidden transition-all border duration-300 hover:-translate-y-0.5 active:scale-[0.98]"
+                      style={{
+                        borderColor: "rgba(255, 180, 50, 0.4)",
+                        background: "rgba(255, 180, 50, 0.12)",
+                        color: "#FFB832",
+                        boxShadow: "0 4px 20px rgba(255, 180, 50, 0.15)"
+                      }}
+                    >
+                      <span className="relative z-10">Register Now</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 relative z-10">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                    </Link>
 
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={!isLoading ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.8, delay: !isLoading ? 1.8 : 0, ease: "easeOut" }}
-                  className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center w-full"
-                >
-                  <Link
-                    href="/registration"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-4 sm:px-7 sm:py-4 font-semibold text-white border border-white/35 bg-gradient-to-r from-white/25 via-white/12 to-white/10 backdrop-blur-xl shadow-[0_16px_50px_rgba(0,0,0,0.35)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.45)] transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5"
-                  >
-                    <span>Register Now</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 translate-x-[1px]">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </Link>
-                  <Link
-                    href="/latest-events"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-4 sm:px-7 sm:py-4 font-semibold text-white border border-white/30 bg-gradient-to-r from-amber-200/12 via-white/8 to-white/6 backdrop-blur-xl shadow-[0_14px_45px_rgba(0,0,0,0.35)] hover:border-white/45 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0.5"
-                  >
-                    <span>View Latest Events</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 translate-x-[1px]">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </Link>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={!isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-                  transition={{ duration: 0.8, delay: !isLoading ? 2 : 0, ease: "easeOut" }}
-                  className="w-full flex justify-center mt-1"
-                >
-                  <div className="inline-flex items-center gap-4 sm:gap-6 rounded-2xl border border-amber-200/25 bg-slate-900/70 px-4 py-4 sm:px-8 sm:py-5 shadow-[0_18px_50px_rgba(0,0,0,0.4)] backdrop-blur-md w-full max-w-[calc(100%-1.5rem)] sm:max-w-[720px] justify-center">
-                    <CountdownTimer targetDate={targetDate} />
-                  </div>
-                </motion.div>
+                    <Link
+                      href="/latest-events"
+                      className="group relative inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-sans font-bold text-sm overflow-hidden transition-all border duration-300 hover:-translate-y-0.5 active:scale-[0.98]"
+                      style={{
+                        borderColor: "rgba(255, 180, 50, 0.4)",
+                        background: "rgba(255, 180, 50, 0.12)",
+                        color: "#FFB832",
+                        boxShadow: "0 4px 20px rgba(255, 180, 50, 0.15)"
+                      }}
+                    >
+                      <span className="relative z-10">View Events</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 relative z-10">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                    </Link>
+                  </motion.div>
                 </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </div>
   )
