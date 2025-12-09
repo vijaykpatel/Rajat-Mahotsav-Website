@@ -1,10 +1,10 @@
 "use client"
-
+import Link from "next/link"
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { useDeviceType } from "@/hooks/use-device-type"
-import { Clock, Footprints, BookOpenText, Apple } from "lucide-react"
+import { Clock, Footprints, BookOpenText, Apple, Send } from "lucide-react"
 import { GiPrayerBeads } from "react-icons/gi"
 import { PiHandsPraying } from "react-icons/pi"
 import { ImageMarquee } from "@/components/organisms/image-marquee"
@@ -23,16 +23,16 @@ const sevaGoals = [
 ]
 
 const parayans = [
-  { 
-    icon: BookOpenText, 
-    title: "Sadachar Sandesh", 
+  {
+    icon: BookOpenText,
+    title: "Sadachar Sandesh",
     description: "Teachings of Prem Murti Acharya Swamishree Maharaj",
     gujaratiLink: "https://www.swaminarayangadi.com/publications/books/scriptures/english/sadachar-sandesh-gujarati",
     englishLink: "https://www.swaminarayangadi.com/publications/books/scriptures/english/sadachar-sandesh-english"
   },
-  { 
-    icon: BookOpenText, 
-    title: "Harignanamrut Kavya", 
+  {
+    icon: BookOpenText,
+    title: "Harignanamrut Kavya",
     description: "Kirtans composed by Jeevanpran Shree Muktajeevan Swamibapa",
     gujaratiLink: "https://www.swaminarayangadi.com/publications/books/kirtanbooks/gujarati/shree-harignanamurt-kavya-amrut-bindu-1",
     gujaratiLink2: "https://www.swaminarayangadi.com/publications/books/kirtanbooks/gujarati/shree-harignanamurt-kavya-amrut-bindu-2",
@@ -40,9 +40,9 @@ const parayans = [
     gujaratiLink4: "https://www.swaminarayangadi.com/publications/books/kirtanbooks/gujarati/shree-harignanamurt-kavya-amrut-bindu-4",
     englishLink: "https://www.swaminarayangadi.com/publications/books/kirtanbooks/transliteration/shree-harignanamrut-kavya-transliteration"
   },
-  { 
-    icon: BookOpenText, 
-    title: "Bapashree ni Vato", 
+  {
+    icon: BookOpenText,
+    title: "Bapashree ni Vato",
     description: "Discourses by Jeevanpran Shree Abji Bapashree",
     gujaratiLink: "https://www.swaminarayangadi.com/publications/books/scriptures/gujarati/shree-abji-bapashree-ni-vato-bhag-1",
     gujaratiLink2: "https://www.swaminarayangadi.com/publications/books/scriptures/gujarati/shree-abji-bapashree-ni-vato-bhag-2",
@@ -93,11 +93,11 @@ export default function SpiritualSevaPage() {
   }, [])
 
   return (
-    <div 
+    <div
       className={`min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 page-bg-extend transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
       data-page="spiritual-seva"
     >
-      
+
       <section className="min-h-screen">
         <div className="relative z-10">
           <div className="mb-36">
@@ -107,7 +107,7 @@ export default function SpiritualSevaPage() {
               description=""
               isLoaded={isLoaded}
             />
-            
+
             {/* Custom Description */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -121,7 +121,7 @@ export default function SpiritualSevaPage() {
             </motion.div>
           </div>
 
-          <ResponsiveImageGallery images={whyWeServeImages} />
+          <ResponsiveImageGallery images={whyWeServeImages as any} />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-16">
             <div className="space-y-8">
@@ -272,16 +272,21 @@ export default function SpiritualSevaPage() {
                   <h3 className="text-2xl md:text-3xl font-bold text-gray-800 text-center mb-6">
                     Seva Tracking & Checkpoint
                   </h3>
-                  <div className="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed text-justify">
+                  <div className="space-y-6 text-lg md:text-xl text-gray-700 leading-relaxed text-justify">
                     <p>
-                      We will begin collecting seva submissions soon to track our collective spiritual progress throughout the Rajat Mahotsav period.
+                      Track your collective spiritual progress throughout the Rajat Mahotsav period by submitting your seva.
                     </p>
                     <p>
                       <span className="font-bold text-orange-600">January 1st Checkpoint:</span> We will conduct a live review of individual totals, serving as an important milestone to celebrate seva completed and inspire continued dedication to our spiritual goals.
                     </p>
-                    <p>
-                      This checkpoint will help motivate everyone to maintain momentum and complete their monthly seva targets as we journey together toward our collective spiritual aspirations.
-                    </p>
+                    <div className="flex justify-center pt-2">
+                      <Link href="/spiritual-seva/submit">
+                        <button className="inline-flex items-center justify-center px-8 py-4 text-xl font-bold text-white bg-gradient-to-r from-orange-600 to-red-600 rounded-full shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 hover:from-orange-700 hover:to-red-700">
+                          <Send className="w-6 h-6 mr-3" />
+                          SUBMIT YOUR SEVA!
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </motion.div>
               </div>

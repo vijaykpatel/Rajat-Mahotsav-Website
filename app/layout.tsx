@@ -91,7 +91,7 @@ html {
 }
         `}</style>
       </head>
-      <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoGujarati.variable}`}>
+      <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoGujarati.variable}`} suppressHydrationWarning>
         <LoadingProvider>
           <AudioProvider>
             <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
