@@ -73,7 +73,7 @@ export default function GuestServicesPage() {
       travelTime: "8 min drive",
       directionsLink: "https://maps.app.goo.gl/CVaAykRG1HQRv9hA9",
       lastDay: "Friday, June 12, 2026",
-      pricePerNight: "$155 - $165",
+      pricePerNight: "$198",
       images: [
         "https://cdn.njrajatmahotsav.com/hotels/courtyard/IMG_6229.jpg",
         "https://cdn.njrajatmahotsav.com/hotels/courtyard/IMG_6230.jpg",
