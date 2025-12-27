@@ -41,7 +41,6 @@ const scheduleData: ScheduleDay[] = [
     events: [
       { time: "Morning", title: "Gnan Sathe Gamat" },
       { time: "Afternoon", title: "Lunch" },
-      { time: "Afternoon", title: "Ladies Program" },
       { time: "Evening", title: "Shakotsav" },
       { time: "Evening", title: "Dinner" }
     ],
