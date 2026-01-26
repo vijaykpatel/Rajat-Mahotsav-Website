@@ -50,8 +50,9 @@ export function StandardPageHeader({ title, subtitle, description, isLoaded = tr
                 index < wordIndex ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
               }`}
               style={{ transitionDelay: `${400 + index * 20}ms` }}
-              dangerouslySetInnerHTML={{ __html: word }}
-            />
+            >
+              {word}
+            </span>
           ))}
         </p>
       )}
