@@ -108,10 +108,6 @@ export default function RegistrationPage() {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true)
-    console.log('Environment check:', {
-      url: process.env.NEXT_PUBLIC_SUPABASE_URL,
-      keyExists: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    })
 
     try {
       let nationalNumber = data.phone
@@ -121,8 +117,8 @@ export default function RegistrationPage() {
           if (parsed) {
             nationalNumber = parsed.nationalNumber
           }
-        } catch (error) {
-          console.log("Phone parsing error:", error)
+        } catch {
+          // Failed to parse phone number, use as-is
         }
       }
 
@@ -140,8 +136,6 @@ export default function RegistrationPage() {
         arrival_date: data.dateRange.start?.toString(),
         departure_date: data.dateRange.end?.toString()
       }
-
-      console.log('Attempting to upsert:', dbData)
 
       // First, check if record exists
       const { data: existingRecord } = await supabase
@@ -169,8 +163,6 @@ export default function RegistrationPage() {
           .insert([dbData])
         error = insertError
       }
-
-      console.log('Supabase response:', { error })
 
       if (!error) {
         const isUpdate = existingRecord !== null
@@ -543,8 +535,8 @@ export default function RegistrationPage() {
                                         if (parsed) {
                                           setValue("phoneCountryCode", `+${parsed.countryCallingCode}`, { shouldValidate: true })
                                         }
-                                      } catch (error) {
-                                        console.log("Phone parsing error:", error)
+                                      } catch {
+                                        // Failed to parse phone number
                                       }
                                     }
                                   }}
