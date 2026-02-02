@@ -102,7 +102,7 @@ export default function GuestServicesPage() {
       blockDates: "July 25 - Aug 2, 2026",
       travelTime: "8 min drive",
       directionsLink: "https://maps.app.goo.gl/vCjZHXt5UcwZsxvb8",
-      lastDay: "Friday, June 12, 2026",
+      lastDay: "Friday, May 1, 2026",
       pricePerNight: "$149",
       images: [
         "https://cdn.njrajatmahotsav.com/hotels/ramada/Screenshot%202025-12-14%20at%205.13.48%E2%80%AFPM.png",
