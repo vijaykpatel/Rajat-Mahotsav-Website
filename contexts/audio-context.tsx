@@ -31,7 +31,8 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     // audioRef.current = new Audio('https://cdn.njrajatmahotsav.com/audio_files/prathna_audio.mp3')
     audioRef.current = new Audio('https://cdn.njrajatmahotsav.com/audio_files/prathna%2Banthem.mp3')
     audioRef.current.preload = 'auto'
-    audioRef.current.volume = 1
+    // Start muted until explicit user interaction.
+    audioRef.current.volume = 0
 
     const audio = audioRef.current
 

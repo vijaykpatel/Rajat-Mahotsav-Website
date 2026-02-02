@@ -459,6 +459,20 @@
   object-fit: cover;
 }
 
+@keyframes float-attention {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float-attention {
+  animation: float-attention 3.5s ease-in-out infinite;
+}
+
 @keyframes scroll-vertical {
   0% {
     transform: translateY(0);
