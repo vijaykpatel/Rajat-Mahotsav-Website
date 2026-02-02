@@ -8,12 +8,16 @@ import { FloatingButton } from './atoms/floating-button'
 export function AudioPlayer() {
   const { toggle, isPlaying, isLoaded } = useAudioContext()
   const [isDarkBackground, setIsDarkBackground] = useState(true)
+  const [hasScrolled, setHasScrolled] = useState(false)
   const rafRef = useRef<number>()
 
   useEffect(() => {
     let ticking = false
     
     const handleScroll = () => {
+      if (!hasScrolled && window.scrollY > 0) {
+        setHasScrolled(true)
+      }
       if (!ticking) {
         requestAnimationFrame(() => {
           if (rafRef.current) cancelAnimationFrame(rafRef.current)
@@ -45,18 +49,20 @@ export function AudioPlayer() {
       window.removeEventListener('scroll', handleScroll)
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
-  }, [])
+  }, [hasScrolled])
 
   return (
-    <FloatingButton
-      onClick={toggle}
-      disabled={!isLoaded}
-      isDarkBackground={isDarkBackground}
-      isVisible={isLoaded}
-      className="fixed bottom-6 right-18 z-40"
-      aria-label={isPlaying ? 'Pause audio' : 'Play audio'}
-    >
-      {isPlaying ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
-    </FloatingButton>
+    <div className="fixed bottom-6 right-18 z-40">
+      <FloatingButton
+        onClick={toggle}
+        disabled={!isLoaded}
+        isDarkBackground={isDarkBackground}
+        isVisible={isLoaded}
+        className={!hasScrolled ? 'animate-float-attention' : undefined}
+        aria-label={isPlaying ? 'Pause audio' : 'Play audio'}
+      >
+        {isPlaying ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
+      </FloatingButton>
+    </div>
   )
 }

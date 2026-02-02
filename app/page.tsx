@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
-import LoadingScreen from "@/components/atoms/loading-screen"
 import VideoSection from "@/components/organisms/video-section"
 import TitleSection from "@/components/organisms/landing-page"
 import TitleSectionMobile from "@/components/organisms/landing-page-mobile"
@@ -12,7 +11,6 @@ import { useDeviceType } from "@/hooks/use-device-type"
 import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import "@/styles/registration-theme.css"
 
-import { useLoading } from "@/hooks/use-loading"
 import PratisthaStory from "@/components/organisms/pratishta-story"
 import AashirwadSection from "@/components/organisms/aashirwad-section"
 import VideoBackgroundSection from "@/components/organisms/video-background-section"
@@ -36,7 +34,6 @@ export default function ShaderShowcase() {
   const targetDate = '2026-08-02T00:00:00';
   const deviceType = useDeviceType();
 
-  const { isLoading } = useLoading();
   const [isLoaded, setIsLoaded] = useState(false)
   const [isPanActive, setIsPanActive] = useState(false)
   const [cardsVisible, setCardsVisible] = useState(false)
@@ -52,14 +49,6 @@ export default function ShaderShowcase() {
     const timer = setTimeout(() => setIsLoaded(true), 100)
     return () => clearTimeout(timer)
   }, [])
-
-  useEffect(() => {
-    if (!isLoading) {
-      window.scrollTo(0, 0)
-    }
-  }, [isLoading])
-
-
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -108,7 +97,6 @@ export default function ShaderShowcase() {
 
   return (
     <>
-      <LoadingScreen />
       {/* Title section - Scrollable overlay */}
       <div className="relative z-10 bg-slate-900 min-h-screen block">
         <div className="hidden md:block">
