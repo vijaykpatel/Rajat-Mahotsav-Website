@@ -9,7 +9,7 @@ export default function VideoBackgroundSection() {
   
   return (
     <>
-      <div className="w-screen h-screen relative overflow-hidden bg-title-section-bg">
+      <div className="w-full h-screen relative overflow-hidden bg-title-section-bg">
         {/* Top gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%' }} />
         

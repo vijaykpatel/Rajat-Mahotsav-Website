@@ -135,7 +135,7 @@ export default function ShaderShowcase() {
       <div className="relative z-10 bg-slate-900" style={{ pointerEvents: 'auto' }}>
 
         {/* Full background Sihasan image section with fade transition */}
-        <div ref={sihasanRef} data-section="sihasan" className="w-screen relative overflow-hidden flex flex-col bg-slate-900" style={{ minHeight: '100vh' }}>
+        <div ref={sihasanRef} data-section="sihasan" className="w-full relative overflow-hidden flex flex-col bg-slate-900" style={{ minHeight: '100vh' }}>
           {/* Top gradient overlay for smooth transition from title */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-700/40 to-transparent z-10 pointer-events-none" style={{ height: '40%' }} />
 
