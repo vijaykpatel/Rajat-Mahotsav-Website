@@ -157,14 +157,14 @@ export function BentoInitiatives() {
                   {/* Content */}
                   <div className="p-6 space-y-6">
                     <div>
-                      <h4 className="text-lg font-semibold mb-3 community-text-primary">Overview</h4>
+                      <h3 className="text-lg font-semibold mb-3 community-text-primary">Overview</h3>
                       <p className="community-text-secondary leading-relaxed">
                         {initiative.details.overview}
                       </p>
                     </div>
                     
                     <div>
-                      <h4 className="text-lg font-semibold mb-3 community-text-primary">Key Achievements</h4>
+                      <h3 className="text-lg font-semibold mb-3 community-text-primary">Key Achievements</h3>
                       <ul className="space-y-2">
                         {initiative.details.achievements.map((achievement, idx) => (
                           <li key={idx} className="flex items-center gap-2 community-text-secondary">
@@ -176,7 +176,7 @@ export function BentoInitiatives() {
                     </div>
                     
                     <div>
-                      <h4 className="text-lg font-semibold mb-3 community-text-primary">Community Impact</h4>
+                      <h3 className="text-lg font-semibold mb-3 community-text-primary">Community Impact</h3>
                       <p className="community-text-secondary leading-relaxed">
                         {initiative.details.impact}
                       </p>

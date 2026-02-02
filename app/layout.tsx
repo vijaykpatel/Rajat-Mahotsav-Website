@@ -12,6 +12,7 @@ import { AudioPlayer } from "@/components/audio-player"
 import { AudioProvider } from "@/contexts/audio-context"
 import { LoadingProvider } from "@/hooks/use-loading"
 import { getCloudflareImage } from "@/lib/cdn-assets"
+import { VideoSchema } from "@/components/organisms/video-schema"
 import "./globals.css"
 
 const figtree = Figtree({
@@ -41,23 +42,27 @@ const notoGujarati = Noto_Sans_Gujarati({
 
 
 export const metadata: Metadata = {
-  title: "Shree Swaminarayan Temple Secaucus, New Jersey Rajat Mahotsav",
-  description: "Shree Swaminarayan Temple Secaucus, NJ Celebrates its Rajat Mahotsav from July 27, 2026 - August 02, 2026.",
+  metadataBase: new URL("https://njrajatmahotsav.com"),
+  title: {
+    default: "NJ Rajat Mahotsav 2026 | Swaminarayan Temple Secaucus",
+    template: "%s | NJ Rajat Mahotsav 2026"
+  },
+  description: "Join us for the Silver Jubilee celebration at Shree Swaminarayan Temple Secaucus, NJ from July 27 - August 2, 2026. Experience divine programs, seva opportunities, and community celebrations marking 25 years of spiritual service.",
   generator: "v0.app",
   icons: {
     icon: "https://cdn.njrajatmahotsav.com/main_logo.png",
   },
   openGraph: {
-    title: "Shree Swaminarayan Temple Secaucus, New Jersey Rajat Mahotsav",
-    description: "Shree Swaminarayan Temple Secaucus, NJ Celebrates its Rajat Mahotsav from July 27, 2026 - August 02, 2026.",
+    title: "NJ Rajat Mahotsav 2026 | Swaminarayan Temple Secaucus",
+    description: "Join us for the Silver Jubilee celebration at Shree Swaminarayan Temple Secaucus, NJ from July 27 - August 2, 2026. Experience divine programs, seva opportunities, and community celebrations marking 25 years of spiritual service.",
     url: "https://njrajatmahotsav.com",
-    siteName: "Shree Swaminarayan Temple Secaucus, New Jersey Rajat Mahotsav",
+    siteName: "NJ Rajat Mahotsav 2026",
     images: [
       {
         url: getCloudflareImage("5aeb6c7e-f6ea-45b1-da4a-823279172400"),
         width: 1200,
         height: 630,
-        alt: "Shree Swaminarayan Temple Secaucus, New Jersey Rajat Mahotsav",
+        alt: "NJ Rajat Mahotsav 2026 - Silver Jubilee Celebration",
       },
     ],
     locale: "en_US",
@@ -65,8 +70,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shree Swaminarayan Temple Secaucus, New Jersey Rajat Mahotsav",
-    description: "Shree Swaminarayan Temple Secaucus, NJ Celebrates its Rajat Mahotsav from July 27, 2026 - August 02, 2026.",
+    title: "NJ Rajat Mahotsav 2026 | Swaminarayan Temple Secaucus",
+    description: "Join us for the Silver Jubilee celebration at Shree Swaminarayan Temple Secaucus, NJ from July 27 - August 2, 2026. Experience divine programs, seva opportunities, and community celebrations marking 25 years of spiritual service.",
     images: [getCloudflareImage("5aeb6c7e-f6ea-45b1-da4a-823279172400")],
   },
 }
@@ -82,6 +87,14 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
         {/* bg-title-section-bg / preset-deep-navy */}
         <meta name="theme-color" content="#0D132D" />
+        {/* Preload LCP image for better performance */}
+        <link
+          rel="preload"
+          as="image"
+          href="https://imagedelivery.net/vdFY6FzpM3Q9zi31qlYmGA/1443ce4a-1e60-4a83-34d8-f8626fe74b00/biggest?format=auto&quality=100"
+          fetchPriority="high"
+        />
+        <VideoSchema />
         <style>{`
 html {
   font-family: ${figtree.style.fontFamily};
@@ -97,9 +110,9 @@ html {
             <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
               <Navigation />
               <div className="min-h-screen flex flex-col">
-                <div className="flex-1">
+                <main className="flex-1">
                   {children}
-                </div>
+                </main>
                 <StickyFooter />
               </div>
               <ScrollToTop />
