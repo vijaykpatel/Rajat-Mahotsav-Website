@@ -196,7 +196,7 @@ export default function TitleSectionMobile({ targetDate = "2026-08-02T00:00:00" 
                     transition={{ duration: 1, delay: !isLoading ? 1 : 0, ease: "easeOut" }}
                     className="text-center mb-2"
                   >
-                    <h1
+                    <div
                       className="font-instrument-serif text-3xl font-bold leading-tight"
                       style={{
                         background: "linear-gradient(135deg, #FFD700 0%, #FFA500 30%, #FF8C00 60%, #D4AF37 100%)",
@@ -205,9 +205,11 @@ export default function TitleSectionMobile({ targetDate = "2026-08-02T00:00:00" 
                         backgroundClip: "text",
                         filter: "drop-shadow(0 2px 20px rgba(255, 165, 0, 0.4))"
                       }}
+                      role="heading"
+                      aria-level={1}
                     >
                       Shree Ghanshyam Maharaj
-                    </h1>
+                    </div>
                   </motion.div>
 
                   {/* Event name */}

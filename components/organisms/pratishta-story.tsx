@@ -306,6 +306,8 @@ export default function PratisthaStory() {
               <iframe
                 src="https://customer-kss5h1dwt4mkz0x3.cloudflarestream.com/6f4c127cc7b339c9b1b7875c1dc8e745/iframe?poster=https%3A%2F%2Fcustomer-kss5h1dwt4mkz0x3.cloudflarestream.com%2F6f4c127cc7b339c9b1b7875c1dc8e745%2Fthumbnails%2Fthumbnail.gif%3Ftime%3D28s%26duration%3D3s&defaultQuality=1080p"
                 loading="lazy"
+                width="1920"
+                height="1080"
                 style={{ border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
                 allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
                 allowFullScreen

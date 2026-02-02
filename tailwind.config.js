@@ -22,6 +22,20 @@ module.exports = {
         'preset-gradient-topper': 'linear-gradient(0deg, #0D132D 24.28%, #0B1B33 100%)',
         'preset-gradient-blue-alt': 'linear-gradient(321deg, #141F4D 7.41%, #12347F 80.62%)',
       },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
       colors: {
         'schedule': {
           'primary': '#ea580c', // orange-600
