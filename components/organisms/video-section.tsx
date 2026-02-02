@@ -1,13 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { Play } from "lucide-react"
-import { useState, useEffect, useRef } from "react"
-import useEmblaCarousel from 'embla-carousel-react'
-import { NextButton, PrevButton, usePrevNextButtons } from '@/components/molecules/video-carousel-buttons'
-import { DotButton, useDotButton } from '@/components/molecules/video-carousel-dots'
+import { useState, useEffect } from "react"
 import { useAudioContext } from '@/contexts/audio-context'
-import ParallaxQuote from '@/components/organisms/parallax-quote'
 
 interface VideoCardProps {
   videoId: string
@@ -15,11 +10,9 @@ interface VideoCardProps {
   thumbnail: string
   onPlay?: () => void
   isPlaying?: boolean
-  onPause?: () => void
 }
 
-function VideoCard({ videoId, title, thumbnail, onPlay, isPlaying: externalIsPlaying, onPause }: VideoCardProps) {
-  const [isHovered, setIsHovered] = useState(false)
+function VideoCard({ videoId, title, thumbnail, onPlay, isPlaying: externalIsPlaying }: VideoCardProps) {
   const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
@@ -60,40 +53,23 @@ function VideoCard({ videoId, title, thumbnail, onPlay, isPlaying: externalIsPla
   return (
     <div
       className="relative cursor-pointer group bg-gradient-to-br from-orange-50 via-white to-blue-50 rounded-3xl p-4 border-2 border-gray-200 hover:border-orange-500/30 transition-all duration-300"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
     >
-      <motion.div
-        className="relative bg-white rounded-2xl overflow-hidden"
-        transition={{ duration: 0.3 }}
-      >
+      <div className="relative bg-white rounded-2xl overflow-hidden">
         <div className="aspect-video relative overflow-hidden rounded-2xl">
           <img
             src={thumbnail}
             alt={title}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
           />
 
-          <motion.div
-            className="absolute bottom-4 right-4"
-            animate={{
-              scale: isHovered ? 1.2 : [1, 1.05, 1],
-              opacity: isHovered ? 1 : [0.7, 0.9, 0.7],
-              rotate: isHovered ? 360 : 0,
-            }}
-            transition={{
-              duration: 0.2,
-              ease: "easeOut",
-              rotate: { duration: 0.6, ease: "easeInOut" },
-              scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-              opacity: { duration: 2.5, repeat: Infinity, ease: "easeInOut" }
-            }}
-          >
+          <div className="absolute bottom-4 right-4 transition-transform duration-200 group-hover:scale-110">
             <Play className="w-8 h-8 text-white fill-white ml-0.5 drop-shadow-lg" style={{ filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.6))' }} />
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
       <p className="text-center text-sm text-gray-600 leading-relaxed mt-4">
         {title}
       </p>
@@ -120,67 +96,22 @@ const videos = [
 ]
 
 export default function VideoSection() {
-  const [emblaRefMobile, emblaApiMobile] = useEmblaCarousel({ loop: true })
   const [playingVideoIndex, setPlayingVideoIndex] = useState<number | null>(null)
-  const [videoSectionVisible, setVideoSectionVisible] = useState(false)
-  const videoSectionRef = useRef<HTMLDivElement>(null)
-
-  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApiMobile)
-
-  useEffect(() => {
-    if (!emblaApiMobile) return
-    const interval = setInterval(() => {
-      emblaApiMobile.scrollNext()
-    }, 4500)
-    return () => clearInterval(interval)
-  }, [emblaApiMobile])
-
-  useEffect(() => {
-    if (!emblaApiMobile) return
-    const onSelect = () => setPlayingVideoIndex(null)
-    emblaApiMobile.on('select', onSelect)
-    return () => { emblaApiMobile.off('select', onSelect) }
-  }, [emblaApiMobile])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setVideoSectionVisible(entry.isIntersecting)
-      },
-      { threshold: 0.2 }
-    )
-
-    if (videoSectionRef.current) {
-      observer.observe(videoSectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
 
   return (
-    <div ref={videoSectionRef} className="min-h-screen pb-20 flex flex-col justify-center">
+    <div className="min-h-screen pb-20 flex flex-col justify-center">
       <div className="max-w-[110rem] mx-auto px-6 sm:px-6 md:px-8 lg:px-16 xl:px-20">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-10 md:mb-12 lg:mb-12 xl:mb-16 px-4"
-        >
+        <div className="text-center mb-10 md:mb-12 lg:mb-12 xl:mb-16 px-4">
           <h2 className="section-title">
             Follow our celebration
           </h2>
           <p className="text-slate-300 text-transition text-left md:text-center space-y-6 md:space-y-8" style={{ fontSize: 'clamp(1.25rem, 4vw, 1.6rem)', lineHeight: 'clamp(1.4, 1.3 + 0.5vw, 1.6)', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
             Follow our celebrations throughout the year leading up to the Mahotsav.
           </p>
-        </motion.div>
+        </div>
 
         {/* YouTube Playlist Link */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="mb-8 text-center px-4"
-        >
+        <div className="mb-8 text-center px-4">
           <a
             href="https://www.youtube.com/playlist?list=PLqKpGEY54C-1OklTqKwLh6JWYCDQpn5MC"
             target="_blank"
@@ -192,15 +123,10 @@ export default function VideoSection() {
             </svg>
             <span>Check out our Youtube Playlist!</span>
           </a>
-        </motion.div>
+        </div>
 
-        {/* Desktop: 3-column grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
-          transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-          className="hidden xl:grid xl:grid-cols-3 gap-8 max-w-[110rem] mx-auto"
-        >
+        {/* Responsive grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-[110rem] mx-auto">
           {videos.map((video, index) => (
             <VideoCard
               key={video.videoId}
@@ -209,41 +135,7 @@ export default function VideoSection() {
               isPlaying={playingVideoIndex === index}
             />
           ))}
-        </motion.div>
-
-        {/* Mobile & Tablet: Single card layout with swipe */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={videoSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
-          transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-          className="xl:hidden"
-        >
-          <div className="overflow-hidden w-full max-w-2xl md:max-w-3xl mx-auto mb-8" ref={emblaRefMobile}>
-            <div className="flex">
-              {videos.map((video, index) => (
-                <div key={video.videoId} className="flex-[0_0_100%] min-w-0">
-                  <VideoCard
-                    {...video}
-                    onPlay={() => setPlayingVideoIndex(index)}
-                    isPlaying={playingVideoIndex === index}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile dots navigation */}
-          <div className="flex justify-center gap-2 mt-8">
-            {scrollSnaps.map((_, index) => (
-              <DotButton
-                key={index}
-                onClick={() => onDotButtonClick(index)}
-                className={`w-3 h-3 rounded-full transition-colors ${index === selectedIndex ? 'bg-orange-500' : 'bg-gray-300'
-                  }`}
-              />
-            ))}
-          </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Registration CTA

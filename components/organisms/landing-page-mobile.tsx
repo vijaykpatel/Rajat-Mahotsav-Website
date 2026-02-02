@@ -1,18 +1,17 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Link from "next/link"
 import { useState } from "react"
+import Link from "next/link"
 
-import { useLoading } from "@/hooks/use-loading"
 import CountdownTimer from "@/components/molecules/countdown-timer"
 import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
+import { useLoading } from "@/hooks/use-loading"
 
 interface TitleSectionMobileProps {
   targetDate?: string
 }
 
-// Mobile image carousel images (same as Skiper53)
 const carouselImages = [
   {
     src: getCloudflareImageBiggest("1443ce4a-1e60-4a83-34d8-f8626fe74b00"),
@@ -48,7 +47,6 @@ const carouselImages = [
   },
 ]
 
-// Mobile-optimized vertical image carousel with tap-to-expand
 function MobileImageCarousel({ className }: { className?: string }) {
   const [activeIndex, setActiveIndex] = useState<number>(3)
   const imageCount = carouselImages.length
@@ -62,13 +60,12 @@ function MobileImageCarousel({ className }: { className?: string }) {
     >
       {carouselImages.map((image, index) => {
         const isActive = activeIndex === index
-        // Calculate widths: active gets 35%, others share rest
         const activeWidth = 35
         const inactiveWidth = (100 - activeWidth) / (imageCount - 1)
 
         return (
           <motion.div
-            key={index}
+            key={image.src}
             className="relative cursor-pointer overflow-hidden flex-shrink-0 h-full"
             initial={{ width: `${100 / imageCount}%` }}
             animate={{
@@ -81,6 +78,9 @@ function MobileImageCarousel({ className }: { className?: string }) {
               src={image.src}
               className="w-full h-full object-cover"
               alt={image.alt}
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchPriority={index === 0 ? "high" : "auto"}
+              decoding="async"
             />
           </motion.div>
         )
@@ -196,7 +196,7 @@ export default function TitleSectionMobile({ targetDate = "2026-08-02T00:00:00" 
                     transition={{ duration: 1, delay: !isLoading ? 1 : 0, ease: "easeOut" }}
                     className="text-center mb-2"
                   >
-                    <div
+                    <h1
                       className="font-instrument-serif text-3xl font-bold leading-tight"
                       style={{
                         background: "linear-gradient(135deg, #FFD700 0%, #FFA500 30%, #FF8C00 60%, #D4AF37 100%)",
@@ -205,11 +205,9 @@ export default function TitleSectionMobile({ targetDate = "2026-08-02T00:00:00" 
                         backgroundClip: "text",
                         filter: "drop-shadow(0 2px 20px rgba(255, 165, 0, 0.4))"
                       }}
-                      role="heading"
-                      aria-level={1}
                     >
                       Shree Ghanshyam Maharaj
-                    </div>
+                    </h1>
                   </motion.div>
 
                   {/* Event name */}

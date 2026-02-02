@@ -126,6 +126,9 @@ const HoverExpand_002 = ({
               src={image.src}
               className="size-full object-cover"
               alt={image.alt}
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchPriority={index === 0 ? "high" : "auto"}
+              decoding="async"
             />
           </motion.div>
         ))}
