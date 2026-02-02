@@ -17,6 +17,7 @@ export default function GuestServicesPage() {
 
   const [isStreetView, setIsStreetView] = useState(true)
   const [isCopied, setIsCopied] = useState(false)
+  const [copiedHotelField, setCopiedHotelField] = useState<{ index: number; field: 'code' | 'group' } | null>(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [selectedHotel, setSelectedHotel] = useState<number | null>(null)
   const [isMobile, setIsMobile] = useState(false)
@@ -96,11 +97,13 @@ export default function GuestServicesPage() {
       address: "2750 Tonnelle Ave, North Bergen, NJ 07047",
       phone: "(201) 442-2424",
       bookingLink: "",
+      reservationCode: "072526SWA",
+      groupName: "Swaminarayan Temple 2026",
       blockDates: "July 25 - Aug 2, 2026",
       travelTime: "8 min drive",
       directionsLink: "https://maps.app.goo.gl/vCjZHXt5UcwZsxvb8",
       lastDay: "Friday, June 12, 2026",
-      pricePerNight: "xxx",
+      pricePerNight: "$149",
       images: [
         "https://cdn.njrajatmahotsav.com/hotels/ramada/Screenshot%202025-12-14%20at%205.13.48%E2%80%AFPM.png",
         "https://cdn.njrajatmahotsav.com/hotels/ramada/Screenshot%202025-12-14%20at%205.14.41%E2%80%AFPM.png",
@@ -676,11 +679,59 @@ export default function GuestServicesPage() {
                         >
                           Book Now
                         </a>
+                      ) : "reservationCode" in hotel && hotel.reservationCode ? (
+                        <span className="acc-card-base">Call to book — see details below</span>
                       ) : (
                         <span className="acc-card-base text-gray-500 italic">Not available yet</span>
                       )}
                     </div>
-                    <div className="mt-3 pr-28">
+                    {"reservationCode" in hotel && hotel.reservationCode && (
+                      <div className="mt-3 space-y-2 rounded-xl bg-purple-50 border border-purple-200 p-3">
+                        <p className="acc-card-caption text-gray-700">
+                          <span className="font-semibold">Reserve by phone:</span> Call the number above and provide the reservation code and group name below.
+                        </p>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <div className="flex items-center gap-1.5">
+                            <Hash className="h-4 w-4 text-purple-400" />
+                            <span className="acc-card-caption font-medium">Code:</span>
+                            <span className="acc-card-base font-mono font-semibold">{hotel.reservationCode}</span>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.preventDefault()
+                                navigator.clipboard.writeText(hotel.reservationCode as string)
+                                setCopiedHotelField({ index, field: 'code' })
+                                setTimeout(() => setCopiedHotelField(null), 2000)
+                              }}
+                              className="p-1 rounded hover:bg-purple-200/60 transition-colors"
+                              title="Copy code"
+                            >
+                              <Copy className="h-4 w-4 text-purple-600" />
+                            </button>
+                            {copiedHotelField?.index === index && copiedHotelField?.field === 'code' && <span className="acc-card-caption text-green-600">Copied!</span>}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="acc-card-caption font-medium">Group name:</span>
+                          <span className="acc-card-base font-semibold">{hotel.groupName}</span>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault()
+                              navigator.clipboard.writeText(hotel.groupName as string)
+                              setCopiedHotelField({ index, field: 'group' })
+                              setTimeout(() => setCopiedHotelField(null), 2000)
+                            }}
+                            className="p-1 rounded hover:bg-purple-200/60 transition-colors"
+                            title="Copy group name"
+                          >
+                            <Copy className="h-4 w-4 text-purple-600" />
+                          </button>
+                        {copiedHotelField?.index === index && copiedHotelField?.field === 'group' && <span className="acc-card-caption text-green-600 ml-1">Copied!</span>}
+                        </div>
+                      </div>
+                    )}
+                    <div className="mt-3">
                       {/* <div className="flex flex-wrap gap-1">
                         {hotel.amenities.map((amenity, i) => (
                           <span key={i} className="acc-card-caption bg-purple-500/20 text-black px-2 py-1 rounded">
@@ -689,16 +740,16 @@ export default function GuestServicesPage() {
                         ))}
                       </div> */}
                     </div>
+                    {hotel.images && hotel.images.length > 0 && (
+                      <button
+                        onClick={() => setSelectedHotel(index)}
+                        className="mt-4 w-full flex items-center justify-center gap-1 bg-gradient-to-r from-purple-400 to-purple-500 hover:from-purple-500 hover:to-purple-600 text-white px-3 py-2 rounded-full acc-card-caption font-medium transition-all border-2 border-purple-300 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-400/50"
+                      >
+                        <span>View Photos</span>
+                        <ArrowRight className="h-4 w-4" />
+                      </button>
+                    )}
                   </div>
-                  {hotel.images && hotel.images.length > 0 && (
-                    <button
-                      onClick={() => setSelectedHotel(index)}
-                      className="absolute bottom-4 right-4 flex items-center gap-1 bg-gradient-to-r from-purple-400 to-purple-500 hover:from-purple-500 hover:to-purple-600 text-white px-3 py-1.5 rounded-full acc-card-caption font-medium transition-all border-2 border-purple-300 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-400/50"
-                    >
-                      <span>View Photos</span>
-                      <ArrowRight className="h-4 w-4" />
-                    </button>
-                  )}
                 </motion.div>
               ))}
             </div>
@@ -711,7 +762,7 @@ export default function GuestServicesPage() {
                 onOpenChange={(open) => !open && setSelectedHotel(null)}
               />
             )}
-            <motion.div
+            {/* <motion.div
               initial={{ y: 20 }}
               whileInView={{ y: 0 }}
               viewport={{ once: false }}
@@ -721,7 +772,7 @@ export default function GuestServicesPage() {
               <p className="acc-card-base text-gray-700 leading-relaxed">
                 <span className="font-semibold">Note:</span> We are still working on securing the <span className="font-semibold">Ramada Hotel</span> group rate. We will update this page as soon as the information is ready.
               </p>
-            </motion.div>
+            </motion.div> */}
           </motion.section>
 
           {/* Transportation Section */}
