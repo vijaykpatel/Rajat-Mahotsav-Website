@@ -197,36 +197,37 @@ export default function TitleSection({ targetDate = "2026-08-02T00:00:00" }: Tit
                       >
                         <Link
                           href="/registration"
-                          className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 font-sans font-bold text-sm sm:text-base text-slate-900 overflow-hidden transition-all rounded-full border duration-300 hover:-translate-y-0.5 hover:scale-[1.02]"
+                          className="group relative isolate inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full px-6 sm:px-7 py-2.5 sm:py-3 font-sans font-bold text-sm sm:text-base text-slate-900 overflow-hidden transition-all border duration-300 hover:-translate-y-0.5 hover:scale-[1.03] active:scale-[0.99] shadow-[0_10px_26px_rgba(212,140,18,0.28)]"
                           style={{
-                            borderColor: "rgba(255, 180, 50, 0.4)",
-                            background: "rgba(255, 180, 50, 0.12)",
-                            color: "#FFB832",
-                            boxShadow: "0 4px 20px rgba(255, 180, 50, 0.15)"
+                            borderColor: "rgba(226, 170, 70, 0.7)",
+                            background: "linear-gradient(135deg, rgba(220, 160, 70, 0.92), rgba(191, 115, 20, 0.9))",
+                            color: "#FFFFFF"
                           }}
                         >
-                          <span className="relative z-10">Register Now</span>
+                          <span className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.22),transparent_55%)] opacity-70 transition-opacity duration-500 group-hover:opacity-90" />
+                          <span className="relative z-10 drop-shadow-[0_1px_1px_rgba(85,45,0,0.45)]">Register Now</span>
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-1 transition-transform">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                           </svg>
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/35 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                         </Link>
 
                         <Link
                           href="/latest-events"
-                          className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 font-sans font-bold text-sm sm:text-base text-slate-900 overflow-hidden transition-all rounded-full border duration-300 hover:-translate-y-0.5 hover:scale-[1.02]"
+                          className="group relative isolate inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full px-6 sm:px-7 py-2.5 sm:py-3 font-sans font-bold text-sm sm:text-base text-slate-900 overflow-hidden transition-all border duration-300 hover:-translate-y-0.5 hover:scale-[1.03] active:scale-[0.99]"
                           style={{
-                            borderColor: "rgba(255, 180, 50, 0.4)",
-                            background: "rgba(255, 180, 50, 0.12)",
-                            color: "#FFB832",
-                            boxShadow: "0 4px 20px rgba(255, 180, 50, 0.15)"
+                            borderColor: "rgba(255, 200, 90, 0.5)",
+                            background: "rgba(255, 195, 80, 0.18)",
+                            color: "#FFD88A",
+                            boxShadow: "0 6px 18px rgba(255, 180, 50, 0.22)"
                           }}
                         >
-                          <span className="relative z-10">View Events</span>
+                          <span className="absolute -inset-2 rounded-full bg-gradient-to-r from-amber-200/30 via-yellow-200/20 to-amber-300/30 blur-lg opacity-60 transition-opacity duration-500 group-hover:opacity-90" />
+                          <span className="relative z-10">View Latest Events</span>
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-1 transition-transform">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                           </svg>
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/25 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                         </Link>
                       </motion.div>
                     </div>
