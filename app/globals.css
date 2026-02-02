@@ -223,36 +223,26 @@
     scroll-behavior: smooth;
     /* Prevent bounce effect when scrolling to top/bottom */
     overscroll-behavior: none;
-    /* Allow vertical scroll; prevent horizontal scroll (fixes Next.js 13+ / Chrome dev scroll issues) */
+    /* Force scroll always visible - fixes Chrome scroll issues */
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
     width: 100%;
+    height: 100%;
     /* Fill safe area with dark color matching page content */
     /* controls the toolbar color on iphone */
     background: #0D132D;
-    /* Ensure consistent scroll behavior */
-    -webkit-overflow-scrolling: touch;
-    /* Use min-height so document can grow and scroll in Chrome (height: 100% can block scroll in dev) */
-    min-height: 100%;
-    /* Extend background to safe areas */
-    /* padding-bottom: env(safe-area-inset-bottom); */
   }
   body {
     @apply bg-background text-foreground;
     /* Set Figtree as the default font family for the entire website */
     font-family: var(--font-figtree);
-    /* Allow vertical scroll; prevent horizontal scroll (fixes Next.js 13+ / Chrome dev scroll issues) */
-    overflow-x: hidden;
-    overflow-y: auto;
+    /* Let body expand naturally - html handles scroll */
     width: 100%;
     max-width: 100vw;
-    /* Prevent independent scrolling */
-    overscroll-behavior: none;
-    /* Ensure unified scroll behavior */
-    -webkit-overflow-scrolling: touch;
-    /* Fix mobile height issues */
     min-height: 100vh;
     min-height: 100dvh;
+    /* Prevent horizontal scroll only */
+    overflow-x: hidden;
   }
   
   /* Mobile-specific optimizations */
