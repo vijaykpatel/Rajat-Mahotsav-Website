@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 
 interface StandardPageHeaderProps {
   title: string
@@ -10,51 +10,37 @@ interface StandardPageHeaderProps {
 }
 
 export function StandardPageHeader({ title, subtitle, description, isLoaded = true }: StandardPageHeaderProps) {
-  const [wordIndex, setWordIndex] = useState(0)
-  const [mounted, setMounted] = useState(false)
-  const descriptionWords = description?.split(" ") || []
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (description && isLoaded && wordIndex < descriptionWords.length && mounted) {
-      const timer = setTimeout(() => {
-        setWordIndex(prev => prev + 1)
-      }, 20)
-      return () => clearTimeout(timer)
-    }
-  }, [isLoaded, wordIndex, descriptionWords.length, description, mounted])
-
   return (
-    <div className="container mx-auto px-4 text-center page-header-spacing">
-      <h1 className={`standard-page-title ${
-        isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-      }`}>
+    <div className="text-center page-header-spacing">
+      <motion.h1
+        className="standard-page-title"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         {title}
-      </h1>
+      </motion.h1>
       {subtitle && (
-        <div className={`standard-page-subtitle ${
-          isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-        }`} style={{ transitionDelay: '200ms' }}>
+        <motion.div
+          className="standard-page-subtitle"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+        >
           {subtitle}
-        </div>
+        </motion.div>
       )}
-      {description && mounted && (
-        <p className="standard-page-description">
-          {descriptionWords.map((word, index) => (
-            <span
-              key={index}
-              className={`animated-word ${
-                index < wordIndex ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-              }`}
-              style={{ transitionDelay: `${400 + index * 20}ms` }}
-            >
-              {word}
-            </span>
-          ))}
-        </p>
+      {description && (
+        <motion.div
+          className="flex justify-center px-4 mt-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+        >
+          <p className="standard-page-description text-center">
+            {description}
+          </p>
+        </motion.div>
       )}
     </div>
   )
