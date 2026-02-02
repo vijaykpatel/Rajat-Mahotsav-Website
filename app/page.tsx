@@ -7,6 +7,7 @@ import TitleSection from "@/components/organisms/landing-page"
 import TitleSectionMobile from "@/components/organisms/landing-page-mobile"
 import GuruCard from "@/components/molecules/guru-card"
 import GuruCarousel from "@/components/organisms/guru-carousel"
+import IntroVideoReveal from "@/components/organisms/intro-video-reveal"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { getCloudflareImageBiggest } from "@/lib/cdn-assets"
 import "@/styles/registration-theme.css"
@@ -121,6 +122,7 @@ export default function ShaderShowcase() {
       {/* <div className="relative z-10" style={{ minHeight: '125vh' }} /> */}
 
       <div className="relative z-10 bg-slate-900" style={{ pointerEvents: 'auto' }}>
+        <IntroVideoReveal />
 
         {/* Full background Sihasan image section with fade transition */}
         <div ref={sihasanRef} data-section="sihasan" className="w-screen relative overflow-hidden flex flex-col bg-slate-900" style={{ minHeight: '100vh' }}>
