@@ -222,7 +222,7 @@ export default function TitleSection({ targetDate = "2026-08-02T00:00:00" }: Tit
                             boxShadow: "0 6px 18px rgba(255, 180, 50, 0.22)"
                           }}
                         >
-                          <span className="absolute -inset-2 rounded-full bg-gradient-to-r from-amber-200/30 via-yellow-200/20 to-amber-300/30 blur-lg opacity-60 transition-opacity duration-500 group-hover:opacity-90" />
+                          <span className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(255,230,170,0.28),transparent_60%)] opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
                           <span className="relative z-10">View Latest Events</span>
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-1 transition-transform">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
