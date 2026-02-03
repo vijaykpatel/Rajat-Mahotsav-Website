@@ -108,6 +108,8 @@ export default function ShaderShowcase() {
         </div>
       </div>
 
+      <IntroVideoReveal />
+
       {/* Video background - Fixed underneath */}
       <div className="z-0 block">
         <VideoBackgroundSection />
@@ -122,8 +124,6 @@ export default function ShaderShowcase() {
       {/* <div className="relative z-10" style={{ minHeight: '125vh' }} /> */}
 
       <div className="relative z-10 bg-slate-900" style={{ pointerEvents: 'auto' }}>
-        <IntroVideoReveal />
-
         {/* Full background Sihasan image section with fade transition */}
         <div ref={sihasanRef} data-section="sihasan" className="w-screen relative overflow-hidden flex flex-col bg-slate-900" style={{ minHeight: '100vh' }}>
           {/* Top gradient overlay for smooth transition from title */}

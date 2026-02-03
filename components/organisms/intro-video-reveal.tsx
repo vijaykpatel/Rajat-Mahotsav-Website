@@ -3,11 +3,55 @@
 import { useEffect, useRef, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 
+type YouTubePlayer = any
+
+declare global {
+  interface Window {
+    YT?: any
+    onYouTubeIframeAPIReady?: () => void
+  }
+}
+
 const VIDEO_ID = "QVFf80VuMeA"
 const POSTER_URL = `https://img.youtube.com/vi/${VIDEO_ID}/maxresdefault.jpg`
+let ytApiPromise: Promise<void> | null = null
+
+const loadYouTubeApi = () => {
+  if (typeof window === "undefined") {
+    return Promise.resolve()
+  }
+
+  if (window.YT?.Player) {
+    return Promise.resolve()
+  }
+
+  if (ytApiPromise) {
+    return ytApiPromise
+  }
+
+  ytApiPromise = new Promise((resolve) => {
+    const existingScript = document.getElementById("youtube-iframe-api")
+    if (!existingScript) {
+      const script = document.createElement("script")
+      script.id = "youtube-iframe-api"
+      script.src = "https://www.youtube.com/iframe_api"
+      document.body.appendChild(script)
+    }
+
+    const previousReady = window.onYouTubeIframeAPIReady
+    window.onYouTubeIframeAPIReady = () => {
+      previousReady?.()
+      resolve()
+    }
+  })
+
+  return ytApiPromise
+}
 
 export default function IntroVideoReveal() {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+  const playerRef = useRef<YouTubePlayer | null>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [shouldLoad, setShouldLoad] = useState(false)
   const [iframeLoaded, setIframeLoaded] = useState(false)
@@ -30,6 +74,48 @@ export default function IntroVideoReveal() {
     }
 
     return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!shouldLoad) return
+    if (!iframeRef.current || playerRef.current) return
+
+    let cancelled = false
+
+    const setupPlayer = async () => {
+      await loadYouTubeApi()
+      if (cancelled || !iframeRef.current || playerRef.current) return
+
+      const player = new window.YT.Player(iframeRef.current, {
+        events: {
+          onReady: (event: any) => {
+            event.target.setPlaybackQuality("hd1080")
+          },
+          onStateChange: (event: any) => {
+            if (window.YT?.PlayerState && event.data === window.YT.PlayerState.PLAYING) {
+              event.target.setPlaybackQuality("hd1080")
+            }
+          }
+        }
+      })
+
+      playerRef.current = player
+    }
+
+    setupPlayer()
+
+    return () => {
+      cancelled = true
+    }
+  }, [shouldLoad])
+
+  useEffect(() => {
+    return () => {
+      if (playerRef.current) {
+        playerRef.current.destroy()
+        playerRef.current = null
+      }
+    }
   }, [])
 
   const revealMotion = reduceMotion
@@ -82,15 +168,16 @@ export default function IntroVideoReveal() {
                 <img
                   src={POSTER_URL}
                   alt="Rajat Mahotsav preview"
-                  className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${iframeLoaded ? "opacity-0" : "opacity-100"}`}
+                  className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${iframeLoaded ? "opacity-0" : "opacity-100"}`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/30 via-transparent to-slate-950/10" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-slate-950/30 via-transparent to-slate-950/10" />
                 {shouldLoad && (
                   <iframe
-                    src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&controls=1`}
+                    ref={iframeRef}
+                    src={`https://www.youtube.com/embed/${VIDEO_ID}?playsinline=1&rel=0&modestbranding=1&controls=1&enablejsapi=1&vq=hd1080`}
                     title="Rajat Mahotsav Preview"
-                    className={`absolute inset-0 h-full w-full transition-opacity duration-700 ${iframeLoaded ? "opacity-100" : "opacity-0"}`}
-                    allow="autoplay; encrypted-media; picture-in-picture"
+                    className="absolute inset-0 h-full w-full"
+                    allow="encrypted-media; picture-in-picture"
                     allowFullScreen
                     loading="lazy"
                     onLoad={() => setIframeLoaded(true)}
