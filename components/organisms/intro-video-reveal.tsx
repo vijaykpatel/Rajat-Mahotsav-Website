@@ -52,8 +52,7 @@ export default function IntroVideoReveal() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const playerRef = useRef<YouTubePlayer | null>(null)
-  const [isVisible, setIsVisible] = useState(false)
-  const [shouldLoad, setShouldLoad] = useState(false)
+  const [hasRevealed, setHasRevealed] = useState(false)
   const [iframeLoaded, setIframeLoaded] = useState(false)
   const reduceMotion = useReducedMotion()
 
@@ -61,9 +60,11 @@ export default function IntroVideoReveal() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         const isIntersecting = entry.isIntersecting && entry.intersectionRatio >= 0.35
-        setIsVisible(isIntersecting)
         if (isIntersecting) {
-          setShouldLoad(true)
+          setHasRevealed(true)
+          if (sectionRef.current) {
+            observer.unobserve(sectionRef.current)
+          }
         }
       },
       { threshold: [0, 0.35, 0.6] }
@@ -77,7 +78,7 @@ export default function IntroVideoReveal() {
   }, [])
 
   useEffect(() => {
-    if (!shouldLoad) return
+    if (!hasRevealed) return
     if (!iframeRef.current || playerRef.current) return
 
     let cancelled = false
@@ -107,7 +108,7 @@ export default function IntroVideoReveal() {
     return () => {
       cancelled = true
     }
-  }, [shouldLoad])
+  }, [hasRevealed])
 
   useEffect(() => {
     return () => {
@@ -119,12 +120,12 @@ export default function IntroVideoReveal() {
   }, [])
 
   const revealMotion = reduceMotion
-    ? { opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }
+    ? { opacity: hasRevealed ? 1 : 0, y: hasRevealed ? 0 : 30 }
     : {
-        opacity: isVisible ? 1 : 0,
-        y: isVisible ? 0 : 40,
-        scale: isVisible ? 1 : 0.98,
-        filter: isVisible ? "blur(0px)" : "blur(8px)"
+        opacity: hasRevealed ? 1 : 0,
+        y: hasRevealed ? 0 : 40,
+        scale: hasRevealed ? 1 : 0.98,
+        filter: hasRevealed ? "blur(0px)" : "blur(8px)"
       }
 
   return (
@@ -171,7 +172,7 @@ export default function IntroVideoReveal() {
                   className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${iframeLoaded ? "opacity-0" : "opacity-100"}`}
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-slate-950/30 via-transparent to-slate-950/10" />
-                {shouldLoad && (
+                {hasRevealed && (
                   <iframe
                     ref={iframeRef}
                     src={`https://www.youtube.com/embed/${VIDEO_ID}?playsinline=1&rel=0&modestbranding=1&controls=1&enablejsapi=1&vq=hd1080`}
