@@ -89,22 +89,22 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ---
 
-### 5) Denied-Domain Logging
-**Goal**: Audit rejected admin access attempts.
-- [ ] Section complete (build, test, verify)
+### ~~5) Denied-Domain Logging~~ *(cancelled – not implementing)*
+~~**Goal**: Audit rejected admin access attempts.~~
+- ~~[ ] Section complete (build, test, verify)~~ **Decision**: Crossed out; no longer implementing.
 
-5.1 **Create `admin_access_denied` table**
-- **Scope**: Supabase SQL.
-- **Fields**: `email`, `full_name`, `provider`, `attempted_at`, `user_agent`, `ip` (if available).
-- **Verify**: Table exists; inserts succeed.
+~~5.1 **Create `admin_access_denied` table**~~
+- ~~**Scope**: Supabase SQL.~~
+- ~~**Fields**: `email`, `full_name`, `provider`, `attempted_at`, `user_agent`, `ip` (if available).~~
+- ~~**Verify**: Table exists; inserts succeed.~~
 
-5.2 **Insert log on domain rejection**
-- **Code**: server-only path in admin route.
-- **Work**: When session exists but domain invalid, insert row before redirect.
-- **Verify**: Log entry created for denied access.
+~~5.2 **Insert log on domain rejection**~~
+- ~~**Code**: server-only path in admin route.~~
+- ~~**Work**: When session exists but domain invalid, insert row before redirect.~~
+- ~~**Verify**: Log entry created for denied access.~~
 
-**Depends on**: 1.2, 2.2, 3.2  
-**Blocks**: none
+~~**Depends on**: 1.2, 2.2, 3.2~~  
+~~**Blocks**: none~~
 
 ---
 
