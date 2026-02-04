@@ -110,7 +110,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 6) Admin Dashboard UI (Stats + Charts)
 **Goal**: Build consistent UI with site theme and insights-first layout.
-- [x] Section complete (build, test, verify)
+- [ ] Section complete (build, test, verify)
 
 6.1 **Create stats view layout**
 - **Code**: `app/admin/registrations/page.tsx` or components.
