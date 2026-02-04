@@ -6,6 +6,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 1) Supabase Auth + Server Client Foundation
 **Goal**: Ensure server-side session access and Google OAuth configuration.
+- [x] Section complete (build, test, verify)
 
 1.1 **Configure Supabase Google OAuth**
 - **Scope**: Supabase project settings.
@@ -24,6 +25,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 2) RLS Tightening + Admin Domain Gate
 **Goal**: Lock down registrations to only authenticated `@nj.sgadi.us`.
+- [x] Section complete (build, test, verify)
 
 2.1 **Write SQL migration for RLS updates**
 - **Scope**: Supabase SQL migration.
@@ -47,6 +49,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 3) Admin Route Gate + Unauthorized UX
 **Goal**: Secure `/admin/registrations` and add access-required / unauthorized states.
+- [x] Section complete (build, test, verify)
 
 3.1 **Add admin route and sign-in screen**
 - **Code**: `app/admin/registrations/page.tsx`
@@ -65,6 +68,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 4) Stats / Insights Backend (RPC or Server Route)
 **Goal**: Provide aggregated stats without client refetch.
+- [ ] Section complete (build, test, verify)
 
 4.1 **Create SQL function or server endpoint for stats**
 - **Scope**: Supabase SQL (RPC) or Next server route.
@@ -87,6 +91,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 5) Denied-Domain Logging
 **Goal**: Audit rejected admin access attempts.
+- [ ] Section complete (build, test, verify)
 
 5.1 **Create `admin_access_denied` table**
 - **Scope**: Supabase SQL.
@@ -105,6 +110,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 6) Admin Dashboard UI (Stats + Charts)
 **Goal**: Build consistent UI with site theme and insights-first layout.
+- [ ] Section complete (build, test, verify)
 
 6.1 **Create stats view layout**
 - **Code**: `app/admin/registrations/page.tsx` or components.
@@ -122,6 +128,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 7) Paginated Table (Lazy Load)
 **Goal**: Avoid heavy load; only fetch table on demand.
+- [ ] Section complete (build, test, verify)
 
 7.1 **Add “Load registrations” button**
 - **Work**: Table data remains empty until user opts in.
@@ -141,6 +148,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 8) CSV Export
 **Goal**: Secure full dataset export in chunks.
+- [ ] Section complete (build, test, verify)
 
 8.1 **Add export route**
 - **Code**: `app/api/registrations/export/route.ts`
@@ -158,6 +166,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 9) Indexing + Performance Hardening
 **Goal**: Scale stats and pagination.
+- [ ] Section complete (build, test, verify)
 
 9.1 **Add indexes**
 - **Work**: Add indexes for `arrival_date`, `departure_date`, `ghaam`, `mandal`, `age`, `email`, `mobile_number`.
@@ -174,6 +183,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 10) UX Edge Cases + Sign-out Handling
 **Goal**: Clean UX and correct state resets.
+- [ ] Section complete (build, test, verify)
 
 10.1 **Null/Unknown handling in UI**
 - **Work**: Show “Unknown” bucket for missing values.

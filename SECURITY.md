@@ -133,7 +133,7 @@ Note: Requires careful configuration due to external resources (Cloudflare CDN, 
 
 Good practices in place:
 - `.env` files in `.gitignore`
-- `.env.example` provided
+- `.env.local` used for local secrets (gitignored)
 - No hardcoded secrets found
 
 **Recommendation:**
@@ -244,7 +244,7 @@ Before making the repository public and deploying:
 - [x] Fix XSS vulnerability
 - [x] Remove sensitive logging
 - [x] Add security headers
-- [x] Create .env.example
+- [x] Use .env.local for local secrets
 - [ ] Implement authentication on API routes
 - [ ] Configure Supabase RLS policies
 - [ ] Add rate limiting

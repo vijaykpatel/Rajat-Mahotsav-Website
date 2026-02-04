@@ -1,13 +1,20 @@
-import { createClient } from '@supabase/supabase-js'
+import { createBrowserClient } from "@supabase/ssr"
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const supabaseUrl =
+  process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://placeholder.supabase.co"
+const supabaseKey =
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+  "placeholder-key-for-build"
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Missing Supabase environment variables:', {
-    url: !!supabaseUrl,
-    key: !!supabaseAnonKey
-  })
+if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !supabaseKey) {
+  if (typeof window !== "undefined") {
+    console.error("Missing Supabase environment variables:", {
+      url: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+      key: !!supabaseKey,
+    })
+  }
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+/** Browser Supabase client; uses cookies for auth (SSR-compatible). */
+export const supabase = createBrowserClient(supabaseUrl, supabaseKey)
