@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { supabase } from "@/utils/supabase/client"
 import { Button } from "@/components/atoms/button"
-import { Database, Loader2, CheckCircle2, XCircle, LogOut } from "lucide-react"
+import { Database, BarChart3, Loader2, CheckCircle2, XCircle, LogOut } from "lucide-react"
 
 interface AdminAuthenticatedViewProps {
   userEmail: string
@@ -13,6 +13,11 @@ interface AdminAuthenticatedViewProps {
 export function AdminAuthenticatedView({ userEmail }: AdminAuthenticatedViewProps) {
   const router = useRouter()
   const [testResult, setTestResult] = useState<{
+    status: "idle" | "loading" | "success" | "error"
+    data?: unknown
+    error?: string
+  }>({ status: "idle" })
+  const [statsResult, setStatsResult] = useState<{
     status: "idle" | "loading" | "success" | "error"
     data?: unknown
     error?: string
@@ -38,6 +43,27 @@ export function AdminAuthenticatedView({ userEmail }: AdminAuthenticatedViewProp
       setTestResult({ status: "success", data })
     } catch (err) {
       setTestResult({
+        status: "error",
+        error: err instanceof Error ? err.message : "Request failed",
+      })
+    }
+  }
+
+  const runStatsTest = async () => {
+    setStatsResult({ status: "loading" })
+    try {
+      const res = await fetch("/api/admin/stats")
+      const data = await res.json()
+      if (!res.ok) {
+        setStatsResult({
+          status: "error",
+          error: data.error ?? data.message ?? `HTTP ${res.status}`,
+        })
+        return
+      }
+      setStatsResult({ status: "success", data })
+    } catch (err) {
+      setStatsResult({
         status: "error",
         error: err instanceof Error ? err.message : "Request failed",
       })
@@ -106,6 +132,51 @@ export function AdminAuthenticatedView({ userEmail }: AdminAuthenticatedViewProp
             <p className="flex items-center gap-2 text-red-800 font-medium">
               <XCircle className="size-4" />
               {testResult.error}
+            </p>
+          </div>
+        )}
+      </div>
+
+      <div className="p-6 rounded-2xl bg-white/80 border border-preset-pale-gray shadow-sm">
+        <h3 className="text-lg font-semibold text-preset-charcoal mb-2 flex items-center gap-2">
+          <BarChart3 className="size-5 text-preset-deep-navy" />
+          Stats RPC test
+        </h3>
+        <p className="text-sm text-preset-bluish-gray mb-4">
+          Verifies get_registrations_stats RPC: aggregated metrics (read-only).
+        </p>
+        <Button
+          onClick={runStatsTest}
+          disabled={statsResult.status === "loading"}
+          className="rounded-full px-6 py-3 font-semibold bg-preset-deep-navy text-white hover:opacity-90 transition-opacity"
+        >
+          {statsResult.status === "loading" ? (
+            <>
+              <Loader2 className="size-4 animate-spin" />
+              Loading stats…
+            </>
+          ) : (
+            "Test stats"
+          )}
+        </Button>
+
+        {statsResult.status === "success" && statsResult.data !== undefined && (
+          <div className="mt-4 p-4 rounded-xl bg-green-50 border border-green-200">
+            <p className="flex items-center gap-2 text-green-800 font-medium mb-2">
+              <CheckCircle2 className="size-4" />
+              Stats loaded
+            </p>
+            <pre className="text-xs text-preset-charcoal overflow-x-auto max-h-64 overflow-y-auto">
+              {JSON.stringify(statsResult.data, null, 2)}
+            </pre>
+          </div>
+        )}
+
+        {statsResult.status === "error" && (
+          <div className="mt-4 p-4 rounded-xl bg-red-50 border border-red-200">
+            <p className="flex items-center gap-2 text-red-800 font-medium">
+              <XCircle className="size-4" />
+              {statsResult.error}
             </p>
           </div>
         )}
