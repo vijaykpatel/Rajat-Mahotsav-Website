@@ -49,7 +49,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 3) Admin Route Gate + Unauthorized UX
 **Goal**: Secure `/admin/registrations` and add access-required / unauthorized states.
-- [ ] Section complete (build, test, verify)
+- [x] Section complete (build, test, verify)
 
 3.1 **Add admin route and sign-in screen**
 - **Code**: `app/admin/registrations/page.tsx`

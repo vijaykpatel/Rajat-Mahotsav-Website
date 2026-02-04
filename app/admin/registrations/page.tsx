@@ -3,6 +3,7 @@ import { createClient } from "@/utils/supabase/server"
 import { isAdminDomainUser } from "@/lib/admin-auth"
 import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { AdminSignIn } from "./AdminSignIn"
+import { AdminAuthenticatedView } from "./AdminAuthenticatedView"
 
 export const dynamic = "force-dynamic"
 
@@ -43,15 +44,7 @@ export default async function AdminRegistrationsPage() {
             title="Registrations Admin"
             description="Dashboard and stats will be built in subsequent tasks."
           />
-          <div className="mt-8 p-6 rounded-2xl bg-white/80 border border-preset-pale-gray shadow-sm max-w-2xl mx-auto">
-            <p className="text-preset-charcoal font-medium">
-              Authenticated as{" "}
-              <span className="text-preset-deep-navy">{user.email}</span>
-            </p>
-            <p className="text-sm text-preset-bluish-gray mt-2">
-              OAuth flow verified. Server-side session is active.
-            </p>
-          </div>
+          <AdminAuthenticatedView userEmail={user.email} />
         </div>
       </div>
     )
