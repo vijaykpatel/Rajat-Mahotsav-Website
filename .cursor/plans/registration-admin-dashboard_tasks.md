@@ -136,7 +136,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 7.2 **Implement pagination**
 - **Work**:
-  - Page size 25/50/100.
+  - Page size 25/50.
   - Keyset or range pagination ordered by `id` desc.
   - Select explicit columns only.
 - **Verify**: Page controls update table; stats remain unchanged.
@@ -148,7 +148,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 8) CSV Export
 **Goal**: Secure full dataset export in chunks.
-- [ ] Section complete (build, test, verify)
+- [x] Section complete (build, test, verify)
 
 8.1 **Add export route**
 - **Code**: `app/api/registrations/export/route.ts`
