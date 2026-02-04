@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { supabase } from "@/utils/supabase/client"
 import { Button } from "@/components/atoms/button"
-import { Database, BarChart3, Loader2, CheckCircle2, XCircle, LogOut } from "lucide-react"
+import { Database, BarChart3, Loader2, CheckCircle2, XCircle, LogOut, Download } from "lucide-react"
 
 interface AdminAuthenticatedViewProps {
   userEmail: string
@@ -180,6 +180,24 @@ export function AdminAuthenticatedView({ userEmail }: AdminAuthenticatedViewProp
             </p>
           </div>
         )}
+      </div>
+
+      <div className="p-6 rounded-2xl bg-white/80 border border-preset-pale-gray shadow-sm">
+        <h3 className="text-lg font-semibold text-preset-charcoal mb-2 flex items-center gap-2">
+          <Download className="size-5 text-preset-deep-navy" />
+          CSV Export
+        </h3>
+        <p className="text-sm text-preset-bluish-gray mb-4">
+          Download full registrations dataset as CSV (chunked streaming, no memory spikes).
+        </p>
+        <a
+          href="/api/registrations/export"
+          download
+          className="inline-flex items-center gap-2 rounded-full px-6 py-3 font-semibold bg-preset-deep-navy text-white hover:opacity-90 transition-opacity"
+        >
+          <Download className="size-4" />
+          Export CSV
+        </a>
       </div>
     </div>
   )
