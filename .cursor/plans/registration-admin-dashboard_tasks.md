@@ -68,7 +68,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 4) Stats / Insights Backend (RPC or Server Route)
 **Goal**: Provide aggregated stats without client refetch.
-- [ ] Section complete (build, test, verify)
+- [x] Section complete (build, test, verify)
 
 4.1 **Create SQL function or server endpoint for stats**
 - **Scope**: Supabase SQL (RPC) or Next server route.
