@@ -22,11 +22,6 @@ export function AdminAuthenticatedView({ userEmail }: AdminAuthenticatedViewProp
     data?: unknown
     error?: string
   }>({ status: "idle" })
-  const [deniedLogResult, setDeniedLogResult] = useState<{
-    status: "idle" | "loading" | "success" | "error"
-    data?: unknown
-    error?: string
-  }>({ status: "idle" })
 
   const handleSignOut = async () => {
     await supabase.auth.signOut()
@@ -48,27 +43,6 @@ export function AdminAuthenticatedView({ userEmail }: AdminAuthenticatedViewProp
       setTestResult({ status: "success", data })
     } catch (err) {
       setTestResult({
-        status: "error",
-        error: err instanceof Error ? err.message : "Request failed",
-      })
-    }
-  }
-
-  const runDeniedLogTest = async () => {
-    setDeniedLogResult({ status: "loading" })
-    try {
-      const res = await fetch("/api/admin/test-read-denied-log")
-      const data = await res.json()
-      if (!res.ok) {
-        setDeniedLogResult({
-          status: "error",
-          error: data.error ?? data.message ?? data.hint ?? `HTTP ${res.status}`,
-        })
-        return
-      }
-      setDeniedLogResult({ status: "success", data })
-    } catch (err) {
-      setDeniedLogResult({
         status: "error",
         error: err instanceof Error ? err.message : "Request failed",
       })
@@ -158,51 +132,6 @@ export function AdminAuthenticatedView({ userEmail }: AdminAuthenticatedViewProp
             <p className="flex items-center gap-2 text-red-800 font-medium">
               <XCircle className="size-4" />
               {testResult.error}
-            </p>
-          </div>
-        )}
-      </div>
-
-      <div className="p-6 rounded-2xl bg-white/80 border border-preset-pale-gray shadow-sm">
-        <h3 className="text-lg font-semibold text-preset-charcoal mb-2 flex items-center gap-2">
-          <Database className="size-5 text-preset-deep-navy" />
-          Denied log read test
-        </h3>
-        <p className="text-sm text-preset-bluish-gray mb-4">
-          Verifies admin client and admin_access_denied table: reads 1 row (read-only).
-        </p>
-        <Button
-          onClick={runDeniedLogTest}
-          disabled={deniedLogResult.status === "loading"}
-          className="rounded-full px-6 py-3 font-semibold bg-preset-deep-navy text-white hover:opacity-90 transition-opacity"
-        >
-          {deniedLogResult.status === "loading" ? (
-            <>
-              <Loader2 className="size-4 animate-spin" />
-              Testing…
-            </>
-          ) : (
-            "Test denied log"
-          )}
-        </Button>
-
-        {deniedLogResult.status === "success" && deniedLogResult.data !== undefined && (
-          <div className="mt-4 p-4 rounded-xl bg-green-50 border border-green-200">
-            <p className="flex items-center gap-2 text-green-800 font-medium mb-2">
-              <CheckCircle2 className="size-4" />
-              Read successful
-            </p>
-            <pre className="text-xs text-preset-charcoal overflow-x-auto">
-              {JSON.stringify(deniedLogResult.data, null, 2)}
-            </pre>
-          </div>
-        )}
-
-        {deniedLogResult.status === "error" && (
-          <div className="mt-4 p-4 rounded-xl bg-red-50 border border-red-200">
-            <p className="flex items-center gap-2 text-red-800 font-medium">
-              <XCircle className="size-4" />
-              {deniedLogResult.error}
             </p>
           </div>
         )}
