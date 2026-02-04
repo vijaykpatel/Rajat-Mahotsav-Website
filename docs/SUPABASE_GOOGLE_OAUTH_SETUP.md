@@ -50,6 +50,9 @@ NEXT_PUBLIC_SUPABASE_URL=https://efwvxiqyyunbyouemrhe.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_xxx
 # or
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+
+# Required for denied-domain logging (Task 5); from Supabase Dashboard → Settings → API → service_role
+SUPABASE_SERVICE_ROLE_KEY=eyJ...
 ```
 
 ## Troubleshooting

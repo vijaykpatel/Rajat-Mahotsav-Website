@@ -91,7 +91,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 5) Denied-Domain Logging
 **Goal**: Audit rejected admin access attempts.
-- [ ] Section complete (build, test, verify)
+- [x] Section complete (build, test, verify)
 
 5.1 **Create `admin_access_denied` table**
 - **Scope**: Supabase SQL.
