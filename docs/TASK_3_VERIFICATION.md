@@ -58,11 +58,11 @@ LIMIT 1;
 ```json
 {
   "id": 111,
-  "first_name": "Het",
-  "last_name": "Raval",
-  "email": "ravalhet43@gmail.com",
-  "ghaam": "Ranasan",
-  "mandal": "Maninagar",
+  "first_name": "H***",
+  "last_name": "R***",
+  "email": "r***@***.***",
+  "ghaam": "R***",
+  "mandal": "M***",
   "arrival_date": "2026-07-24",
   "departure_date": "2026-08-01"
 }
@@ -82,11 +82,11 @@ LIMIT 1;
   "message": "Read-only test: 1 row from registrations",
   "row": {
     "id": 111,
-    "first_name": "Het",
-    "last_name": "Raval",
-    "email": "ravalhet43@gmail.com",
-    "ghaam": "Ranasan",
-    "mandal": "Maninagar",
+    "first_name": "H***",
+    "last_name": "R***",
+    "email": "r***@***.***",
+    "ghaam": "R***",
+    "mandal": "M***",
     "arrival_date": "2026-07-24",
     "departure_date": "2026-08-01"
   },

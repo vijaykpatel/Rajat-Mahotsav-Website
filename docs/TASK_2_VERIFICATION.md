@@ -34,8 +34,8 @@
 | Test | Role | JWT email | Expected | Result |
 |------|------|-----------|----------|--------|
 | 1 | `anon` | — | 0 rows | ✓ `anon_row_count: 0` |
-| 2 | `authenticated` | `admin@nj.sgadi.us` | 1 row (limited) | ✓ `{id:1, first_name:"Vijay", email:"..."}` |
-| 3 | `authenticated` | `user@gmail.com` | 0 rows | ✓ `denied_row_count: 0` |
+| 2 | `authenticated` | `a***@nj.sgadi.us` | 1 row (limited) | ✓ `{id:1, first_name:"V***", email:"..."}` |
+| 3 | `authenticated` | `u***@gmail.com` | 0 rows | ✓ `denied_row_count: 0` |
 
 **SQL used** (run via Supabase MCP):
 
@@ -47,14 +47,14 @@ RESET ROLE;
 
 -- Test 2: authenticated @nj.sgadi.us
 SET ROLE authenticated;
-SET request.jwt.claims = '{"email": "admin@nj.sgadi.us", "sub": "test-uuid"}';
+SET request.jwt.claims = '{"email": "a***@nj.sgadi.us", "sub": "test-uuid"}';
 SELECT id, first_name, email FROM public.registrations LIMIT 1;
 RESET request.jwt.claims;
 RESET ROLE;
 
 -- Test 3: authenticated wrong domain
 SET ROLE authenticated;
-SET request.jwt.claims = '{"email": "user@gmail.com", "sub": "test-uuid"}';
+SET request.jwt.claims = '{"email": "u***@gmail.com", "sub": "test-uuid"}';
 SELECT COUNT(*) AS denied_row_count FROM public.registrations;
 RESET request.jwt.claims;
 RESET ROLE;
@@ -70,16 +70,16 @@ RESET ROLE;
 import { isAllowedAdminDomain, isAdminDomainUser } from "@/lib/admin-auth"
 
 // Valid domain
-isAllowedAdminDomain("admin@nj.sgadi.us")     // true
-isAllowedAdminDomain("Admin@NJ.SGADI.US")     // true
+isAllowedAdminDomain("a***@nj.sgadi.us")     // true
+isAllowedAdminDomain("A***@NJ.SGADI.US")     // true
 
 // Invalid
-isAllowedAdminDomain("user@gmail.com")        // false
+isAllowedAdminDomain("u***@gmail.com")       // false
 isAllowedAdminDomain(null)                    // false
 isAllowedAdminDomain(undefined)               // false
 
-isAdminDomainUser({ email: "admin@nj.sgadi.us" })  // true
-isAdminDomainUser({ email: "user@gmail.com" })    // false
+isAdminDomainUser({ email: "a***@nj.sgadi.us" })  // true
+isAdminDomainUser({ email: "u***@gmail.com" })    // false
 isAdminDomainUser(null)                            // false
 ```
 

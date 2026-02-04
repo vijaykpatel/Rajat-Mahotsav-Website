@@ -3,14 +3,17 @@ import { createClient } from "@/utils/supabase/server"
 
 /**
  * OAuth callback route. Exchanges auth code for session and redirects.
- * Add this URL to Supabase Auth redirect allow list:
- * - http://localhost:3000/auth/callback (local)
- * - https://njrajatmahotsav.com/auth/callback (prod)
+ * Add these to Supabase Auth redirect allow list (wildcard for query params):
+ * - http://localhost:3000/auth/callback** (local)
+ * - https://njrajatmahotsav.com/auth/callback** (prod)
  */
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get("code")
-  const next = searchParams.get("next") ?? "/"
+  let next = searchParams.get("next") ?? "/"
+  if (!next.startsWith("/") || next.includes("//") || next.includes(":")) {
+    next = "/"
+  }
 
   if (!code) {
     return NextResponse.redirect(`${origin}/auth/auth-code-error`)
