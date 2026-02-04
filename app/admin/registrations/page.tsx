@@ -10,13 +10,19 @@ export default async function AdminRegistrationsPage() {
   try {
     supabase = await createClient()
   } catch (err) {
+    const message =
+      err instanceof Error ? err.message : "Supabase is not configured."
     return (
       <div className="page-bg-extend bg-preset-light-gray min-h-screen">
         <div className="section-shell landing-section">
           <StandardPageHeader
             title="Admin Access"
-            description="Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local."
+            description={message}
           />
+          <p className="text-sm text-preset-bluish-gray mt-4 text-center max-w-lg mx-auto">
+            Ensure .env.local is in the project root (where you run npm run dev)
+            and restart the dev server after changes.
+          </p>
         </div>
       </div>
     )

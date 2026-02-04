@@ -16,9 +16,13 @@ export async function createClient() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
   if (!supabaseUrl || !supabaseKey) {
-    throw new Error(
-      "Missing Supabase env: NEXT_PUBLIC_SUPABASE_URL and (NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY or NEXT_PUBLIC_SUPABASE_ANON_KEY)"
-    )
+    const missing = [
+      !supabaseUrl && "NEXT_PUBLIC_SUPABASE_URL",
+      !supabaseKey && "NEXT_PUBLIC_SUPABASE_ANON_KEY or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
+    ]
+      .filter(Boolean)
+      .join(", ")
+    throw new Error(`Missing Supabase env: ${missing}`)
   }
 
   return createServerClient(supabaseUrl, supabaseKey, {

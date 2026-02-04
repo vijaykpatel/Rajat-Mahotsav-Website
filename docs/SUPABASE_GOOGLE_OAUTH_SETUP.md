@@ -54,6 +54,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 
 ## Troubleshooting
 
+- **"Supabase is not configured"** / env vars not loading: If using a git worktree, `.env.local` must exist in the worktree root (where you run `npm run dev`), not only in the main repo. Restart the dev server after adding or changing `.env.local`.
 - **"redirect_uri_mismatch"**: Ensure the exact callback URL is in both Google Console and Supabase redirect allow list.
 - **Session not persisting**: Check that middleware runs (see `middleware.ts`) and that cookies are not blocked.
 - **"Invalid OAuth client"**: Verify Client ID/Secret in Supabase match the Google Console values.

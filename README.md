@@ -96,12 +96,7 @@ This is a portfolio project showcasing a modern, full-featured event website bui
    ```
 
 3. Set up environment variables:
-   - Copy `.env.example` to `.env.local`
-   - Fill in your Supabase and Cloudflare R2 credentials
-
-   ```bash
-   cp .env.example .env.local
-   ```
+   - Create `.env.local` in the project root with your Supabase and Cloudflare R2 credentials
 
 4. Run the development server:
    ```bash
@@ -112,7 +107,7 @@ This is a portfolio project showcasing a modern, full-featured event website bui
 
 ### Environment Variables
 
-See `.env.example` for required environment variables:
+Create `.env.local` in the project root with:
 
 - `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Your Supabase anonymous key
