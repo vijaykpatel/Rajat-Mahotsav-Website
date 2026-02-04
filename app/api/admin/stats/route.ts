@@ -1,11 +1,15 @@
 import { NextResponse } from "next/server"
 import { createClient } from "@/utils/supabase/server"
 import { isAdminDomainUser } from "@/lib/admin-auth"
+import { REGISTRATION_DATE_RANGE } from "@/lib/registration-date-range"
 
 /**
  * Registration stats endpoint for admin dashboard.
  * Calls get_registrations_stats RPC - read-only, no table writes.
  * Requires authenticated session with @nj.sgadi.us domain.
+ *
+ * Date range: start and end are both inclusive.
+ * Defaults (when no query params): match registration form options (lib/registration-date-range.ts).
  *
  * @see docs/TASK_4_VERIFICATION.md
  */
@@ -42,8 +46,8 @@ export async function GET(request: Request) {
   }
 
   const { searchParams } = new URL(request.url)
-  const startDate = searchParams.get("start_date") ?? "2026-07-29"
-  const endDate = searchParams.get("end_date") ?? "2026-08-02"
+  const startDate = searchParams.get("start_date") ?? REGISTRATION_DATE_RANGE.start
+  const endDate = searchParams.get("end_date") ?? REGISTRATION_DATE_RANGE.end
 
   const { data, error } = await supabase.rpc("get_registrations_stats", {
     p_start_date: startDate,

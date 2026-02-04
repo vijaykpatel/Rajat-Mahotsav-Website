@@ -12,6 +12,7 @@ import {
 import { DateValue, CalendarDate } from "@internationalized/date"
 
 import { cn } from "@/lib/utils"
+import { REGISTRATION_DATE_RANGE } from "@/lib/registration-date-range"
 import { RangeCalendar } from "@/components/organisms/calendar-rac"
 import { DateInput, dateInputStyle } from "@/components/molecules/datefield-rac"
 
@@ -63,8 +64,12 @@ export default function RegistrationDatePicker({
           <Dialog className="max-h-[inherit] overflow-auto p-4">
             <RangeCalendar 
               defaultFocusedValue={new CalendarDate(2026, 7, 1)}
-              minValue={new CalendarDate(2026, 7, 23)}
-              maxValue={new CalendarDate(2026, 8, 8)}
+              minValue={new CalendarDate(
+                ...REGISTRATION_DATE_RANGE.start.split("-").map(Number) as [number, number, number]
+              )}
+              maxValue={new CalendarDate(
+                ...REGISTRATION_DATE_RANGE.end.split("-").map(Number) as [number, number, number]
+              )}
               className="[&_*]:text-black [&_button]:text-black [&_td]:text-black [&_th]:text-black"
             />
           </Dialog>
