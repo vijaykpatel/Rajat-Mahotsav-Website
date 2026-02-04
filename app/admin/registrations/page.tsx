@@ -1,9 +1,12 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/utils/supabase/server"
 import { isAdminDomainUser } from "@/lib/admin-auth"
+import { REGISTRATION_DATE_RANGE } from "@/lib/registration-date-range"
 import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { AdminSignIn } from "./AdminSignIn"
-import { AdminAuthenticatedView } from "./AdminAuthenticatedView"
+import type { RegistrationsStats } from "./types"
+import { AdminDashboardStats } from "./AdminDashboardStats"
+import { AdminRegistrationsTable } from "./AdminRegistrationsTable"
 
 export const dynamic = "force-dynamic"
 
@@ -37,14 +40,41 @@ export default async function AdminRegistrationsPage() {
     if (!isAdminDomainUser(user)) {
       redirect("/admin/registrations/unauthorized")
     }
+
+    const { data: statsData, error: statsError } = await supabase.rpc(
+      "get_registrations_stats",
+      {
+        p_start_date: REGISTRATION_DATE_RANGE.start,
+        p_end_date: REGISTRATION_DATE_RANGE.end,
+      }
+    )
+
+    const stats = statsError ? null : (statsData as RegistrationsStats)
+
     return (
       <div className="page-bg-extend bg-preset-light-gray min-h-screen">
         <div className="section-shell landing-section">
           <StandardPageHeader
             title="Registrations Admin"
-            description="Dashboard and stats will be built in subsequent tasks."
+            description="Insights and registrations data. Table loads on demand."
           />
-          <AdminAuthenticatedView userEmail={user.email} />
+          {stats ? (
+            <>
+              <AdminDashboardStats stats={stats} userEmail={user.email ?? ""} />
+              <div className="mt-8 max-w-6xl mx-auto">
+                <AdminRegistrationsTable />
+              </div>
+            </>
+          ) : (
+            <div className="mt-8 p-6 rounded-2xl bg-white/80 border border-preset-pale-gray shadow-sm max-w-2xl mx-auto">
+              <p className="text-preset-charcoal">
+                Stats unavailable. {statsError?.message ?? "Please try again."}
+              </p>
+              <div className="mt-6">
+                <AdminRegistrationsTable />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     )
