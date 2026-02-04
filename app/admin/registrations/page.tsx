@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/utils/supabase/server"
+import { isAdminDomainUser } from "@/lib/admin-auth"
 import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { AdminSignIn } from "./AdminSignIn"
 
@@ -32,8 +33,7 @@ export default async function AdminRegistrationsPage() {
   } = await supabase.auth.getUser()
 
   if (user) {
-    const isAllowedDomain = user.email?.toLowerCase().endsWith("@nj.sgadi.us")
-    if (!isAllowedDomain) {
+    if (!isAdminDomainUser(user)) {
       redirect("/admin/registrations/unauthorized")
     }
     return (
