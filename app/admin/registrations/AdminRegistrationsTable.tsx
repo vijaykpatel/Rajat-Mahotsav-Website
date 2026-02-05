@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   Table2,
@@ -9,10 +9,16 @@ import {
   ChevronRight,
   Database,
   Download,
+  Search,
+  Filter,
+  X,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react"
-import { mandalStoredToDisplay } from "@/lib/mandal-options"
+import { mandalStoredToDisplay, getAllMandalOptionsStored } from "@/lib/mandal-options"
 import { Button } from "@/components/atoms/button"
 import { format } from "date-fns"
+import { REGISTRATION_DATE_RANGE } from "@/lib/registration-date-range"
 
 type RegistrationRow = {
   id: number
@@ -42,7 +48,18 @@ type PaginatedResponse = {
   details?: string
 }
 
+type DistinctValuesResponse = {
+  success?: boolean
+  ghaam?: string[]
+  country?: string[]
+}
+
 const PAGE_SIZE_OPTIONS = [25, 50, 100] as const
+const SEARCH_DEBOUNCE_MS = 350
+const SELECT_STYLE =
+  "h-10 rounded-lg border border-preset-pale-gray bg-white px-3 text-sm text-preset-charcoal focus:outline-none focus:ring-2 focus:ring-preset-deep-navy/30 min-w-[140px]"
+const INPUT_STYLE =
+  "h-10 rounded-lg border border-preset-pale-gray bg-white px-3 text-sm text-preset-charcoal focus:outline-none focus:ring-2 focus:ring-preset-deep-navy/30"
 
 function formatDate(val: string | null): string {
   if (!val || val === "Unknown") return val ?? "—"
@@ -55,6 +72,50 @@ function formatDate(val: string | null): string {
   }
 }
 
+function hasActiveFilters(f: FilterState): boolean {
+  return !!(
+    f.search ||
+    f.ghaam ||
+    f.mandal ||
+    f.country ||
+    f.age != null ||
+    f.ageMin != null ||
+    f.ageMax != null ||
+    f.arrivalFrom ||
+    f.arrivalTo ||
+    f.departureFrom ||
+    f.departureTo
+  )
+}
+
+type FilterState = {
+  search: string
+  ghaam: string
+  mandal: string
+  country: string
+  age: number | null
+  ageMin: number | null
+  ageMax: number | null
+  arrivalFrom: string
+  arrivalTo: string
+  departureFrom: string
+  departureTo: string
+}
+
+const INITIAL_FILTERS: FilterState = {
+  search: "",
+  ghaam: "",
+  mandal: "",
+  country: "",
+  age: null,
+  ageMin: null,
+  ageMax: null,
+  arrivalFrom: "",
+  arrivalTo: "",
+  departureFrom: "",
+  departureTo: "",
+}
+
 export function AdminRegistrationsTable() {
   const [loaded, setLoaded] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -65,18 +126,60 @@ export function AdminRegistrationsTable() {
   const [prevCursor, setPrevCursor] = useState<number | null>(null)
   const [hasMore, setHasMore] = useState(false)
   const [hasPrev, setHasPrev] = useState(false)
+  const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS)
+  const [searchInput, setSearchInput] = useState("")
+  const [distinctValues, setDistinctValues] = useState<{
+    ghaam: string[]
+    country: string[]
+  } | null>(null)
+  const [filtersExpanded, setFiltersExpanded] = useState(false)
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const hasLoadedOnceRef = useRef(false)
+  const mandalOptions = getAllMandalOptionsStored()
+
+  const fetchDistinctValues = useCallback(async () => {
+    try {
+      const res = await fetch("/api/admin/registrations/distinct")
+      const data: DistinctValuesResponse = await res.json()
+      if (res.ok && data.ghaam && data.country) {
+        setDistinctValues({ ghaam: data.ghaam, country: data.country })
+      }
+    } catch {
+      // Non-blocking; dropdowns will show empty
+    }
+  }, [])
+
+  const buildParams = useCallback(
+    (cursor: number | null, direction: "next" | "prev") => {
+      const params = new URLSearchParams({
+        page_size: String(pageSize),
+        direction,
+      })
+      if (cursor != null) params.set("cursor", String(cursor))
+      if (filters.search.trim().length >= 2)
+        params.set("search", filters.search.trim())
+      if (filters.ghaam) params.set("ghaam", filters.ghaam)
+      if (filters.mandal) params.set("mandal", filters.mandal)
+      if (filters.country) params.set("country", filters.country)
+      if (filters.age != null) params.set("age", String(filters.age))
+      if (filters.ageMin != null) params.set("age_min", String(filters.ageMin))
+      if (filters.ageMax != null) params.set("age_max", String(filters.ageMax))
+      if (filters.arrivalFrom) params.set("arrival_from", filters.arrivalFrom)
+      if (filters.arrivalTo) params.set("arrival_to", filters.arrivalTo)
+      if (filters.departureFrom)
+        params.set("departure_from", filters.departureFrom)
+      if (filters.departureTo) params.set("departure_to", filters.departureTo)
+      return params
+    },
+    [pageSize, filters]
+  )
 
   const fetchPage = useCallback(
     async (cursor: number | null, direction: "next" | "prev" = "next") => {
       setLoading(true)
       setError(null)
       try {
-        const params = new URLSearchParams({
-          page_size: String(pageSize),
-          direction,
-        })
-        if (cursor != null) params.set("cursor", String(cursor))
-
+        const params = buildParams(cursor, direction)
         const res = await fetch(`/api/admin/registrations?${params}`)
         const data: PaginatedResponse = await res.json()
 
@@ -97,10 +200,44 @@ export function AdminRegistrationsTable() {
         setLoading(false)
       }
     },
-    [pageSize]
+    [buildParams]
   )
 
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current)
+    debounceRef.current = setTimeout(() => {
+      setFilters((prev) => ({ ...prev, search: searchInput }))
+      debounceRef.current = null
+    }, SEARCH_DEBOUNCE_MS)
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current)
+    }
+  }, [searchInput])
+
+  useEffect(() => {
+    if (!loaded) return
+    if (!hasLoadedOnceRef.current) {
+      hasLoadedOnceRef.current = true
+      return
+    }
+    fetchPage(null, "next")
+  }, [
+    loaded,
+    filters.ghaam,
+    filters.mandal,
+    filters.country,
+    filters.age,
+    filters.ageMin,
+    filters.ageMax,
+    filters.arrivalFrom,
+    filters.arrivalTo,
+    filters.departureFrom,
+    filters.departureTo,
+    filters.search,
+  ])
+
   const handleLoadRegistrations = () => {
+    fetchDistinctValues()
     fetchPage(null, "next")
   }
 
@@ -117,9 +254,20 @@ export function AdminRegistrationsTable() {
   const handlePageSizeChange = (newSize: 25 | 50 | 100) => {
     if (newSize === pageSize) return
     setPageSize(newSize)
-    if (loaded) {
-      fetchPage(null, "next")
-    }
+    if (loaded) fetchPage(null, "next")
+  }
+
+  const handleClearFilters = () => {
+    setFilters(INITIAL_FILTERS)
+    setSearchInput("")
+    // useEffect will refetch when filters change
+  }
+
+  const updateFilter = <K extends keyof FilterState>(
+    key: K,
+    value: FilterState[K]
+  ) => {
+    setFilters((prev) => ({ ...prev, [key]: value }))
   }
 
   return (
@@ -141,7 +289,7 @@ export function AdminRegistrationsTable() {
               onChange={(e) =>
                 handlePageSizeChange(Number(e.target.value) as 25 | 50 | 100)
               }
-              className="h-10 rounded-lg border border-preset-pale-gray bg-white px-3 text-sm text-preset-charcoal focus:outline-none focus:ring-2 focus:ring-preset-deep-navy/30"
+              className={SELECT_STYLE}
             >
               {PAGE_SIZE_OPTIONS.map((n) => (
                 <option key={n} value={n}>
@@ -160,6 +308,239 @@ export function AdminRegistrationsTable() {
           </a>
         </div>
       </div>
+
+      {loaded && (
+        <div className="mb-6 space-y-4">
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="relative flex-1 min-w-[200px] max-w-md">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-preset-bluish-gray pointer-events-none" />
+              <input
+                type="search"
+                placeholder="Search name, email, phone…"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                className={`${INPUT_STYLE} w-full pl-10 pr-10`}
+                aria-label="Search registrations"
+              />
+              {searchInput && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchInput("")
+                    setFilters((p) => ({ ...p, search: "" }))
+                    fetchPage(null, "next")
+                  }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded text-preset-bluish-gray hover:text-preset-charcoal hover:bg-preset-pale-gray/50 transition-colors"
+                  aria-label="Clear search"
+                >
+                  <X className="size-4" />
+                </button>
+              )}
+            </div>
+            <select
+              value={filters.ghaam}
+              onChange={(e) => updateFilter("ghaam", e.target.value)}
+              className={SELECT_STYLE}
+              aria-label="Filter by ghaam"
+            >
+              <option value="">All ghaams</option>
+              {(distinctValues?.ghaam ?? []).map((g) => (
+                <option key={g} value={g}>
+                  {g}
+                </option>
+              ))}
+            </select>
+            <select
+              value={filters.mandal}
+              onChange={(e) => updateFilter("mandal", e.target.value)}
+              className={SELECT_STYLE}
+              aria-label="Filter by mandal"
+            >
+              <option value="">All mandals</option>
+              {mandalOptions.map((m) => (
+                <option key={m} value={m}>
+                  {mandalStoredToDisplay(m)}
+                </option>
+              ))}
+            </select>
+            <select
+              value={filters.country}
+              onChange={(e) => updateFilter("country", e.target.value)}
+              className={SELECT_STYLE}
+              aria-label="Filter by country"
+            >
+              <option value="">All countries</option>
+              {(distinctValues?.country ?? []).map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+            {hasActiveFilters(filters) && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleClearFilters}
+                className="rounded-full px-4 py-2 border-preset-deep-navy/50 text-preset-deep-navy hover:bg-preset-deep-navy/10"
+              >
+                <X className="size-4 mr-1" />
+                Clear filters
+              </Button>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setFiltersExpanded((e) => !e)}
+            className="flex items-center gap-2 text-sm text-preset-bluish-gray hover:text-preset-charcoal transition-colors"
+          >
+            <Filter className="size-4" />
+            {filtersExpanded ? (
+              <>
+                <ChevronUp className="size-4" />
+                Hide age & date filters
+              </>
+            ) : (
+              <>
+                <ChevronDown className="size-4" />
+                Show age & date filters
+              </>
+            )}
+          </button>
+
+          <AnimatePresence>
+            {filtersExpanded && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden"
+              >
+                <div className="flex flex-wrap items-end gap-4 pt-2 pb-2 border-t border-preset-pale-gray/60">
+                  <div>
+                    <label className="block text-xs font-medium text-preset-bluish-gray mb-1">
+                      Age (exact)
+                    </label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={120}
+                      placeholder="—"
+                      value={filters.age ?? ""}
+                      onChange={(e) =>
+                        updateFilter(
+                          "age",
+                          e.target.value ? parseInt(e.target.value, 10) : null
+                        )
+                      }
+                      className={`${INPUT_STYLE} w-24`}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-preset-bluish-gray mb-1">
+                      Age min
+                    </label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={120}
+                      placeholder="—"
+                      value={filters.ageMin ?? ""}
+                      onChange={(e) =>
+                        updateFilter(
+                          "ageMin",
+                          e.target.value ? parseInt(e.target.value, 10) : null
+                        )
+                      }
+                      className={`${INPUT_STYLE} w-24`}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-preset-bluish-gray mb-1">
+                      Age max
+                    </label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={120}
+                      placeholder="—"
+                      value={filters.ageMax ?? ""}
+                      onChange={(e) =>
+                        updateFilter(
+                          "ageMax",
+                          e.target.value ? parseInt(e.target.value, 10) : null
+                        )
+                      }
+                      className={`${INPUT_STYLE} w-24`}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-preset-bluish-gray mb-1">
+                      Arrival from
+                    </label>
+                    <input
+                      type="date"
+                      min={REGISTRATION_DATE_RANGE.start}
+                      max={REGISTRATION_DATE_RANGE.end}
+                      value={filters.arrivalFrom}
+                      onChange={(e) =>
+                        updateFilter("arrivalFrom", e.target.value)
+                      }
+                      className={`${INPUT_STYLE} w-36`}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-preset-bluish-gray mb-1">
+                      Arrival to
+                    </label>
+                    <input
+                      type="date"
+                      min={REGISTRATION_DATE_RANGE.start}
+                      max={REGISTRATION_DATE_RANGE.end}
+                      value={filters.arrivalTo}
+                      onChange={(e) =>
+                        updateFilter("arrivalTo", e.target.value)
+                      }
+                      className={`${INPUT_STYLE} w-36`}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-preset-bluish-gray mb-1">
+                      Departure from
+                    </label>
+                    <input
+                      type="date"
+                      min={REGISTRATION_DATE_RANGE.start}
+                      max={REGISTRATION_DATE_RANGE.end}
+                      value={filters.departureFrom}
+                      onChange={(e) =>
+                        updateFilter("departureFrom", e.target.value)
+                      }
+                      className={`${INPUT_STYLE} w-36`}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-preset-bluish-gray mb-1">
+                      Departure to
+                    </label>
+                    <input
+                      type="date"
+                      min={REGISTRATION_DATE_RANGE.start}
+                      max={REGISTRATION_DATE_RANGE.end}
+                      value={filters.departureTo}
+                      onChange={(e) =>
+                        updateFilter("departureTo", e.target.value)
+                      }
+                      className={`${INPUT_STYLE} w-36`}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
 
       {!loaded && (
         <div className="flex flex-col items-center justify-center py-16 px-4 rounded-xl bg-preset-light-gray/60 border border-preset-pale-gray/50">
@@ -291,9 +672,26 @@ export function AdminRegistrationsTable() {
         )}
 
         {loaded && rows.length === 0 && !loading && (
-          <p className="py-8 text-center text-preset-bluish-gray">
-            No registrations found.
-          </p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="py-12 px-6 rounded-xl bg-preset-light-gray/40 border border-preset-pale-gray/60 text-center"
+          >
+            <p className="text-preset-charcoal font-medium mb-2">
+              No registrations match your filters
+            </p>
+            <p className="text-sm text-preset-bluish-gray mb-4">
+              Try adjusting your search or filters
+            </p>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleClearFilters}
+              className="rounded-full px-5 py-2.5 border-preset-deep-navy text-preset-deep-navy hover:bg-preset-deep-navy hover:text-white"
+            >
+              Clear filters
+            </Button>
+          </motion.div>
         )}
       </AnimatePresence>
 

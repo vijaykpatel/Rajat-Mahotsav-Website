@@ -65,4 +65,18 @@ export function mandalStoredToDisplay(
   return STORED_TO_DISPLAY[trimmed.toLowerCase()] ?? trimmed
 }
 
+/** All mandal values in stored format for filter dropdowns (e.g. "new-jersey") */
+export function getAllMandalOptionsStored(): string[] {
+  const stored = new Set<string>()
+  for (const mandals of Object.values(MANDAL_OPTIONS_BY_COUNTRY)) {
+    for (const m of mandals) {
+      stored.add(toStoredValue(m))
+    }
+  }
+  for (const display of Object.values(SPECIAL_COUNTRY_MANDALS)) {
+    stored.add(toStoredValue(display))
+  }
+  return Array.from(stored).sort()
+}
+
 export { MANDAL_OPTIONS_BY_COUNTRY, SPECIAL_COUNTRY_MANDALS }

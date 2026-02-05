@@ -2,23 +2,6 @@ import { NextResponse } from "next/server"
 import { createClient } from "@/utils/supabase/server"
 import { isAdminDomainUser } from "@/lib/admin-auth"
 
-/** Explicit columns only – avoid SELECT * per query best practices (data-pagination) */
-const REGISTRATION_COLUMNS = [
-  "id",
-  "first_name",
-  "middle_name",
-  "last_name",
-  "email",
-  "mobile_number",
-  "phone_country_code",
-  "country",
-  "ghaam",
-  "mandal",
-  "arrival_date",
-  "departure_date",
-  "age",
-] as const
-
 const PAGE_SIZES = [25, 50, 100] as const
 type PageSize = (typeof PAGE_SIZES)[number]
 
@@ -28,17 +11,29 @@ function parsePageSize(val: string | null): PageSize {
   return 25
 }
 
+function parseOptionalInt(val: string | null): number | null {
+  if (!val || val.trim() === "") return null
+  const n = parseInt(val, 10)
+  return Number.isNaN(n) ? null : n
+}
+
+function parseOptionalDate(val: string | null): string | null {
+  if (!val || val.trim() === "") return null
+  const d = new Date(val)
+  return Number.isNaN(d.getTime()) ? null : val.trim()
+}
+
 /**
- * Paginated registrations endpoint.
- * Uses keyset pagination (cursor-based) ordered by id DESC – O(1) per page per data-pagination best practices.
+ * Paginated registrations endpoint with filters and search.
+ * Uses keyset pagination (cursor-based) ordered by id DESC.
  * Requires authenticated session with @nj.sgadi.us domain.
  *
  * Query params:
- * - page_size: 25 | 50 | 100 (default 25)
- * - cursor: id for keyset (optional; omit for first page)
- * - direction: "next" | "prev" (default "next")
- *
- * @see .agents/skills/supabase-postgres-best-practices/references/data-pagination.md
+ * - page_size, cursor, direction (pagination)
+ * - ghaam, mandal, country (exact)
+ * - age, age_min, age_max
+ * - arrival_from, arrival_to, departure_from, departure_to (ISO dates)
+ * - search (text across name, email, mobile; min 2 chars per word)
  */
 export async function GET(request: Request) {
   const headers = new Headers()
@@ -78,25 +73,42 @@ export async function GET(request: Request) {
   const cursor = cursorRaw ? parseInt(cursorRaw, 10) : null
   const direction = searchParams.get("direction") === "prev" ? "prev" : "next"
 
-  const columns = REGISTRATION_COLUMNS.join(", ")
+  const ghaam = searchParams.get("ghaam")?.trim() || null
+  const mandal = searchParams.get("mandal")?.trim() || null
+  const country = searchParams.get("country")?.trim() || null
+  const age = parseOptionalInt(searchParams.get("age"))
+  const ageMin = parseOptionalInt(searchParams.get("age_min"))
+  const ageMax = parseOptionalInt(searchParams.get("age_max"))
+  const arrivalFrom = parseOptionalDate(searchParams.get("arrival_from"))
+  const arrivalTo = parseOptionalDate(searchParams.get("arrival_to"))
+  const departureFrom = parseOptionalDate(searchParams.get("departure_from"))
+  const departureTo = parseOptionalDate(searchParams.get("departure_to"))
+  const searchRaw = searchParams.get("search")?.trim() || null
+  const search = searchRaw && searchRaw.length >= 2 ? searchRaw : null
 
-  let query = supabase
-    .from("registrations")
-    .select(columns)
-
-  if (direction === "next") {
-    query = query.order("id", { ascending: false }).limit(pageSize)
-    if (cursor != null && !Number.isNaN(cursor)) {
-      query = query.lt("id", cursor)
-    }
-  } else {
-    query = query.order("id", { ascending: true }).limit(pageSize)
-    if (cursor != null && !Number.isNaN(cursor)) {
-      query = query.gt("id", cursor)
-    }
+  if (ageMin != null && ageMax != null && ageMin > ageMax) {
+    return NextResponse.json(
+      { error: "age_min must be <= age_max" },
+      { status: 400, headers }
+    )
   }
 
-  const { data, error } = await query
+  const { data, error } = await supabase.rpc("get_registrations_filtered", {
+    p_page_size: pageSize,
+    p_cursor: cursor,
+    p_direction: direction,
+    p_ghaam: ghaam,
+    p_mandal: mandal,
+    p_country: country,
+    p_age: age,
+    p_age_min: ageMin,
+    p_age_max: ageMax,
+    p_arrival_from: arrivalFrom,
+    p_arrival_to: arrivalTo,
+    p_departure_from: departureFrom,
+    p_departure_to: departureTo,
+    p_search: search,
+  })
 
   if (error) {
     return NextResponse.json(
@@ -105,23 +117,33 @@ export async function GET(request: Request) {
     )
   }
 
-  const rows = (data ?? []) as Array<Record<string, unknown>>
-  if (direction === "prev" && rows.length > 0) {
-    rows.reverse()
+  const result = data as {
+    success?: boolean
+    error?: string
+    rows?: unknown[]
+    pageSize?: number
+    nextCursor?: number | null
+    prevCursor?: number | null
+    hasMore?: boolean
+    hasPrev?: boolean
   }
 
-  const minId = rows.length > 0 ? Math.min(...rows.map((r) => Number(r.id))) : null
-  const maxId = rows.length > 0 ? Math.max(...rows.map((r) => Number(r.id))) : null
+  if (result.success === false && result.error) {
+    return NextResponse.json(
+      { error: result.error },
+      { status: 400, headers }
+    )
+  }
 
   return NextResponse.json(
     {
       success: true,
-      rows,
-      pageSize,
-      nextCursor: direction === "next" ? minId : maxId,
-      prevCursor: direction === "next" ? maxId : minId,
-      hasMore: rows.length === pageSize,
-      hasPrev: direction === "next" && cursor != null && !Number.isNaN(cursor),
+      rows: result.rows ?? [],
+      pageSize: result.pageSize ?? pageSize,
+      nextCursor: result.nextCursor ?? null,
+      prevCursor: result.prevCursor ?? null,
+      hasMore: result.hasMore ?? false,
+      hasPrev: result.hasPrev ?? false,
     },
     { status: 200, headers }
   )

@@ -4,22 +4,22 @@ overview: Add column filters and text search to the admin registrations table wi
 todos:
   - id: api-filters
     content: Add filter and search query params to GET /api/admin/registrations
-    status: pending
+    status: completed
   - id: api-distinct
     content: Add API endpoint for distinct ghaam and country values (filter dropdowns)
-    status: pending
+    status: completed
   - id: ui-search
     content: Add search input with debounce to AdminRegistrationsTable
-    status: pending
+    status: completed
   - id: ui-dropdowns
     content: Add ghaam, mandal, country filter dropdowns
-    status: pending
+    status: completed
   - id: ui-remaining
     content: Add age and date range filters (optional)
-    status: pending
+    status: completed
   - id: perf-indexes
     content: Add composite indexes if EXPLAIN shows benefit; trigram/tsvector if search slow
-    status: pending
+    status: completed
 isProject: false
 ---
 
