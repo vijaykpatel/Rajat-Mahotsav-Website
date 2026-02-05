@@ -9,6 +9,7 @@ This is a portfolio project showcasing a modern, full-featured event website bui
 ## Key Features
 
 - **Event Registration** - Multi-step registration form with form validation and Supabase backend
+- **Admin Dashboard** - Protected admin portal with Google OAuth authentication for registration management
 - **Interactive Schedule** - Dynamic timeline view with mobile and desktop variants
 - **Media Galleries** - Image carousels and video players with custom controls
 - **Seva Submission** - Forms for spiritual and community service contributions
@@ -40,7 +41,7 @@ This is a portfolio project showcasing a modern, full-featured event website bui
 - **chrono-node** - Natural language date parsing
 
 ### Backend & Storage
-- **Supabase** - Backend as a service (database, authentication)
+- **Supabase** - Backend as a service (PostgreSQL database, Google OAuth authentication, Row Level Security)
 - **Cloudflare R2** - Object storage
 - **Cloudflare Images** - Image optimization and delivery
 - **AWS SDK** - S3-compatible operations for R2
@@ -56,7 +57,10 @@ This is a portfolio project showcasing a modern, full-featured event website bui
 ```
 .
 ├── app/                          # Next.js app router pages
+│   ├── admin/                    # Admin portal (protected)
+│   │   └── registrations/        # Registration management dashboard
 │   ├── api/                      # API routes
+│   ├── auth/                     # Authentication callback handlers
 │   ├── registration/             # Event registration
 │   ├── schedule/                 # Event schedule
 │   ├── community-seva/           # Community service
@@ -71,7 +75,11 @@ This is a portfolio project showcasing a modern, full-featured event website bui
 ├── contexts/                     # React contexts
 ├── hooks/                        # Custom React hooks
 ├── lib/                          # Utility functions and data
-└── utils/                        # Helper utilities
+├── utils/                        # Helper utilities
+│   └── supabase/                 # Supabase client utilities (client, server, middleware)
+├── docs/                         # Documentation and migration files
+├── styles/                       # Theme CSS files (registration, admin, community)
+└── middleware.ts                 # Next.js middleware for auth session refresh
 ```
 
 ## Getting Started
@@ -156,24 +164,28 @@ This project follows Atomic Design principles:
 
 This project implements several security best practices:
 
+- **Google OAuth Authentication** - Domain-restricted admin access via Supabase Auth
+- **Row Level Security (RLS)** - Database-level access control for registrations data
+- **Domain Validation** - Admin routes verify user email domains before granting access
 - URL validation and allowlisting for file downloads
 - Sanitized user input handling
 - Security headers (X-Frame-Options, X-Content-Type-Options, etc.)
 - Environment variable protection
 - No hardcoded secrets
+- Open redirect prevention in auth callbacks
 
 ### Important Security Notes
 
 ⚠️ **Before deploying to production:**
 
-1. **Configure Supabase RLS Policies** - Row Level Security must be enabled on all tables
-2. **Implement Authentication** - Add proper authentication for API routes
+1. **Configure Supabase RLS Policies** - Row Level Security is enabled; verify policies match your domain requirements
+2. **Set Admin Domains** - Update `lib/admin-auth.ts` with your allowed admin email domain
 3. **Add Rate Limiting** - Implement rate limiting to prevent abuse
 4. **Enable CSRF Protection** - Add CSRF tokens to forms
 5. **Add Input Validation** - Server-side validation for all user inputs
 6. **File Upload Security** - Validate file types and sizes server-side
 
-See the security audit report for detailed recommendations.
+See `docs/SUPABASE_GOOGLE_OAUTH_SETUP.md` for OAuth configuration and the security audit report for detailed recommendations.
 
 ## Architecture Highlights
 
@@ -191,6 +203,35 @@ See the security audit report for detailed recommendations.
 - Timeline data in `lib/timeline-data.ts`
 - CDN asset paths in `lib/cdn-assets.ts`
 - Supabase for dynamic data storage
+
+## Admin Portal
+
+The admin portal (`/admin/registrations`) provides a secure dashboard for managing event registrations.
+
+### Features
+
+- **Google OAuth Authentication** - Domain-restricted sign-in via Supabase Auth
+- **Dashboard Statistics** - Animated stat cards showing registration metrics, peak attendance, and daily arrivals
+- **Interactive Charts** - Visualizations for arrivals by date, Ghaam distribution, and Mandal breakdown
+- **Registrations Table** - Paginated, sortable table with filtering and search capabilities:
+  - Full-text search across names, email, and phone
+  - Filters for Ghaam, Mandal, Country, age range, and date ranges
+  - CSV export with chunked streaming for large datasets
+  - Keyset pagination for performance
+- **Row Level Security** - Database-level access control restricted to authorized admin domains
+
+### Authentication Flow
+
+1. Users sign in via Google OAuth at `/admin/registrations`
+2. Auth callback at `/auth/callback` validates the user's domain
+3. Authorized users (matching allowed domain) access the dashboard
+4. Unauthorized users are redirected to `/admin/registrations/unauthorized`
+
+### Admin Configuration
+
+Admin access is restricted by email domain. The allowed domain is configured in `lib/admin-auth.ts`. To change the allowed domain, update the `ALLOWED_DOMAIN` constant.
+
+See `docs/SUPABASE_GOOGLE_OAUTH_SETUP.md` for detailed OAuth configuration instructions.
 
 ## Deployment
 
