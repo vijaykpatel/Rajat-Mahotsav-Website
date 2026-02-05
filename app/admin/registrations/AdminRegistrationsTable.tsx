@@ -10,6 +10,7 @@ import {
   Database,
   Download,
 } from "lucide-react"
+import { mandalStoredToDisplay } from "@/lib/mandal-options"
 import { Button } from "@/components/atoms/button"
 import { format } from "date-fns"
 
@@ -199,12 +200,9 @@ export function AdminRegistrationsTable() {
             exit={{ opacity: 0 }}
             className="overflow-x-auto -mx-2"
           >
-            <table className="w-full min-w-[800px] text-sm">
+            <table className="w-full min-w-[700px] text-sm">
               <thead>
                 <tr className="border-b border-preset-pale-gray">
-                  <th className="text-left py-3 px-3 font-semibold text-preset-charcoal">
-                    ID
-                  </th>
                   <th className="text-left py-3 px-3 font-semibold text-preset-charcoal">
                     Name
                   </th>
@@ -234,9 +232,6 @@ export function AdminRegistrationsTable() {
                     key={row.id}
                     className="border-b border-preset-pale-gray/60 hover:bg-preset-light-gray/40 transition-colors"
                   >
-                    <td className="py-3 px-3 text-preset-charcoal font-mono text-xs">
-                      {row.id}
-                    </td>
                     <td className="py-3 px-3 text-preset-charcoal">
                       {[row.first_name, row.middle_name, row.last_name]
                         .filter(Boolean)
@@ -249,7 +244,7 @@ export function AdminRegistrationsTable() {
                       {row.ghaam ?? "—"}
                     </td>
                     <td className="py-3 px-3 text-preset-charcoal">
-                      {row.mandal ?? "—"}
+                      {mandalStoredToDisplay(row.mandal)}
                     </td>
                     <td className="py-3 px-3 text-preset-bluish-gray">
                       {formatDate(row.arrival_date)}

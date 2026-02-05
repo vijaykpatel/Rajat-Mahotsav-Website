@@ -25,6 +25,7 @@ import { supabase } from "@/utils/supabase/client"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/atoms/button"
 import type { RegistrationsStats } from "./types"
+import { mandalStoredToDisplay } from "@/lib/mandal-options"
 import { format } from "date-fns"
 
 function formatShortDate(iso: string): string {
@@ -345,7 +346,7 @@ export function AdminDashboardStats({ stats, userEmail }: AdminDashboardStatsPro
                 className="flex items-center justify-between text-sm"
               >
                 <span className="text-preset-charcoal">
-                  {i + 1}. {item.name}
+                  {i + 1}. {mandalStoredToDisplay(item.name)}
                 </span>
                 <span className="font-medium text-preset-deep-navy">
                   {item.count}
