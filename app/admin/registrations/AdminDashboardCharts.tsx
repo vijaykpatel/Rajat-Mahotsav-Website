@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useRef } from "react"
 import {
   BarChart,
   Bar,
@@ -13,7 +13,7 @@ import {
   Line,
   ReferenceArea,
 } from "recharts"
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import {
   Dialog,
   DialogContent,
@@ -106,6 +106,18 @@ function CustomTooltip({ active, payload, label, valueLabel }: any) {
 }
 
 export default function AdminDashboardCharts({ stats }: { stats: RegistrationsStats }) {
+  const attendanceRef = useRef<HTMLDivElement | null>(null)
+  const arrivalsRef = useRef<HTMLDivElement | null>(null)
+  const departuresRef = useRef<HTMLDivElement | null>(null)
+  const ghaamRef = useRef<HTMLDivElement | null>(null)
+  const mandalRef = useRef<HTMLDivElement | null>(null)
+
+  const attendanceInView = useInView(attendanceRef, { once: true, margin: "-100px" })
+  const arrivalsInView = useInView(arrivalsRef, { once: true, margin: "-100px" })
+  const departuresInView = useInView(departuresRef, { once: true, margin: "-100px" })
+  const ghaamInView = useInView(ghaamRef, { once: true, margin: "-100px" })
+  const mandalInView = useInView(mandalRef, { once: true, margin: "-100px" })
+
   const arrivalsData = useMemo(
     () => objToSortedChartData(stats.counts_by_arrival_date),
     [stats.counts_by_arrival_date]
@@ -156,8 +168,10 @@ export default function AdminDashboardCharts({ stats }: { stats: RegistrationsSt
     <>
       {/* Daily expected attendance - full width (moved above arrivals/departures) */}
       <motion.div
+        ref={attendanceRef}
         initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.4, delay: 0.1 }}
         className="p-6 rounded-2xl admin-card"
       >
@@ -167,6 +181,7 @@ export default function AdminDashboardCharts({ stats }: { stats: RegistrationsSt
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
+              key={attendanceInView ? "attendance-animate" : "attendance-static"}
               data={dailyAttendanceData}
               margin={{ top: 8, right: 24, left: 8, bottom: 0 }}
             >
@@ -200,6 +215,8 @@ export default function AdminDashboardCharts({ stats }: { stats: RegistrationsSt
                 strokeWidth={2.5}
                 dot={{ fill: lineColor, r: 3, strokeWidth: 0 }}
                 activeDot={{ r: 5, fill: lineColor, stroke: "#fff", strokeWidth: 2 }}
+                isAnimationActive={attendanceInView}
+                animationDuration={900}
               />
             </LineChart>
           </ResponsiveContainer>
@@ -210,8 +227,10 @@ export default function AdminDashboardCharts({ stats }: { stats: RegistrationsSt
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {/* Arrivals by date */}
         <motion.div
+          ref={arrivalsRef}
           initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.4, delay: 0.15 }}
           className="p-6 rounded-2xl admin-card"
         >
@@ -220,7 +239,11 @@ export default function AdminDashboardCharts({ stats }: { stats: RegistrationsSt
           </h3>
           <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={arrivalsData} margin={{ top: 8, right: 16, left: 8, bottom: 0 }}>
+              <BarChart
+                key={arrivalsInView ? "arrivals-animate" : "arrivals-static"}
+                data={arrivalsData}
+                margin={{ top: 8, right: 16, left: 8, bottom: 0 }}
+              >
                 {/* Core event shading */}
                 {arrivalsBounds && (
                   <ReferenceArea
@@ -253,6 +276,8 @@ export default function AdminDashboardCharts({ stats }: { stats: RegistrationsSt
                   fill={arrivalBarColor} 
                   radius={[4, 4, 0, 0]}
                   maxBarSize={32}
+                  isAnimationActive={arrivalsInView}
+                  animationDuration={800}
                 />
               </BarChart>
             </ResponsiveContainer>
@@ -261,8 +286,10 @@ export default function AdminDashboardCharts({ stats }: { stats: RegistrationsSt
 
         {/* Departures by date */}
         <motion.div
+          ref={departuresRef}
           initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.4, delay: 0.2 }}
           className="p-6 rounded-2xl admin-card"
         >
@@ -271,7 +298,11 @@ export default function AdminDashboardCharts({ stats }: { stats: RegistrationsSt
           </h3>
           <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={departuresData} margin={{ top: 8, right: 16, left: 8, bottom: 0 }}>
+              <BarChart
+                key={departuresInView ? "departures-animate" : "departures-static"}
+                data={departuresData}
+                margin={{ top: 8, right: 16, left: 8, bottom: 0 }}
+              >
                 {/* Core event shading */}
                 {departuresBounds && (
                   <ReferenceArea
@@ -304,6 +335,8 @@ export default function AdminDashboardCharts({ stats }: { stats: RegistrationsSt
                   fill={arrivalBarColor} 
                   radius={[4, 4, 0, 0]}
                   maxBarSize={32}
+                  isAnimationActive={departuresInView}
+                  animationDuration={800}
                 />
               </BarChart>
             </ResponsiveContainer>
@@ -314,8 +347,9 @@ export default function AdminDashboardCharts({ stats }: { stats: RegistrationsSt
       {/* Highest Attendees by Ghaam & Mandal */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <motion.div
+          ref={ghaamRef}
           initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={ghaamInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
           transition={{ duration: 0.4, delay: 0.25 }}
           className="p-6 rounded-2xl admin-card"
         >
@@ -438,8 +472,9 @@ export default function AdminDashboardCharts({ stats }: { stats: RegistrationsSt
           )}
         </motion.div>
         <motion.div
+          ref={mandalRef}
           initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={mandalInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
           transition={{ duration: 0.4, delay: 0.3 }}
           className="p-6 rounded-2xl admin-card"
         >

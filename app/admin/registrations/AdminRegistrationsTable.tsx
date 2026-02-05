@@ -381,8 +381,8 @@ export function AdminRegistrationsTable() {
 
       {loaded && (
         <div className="p-5 pb-0 space-y-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="relative flex-1 min-w-0 sm:min-w-[200px] max-w-md">
+          <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center">
+            <div className="relative col-span-2 min-w-0 w-full sm:flex-1 sm:min-w-[200px] sm:max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 reg-text-secondary pointer-events-none" aria-hidden />
               <input
                 type="search"
@@ -410,7 +410,7 @@ export function AdminRegistrationsTable() {
             <select
               value={filters.ghaam}
               onChange={(e) => updateFilter("ghaam", e.target.value)}
-              className={SELECT_STYLE}
+              className={`${SELECT_STYLE} col-span-1 w-full sm:w-auto`}
               aria-label="Filter by ghaam"
             >
               <option value="">All ghaams</option>
@@ -423,7 +423,7 @@ export function AdminRegistrationsTable() {
             <select
               value={filters.mandal}
               onChange={(e) => updateFilter("mandal", e.target.value)}
-              className={SELECT_STYLE}
+              className={`${SELECT_STYLE} col-span-1 w-full sm:w-auto`}
               aria-label="Filter by mandal"
             >
               <option value="">All mandals</option>
@@ -436,7 +436,7 @@ export function AdminRegistrationsTable() {
             <select
               value={filters.country}
               onChange={(e) => updateFilter("country", e.target.value)}
-              className={SELECT_STYLE}
+              className={`${SELECT_STYLE} col-span-2 w-full sm:col-span-1 sm:w-auto`}
               aria-label="Filter by country"
             >
               <option value="">All countries</option>
@@ -451,7 +451,7 @@ export function AdminRegistrationsTable() {
                 variant="outline"
                 size="sm"
                 onClick={handleClearFilters}
-                className="rounded-full px-4 py-2 admin-btn-outline"
+                className="col-span-2 w-full sm:col-span-1 sm:w-auto rounded-full px-4 py-2 admin-btn-outline"
               >
                 <X className="size-4 mr-1" aria-hidden />
                 Clear filters
