@@ -166,7 +166,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 9) Indexing + Performance Hardening
 **Goal**: Scale stats and pagination.
-- [ ] Section complete (build, test, verify)
+- [x] Section complete (build, test, verify)
 
 9.1 **Add indexes**
 - **Work**: Add indexes for `arrival_date`, `departure_date`, `ghaam`, `mandal`, `age`, `email`, `mobile_number`.
