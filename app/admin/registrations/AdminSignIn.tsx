@@ -18,6 +18,12 @@ export function AdminSignIn() {
         "Max-Age=600",
         "SameSite=Lax",
       ]
+      // Ensure the cookie survives redirects between `www` and apex domain on prod.
+      // (Host-only cookies are lost if the callback lands on a different subdomain.)
+      const host = window.location.hostname
+      if (host.endsWith("njrajatmahotsav.com")) {
+        cookieParts.push("Domain=.njrajatmahotsav.com")
+      }
       if (window.location.protocol === "https:") cookieParts.push("Secure")
       document.cookie = cookieParts.join("; ")
 

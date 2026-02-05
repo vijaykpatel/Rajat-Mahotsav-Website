@@ -35,6 +35,8 @@ export async function GET(request: Request) {
   }
 
   const forwardedHost = request.headers.get("x-forwarded-host")
+  const requestHost = request.headers.get("host")
+  const effectiveHost = forwardedHost ?? requestHost ?? new URL(request.url).host
   const isLocalEnv = process.env.NODE_ENV === "development"
 
   const redirectUrl = isLocalEnv
@@ -43,7 +45,25 @@ export async function GET(request: Request) {
       ? `https://${forwardedHost}${next}`
       : `${origin}${next}`
 
+  // Diagnostics for "falls back to /" cases: usually missing cookie due to host mismatch (www vs apex)
+  // or query param not present. Avoid logging the auth code.
+  if (process.env.NODE_ENV !== "production") {
+    console.info("[auth/callback] redirect decision", {
+      origin,
+      effectiveHost,
+      hasQueryNext: !!queryNext,
+      next,
+    })
+  }
+
   const response = NextResponse.redirect(redirectUrl)
-  response.cookies.set("rm-auth-next", "", { path: "/", maxAge: 0 })
+  const clearCookieOptions: Parameters<typeof response.cookies.set>[2] = {
+    path: "/",
+    maxAge: 0,
+  }
+  if (effectiveHost.endsWith("njrajatmahotsav.com")) {
+    clearCookieOptions.domain = ".njrajatmahotsav.com"
+  }
+  response.cookies.set("rm-auth-next", "", clearCookieOptions)
   return response
 }
