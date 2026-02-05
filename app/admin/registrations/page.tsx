@@ -56,7 +56,7 @@ export default async function AdminRegistrationsPage() {
         <div className="container mx-auto px-4 page-bottom-spacing max-w-6xl">
           <StandardPageHeader
             title="Registrations Admin"
-            description="Insights and registrations data for the Rajat Mahotsav event."
+            description="Insights and registrations data for the Rajat Mahotsav."
           />
           {stats ? (
             <>
