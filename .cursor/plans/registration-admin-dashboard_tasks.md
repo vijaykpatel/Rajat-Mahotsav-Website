@@ -128,7 +128,7 @@ Source plan: `.cursor/plans/registration-admin-dashboard_8e4c088e.plan.md`
 
 ### 7) Paginated Table (Lazy Load)
 **Goal**: Avoid heavy load; only fetch table on demand.
-- [ ] Section complete (build, test, verify)
+- [x] Section complete (build, test, verify)
 
 7.1 **Add “Load registrations” button**
 - **Work**: Table data remains empty until user opts in.
