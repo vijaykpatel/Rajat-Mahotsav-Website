@@ -142,7 +142,8 @@ export function AdminRegistrationsTable() {
   const hasLoadedOnceRef = useRef(false)
   const mandalOptions = getAllMandalOptionsStored()
   const tableContainerRef = useRef<HTMLDivElement>(null)
-  const previousPageSizeRef = useRef<number>(pageSize)
+  const abortRef = useRef<AbortController | null>(null)
+  const requestIdRef = useRef(0)
 
   const fetchDistinctValues = useCallback(async () => {
     try {
@@ -186,48 +187,69 @@ export function AdminRegistrationsTable() {
     [pageSize, filters]
   )
 
+  const applyPageData = useCallback(
+    (data: PaginatedResponse, direction: "next" | "prev") => {
+      const fetchedRows = data.rows ?? []
+      setRows(fetchedRows)
+      setNextCursor(data.nextCursor ?? null)
+      setPrevCursor(data.prevCursor ?? null)
+
+      // When navigating backward, the API's hasMore reflects backward direction.
+      // We need to determine if there are more rows forward (next).
+      if (direction === "prev") {
+        setHasMore(data.nextCursor != null)
+      } else {
+        setHasMore(data.hasMore ?? false)
+      }
+      setHasPrev(data.hasPrev ?? false)
+      setLoaded(true)
+    },
+    []
+  )
+
   const fetchPage = useCallback(
     async (
       cursor: number | null,
       direction: "next" | "prev" = "next",
       pageSizeOverride?: number
     ) => {
-      setLoading(true)
-      setError(null)
+      const requestId = ++requestIdRef.current
+      const isCurrent = () => requestId === requestIdRef.current
+
       try {
+        abortRef.current?.abort()
+        const controller = new AbortController()
+        abortRef.current = controller
+
         const params = buildParams(cursor, direction, pageSizeOverride)
-        const res = await fetch(`/api/admin/registrations?${params}`)
+
+        setLoading(true)
+        setError(null)
+        const res = await fetch(`/api/admin/registrations?${params}`, {
+          signal: controller.signal,
+        })
         const data: PaginatedResponse = await res.json()
+
+        if (!isCurrent()) return
 
         if (!res.ok) {
           setError(data.error ?? data.details ?? `HTTP ${res.status}`)
           return
         }
 
-        const fetchedRows = data.rows ?? []
-        setRows(fetchedRows)
-        setNextCursor(data.nextCursor ?? null)
-        setPrevCursor(data.prevCursor ?? null)
-        
-        // When navigating backward, the API's hasMore reflects backward direction.
-        // We need to determine if there are more rows forward (next).
-        // If we have a full page of rows and a nextCursor, there are likely more rows.
-        if (direction === "prev") {
-          // After going prev, check if there are more rows forward
-          // If we have nextCursor, there are more rows ahead
-          setHasMore(data.nextCursor != null)
-        } else {
-          setHasMore(data.hasMore ?? false)
-        }
-        setHasPrev(data.hasPrev ?? false)
-        setLoaded(true)
+        applyPageData(data, direction)
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Request failed")
+        if (err instanceof DOMException && err.name === "AbortError") {
+          return
+        }
+        if (isCurrent()) {
+          setError(err instanceof Error ? err.message : "Request failed")
+        }
       } finally {
-        setLoading(false)
+        if (isCurrent()) setLoading(false)
       }
     },
-    [buildParams]
+    [applyPageData, buildParams]
   )
 
   useEffect(() => {
@@ -291,7 +313,6 @@ export function AdminRegistrationsTable() {
 
   const handlePageSizeChange = (newSize: 25 | 50 | 100) => {
     if (newSize === pageSize) return
-    previousPageSizeRef.current = pageSize
     setPageSize(newSize)
     setPageInfo({ startIndex: 1 }) // Reset to first page when changing page size
     if (loaded) {
