@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { cookies } from "next/headers"
 import { createClient } from "@/utils/supabase/server"
 
 /**
@@ -10,7 +11,13 @@ import { createClient } from "@/utils/supabase/server"
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get("code")
-  let next = searchParams.get("next") ?? "/"
+  const queryNext = searchParams.get("next")
+  let next = queryNext ?? "/"
+  if (!queryNext) {
+    const cookieStore = await cookies()
+    const cookieNext = cookieStore.get("rm-auth-next")?.value
+    if (cookieNext) next = decodeURIComponent(cookieNext)
+  }
   if (!next.startsWith("/") || next.includes("//") || next.includes(":")) {
     next = "/"
   }
@@ -30,11 +37,13 @@ export async function GET(request: Request) {
   const forwardedHost = request.headers.get("x-forwarded-host")
   const isLocalEnv = process.env.NODE_ENV === "development"
 
-  if (isLocalEnv) {
-    return NextResponse.redirect(`${origin}${next}`)
-  }
-  if (forwardedHost) {
-    return NextResponse.redirect(`https://${forwardedHost}${next}`)
-  }
-  return NextResponse.redirect(`${origin}${next}`)
+  const redirectUrl = isLocalEnv
+    ? `${origin}${next}`
+    : forwardedHost
+      ? `https://${forwardedHost}${next}`
+      : `${origin}${next}`
+
+  const response = NextResponse.redirect(redirectUrl)
+  response.cookies.set("rm-auth-next", "", { path: "/", maxAge: 0 })
+  return response
 }

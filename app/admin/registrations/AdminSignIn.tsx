@@ -11,10 +11,22 @@ export function AdminSignIn() {
   const handleGoogleSignIn = async () => {
     setLoading(true)
     try {
+      const nextPath = "/admin/registrations"
+      const cookieParts = [
+        `rm-auth-next=${encodeURIComponent(nextPath)}`,
+        "Path=/",
+        "Max-Age=600",
+        "SameSite=Lax",
+      ]
+      if (window.location.protocol === "https:") cookieParts.push("Secure")
+      document.cookie = cookieParts.join("; ")
+
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback?next=/admin/registrations`,
+          // Keep redirect URL stable; store the post-auth destination in a cookie
+          // because some providers/flows may drop custom query params.
+          redirectTo: `${window.location.origin}/auth/callback`,
         },
       })
       if (error) throw error
