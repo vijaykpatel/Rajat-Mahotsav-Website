@@ -13,6 +13,7 @@ import { AudioProvider } from "@/contexts/audio-context"
 import { LoadingProvider } from "@/hooks/use-loading"
 import { getCloudflareImage } from "@/lib/cdn-assets"
 import { VideoSchema } from "@/components/organisms/video-schema"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css"
 
 const figtree = Figtree({
@@ -121,6 +122,7 @@ html {
             </ThemeProvider>
           </AudioProvider>
         </LoadingProvider>
+        <SpeedInsights />
       </body>
     </html>
   )
