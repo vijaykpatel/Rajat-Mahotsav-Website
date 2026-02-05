@@ -18,13 +18,13 @@ export default async function AdminRegistrationsPage() {
     const message =
       err instanceof Error ? err.message : "Supabase is not configured."
     return (
-      <div className="page-bg-extend bg-preset-light-gray min-h-screen">
+      <div className="page-bg-extend reg-page-bg min-h-screen">
         <div className="section-shell landing-section">
           <StandardPageHeader
             title="Admin Access"
             description={message}
           />
-          <p className="text-sm text-preset-bluish-gray mt-4 text-center max-w-lg mx-auto">
+          <p className="text-sm reg-text-secondary mt-4 text-center max-w-lg mx-auto">
             Ensure .env.local is in the project root (where you run npm run dev)
             and restart the dev server after changes.
           </p>
@@ -52,7 +52,7 @@ export default async function AdminRegistrationsPage() {
     const stats = statsError ? null : (statsData as RegistrationsStats)
 
     return (
-      <div className="page-bg-extend bg-preset-light-gray min-h-screen">
+      <div className="page-bg-extend reg-page-bg min-h-screen">
         <div className="section-shell landing-section">
           <StandardPageHeader
             title="Registrations Admin"
@@ -66,8 +66,8 @@ export default async function AdminRegistrationsPage() {
               </div>
             </>
           ) : (
-            <div className="mt-8 p-6 rounded-2xl bg-white/80 border border-preset-pale-gray shadow-sm max-w-2xl mx-auto">
-              <p className="text-preset-charcoal">
+            <div className="mt-8 p-6 rounded-2xl admin-card max-w-2xl mx-auto">
+              <p className="reg-text-primary">
                 Stats unavailable. {statsError?.message ?? "Please try again."}
               </p>
               <div className="mt-6">
@@ -81,7 +81,7 @@ export default async function AdminRegistrationsPage() {
   }
 
   return (
-    <div className="page-bg-extend bg-preset-light-gray min-h-screen">
+    <div className="page-bg-extend reg-page-bg min-h-screen">
       <div className="section-shell landing-section">
         <StandardPageHeader
           title="Admin Access"

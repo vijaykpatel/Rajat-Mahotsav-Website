@@ -57,9 +57,9 @@ type DistinctValuesResponse = {
 const PAGE_SIZE_OPTIONS = [25, 50, 100] as const
 const SEARCH_DEBOUNCE_MS = 350
 const SELECT_STYLE =
-  "h-10 rounded-lg border border-preset-pale-gray bg-white px-3 text-sm text-preset-charcoal focus:outline-none focus:ring-2 focus:ring-preset-deep-navy/30 min-w-[140px]"
+  "h-10 rounded-lg border-2 border-[rgb(254,215,170)] bg-white/80 px-3 text-sm reg-text-primary focus:outline-none focus:ring-2 focus:ring-[rgb(254,215,170)] focus-visible:ring-2 min-w-[120px] sm:min-w-[140px]"
 const INPUT_STYLE =
-  "h-10 rounded-lg border border-preset-pale-gray bg-white px-3 text-sm text-preset-charcoal focus:outline-none focus:ring-2 focus:ring-preset-deep-navy/30"
+  "h-10 rounded-lg border-2 border-[rgb(254,215,170)] bg-white/80 px-3 text-sm reg-text-primary focus:outline-none focus:ring-2 focus:ring-[rgb(254,215,170)] focus-visible:ring-2"
 
 function formatDate(val: string | null): string {
   if (!val || val === "Unknown") return val ?? "—"
@@ -275,11 +275,11 @@ export function AdminRegistrationsTable() {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.35 }}
-      className="p-6 rounded-2xl bg-white/90 border border-preset-pale-gray shadow-sm"
+      className="p-6 rounded-2xl admin-card"
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-        <h3 className="text-lg font-semibold text-preset-charcoal flex items-center gap-2">
-          <Table2 className="size-5 text-preset-deep-navy" />
+        <h3 className="text-lg font-semibold reg-text-primary flex items-center gap-2">
+          <Table2 className="size-5 text-[rgb(13,19,45)]" aria-hidden />
           Registrations Table
         </h3>
         <div className="flex items-center gap-3">
@@ -301,9 +301,9 @@ export function AdminRegistrationsTable() {
           <a
             href="/api/registrations/export"
             download
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-medium bg-preset-deep-navy text-white hover:opacity-90 transition-opacity text-sm"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-medium admin-btn-primary text-sm"
           >
-            <Download className="size-4" />
+            <Download className="size-4" aria-hidden />
             Export CSV
           </a>
         </div>
@@ -312,8 +312,8 @@ export function AdminRegistrationsTable() {
       {loaded && (
         <div className="mb-6 space-y-4">
           <div className="flex flex-wrap items-center gap-3">
-            <div className="relative flex-1 min-w-[200px] max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-preset-bluish-gray pointer-events-none" />
+            <div className="relative flex-1 min-w-0 sm:min-w-[200px] max-w-md">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 reg-text-secondary pointer-events-none" aria-hidden />
               <input
                 type="search"
                 placeholder="Search name, email, phone…"
@@ -330,7 +330,7 @@ export function AdminRegistrationsTable() {
                     setFilters((p) => ({ ...p, search: "" }))
                     fetchPage(null, "next")
                   }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded text-preset-bluish-gray hover:text-preset-charcoal hover:bg-preset-pale-gray/50 transition-colors"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded reg-text-secondary hover:text-[rgb(31,41,55)] hover:bg-[rgb(254,215,170)]/30 transition-colors focus-visible:ring-2 focus-visible:ring-[rgb(254,215,170)]"
                   aria-label="Clear search"
                 >
                   <X className="size-4" />
@@ -381,9 +381,9 @@ export function AdminRegistrationsTable() {
                 variant="outline"
                 size="sm"
                 onClick={handleClearFilters}
-                className="rounded-full px-4 py-2 border-preset-deep-navy/50 text-preset-deep-navy hover:bg-preset-deep-navy/10"
+                className="rounded-full px-4 py-2 admin-btn-outline"
               >
-                <X className="size-4 mr-1" />
+                <X className="size-4 mr-1" aria-hidden />
                 Clear filters
               </Button>
             )}
@@ -392,9 +392,9 @@ export function AdminRegistrationsTable() {
           <button
             type="button"
             onClick={() => setFiltersExpanded((e) => !e)}
-            className="flex items-center gap-2 text-sm text-preset-bluish-gray hover:text-preset-charcoal transition-colors"
+            className="flex items-center gap-2 text-sm reg-text-secondary hover:text-[rgb(31,41,55)] transition-colors focus-visible:ring-2 focus-visible:ring-[rgb(254,215,170)] rounded px-2 py-1 -mx-2 -my-1"
           >
-            <Filter className="size-4" />
+            <Filter className="size-4" aria-hidden />
             {filtersExpanded ? (
               <>
                 <ChevronUp className="size-4" />
@@ -417,12 +417,13 @@ export function AdminRegistrationsTable() {
                 transition={{ duration: 0.2 }}
                 className="overflow-hidden"
               >
-                <div className="flex flex-wrap items-end gap-4 pt-2 pb-2 border-t border-preset-pale-gray/60">
+                <div className="flex flex-wrap items-end gap-4 pt-2 pb-2 border-t border-[rgb(254,215,170)]/60">
                   <div>
-                    <label className="block text-xs font-medium text-preset-bluish-gray mb-1">
+                    <label htmlFor="filter-age" className="block text-xs font-medium reg-text-secondary mb-1">
                       Age (exact)
                     </label>
                     <input
+                      id="filter-age"
                       type="number"
                       min={1}
                       max={120}
@@ -543,24 +544,24 @@ export function AdminRegistrationsTable() {
       )}
 
       {!loaded && (
-        <div className="flex flex-col items-center justify-center py-16 px-4 rounded-xl bg-preset-light-gray/60 border border-preset-pale-gray/50">
-          <Database className="size-12 text-preset-bluish-gray mb-4" />
-          <p className="text-preset-charcoal font-medium mb-2">
+        <div className="flex flex-col items-center justify-center py-16 px-4 rounded-xl admin-card">
+          <Database className="size-12 reg-text-secondary mb-4" aria-hidden />
+          <p className="reg-text-primary font-medium mb-2">
             Table data loads on demand
           </p>
-          <p className="text-sm text-preset-bluish-gray mb-6 max-w-sm text-center">
+          <p className="text-sm reg-text-secondary mb-6 max-w-sm text-center">
             Click below to fetch the first page of registrations. Stats above
             remain unchanged.
           </p>
           <Button
             onClick={handleLoadRegistrations}
             disabled={loading}
-            className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold bg-preset-deep-navy text-white hover:opacity-90 transition-opacity"
+            className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold admin-btn-primary"
           >
             {loading ? (
-              <Loader2 className="size-5 animate-spin" />
+              <Loader2 className="size-5 animate-spin" aria-hidden />
             ) : (
-              <Table2 className="size-5" />
+              <Table2 className="size-5" aria-hidden />
             )}
             {loading ? "Loading…" : "Load registrations"}
           </Button>
@@ -581,28 +582,28 @@ export function AdminRegistrationsTable() {
             exit={{ opacity: 0 }}
             className="overflow-x-auto -mx-2"
           >
-            <table className="w-full min-w-[700px] text-sm">
+            <table className="w-full min-w-[600px] sm:min-w-[700px] text-sm">
               <thead>
-                <tr className="border-b border-preset-pale-gray">
-                  <th className="text-left py-3 px-3 font-semibold text-preset-charcoal">
+                <tr className="border-b-2 border-[rgb(254,215,170)]">
+                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
                     Name
                   </th>
-                  <th className="text-left py-3 px-3 font-semibold text-preset-charcoal">
+                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
                     Email
                   </th>
-                  <th className="text-left py-3 px-3 font-semibold text-preset-charcoal">
+                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
                     Ghaam
                   </th>
-                  <th className="text-left py-3 px-3 font-semibold text-preset-charcoal">
+                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
                     Mandal
                   </th>
-                  <th className="text-left py-3 px-3 font-semibold text-preset-charcoal">
+                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
                     Arrival
                   </th>
-                  <th className="text-left py-3 px-3 font-semibold text-preset-charcoal">
+                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
                     Departure
                   </th>
-                  <th className="text-left py-3 px-3 font-semibold text-preset-charcoal">
+                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
                     Age
                   </th>
                 </tr>
@@ -611,29 +612,29 @@ export function AdminRegistrationsTable() {
                 {rows.map((row) => (
                   <tr
                     key={row.id}
-                    className="border-b border-preset-pale-gray/60 hover:bg-preset-light-gray/40 transition-colors"
+                    className="border-b border-[rgb(254,215,170)]/50 hover:bg-[rgb(255,247,237)]/60 transition-colors"
                   >
-                    <td className="py-3 px-3 text-preset-charcoal">
+                    <td className="py-3 px-3 reg-text-primary">
                       {[row.first_name, row.middle_name, row.last_name]
                         .filter(Boolean)
                         .join(" ") || "—"}
                     </td>
-                    <td className="py-3 px-3 text-preset-charcoal truncate max-w-[180px]">
+                    <td className="py-3 px-3 reg-text-primary truncate max-w-[140px] sm:max-w-[180px]">
                       {row.email ?? "—"}
                     </td>
-                    <td className="py-3 px-3 text-preset-charcoal">
+                    <td className="py-3 px-3 reg-text-primary">
                       {row.ghaam ?? "—"}
                     </td>
-                    <td className="py-3 px-3 text-preset-charcoal">
+                    <td className="py-3 px-3 reg-text-primary">
                       {mandalStoredToDisplay(row.mandal)}
                     </td>
-                    <td className="py-3 px-3 text-preset-bluish-gray">
+                    <td className="py-3 px-3 reg-text-secondary tabular-nums">
                       {formatDate(row.arrival_date)}
                     </td>
-                    <td className="py-3 px-3 text-preset-bluish-gray">
+                    <td className="py-3 px-3 reg-text-secondary tabular-nums">
                       {formatDate(row.departure_date)}
                     </td>
-                    <td className="py-3 px-3 text-preset-charcoal">
+                    <td className="py-3 px-3 reg-text-primary tabular-nums">
                       {row.age ?? "—"}
                     </td>
                   </tr>
@@ -641,8 +642,8 @@ export function AdminRegistrationsTable() {
               </tbody>
             </table>
 
-            <div className="flex items-center justify-between mt-4 pt-4 border-t border-preset-pale-gray">
-              <p className="text-sm text-preset-bluish-gray">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-4 pt-4 border-t-2 border-[rgb(254,215,170)]">
+              <p className="text-sm reg-text-secondary">
                 Showing {rows.length} row{rows.length !== 1 ? "s" : ""}
               </p>
               <div className="flex items-center gap-2">
@@ -651,9 +652,9 @@ export function AdminRegistrationsTable() {
                   size="sm"
                   onClick={handlePrev}
                   disabled={!hasPrev || loading}
-                  className="rounded-full px-4 py-2 border-preset-deep-navy text-preset-deep-navy hover:bg-preset-deep-navy hover:text-white"
+                  className="rounded-full px-4 py-2 admin-btn-outline"
                 >
-                  <ChevronLeft className="size-4" />
+                  <ChevronLeft className="size-4" aria-hidden />
                   Prev
                 </Button>
                 <Button
@@ -661,10 +662,10 @@ export function AdminRegistrationsTable() {
                   size="sm"
                   onClick={handleNext}
                   disabled={!hasMore || loading}
-                  className="rounded-full px-4 py-2 border-preset-deep-navy text-preset-deep-navy hover:bg-preset-deep-navy hover:text-white"
+                  className="rounded-full px-4 py-2 admin-btn-outline"
                 >
                   Next
-                  <ChevronRight className="size-4" />
+                  <ChevronRight className="size-4" aria-hidden />
                 </Button>
               </div>
             </div>
@@ -675,19 +676,19 @@ export function AdminRegistrationsTable() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="py-12 px-6 rounded-xl bg-preset-light-gray/40 border border-preset-pale-gray/60 text-center"
+            className="py-12 px-6 rounded-xl admin-card text-center"
           >
-            <p className="text-preset-charcoal font-medium mb-2">
+            <p className="reg-text-primary font-medium mb-2">
               No registrations match your filters
             </p>
-            <p className="text-sm text-preset-bluish-gray mb-4">
+            <p className="text-sm reg-text-secondary mb-4">
               Try adjusting your search or filters
             </p>
             <Button
               variant="outline"
               size="sm"
               onClick={handleClearFilters}
-              className="rounded-full px-5 py-2.5 border-preset-deep-navy text-preset-deep-navy hover:bg-preset-deep-navy hover:text-white"
+              className="rounded-full px-5 py-2.5 admin-btn-outline"
             >
               Clear filters
             </Button>
@@ -697,7 +698,7 @@ export function AdminRegistrationsTable() {
 
       {loaded && loading && (
         <div className="flex items-center justify-center py-8">
-          <Loader2 className="size-8 animate-spin text-preset-deep-navy" />
+          <Loader2 className="size-8 animate-spin text-[rgb(185,28,28)]" aria-hidden />
         </div>
       )}
     </motion.div>
