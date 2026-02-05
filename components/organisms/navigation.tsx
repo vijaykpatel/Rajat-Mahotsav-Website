@@ -1,12 +1,14 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { useRouter, usePathname } from "next/navigation"
-import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image as ImageIcon, CalendarCheck, Menu, X } from "lucide-react"
+import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image as ImageIcon, CalendarCheck, Shield } from "lucide-react"
 import { PiHandsPraying } from "react-icons/pi"
 import { useDeviceType } from "@/hooks/use-device-type"
 import { NavBar } from "@/components/organisms/tubelight-navbar"
 import { CDN_ASSETS } from "@/lib/cdn-assets"
+import { supabase } from "@/utils/supabase/client"
+import { isAllowedAdminDomain } from "@/lib/admin-auth"
 
 const menuItems = [
   {
@@ -87,23 +89,63 @@ const menuItems = [
   },
 ]
 
+const adminMenuItem = {
+  icon: Shield,
+  label: "Admin",
+  href: "/admin/registrations",
+  gradient:
+    "radial-gradient(circle, rgba(14,165,233,0.15) 0%, rgba(2,132,199,0.06) 50%, rgba(14,116,144,0) 100%)",
+  iconColor: "text-sky-500",
+}
+
 export function Navigation() {
   const [activeItem, setActiveItem] = useState<string>("Home")
   const [mounted, setMounted] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [canAccessAdmin, setCanAccessAdmin] = useState(false)
   const deviceType = useDeviceType()
   const router = useRouter()
   const pathname = usePathname()
 
+  const navItems = useMemo(
+    () => (canAccessAdmin ? [...menuItems, adminMenuItem] : menuItems),
+    [canAccessAdmin]
+  )
 
+  useEffect(() => {
+    let isActive = true
+
+    const loadUser = async () => {
+      const { data, error } = await supabase.auth.getUser()
+      if (!isActive) return
+      if (error) {
+        setCanAccessAdmin(false)
+        return
+      }
+      setCanAccessAdmin(isAllowedAdminDomain(data.user?.email))
+    }
+
+    loadUser()
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setCanAccessAdmin(isAllowedAdminDomain(session?.user?.email))
+    })
+
+    return () => {
+      isActive = false
+      subscription.unsubscribe()
+    }
+  }, [])
 
   useEffect(() => {
     setMounted(true)
-    const currentItem = menuItems.find(item => item.href === pathname)
+    const currentItem = navItems.find(item => item.href === pathname)
     if (currentItem) {
       setActiveItem(currentItem.label)
     }
-  }, [pathname])
+  }, [pathname, navItems])
 
 
 
@@ -139,7 +181,7 @@ export function Navigation() {
 
           {/* Left Side - Tubelight Navbar */}
           <div className="flex-shrink-0">
-            <NavBar items={menuItems.map(item => ({ 
+            <NavBar items={navItems.map(item => ({ 
               name: item.label, 
               url: item.href, 
               icon: item.icon,

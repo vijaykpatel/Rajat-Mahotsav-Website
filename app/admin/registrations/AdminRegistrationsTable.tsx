@@ -157,9 +157,14 @@ export function AdminRegistrationsTable() {
   }, [])
 
   const buildParams = useCallback(
-    (cursor: number | null, direction: "next" | "prev") => {
+    (
+      cursor: number | null,
+      direction: "next" | "prev",
+      pageSizeOverride?: number
+    ) => {
+      const effectivePageSize = pageSizeOverride ?? pageSize
       const params = new URLSearchParams({
-        page_size: String(pageSize),
+        page_size: String(effectivePageSize),
         direction,
       })
       if (cursor != null) params.set("cursor", String(cursor))
@@ -182,11 +187,15 @@ export function AdminRegistrationsTable() {
   )
 
   const fetchPage = useCallback(
-    async (cursor: number | null, direction: "next" | "prev" = "next") => {
+    async (
+      cursor: number | null,
+      direction: "next" | "prev" = "next",
+      pageSizeOverride?: number
+    ) => {
       setLoading(true)
       setError(null)
       try {
-        const params = buildParams(cursor, direction)
+        const params = buildParams(cursor, direction, pageSizeOverride)
         const res = await fetch(`/api/admin/registrations?${params}`)
         const data: PaginatedResponse = await res.json()
 
@@ -287,7 +296,7 @@ export function AdminRegistrationsTable() {
     setPageInfo({ startIndex: 1 }) // Reset to first page when changing page size
     if (loaded) {
       // Need to refetch with new page size from the beginning
-      fetchPage(null, "next")
+      fetchPage(null, "next", newSize)
     }
   }
 

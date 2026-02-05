@@ -299,9 +299,6 @@ export function AdminDashboardStats({ stats, userEmail }: AdminDashboardStatsPro
             </LineChart>
           </ResponsiveContainer>
         </div>
-        <p className="text-xs reg-text-secondary mt-3 text-center">
-          Shaded area: Core event dates (Jul 27 – Aug 2)
-        </p>
       </motion.div>
 
       {/* Charts row - Arrivals & Departures */}
