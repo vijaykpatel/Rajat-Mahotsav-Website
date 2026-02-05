@@ -1,0 +1,74 @@
+/**
+ * Admin Dashboard Theme
+ * Extends registration-theme.css for consistent styling across admin pages.
+ * Uses the same warm gradient background, orange-red accents, and card styling
+ * as the registration page for a cohesive site experience.
+ */
+
+/* Admin page inherits registration theme - import registration-theme.css first */
+
+/* Admin-specific card styling - dashboard cards with registration theme */
+.admin-card {
+  background: var(--reg-bg-card);
+  border: 2px solid var(--reg-border-primary);
+  box-shadow: var(--reg-shadow-card);
+  backdrop-filter: blur(4px);
+}
+
+/* Admin primary button - orange-red gradient, white text (high contrast) */
+.admin-btn-primary {
+  background: var(--reg-bg-button);
+  color: white;
+  font-weight: 600;
+  box-shadow: var(--reg-shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-btn-primary:hover:not(:disabled) {
+  background: var(--reg-bg-button-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 20px -4px rgb(0 0 0 / 0.15);
+}
+
+.admin-btn-primary:focus-visible {
+  outline: none;
+  box-shadow: var(--reg-focus-ring), 0 0 0 3px rgb(249 115 22 / 0.3);
+}
+
+/* Admin outline button - navy border, dark text, hover fills with navy */
+.admin-btn-outline {
+  border: 2px solid rgb(13 19 45);
+  color: rgb(13 19 45);
+  background: transparent;
+  font-weight: 500;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.admin-btn-outline:hover:not(:disabled) {
+  background: rgb(13 19 45);
+  color: white;
+}
+
+.admin-btn-outline:focus-visible {
+  outline: none;
+  box-shadow: var(--reg-focus-ring);
+}
+
+/* Chart colors aligned with site theme */
+.admin-chart-primary {
+  fill: rgb(13 19 45); /* preset-deep-navy */
+}
+
+.admin-chart-accent {
+  fill: rgb(185 28 28); /* darker red for charts - good contrast on light bg */
+}
+
+.admin-chart-grid {
+  stroke: rgb(254 215 170); /* reg border - softer grid */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-btn-primary:hover:not(:disabled) {
+    transform: none;
+  }
+}

@@ -29,12 +29,13 @@ export function AdminSignIn() {
       <Button
         onClick={handleGoogleSignIn}
         disabled={loading}
-        className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold bg-preset-deep-navy text-white hover:opacity-90 transition-opacity shadow-lg"
+        className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold admin-btn-primary shadow-lg"
+        aria-label="Sign in with Google"
       >
         {loading ? (
-          <Loader2 className="size-5 animate-spin" />
+          <Loader2 className="size-5 animate-spin" aria-hidden />
         ) : (
-          <svg className="size-5" viewBox="0 0 24 24">
+          <svg className="size-5" viewBox="0 0 24 24" aria-hidden>
             <path
               fill="currentColor"
               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -55,7 +56,7 @@ export function AdminSignIn() {
         )}
         {loading ? "Signing in…" : "Sign in with Google"}
       </Button>
-      <p className="text-sm text-preset-bluish-gray max-w-xs text-center">
+      <p className="text-sm reg-text-secondary max-w-xs text-center">
         Access restricted to @nj.sgadi.us accounts
       </p>
     </div>
