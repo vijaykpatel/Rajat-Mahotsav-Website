@@ -168,3 +168,65 @@
   color: rgb(194 65 12);
   font-weight: 700;
 }
+
+/* Admin dashboard card styles */
+.admin-card {
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 247, 237, 0.85));
+  border: 2px solid var(--reg-border-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.admin-btn-primary {
+  background: var(--reg-bg-button);
+  color: white;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.admin-btn-primary:hover {
+  background: var(--reg-bg-button-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+.admin-btn-outline {
+  background: white;
+  border: 2px solid var(--reg-border-primary);
+  color: var(--reg-text-primary);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.admin-btn-outline:hover:not(:disabled) {
+  background: var(--reg-hover-light);
+  border-color: rgb(249 115 22);
+}
+
+.admin-btn-outline:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: rgb(243 244 246);
+}
+
+/* Custom scrollbar for admin dialogs */
+.admin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(254 215 170) transparent;
+}
+
+.admin-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.admin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.admin-scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(254 215 170);
+  border-radius: 3px;
+}
+
+.admin-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgb(251 191 36);
+}

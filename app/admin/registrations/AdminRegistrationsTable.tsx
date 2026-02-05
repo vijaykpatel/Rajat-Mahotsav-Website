@@ -7,7 +7,6 @@ import {
   Loader2,
   ChevronLeft,
   ChevronRight,
-  Database,
   Download,
   Search,
   Filter,
@@ -19,6 +18,11 @@ import { mandalStoredToDisplay, getAllMandalOptionsStored } from "@/lib/mandal-o
 import { Button } from "@/components/atoms/button"
 import { format } from "date-fns"
 import { REGISTRATION_DATE_RANGE } from "@/lib/registration-date-range"
+
+// Track the current page number for row numbering
+type PageInfo = {
+  startIndex: number // The row number to start counting from (1-based)
+}
 
 type RegistrationRow = {
   id: number
@@ -133,9 +137,12 @@ export function AdminRegistrationsTable() {
     country: string[]
   } | null>(null)
   const [filtersExpanded, setFiltersExpanded] = useState(false)
+  const [pageInfo, setPageInfo] = useState<PageInfo>({ startIndex: 1 })
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const hasLoadedOnceRef = useRef(false)
   const mandalOptions = getAllMandalOptionsStored()
+  const tableContainerRef = useRef<HTMLDivElement>(null)
+  const previousPageSizeRef = useRef<number>(pageSize)
 
   const fetchDistinctValues = useCallback(async () => {
     try {
@@ -188,10 +195,21 @@ export function AdminRegistrationsTable() {
           return
         }
 
-        setRows(data.rows ?? [])
+        const fetchedRows = data.rows ?? []
+        setRows(fetchedRows)
         setNextCursor(data.nextCursor ?? null)
         setPrevCursor(data.prevCursor ?? null)
-        setHasMore(data.hasMore ?? false)
+        
+        // When navigating backward, the API's hasMore reflects backward direction.
+        // We need to determine if there are more rows forward (next).
+        // If we have a full page of rows and a nextCursor, there are likely more rows.
+        if (direction === "prev") {
+          // After going prev, check if there are more rows forward
+          // If we have nextCursor, there are more rows ahead
+          setHasMore(data.nextCursor != null)
+        } else {
+          setHasMore(data.hasMore ?? false)
+        }
         setHasPrev(data.hasPrev ?? false)
         setLoaded(true)
       } catch (err) {
@@ -220,6 +238,8 @@ export function AdminRegistrationsTable() {
       hasLoadedOnceRef.current = true
       return
     }
+    // Reset to first page when filters change
+    setPageInfo({ startIndex: 1 })
     fetchPage(null, "next")
   }, [
     loaded,
@@ -234,27 +254,41 @@ export function AdminRegistrationsTable() {
     filters.departureFrom,
     filters.departureTo,
     filters.search,
+    fetchPage,
   ])
 
   const handleLoadRegistrations = () => {
     fetchDistinctValues()
     fetchPage(null, "next")
+    setPageInfo({ startIndex: 1 })
   }
 
   const handleNext = () => {
-    if (nextCursor == null || !hasMore) return
+    if (nextCursor == null || !hasMore || loading) return
+    setPageInfo((prev) => ({ startIndex: prev.startIndex + rows.length }))
     fetchPage(nextCursor, "next")
   }
 
   const handlePrev = () => {
-    if (!hasPrev || prevCursor == null) return
+    // Use pageInfo.startIndex as source of truth for whether we can go back
+    const canGoPrev = pageInfo.startIndex > 1 && prevCursor != null
+    if (!canGoPrev || loading) return
+    setPageInfo((prev) => ({ startIndex: Math.max(1, prev.startIndex - pageSize) }))
     fetchPage(prevCursor, "prev")
   }
 
+  // Derive whether we're on the first page from pageInfo
+  const isOnFirstPage = pageInfo.startIndex === 1
+
   const handlePageSizeChange = (newSize: 25 | 50 | 100) => {
     if (newSize === pageSize) return
+    previousPageSizeRef.current = pageSize
     setPageSize(newSize)
-    if (loaded) fetchPage(null, "next")
+    setPageInfo({ startIndex: 1 }) // Reset to first page when changing page size
+    if (loaded) {
+      // Need to refetch with new page size from the beginning
+      fetchPage(null, "next")
+    }
   }
 
   const handleClearFilters = () => {
@@ -275,13 +309,18 @@ export function AdminRegistrationsTable() {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.35 }}
-      className="p-6 rounded-2xl admin-card"
+      className="rounded-2xl admin-card overflow-hidden"
     >
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-        <h3 className="text-lg font-semibold reg-text-primary flex items-center gap-2">
-          <Table2 className="size-5 text-[rgb(13,19,45)]" aria-hidden />
+      {/* Header - always visible */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 border-b border-[rgb(254,215,170)]/60">
+        <div className="text-lg font-semibold reg-text-primary flex items-center gap-2">
+          {loading && !loaded ? (
+            <Loader2 className="size-5 text-orange-500 animate-spin" aria-hidden />
+          ) : (
+            <Table2 className="size-5 text-[rgb(13,19,45)]" aria-hidden />
+          )}
           Registrations Table
-        </h3>
+        </div>
         <div className="flex items-center gap-3">
           {loaded && (
             <select
@@ -290,6 +329,7 @@ export function AdminRegistrationsTable() {
                 handlePageSizeChange(Number(e.target.value) as 25 | 50 | 100)
               }
               className={SELECT_STYLE}
+              aria-label="Rows per page"
             >
               {PAGE_SIZE_OPTIONS.map((n) => (
                 <option key={n} value={n}>
@@ -310,7 +350,7 @@ export function AdminRegistrationsTable() {
       </div>
 
       {loaded && (
-        <div className="mb-6 space-y-4">
+        <div className="p-5 pb-0 space-y-4">
           <div className="flex flex-wrap items-center gap-3">
             <div className="relative flex-1 min-w-0 sm:min-w-[200px] max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 reg-text-secondary pointer-events-none" aria-hidden />
@@ -543,162 +583,189 @@ export function AdminRegistrationsTable() {
         </div>
       )}
 
-      {!loaded && (
-        <div className="flex flex-col items-center justify-center py-16 px-4 rounded-xl admin-card">
-          <Database className="size-12 reg-text-secondary mb-4" aria-hidden />
-          <p className="reg-text-primary font-medium mb-2">
-            Table data loads on demand
-          </p>
-          <p className="text-sm reg-text-secondary mb-6 max-w-sm text-center">
-            Click below to fetch the first page of registrations. Stats above
-            remain unchanged.
-          </p>
+      {/* Initial state - prompt to load */}
+      {!loaded && !loading && (
+        <div className="flex items-center justify-center py-12 px-5">
           <Button
             onClick={handleLoadRegistrations}
-            disabled={loading}
-            className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold admin-btn-primary"
+            className="inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium admin-btn-primary text-base shadow-md hover:shadow-lg transition-shadow"
           >
-            {loading ? (
-              <Loader2 className="size-5 animate-spin" aria-hidden />
-            ) : (
-              <Table2 className="size-5" aria-hidden />
-            )}
-            {loading ? "Loading…" : "Load registrations"}
+            <Table2 className="size-5" aria-hidden />
+            Load Registrations
           </Button>
+        </div>
+      )}
+      
+      {/* Loading state before first load */}
+      {!loaded && loading && (
+        <div className="flex flex-col items-center justify-center py-10 px-4">
+          <Loader2 className="size-8 animate-spin text-orange-500 mb-3" aria-hidden />
+          <p className="reg-text-primary font-medium">Loading registrations…</p>
         </div>
       )}
 
       {error && (
-        <div className="py-4 px-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-sm">
+        <div className="mx-5 mb-5 py-3 px-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-sm">
           {error}
         </div>
       )}
 
-      <AnimatePresence mode="wait">
-        {loaded && rows.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="overflow-x-auto -mx-2"
-          >
-            <table className="w-full min-w-[600px] sm:min-w-[700px] text-sm">
-              <thead>
-                <tr className="border-b-2 border-[rgb(254,215,170)]">
-                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
-                    Name
-                  </th>
-                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
-                    Email
-                  </th>
-                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
-                    Ghaam
-                  </th>
-                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
-                    Mandal
-                  </th>
-                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
-                    Arrival
-                  </th>
-                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
-                    Departure
-                  </th>
-                  <th className="text-left py-3 px-3 font-semibold reg-text-primary">
-                    Age
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((row) => (
-                  <tr
-                    key={row.id}
-                    className="border-b border-[rgb(254,215,170)]/50 hover:bg-[rgb(255,247,237)]/60 transition-colors"
-                  >
-                    <td className="py-3 px-3 reg-text-primary">
-                      {[row.first_name, row.middle_name, row.last_name]
-                        .filter(Boolean)
-                        .join(" ") || "—"}
-                    </td>
-                    <td className="py-3 px-3 reg-text-primary truncate max-w-[140px] sm:max-w-[180px]">
-                      {row.email ?? "—"}
-                    </td>
-                    <td className="py-3 px-3 reg-text-primary">
-                      {row.ghaam ?? "—"}
-                    </td>
-                    <td className="py-3 px-3 reg-text-primary">
-                      {mandalStoredToDisplay(row.mandal)}
-                    </td>
-                    <td className="py-3 px-3 reg-text-secondary tabular-nums">
-                      {formatDate(row.arrival_date)}
-                    </td>
-                    <td className="py-3 px-3 reg-text-secondary tabular-nums">
-                      {formatDate(row.departure_date)}
-                    </td>
-                    <td className="py-3 px-3 reg-text-primary tabular-nums">
-                      {row.age ?? "—"}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      {/* Table with fixed height container to prevent layout shift */}
+      {loaded && (
+        <div ref={tableContainerRef} className="relative min-h-[400px] p-5">
+          {/* Loading overlay - shows on top of existing content */}
+          <AnimatePresence>
+            {loading && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                className="absolute inset-0 bg-white/70 backdrop-blur-[1px] z-10 flex items-center justify-center"
+              >
+                <div className="flex flex-col items-center gap-2">
+                  <Loader2 className="size-8 animate-spin text-orange-500" aria-hidden />
+                  <span className="text-sm reg-text-secondary">Loading…</span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-4 pt-4 border-t-2 border-[rgb(254,215,170)]">
-              <p className="text-sm reg-text-secondary">
-                Showing {rows.length} row{rows.length !== 1 ? "s" : ""}
-              </p>
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handlePrev}
-                  disabled={!hasPrev || loading}
-                  className="rounded-full px-4 py-2 admin-btn-outline"
-                >
-                  <ChevronLeft className="size-4" aria-hidden />
-                  Prev
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleNext}
-                  disabled={!hasMore || loading}
-                  className="rounded-full px-4 py-2 admin-btn-outline"
-                >
-                  Next
-                  <ChevronRight className="size-4" aria-hidden />
-                </Button>
+          {rows.length > 0 ? (
+            <>
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[700px] text-sm">
+                  <thead>
+                    <tr className="border-b-2 border-[rgb(254,215,170)]">
+                      <th className="text-center py-3 px-2 font-semibold reg-text-secondary w-12">
+                        #
+                      </th>
+                      <th className="text-left py-3 px-3 font-semibold reg-text-primary">
+                        Name
+                      </th>
+                      <th className="text-left py-3 px-3 font-semibold reg-text-primary">
+                        Email
+                      </th>
+                      <th className="text-left py-3 px-3 font-semibold reg-text-primary">
+                        Ghaam
+                      </th>
+                      <th className="text-left py-3 px-3 font-semibold reg-text-primary">
+                        Mandal
+                      </th>
+                      <th className="text-left py-3 px-3 font-semibold reg-text-primary">
+                        Arrival
+                      </th>
+                      <th className="text-left py-3 px-3 font-semibold reg-text-primary">
+                        Departure
+                      </th>
+                      <th className="text-left py-3 px-3 font-semibold reg-text-primary">
+                        Age
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rows.map((row, index) => (
+                      <tr
+                        key={row.id}
+                        className={`border-b border-[rgb(254,215,170)]/40 transition-colors ${
+                          index % 2 === 0 
+                            ? "bg-white" 
+                            : "bg-orange-100/70"
+                        } hover:bg-orange-200/60`}
+                      >
+                        <td className="py-2.5 px-2 text-center text-xs font-medium reg-text-secondary tabular-nums">
+                          {pageInfo.startIndex + index}
+                        </td>
+                        <td className="py-2.5 px-3 reg-text-primary font-medium">
+                          {[row.first_name, row.middle_name, row.last_name]
+                            .filter(Boolean)
+                            .join(" ") || "—"}
+                        </td>
+                        <td className="py-2.5 px-3 reg-text-primary truncate max-w-[160px]">
+                          {row.email ?? "—"}
+                        </td>
+                        <td className="py-2.5 px-3 reg-text-primary">
+                          {row.ghaam ?? "—"}
+                        </td>
+                        <td className="py-2.5 px-3 reg-text-primary">
+                          {mandalStoredToDisplay(row.mandal)}
+                        </td>
+                        <td className="py-2.5 px-3 reg-text-secondary tabular-nums text-xs">
+                          {formatDate(row.arrival_date)}
+                        </td>
+                        <td className="py-2.5 px-3 reg-text-secondary tabular-nums text-xs">
+                          {formatDate(row.departure_date)}
+                        </td>
+                        <td className="py-2.5 px-3 reg-text-primary tabular-nums text-center">
+                          {row.age ?? "—"}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
+
+              {/* Pagination footer */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-5 pt-4 border-t-2 border-[rgb(254,215,170)]">
+                <p className="text-sm reg-text-secondary">
+                  Showing rows {pageInfo.startIndex}–{pageInfo.startIndex + rows.length - 1}
+                </p>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={handlePrev}
+                    disabled={isOnFirstPage || loading}
+                    className={`
+                      inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium
+                      transition-all duration-200
+                      ${!isOnFirstPage && !loading
+                        ? "bg-white border-2 border-[rgb(254,215,170)] text-gray-700 hover:bg-orange-50 hover:border-orange-400 active:scale-95"
+                        : "bg-gray-100 border-2 border-gray-200 text-gray-400 cursor-not-allowed"
+                      }
+                    `}
+                    aria-label="Previous page"
+                  >
+                    <ChevronLeft className="size-4" aria-hidden />
+                    <span>Prev</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    disabled={!hasMore || loading}
+                    className={`
+                      inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium
+                      transition-all duration-200
+                      ${hasMore && !loading
+                        ? "bg-white border-2 border-[rgb(254,215,170)] text-gray-700 hover:bg-orange-50 hover:border-orange-400 active:scale-95"
+                        : "bg-gray-100 border-2 border-gray-200 text-gray-400 cursor-not-allowed"
+                      }
+                    `}
+                    aria-label="Next page"
+                  >
+                    <span>Next</span>
+                    <ChevronRight className="size-4" aria-hidden />
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : !loading ? (
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+              <p className="reg-text-primary font-medium mb-2">
+                No registrations match your filters
+              </p>
+              <p className="text-sm reg-text-secondary mb-4">
+                Try adjusting your search or filters
+              </p>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleClearFilters}
+                className="rounded-full px-5 py-2.5 admin-btn-outline"
+              >
+                Clear filters
+              </Button>
             </div>
-          </motion.div>
-        )}
-
-        {loaded && rows.length === 0 && !loading && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="py-12 px-6 rounded-xl admin-card text-center"
-          >
-            <p className="reg-text-primary font-medium mb-2">
-              No registrations match your filters
-            </p>
-            <p className="text-sm reg-text-secondary mb-4">
-              Try adjusting your search or filters
-            </p>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleClearFilters}
-              className="rounded-full px-5 py-2.5 admin-btn-outline"
-            >
-              Clear filters
-            </Button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {loaded && loading && (
-        <div className="flex items-center justify-center py-8">
-          <Loader2 className="size-8 animate-spin text-[rgb(185,28,28)]" aria-hidden />
+          ) : null}
         </div>
       )}
     </motion.div>

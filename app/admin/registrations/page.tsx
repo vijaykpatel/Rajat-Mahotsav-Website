@@ -19,7 +19,7 @@ export default async function AdminRegistrationsPage() {
       err instanceof Error ? err.message : "Supabase is not configured."
     return (
       <div className="page-bg-extend reg-page-bg min-h-screen">
-        <div className="section-shell landing-section">
+        <div className="container mx-auto px-4 page-bottom-spacing max-w-6xl">
           <StandardPageHeader
             title="Admin Access"
             description={message}
@@ -53,20 +53,20 @@ export default async function AdminRegistrationsPage() {
 
     return (
       <div className="page-bg-extend reg-page-bg min-h-screen">
-        <div className="section-shell landing-section">
+        <div className="container mx-auto px-4 page-bottom-spacing max-w-6xl">
           <StandardPageHeader
             title="Registrations Admin"
-            description="Insights and registrations data. Table loads on demand."
+            description="Insights and registrations data for the Rajat Mahotsav event."
           />
           {stats ? (
             <>
               <AdminDashboardStats stats={stats} userEmail={user.email ?? ""} />
-              <div className="mt-8 max-w-6xl mx-auto">
+              <div className="mt-6">
                 <AdminRegistrationsTable />
               </div>
             </>
           ) : (
-            <div className="mt-8 p-6 rounded-2xl admin-card max-w-2xl mx-auto">
+            <div className="p-6 rounded-2xl admin-card max-w-2xl mx-auto">
               <p className="reg-text-primary">
                 Stats unavailable. {statsError?.message ?? "Please try again."}
               </p>
@@ -82,7 +82,7 @@ export default async function AdminRegistrationsPage() {
 
   return (
     <div className="page-bg-extend reg-page-bg min-h-screen">
-      <div className="section-shell landing-section">
+      <div className="container mx-auto px-4 page-bottom-spacing max-w-6xl">
         <StandardPageHeader
           title="Admin Access"
           description="Sign in with your @nj.sgadi.us Google account to view registrations."
