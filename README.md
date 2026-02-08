@@ -1,10 +1,12 @@
-# NJ Rajat Mahotsav 2026
+# NJ Rajat Mahotsav Event Platform
 
-A Next.js 15 application for the Shree Swaminarayan Temple Secaucus Rajat Mahotsav celebration event (July 29 - August 2, 2026). This website provides event information, registration, scheduling, media galleries, and seva (service) submission features.
+The Shree Swaminarayan Temple in Secaucus needed a platform for their 25th Anniversary celebration to handle event registration, admin workflows, display media content, share event schedules, and keep the community up to date on the latest information. Not just a brochure site, but a productionized product.
+
+Learn more about the project here - https://www.vijaypatel.dev/projects/rajat-mahotsav-website.
 
 ## Overview
 
-This is a portfolio project showcasing a modern, full-featured event website built with Next.js, React, TypeScript, and various modern web technologies. The website serves as the digital platform for a major religious celebration event.
+This project showcases a modern, full-featured event website built with Next.js, React, TypeScript, and various modern web technologies. The website serves as the digital platform for a major religious celebration event.
 
 ## Key Features
 
