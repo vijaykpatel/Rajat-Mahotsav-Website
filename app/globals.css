@@ -250,6 +250,8 @@
     html {
       /* Prevent zoom on input focus on iOS */
       -webkit-text-size-adjust: 100%;
+      /* Let mobile browsers manage scrolling to avoid Android scroll lock */
+      overflow-y: auto;
     }
     
     body {
@@ -257,11 +259,6 @@
       -webkit-overflow-scrolling: touch;
       /* Fix mobile scroll behavior */
       touch-action: pan-y;
-    }
-    
-    /* Prevent content from scrolling independently on mobile */
-    * {
-      overscroll-behavior: contain;
     }
   }
 }
