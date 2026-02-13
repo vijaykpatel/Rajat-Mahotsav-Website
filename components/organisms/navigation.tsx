@@ -1,16 +1,33 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
-import { useRouter, usePathname } from "next/navigation"
+import type React from "react"
+import { useState, useEffect, useMemo, useRef } from "react"
+import { usePathname } from "next/navigation"
 import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image as ImageIcon, CalendarCheck, Shield } from "lucide-react"
 import { PiHandsPraying } from "react-icons/pi"
-import { useDeviceType } from "@/hooks/use-device-type"
 import { NavBar } from "@/components/organisms/tubelight-navbar"
 import { CDN_ASSETS } from "@/lib/cdn-assets"
 import { supabase } from "@/utils/supabase/client"
 import { isAllowedAdminDomain } from "@/lib/admin-auth"
 
-const menuItems = [
+type NavIcon = React.ComponentType<any>
+
+type NavigationSubItem = {
+  icon: NavIcon
+  label: string
+  href: string
+}
+
+type NavigationItem = {
+  icon: NavIcon
+  label: string
+  href: string
+  gradient: string
+  iconColor: string
+  subItems?: NavigationSubItem[]
+}
+
+const menuItems: NavigationItem[] = [
   {
     icon: Home,
     label: "Home",
@@ -89,7 +106,7 @@ const menuItems = [
   },
 ]
 
-const adminMenuItem = {
+const adminMenuItem: NavigationItem = {
   icon: Shield,
   label: "Admin",
   href: "/admin/registrations",
@@ -99,12 +116,11 @@ const adminMenuItem = {
 }
 
 export function Navigation() {
-  const [activeItem, setActiveItem] = useState<string>("Home")
   const [mounted, setMounted] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [canAccessAdmin, setCanAccessAdmin] = useState(false)
-  const deviceType = useDeviceType()
-  const router = useRouter()
+  const [availableInlineWidth, setAvailableInlineWidth] = useState<number>()
+  const navRowRef = useRef<HTMLDivElement | null>(null)
+  const logosGroupRef = useRef<HTMLDivElement | null>(null)
   const pathname = usePathname()
 
   const navItems = useMemo(
@@ -141,23 +157,42 @@ export function Navigation() {
 
   useEffect(() => {
     setMounted(true)
-    const currentItem = navItems.find(item => item.href === pathname)
-    if (currentItem) {
-      setActiveItem(currentItem.label)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) {
+      return
     }
-  }, [pathname, navItems])
 
+    const navRow = navRowRef.current
+    const logosGroup = logosGroupRef.current
 
-
-  const handleItemClick = (label: string, href: string) => {
-    setActiveItem(label)
-    setIsMobileMenuOpen(false)
-    if (href !== "#") {
-      router.push(href)
+    if (!navRow || !logosGroup) {
+      return
     }
-  }
 
-  const isMobile = mounted && deviceType !== 'desktop'
+    const recalculateAvailableWidth = () => {
+      const computed = window.getComputedStyle(navRow)
+      const gapValue = Number.parseFloat(computed.columnGap || computed.gap || "0")
+      const rowWidth = navRow.clientWidth
+      const logosWidth = logosGroup.getBoundingClientRect().width
+      const reservedSpace = gapValue + 24
+      const nextWidth = Math.max(56, Math.floor(rowWidth - logosWidth - reservedSpace))
+      setAvailableInlineWidth(nextWidth)
+    }
+
+    recalculateAvailableWidth()
+
+    const observer = new ResizeObserver(recalculateAvailableWidth)
+    observer.observe(navRow)
+    observer.observe(logosGroup)
+    window.addEventListener("resize", recalculateAvailableWidth)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener("resize", recalculateAvailableWidth)
+    }
+  }, [mounted, navItems, pathname])
 
   const isHomePage = pathname === '/'
 
@@ -177,7 +212,7 @@ export function Navigation() {
             --navbar-height: calc(5rem + 1.5rem);
           }
         `}</style>
-        <div className="flex items-center justify-between w-full gap-2 sm:gap-4">
+        <div ref={navRowRef} className="flex items-center justify-between w-full gap-2 sm:gap-4">
 
           {/* Left Side - Tubelight Navbar */}
           <div className="flex-shrink-0">
@@ -190,28 +225,33 @@ export function Navigation() {
                 url: sub.href,
                 icon: sub.icon
               }))
-            }))} />
+            }))}
+              availableInlineWidth={availableInlineWidth}
+              inlineSafetyBuffer={24}
+            />
           </div>
 
           {/* Center - Flexible spacer */}
           <div className="flex-1 min-w-0"></div>
 
           {/* Right Side - Both Logos */}
-          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          <div ref={logosGroupRef} className="flex items-center gap-2 sm:gap-3 flex-shrink-0 pl-2">
             <img
               src={CDN_ASSETS.mainLogoNoText}
               alt="Main Logo"
               width="144"
               height="144"
-              className="h-20 w-auto sm:h-24 md:h-28 lg:h-32 xl:h-36 object-contain"
+              className="w-auto object-contain"
+              style={{ height: "clamp(4.5rem, 8vw, 8.75rem)" }}
             />
-            <div className="h-14 w-px bg-white/40 sm:h-18 md:h-22 lg:h-26 xl:h-30"></div>
+            <div className="w-px bg-white/40" style={{ height: "clamp(3.75rem, 7vw, 7.5rem)" }}></div>
             <img
               src={CDN_ASSETS.maningarLogo}
               alt="Maninagar Logo"
               width="144"
               height="144"
-              className="h-20 w-auto sm:h-24 md:h-28 lg:h-32 xl:h-36 object-contain"
+              className="w-auto object-contain"
+              style={{ height: "clamp(4.5rem, 8vw, 8.75rem)" }}
             />
           </div>
         </div>
