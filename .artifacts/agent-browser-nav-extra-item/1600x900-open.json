@@ -1,0 +1,35 @@
+{
+  "ariaExpanded": "true",
+  "logoRects": [
+    {
+      "bottom": 140,
+      "height": 128,
+      "left": 1252.453125,
+      "right": 1418.734375,
+      "top": 12,
+      "width": 166.28125
+    },
+    {
+      "bottom": 140,
+      "height": 128,
+      "left": 1443.734375,
+      "right": 1568,
+      "top": 12,
+      "width": 124.265625
+    }
+  ],
+  "logosFullyVisible": true,
+  "toolbarOverlapsLogo": false,
+  "toolbarRect": {
+    "bottom": 104,
+    "height": 56,
+    "left": 48,
+    "right": 1178.90625,
+    "top": 48,
+    "width": 1130.90625
+  },
+  "viewport": {
+    "height": 900,
+    "width": 1600
+  }
+}
