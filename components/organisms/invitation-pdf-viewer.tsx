@@ -215,7 +215,7 @@ export function InvitationPdfViewer({ filePath, title, languageKey }: Invitation
         renderTaskRef.current = null
       }
       if (previousDocument) {
-  }, [computeFitScale, filePath])
+        void previousDocument.destroy().catch(() => undefined)
         previousDocument = null
       }
     }
