@@ -157,7 +157,7 @@ export default function IntroVideoReveal() {
             A Glimpse Into the Celebration
           </h2>
 
-          <div className="relative">
+          <div className="relative mx-auto w-full lg:max-w-5xl xl:max-w-4xl">
             <div className="absolute -inset-6 rounded-[40px] bg-[radial-gradient(circle,rgba(255,186,120,0.25)_0%,rgba(15,23,42,0)_65%)] blur-2xl" />
             <div
               className="relative rounded-3xl border border-amber-200/20 bg-white/5 backdrop-blur-xl p-3 sm:p-4"
