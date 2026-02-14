@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { StandardPageHeader } from "@/components/organisms/standard-page-header"
-import { Calendar, Heart, Users, Sparkles, MapPin, Phone, Clock, Globe, ChevronDown, ChevronUp } from "lucide-react"
+import { Calendar, Heart, Users, Sparkles, MapPin, Phone, Mail, Globe, ChevronDown, ChevronUp } from "lucide-react"
 
 export default function AboutPage() {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -208,11 +208,17 @@ export default function AboutPage() {
 
                 <div className="flex items-start gap-4">
                   <div className="bg-orange-100 p-3 rounded-lg">
-                    <Clock className="w-6 h-6 text-orange-600" />
+                    <Mail className="w-6 h-6 text-orange-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Event Dates</h3>
-                    <p className="text-lg text-gray-700">July 27 - August 2, 2026</p>
+                    <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
+                    <a
+                      href="mailto:NewJersey@SwaminarayanGadi.com"
+                      className="text-lg text-gray-700 hover:text-gray-900 underline break-words"
+                    >
+                      NewJersey@<wbr />
+                      SwaminarayanGadi.com
+                    </a>
                   </div>
                 </div>
 
@@ -223,20 +229,13 @@ export default function AboutPage() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Website</h3>
                     <a
-                      href="https://sgadi.com/northamerica"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="sm:hidden text-lg text-orange-600 hover:text-orange-700 underline break-all"
-                    >
-                      sgadi.com/northamerica
-                    </a>
-                    <a
                       href="https://www.swaminarayangadi.com/northamerica"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hidden sm:inline text-lg text-orange-600 hover:text-orange-700 underline break-all"
+                      className="text-lg text-orange-600 hover:text-orange-700 underline break-words"
                     >
-                      swaminarayangadi.com/northamerica
+                      swaminarayangadi.com/<wbr />
+                      northamerica
                     </a>
                   </div>
                 </div>
