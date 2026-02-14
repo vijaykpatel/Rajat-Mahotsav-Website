@@ -41,7 +41,9 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
             <div
               className={`relative overflow-hidden transition-[max-height] duration-300 sm:max-h-none ${
-                isStoryExpanded ? "max-h-[2000px]" : "max-h-[22rem]"
+                isStoryExpanded
+                  ? "max-h-[2000px]"
+                  : "max-h-[22rem] [mask-image:linear-gradient(to_bottom,black_72%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_72%,transparent)] sm:[mask-image:none] sm:[-webkit-mask-image:none]"
               }`}
             >
               <div className="prose prose-xl max-w-none text-gray-700 space-y-4">
@@ -55,9 +57,6 @@ export default function AboutPage() {
                   Our temple follows the teachings of the Swaminarayan Sampraday, emphasizing devotion to God, service to humanity, and living a life of dharma (righteousness). Through daily worship, community programs, and charitable initiatives, we strive to create a positive impact while preserving and sharing our rich spiritual heritage.
                 </p>
               </div>
-              {!isStoryExpanded && (
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white via-white/90 to-transparent sm:hidden" />
-              )}
             </div>
             <button
               type="button"
@@ -79,15 +78,14 @@ export default function AboutPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-3">Celebration Timeline</h3>
               <div
                 className={`relative overflow-hidden transition-[max-height] duration-300 sm:max-h-none ${
-                  expandedHighlights.timeline ? "max-h-96" : "max-h-28"
+                  expandedHighlights.timeline
+                    ? "max-h-96"
+                    : "max-h-28 [mask-image:linear-gradient(to_bottom,black_72%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_72%,transparent)] sm:[mask-image:none] sm:[-webkit-mask-image:none]"
                 }`}
               >
                 <p className="text-lg text-gray-700 leading-relaxed">
                   Join us from July 27 through August 2, 2026 for seven days of divine programs, including daily aarti, katha, prasad, cultural performances, and special ceremonies commemorating 25 years of spiritual service.
                 </p>
-                {!expandedHighlights.timeline && (
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-white via-white/90 to-transparent sm:hidden" />
-                )}
               </div>
               <button
                 type="button"
@@ -107,15 +105,14 @@ export default function AboutPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-3">Community Service</h3>
               <div
                 className={`relative overflow-hidden transition-[max-height] duration-300 sm:max-h-none ${
-                  expandedHighlights.community ? "max-h-96" : "max-h-28"
+                  expandedHighlights.community
+                    ? "max-h-96"
+                    : "max-h-28 [mask-image:linear-gradient(to_bottom,black_72%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_72%,transparent)] sm:[mask-image:none] sm:[-webkit-mask-image:none]"
                 }`}
               >
                 <p className="text-lg text-gray-700 leading-relaxed">
                   Throughout 2025 and 2026, we've engaged in numerous seva activities including food distribution, healthcare outreach, environmental care, and community events, touching thousands of lives with compassion and service.
                 </p>
-                {!expandedHighlights.community && (
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-white via-white/90 to-transparent sm:hidden" />
-                )}
               </div>
               <button
                 type="button"
@@ -135,15 +132,14 @@ export default function AboutPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-3">Global Unity</h3>
               <div
                 className={`relative overflow-hidden transition-[max-height] duration-300 sm:max-h-none ${
-                  expandedHighlights.unity ? "max-h-96" : "max-h-28"
+                  expandedHighlights.unity
+                    ? "max-h-96"
+                    : "max-h-28 [mask-image:linear-gradient(to_bottom,black_72%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_72%,transparent)] sm:[mask-image:none] sm:[-webkit-mask-image:none]"
                 }`}
               >
                 <p className="text-lg text-gray-700 leading-relaxed">
                   The Rajat Mahotsav brings together devotees from USA, Canada, England, India, Kenya, Australia, and beyond, uniting our global Swaminarayan community in celebration, devotion, and brotherhood.
                 </p>
-                {!expandedHighlights.unity && (
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-white via-white/90 to-transparent sm:hidden" />
-                )}
               </div>
               <button
                 type="button"
@@ -163,15 +159,14 @@ export default function AboutPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-3">Divine Experience</h3>
               <div
                 className={`relative overflow-hidden transition-[max-height] duration-300 sm:max-h-none ${
-                  expandedHighlights.experience ? "max-h-96" : "max-h-28"
+                  expandedHighlights.experience
+                    ? "max-h-96"
+                    : "max-h-28 [mask-image:linear-gradient(to_bottom,black_72%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_72%,transparent)] sm:[mask-image:none] sm:[-webkit-mask-image:none]"
                 }`}
               >
                 <p className="text-lg text-gray-700 leading-relaxed">
                   Experience the divine presence through sacred rituals, devotional music, inspiring discourses, and the darshan of our beloved deities in the beautifully decorated temple adorned for this special celebration.
                 </p>
-                {!expandedHighlights.experience && (
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-white via-white/90 to-transparent sm:hidden" />
-                )}
               </div>
               <button
                 type="button"
