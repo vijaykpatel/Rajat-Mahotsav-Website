@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Figtree } from "next/font/google"
 import { Instrument_Serif } from "next/font/google"
 import { Noto_Sans_Gujarati } from "next/font/google"
+import Script from "next/script"
 import { ThemeProvider } from "@/components/atoms/theme-provider"
 import { Navigation } from "@/components/organisms/navigation"
 import StickyFooter from "@/components/organisms/sticky-footer"
@@ -106,6 +107,18 @@ html {
         `}</style>
       </head>
       <body className={`${figtree.variable} ${instrumentSerif.variable} ${notoGujarati.variable}`} suppressHydrationWarning>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-1SD09GSK35"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-1SD09GSK35');
+          `}
+        </Script>
         <LoadingProvider>
           <AudioProvider>
             <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
