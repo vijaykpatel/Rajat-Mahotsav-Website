@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { StandardPageHeader } from "@/components/organisms/standard-page-header"
 import { cn } from "@/lib/utils"
+import "@/styles/registration-theme.css"
 import "@/styles/invitation-theme.css"
 
 type InvitationLanguage = "english" | "gujarati"
@@ -91,7 +92,7 @@ export default function InvitationPage() {
   }, [viewerUrl])
 
   return (
-    <div className="min-h-screen invitation-page-bg page-bg-extend">
+    <div className="min-h-[calc(100vh+200px)] w-full reg-page-bg page-bg-extend" data-page="invitation">
       <div className="container mx-auto px-4 page-bottom-spacing">
         <StandardPageHeader
           title="Invitation"
