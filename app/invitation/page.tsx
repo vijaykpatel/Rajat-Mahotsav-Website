@@ -95,7 +95,7 @@ export default function InvitationPage() {
     <div className="min-h-[calc(100vh+200px)] w-full reg-page-bg page-bg-extend" data-page="invitation">
       <div className="container mx-auto px-4 page-bottom-spacing">
         <StandardPageHeader
-          title="Invitation"
+          title="Rajat Pratishtha Mahotsav Invitation"
           isLoaded={isLoaded}
         />
 
