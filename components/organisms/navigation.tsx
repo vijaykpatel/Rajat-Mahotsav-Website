@@ -38,7 +38,7 @@ const menuItems: NavigationItem[] = [
   },
   {
     icon: BookA,
-    label: "About Us",
+    label: "About the Mahotsav",
     href: "/about",
     gradient:
       "radial-gradient(circle, rgba(14,165,233,0.15) 0%, rgba(2,132,199,0.06) 50%, rgba(14,116,144,0) 100%)",
