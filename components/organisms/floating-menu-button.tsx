@@ -10,7 +10,7 @@ import { FloatingButton } from "../atoms/floating-button"
 
 const menuItems = [
   { icon: Home, label: "Home", href: "/" },
-  { icon: BookA, label: "About Us", href: "/about" },
+  { icon: BookA, label: "About the Mahotsav", href: "/about" },
   { icon: ScrollText, label: "Timeline", href: "/timeline" },
   { icon: ClipboardPen, label: "Registration", href: "/registration" },
   { icon: FileText, label: "Invitation", href: "/invitation" },

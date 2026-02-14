@@ -66,6 +66,48 @@ export default function AboutPage() {
 
           {/* Event Highlights */}
           <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-md p-6">
+              <div className="bg-blue-100 p-3 rounded-lg w-fit mb-4">
+                <Users className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Global Unity</h3>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                The Rajat Mahotsav brings together devotees from USA, Canada, England, India, Kenya, Australia, and beyond, uniting our global Swaminarayan community in celebration, devotion, and brotherhood.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <a
+                  href="/invitation"
+                  className="inline-flex items-center rounded-full border border-blue-300 bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-200 transition-colors"
+                >
+                  View Invitation
+                </a>
+                <a
+                  href="/guest-services"
+                  className="inline-flex items-center rounded-full border border-blue-300 bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-200 transition-colors"
+                >
+                  Guest Services
+                </a>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-purple-50 to-white rounded-xl shadow-md p-6">
+              <div className="bg-purple-100 p-3 rounded-lg w-fit mb-4">
+                <Sparkles className="w-8 h-8 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Divine Experience</h3>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Experience the divine presence through sacred rituals, devotional music, inspiring discourses, and the darshan of our beloved deities in the beautifully decorated temple adorned for this special celebration.
+              </p>
+              <div className="mt-5">
+                <a
+                  href="/registration"
+                  className="inline-flex items-center rounded-full border border-purple-300 bg-purple-100 px-4 py-2 text-sm font-semibold text-purple-700 hover:bg-purple-200 transition-colors"
+                >
+                  Register for the Event
+                </a>
+              </div>
+            </div>
+
             <div className="bg-gradient-to-br from-orange-50 to-white rounded-xl shadow-md p-6">
               <div className="bg-orange-100 p-3 rounded-lg w-fit mb-4">
                 <Calendar className="w-8 h-8 text-orange-600" />
@@ -108,47 +150,6 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-md p-6">
-              <div className="bg-blue-100 p-3 rounded-lg w-fit mb-4">
-                <Users className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Global Unity</h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                The Rajat Mahotsav brings together devotees from USA, Canada, England, India, Kenya, Australia, and beyond, uniting our global Swaminarayan community in celebration, devotion, and brotherhood.
-              </p>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <a
-                  href="/invitation"
-                  className="inline-flex items-center rounded-full border border-blue-300 bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-200 transition-colors"
-                >
-                  View Invitation
-                </a>
-                <a
-                  href="/guest-services"
-                  className="inline-flex items-center rounded-full border border-blue-300 bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-200 transition-colors"
-                >
-                  Guest Services
-                </a>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-purple-50 to-white rounded-xl shadow-md p-6">
-              <div className="bg-purple-100 p-3 rounded-lg w-fit mb-4">
-                <Sparkles className="w-8 h-8 text-purple-600" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Divine Experience</h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Experience the divine presence through sacred rituals, devotional music, inspiring discourses, and the darshan of our beloved deities in the beautifully decorated temple adorned for this special celebration.
-              </p>
-              <div className="mt-5">
-                <a
-                  href="/registration"
-                  className="inline-flex items-center rounded-full border border-purple-300 bg-purple-100 px-4 py-2 text-sm font-semibold text-purple-700 hover:bg-purple-200 transition-colors"
-                >
-                  Register for the Event
-                </a>
-              </div>
-            </div>
           </div>
 
           {/* Temple Contact Resources */}
