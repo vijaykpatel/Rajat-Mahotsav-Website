@@ -25,28 +25,70 @@ export default function InvitationPage() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [activeLanguage, setActiveLanguage] = useState<InvitationLanguage>("english")
   const [isViewerLoading, setIsViewerLoading] = useState(true)
+  const [viewerUrl, setViewerUrl] = useState<string>("")
+  const [viewerError, setViewerError] = useState<string>("")
 
   useEffect(() => {
     const timer = window.setTimeout(() => setIsLoaded(true), 260)
     return () => window.clearTimeout(timer)
   }, [])
 
-  useEffect(() => {
-    setIsViewerLoading(true)
-
-    const loadingGuard = window.setTimeout(() => {
-      setIsViewerLoading(false)
-    }, 1500)
-
-    return () => window.clearTimeout(loadingGuard)
-  }, [activeLanguage])
-
   const activeDocument = useMemo(
     () => invitationDocuments.find((doc) => doc.key === activeLanguage) ?? invitationDocuments[0],
     [activeLanguage]
   )
 
-  const viewerSrc = activeDocument.filePath
+  useEffect(() => {
+    let isCancelled = false
+    let objectUrl = ""
+
+    setViewerError("")
+    setViewerUrl("")
+    setIsViewerLoading(true)
+
+    const loadPdf = async () => {
+      try {
+        const response = await fetch(activeDocument.filePath, { cache: "no-store" })
+        if (!response.ok) {
+          throw new Error(`Failed to load ${activeDocument.label} invitation`)
+        }
+
+        const pdfBlob = await response.blob()
+        if (isCancelled) {
+          return
+        }
+
+        objectUrl = URL.createObjectURL(pdfBlob)
+        setViewerUrl(objectUrl)
+      } catch {
+        if (!isCancelled) {
+          setViewerError(`Unable to load the ${activeDocument.label} invitation right now.`)
+          setIsViewerLoading(false)
+        }
+      }
+    }
+
+    loadPdf()
+
+    return () => {
+      isCancelled = true
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl)
+      }
+    }
+  }, [activeDocument.filePath, activeDocument.label])
+
+  useEffect(() => {
+    if (!viewerUrl) {
+      return
+    }
+
+    const guard = window.setTimeout(() => {
+      setIsViewerLoading(false)
+    }, 1200)
+
+    return () => window.clearTimeout(guard)
+  }, [viewerUrl])
 
   return (
     <div className="min-h-screen invitation-page-bg page-bg-extend">
@@ -76,8 +118,8 @@ export default function InvitationPage() {
                     className={cn(
                       "min-h-11 rounded-lg px-3 py-2 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2",
                       isActive
-                        ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md"
-                        : "text-slate-700 hover:bg-white/90 hover:text-slate-900"
+                        ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md ring-2 ring-orange-500/70"
+                        : "border border-slate-300 bg-white text-slate-700 shadow-sm hover:border-orange-300 hover:bg-orange-50 hover:text-slate-900"
                     )}
                   >
                     <span className="block text-sm font-semibold leading-none">{document.label}</span>
@@ -101,19 +143,18 @@ export default function InvitationPage() {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.24, ease: "easeOut" }}
               >
-                <object
-                  data={viewerSrc}
-                  type="application/pdf"
-                  className="h-[72vh] min-h-[420px] w-full bg-white md:min-h-[760px]"
-                  onLoad={() => setIsViewerLoading(false)}
-                >
+                {viewerUrl ? (
                   <iframe
                     title={`${activeDocument.label} formal invitation PDF`}
-                    src={viewerSrc}
+                    src={viewerUrl}
                     className="h-[72vh] min-h-[420px] w-full bg-white md:min-h-[760px]"
                     onLoad={() => setIsViewerLoading(false)}
                   />
-                </object>
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center px-6 text-center text-sm text-slate-600">
+                    {viewerError || "Preparing invitation preview..."}
+                  </div>
+                )}
               </motion.div>
             </AnimatePresence>
 
