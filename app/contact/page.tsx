@@ -33,11 +33,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1">Address</h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Shree Swaminarayan Temple<br />
-                    Secaucus, New Jersey<br />
-                    United States
-                  </p>
+                  <p className="text-gray-700 leading-relaxed">200 Swamibapa Way, Secaucus, NJ 07094</p>
                 </div>
               </div>
 

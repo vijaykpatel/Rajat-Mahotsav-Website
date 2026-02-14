@@ -3,11 +3,11 @@
 import type React from "react"
 import { useState, useEffect, useMemo, useRef } from "react"
 import { usePathname } from "next/navigation"
-import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image as ImageIcon, CalendarCheck, Shield, FileText } from "lucide-react"
+import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image as ImageIcon, CalendarCheck, Shield, FileText, BookA } from "lucide-react"
 import { PiHandsPraying } from "react-icons/pi"
 import { NavBar } from "@/components/organisms/tubelight-navbar"
 import { CDN_ASSETS } from "@/lib/cdn-assets"
-import { supabase } from "@/utils/supabase/client"
+import { supabase, hasSupabaseClientEnv } from "@/utils/supabase/client"
 import { isAllowedAdminDomain } from "@/lib/admin-auth"
 
 type NavIcon = React.ComponentType<any>
@@ -35,6 +35,14 @@ const menuItems: NavigationItem[] = [
     gradient:
       "radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba(29,78,216,0) 100%)",
     iconColor: "text-blue-500",
+  },
+  {
+    icon: BookA,
+    label: "About Us",
+    href: "/about",
+    gradient:
+      "radial-gradient(circle, rgba(14,165,233,0.15) 0%, rgba(2,132,199,0.06) 50%, rgba(14,116,144,0) 100%)",
+    iconColor: "text-sky-500",
   },
   {
     icon: ScrollText,
@@ -137,6 +145,11 @@ export function Navigation() {
   )
 
   useEffect(() => {
+    if (!hasSupabaseClientEnv) {
+      setCanAccessAdmin(false)
+      return
+    }
+
     let isActive = true
 
     const loadUser = async () => {
