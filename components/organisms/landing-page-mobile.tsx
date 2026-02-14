@@ -15,36 +15,36 @@ interface TitleSectionMobileProps {
 // Mobile image carousel images (same as Skiper53)
 const carouselImages = [
   {
-    src: getCloudflareImageBiggest("1443ce4a-1e60-4a83-34d8-f8626fe74b00"),
-    alt: "Lord Shree Swaminarayan",
-  },
-  {
-    src: getCloudflareImageBiggest("9dbe17dd-7e0b-49d1-984f-f8a4f20cd000"),
-    alt: "Festival lights",
-  },
-  {
-    src: getCloudflareImageBiggest("f3dcd6de-5334-48d0-c950-8d35e3f32f00"),
-    alt: "Cultural celebration",
-  },
-  {
-    src: getCloudflareImageBiggest("9b13ec59-9484-4191-00db-04b31cda2a00"),
-    alt: "Temple architecture",
-  },
-  {
     src: getCloudflareImageBiggest("6369e804-64ef-42fe-2bd7-ece677d9f200"),
-    alt: "Prayer ceremony",
+    alt: "Swamibapa",
   },
   {
     src: getCloudflareImageBiggest("8e64636f-efca-468f-44a0-1004f7f7a600"),
-    alt: "Devotional gathering",
+    alt: "Ishwarbapa",
+  },
+  {
+    src: getCloudflareImageBiggest("f3dcd6de-5334-48d0-c950-8d35e3f32f00"),
+    alt: "Abji Bapashree",
+  },
+  {
+    src: getCloudflareImageBiggest("9b13ec59-9484-4191-00db-04b31cda2a00"),
+    alt: "Swaminarayan Bhagwan",
+  },
+  {
+    src: getCloudflareImageBiggest("9dbe17dd-7e0b-49d1-984f-f8a4f20cd000"),
+    alt: "Gopalbapa",
+  },
+  {
+    src: getCloudflareImageBiggest("1443ce4a-1e60-4a83-34d8-f8626fe74b00"),
+    alt: "Nirgunbapa",
   },
   {
     src: getCloudflareImageBiggest("b7366436-526c-437a-bf1b-6bae9cec4a00"),
-    alt: "Sacred ceremony",
+    alt: "Prem Murti Bapa",
   },
   {
     src: getCloudflareImageBiggest("24e09951-0339-4eb7-b452-02aa945d2600"),
-    alt: "Community event",
+    alt: "Gnan Murti Bapa",
   },
 ]
 
