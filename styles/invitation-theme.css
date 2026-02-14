@@ -22,6 +22,148 @@
   background: linear-gradient(to bottom right, #fff, #fffaf5);
 }
 
+.invitation-pdf-toolbar {
+  border-bottom: 1px solid rgba(251, 146, 60, 0.24);
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.96), rgba(255, 250, 244, 0.9)),
+    radial-gradient(circle at 10% 10%, rgba(251, 146, 60, 0.12), transparent 34%);
+  backdrop-filter: blur(8px);
+  padding: 0.7rem;
+}
+
+.invitation-pdf-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.invitation-pdf-controls-left {
+  justify-content: flex-start;
+}
+
+.invitation-pdf-controls-right {
+  justify-content: flex-end;
+}
+
+.invitation-pdf-page-indicator {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 2.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgb(71, 85, 105);
+}
+
+.invitation-pdf-mobile-nav {
+  display: none;
+  border-top: 1px solid rgba(251, 146, 60, 0.2);
+  background: rgba(255, 255, 255, 0.86);
+  padding: 0.6rem 0.7rem 0.7rem;
+}
+
+.invitation-pdf-pagination {
+  gap: 0.55rem;
+}
+
+.invitation-pdf-pagination-bottom {
+  justify-content: center;
+}
+
+.invitation-pdf-page-indicator-bottom {
+  width: 100%;
+  margin-top: 0.1rem;
+}
+
+.invitation-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 2.5rem;
+  min-width: 2.5rem;
+  border: 1px solid rgba(251, 146, 60, 0.36);
+  background: rgba(255, 255, 255, 0.95);
+  color: rgb(30, 41, 59);
+  border-radius: 0.65rem;
+  padding: 0.42rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.invitation-pdf-btn:hover:not(:disabled) {
+  background: rgba(255, 247, 237, 0.94);
+  border-color: rgba(249, 115, 22, 0.8);
+}
+
+.invitation-pdf-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.invitation-pdf-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--reg-focus-ring);
+}
+
+.invitation-pdf-canvas-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: auto;
+  min-height: min(60vh, 34rem);
+  max-height: min(78vh, 58rem);
+  background:
+    linear-gradient(to bottom right, rgba(255, 255, 255, 0.95), rgba(255, 250, 244, 0.84)),
+    radial-gradient(circle at 85% 20%, rgba(251, 146, 60, 0.08), transparent 42%);
+  padding: 0.75rem;
+}
+
+.invitation-pdf-canvas {
+  display: block;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 12px 32px -20px rgba(15, 23, 42, 0.55);
+}
+
+.invitation-pdf-canvas-loading {
+  opacity: 0.55;
+}
+
+.invitation-pdf-loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, rgba(255, 247, 237, 0.7), rgba(255, 255, 255, 0.8));
+  backdrop-filter: blur(1px);
+}
+
+.invitation-pdf-error-state {
+  width: min(32rem, 100%);
+  border: 1px solid rgba(251, 146, 60, 0.24);
+  border-radius: 0.9rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.94);
+  color: rgb(51, 65, 85);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.invitation-pdf-error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
 .invitation-toggle-btn {
   min-height: 3rem;
   transition: all 0.2s ease;
@@ -58,5 +200,44 @@
 @media (max-width: 768px) {
   .invitation-shell {
     border-radius: 1.35rem;
+  }
+
+  .invitation-pdf-toolbar {
+    padding: 0.62rem;
+  }
+
+  .invitation-pdf-pagination-top,
+  .invitation-pdf-page-indicator-top {
+    display: none;
+  }
+
+  .invitation-pdf-controls-right {
+    justify-content: center;
+  }
+
+  .invitation-pdf-mobile-nav {
+    display: block;
+  }
+
+  .invitation-pdf-btn {
+    min-height: 2.7rem;
+    font-size: 0.75rem;
+    padding: 0.44rem 0.62rem;
+  }
+
+  .invitation-pdf-canvas-wrap {
+    min-height: min(32vh, 15rem);
+    max-height: min(42vh, 20rem);
+    padding: 0.5rem;
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+}
+
+@media (min-width: 769px) {
+  .invitation-pdf-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.75rem;
   }
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useId, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -34,7 +34,7 @@ export function NavBar({
   forceOverlayMode,
 }: NavBarProps) {
   const pathname = usePathname()
-  const menuPanelId = useId()
+  const menuPanelId = "primary-nav-panel"
   const [activeTab, setActiveTab] = useState(items[0]?.name ?? "")
   const [hoveredTab, setHoveredTab] = useState<string | null>(null)
   const [isExpanded, setIsExpanded] = useState(false)
@@ -144,7 +144,7 @@ export function NavBar({
   }, [isExpanded, expandedItem, hoveredItem])
 
   const getSubMenuId = (itemName: string) =>
-    `${menuPanelId}-${itemName.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
+    `primary-nav-submenu-${itemName.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
 
   return (
     <>

@@ -12,6 +12,16 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['framer-motion'],
   },
+  webpack: (config, { webpack }) => {
+    config.resolve = config.resolve || {}
+    config.resolve.fallback = config.resolve.fallback || {}
+    config.resolve.alias = config.resolve.alias || {}
+    config.resolve.fallback.canvas = false
+    config.resolve.alias.canvas = false
+    config.plugins = config.plugins || []
+    config.plugins.push(new webpack.IgnorePlugin({ resourceRegExp: /^canvas$/ }))
+    return config
+  },
   async headers() {
     return [
       {
