@@ -162,6 +162,10 @@ export function InvitationPdfViewer({ filePath, title, languageKey }: Invitation
           }
 
           const firstPage = await pdfDocument.getPage(1)
+          if (isCancelled) {
+            return
+          }
+
           const width = firstPage.getViewport({ scale: 1 }).width
           const fitScale = computeFitScale(width)
 
