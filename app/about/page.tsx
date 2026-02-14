@@ -228,7 +228,7 @@ export default function AboutPage() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Website</h3>
                     <a
-                      href="http://sgadi.com/northamerica"
+                      href="https://sgadi.com/northamerica"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="sm:hidden text-lg text-orange-600 hover:text-orange-700 underline break-all"
