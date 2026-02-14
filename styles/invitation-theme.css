@@ -1,0 +1,62 @@
+.invitation-shell {
+  border: 1px solid rgba(251, 146, 60, 0.26);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.58));
+  backdrop-filter: blur(8px);
+  box-shadow:
+    0 22px 50px -24px rgba(190, 24, 93, 0.22),
+    0 14px 40px -24px rgba(234, 88, 12, 0.36);
+}
+
+.invitation-toolbar {
+  border: 1px solid rgba(251, 146, 60, 0.24);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.96), rgba(255, 251, 245, 0.9)),
+    radial-gradient(circle at 8% 50%, rgba(251, 146, 60, 0.12), transparent 36%);
+}
+
+.invitation-viewer {
+  border: 1px solid rgba(251, 146, 60, 0.3);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.75) inset,
+    0 20px 44px -26px rgba(15, 23, 42, 0.35);
+  background: linear-gradient(to bottom right, #fff, #fffaf5);
+}
+
+.invitation-toggle-btn {
+  min-height: 3rem;
+  transition: all 0.2s ease;
+}
+
+.invitation-toggle-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--reg-focus-ring);
+}
+
+.invitation-toggle-btn-inactive {
+  background: white;
+}
+
+.invitation-toggle-btn-active {
+  border: none;
+}
+
+.invitation-loading-ring {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 9999px;
+  border: 3px solid rgba(251, 146, 60, 0.2);
+  border-top-color: rgba(234, 88, 12, 1);
+  animation: invitation-spin 0.9s linear infinite;
+}
+
+@keyframes invitation-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .invitation-shell {
+    border-radius: 1.35rem;
+  }
+}

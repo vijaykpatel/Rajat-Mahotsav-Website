@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image, CalendarCheck } from "lucide-react"
+import { Home, ScrollText, ClipboardPen, CalendarDays, Hotel, Heart, Image, CalendarCheck, FileText } from "lucide-react"
 import { PiHandsPraying } from "react-icons/pi"
 import { useRouter, usePathname } from "next/navigation"
 import { FloatingButton } from "../atoms/floating-button"
@@ -12,6 +12,7 @@ const menuItems = [
   { icon: Home, label: "Home", href: "/" },
   { icon: ScrollText, label: "Timeline", href: "/timeline" },
   { icon: ClipboardPen, label: "Registration", href: "/registration" },
+  { icon: FileText, label: "Invitation", href: "/invitation" },
   { icon: Hotel, label: "Guest Services", href: "/guest-services" },
   { icon: CalendarDays, label: "Schedule", href: "/schedule" },
   {

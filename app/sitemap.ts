@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     '',
     '/registration',
+    '/invitation',
     '/latest-events',
     '/schedule',
     '/community-seva',
