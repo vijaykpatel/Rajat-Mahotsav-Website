@@ -106,7 +106,7 @@ export default function InvitationPage() {
           className="invitation-shell mx-auto max-w-6xl rounded-[2rem] p-4 md:p-6"
         >
           <div className="invitation-toolbar mb-4 flex justify-center rounded-2xl p-3 md:p-4">
-            <div className="grid w-full max-w-md grid-cols-2 gap-2 rounded-xl bg-white/60 p-1.5 shadow-inner" role="group" aria-label="Invitation language">
+            <div className="grid w-full max-w-md grid-cols-2 gap-3" role="group" aria-label="Invitation language">
               {invitationDocuments.map((document) => {
                 const isActive = document.key === activeLanguage
 
@@ -117,10 +117,10 @@ export default function InvitationPage() {
                     aria-pressed={isActive}
                     onClick={() => setActiveLanguage(document.key)}
                     className={cn(
-                      "min-h-11 rounded-lg px-3 py-2 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2",
+                      "invitation-toggle-btn w-full inline-flex items-center justify-center px-4 py-2 text-center text-base rounded-lg",
                       isActive
-                        ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md ring-2 ring-orange-500/70"
-                        : "border border-slate-300 bg-white text-slate-700 shadow-sm hover:border-orange-300 hover:bg-orange-50 hover:text-slate-900"
+                        ? "reg-button invitation-toggle-btn-active"
+                        : "admin-btn-outline invitation-toggle-btn-inactive"
                     )}
                   >
                     <span className="block text-sm font-semibold leading-none">{document.label}</span>

@@ -22,6 +22,24 @@
   background: linear-gradient(to bottom right, #fff, #fffaf5);
 }
 
+.invitation-toggle-btn {
+  min-height: 3rem;
+  transition: all 0.2s ease;
+}
+
+.invitation-toggle-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--reg-focus-ring);
+}
+
+.invitation-toggle-btn-inactive {
+  background: white;
+}
+
+.invitation-toggle-btn-active {
+  border: none;
+}
+
 .invitation-loading-ring {
   width: 2.2rem;
   height: 2.2rem;
