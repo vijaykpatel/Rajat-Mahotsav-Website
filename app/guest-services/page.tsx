@@ -311,7 +311,7 @@ export default function GuestServicesPage() {
           alt="Accommodations Hero"
           width="1200"
           height="800"
-          className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl mx-auto h-auto object-cover rounded-2xl shadow-lg"
+          className="w-full max-w-sm sm:max-w-md md:max-w-md lg:max-w-xl xl:max-w-3xl mx-auto h-auto object-cover rounded-2xl shadow-lg"
           initial={{ opacity: 0, scale: 0.9, y: 30 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: false }}
@@ -435,7 +435,7 @@ export default function GuestServicesPage() {
                         200 Swamibapa Way, Secaucus, NJ 07094
                       </p>
                     </div>
-                    <div className="relative overflow-hidden rounded-lg w-full h-[400px] md:h-[500px] bg-gray-100">
+                    <div className="relative overflow-hidden rounded-lg w-full h-[360px] md:h-[460px] bg-gray-100">
                       <iframe
                         src={isStreetView
                           ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e1!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus&loading=eager"
@@ -494,7 +494,7 @@ export default function GuestServicesPage() {
                       200 Swamibapa Way, Secaucus, NJ 07094
                     </p>
                   </div>
-                  <div className="relative overflow-hidden rounded-lg h-[500px] bg-gray-100">
+                  <div className="relative overflow-hidden rounded-lg h-[460px] bg-gray-100">
                     <iframe
                       src={isStreetView
                         ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d755.45!2d-74.0567890!3d40.7894567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f17.5!3m3!1m2!1s0x89c2f0a1b2c3d4e5%3A0x1234567890abcdef!2s200%20Swamibapa%20Way%2C%20Secaucus%2C%20NJ%2007094!5e1!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus&loading=eager"
