@@ -512,110 +512,13 @@ export default function GuestServicesPage() {
             </div>
           </motion.section>
 
-          {/* Airport Transportation Section */}
-          <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.8 }}
-            className="mb-16 mt-24"
-          >
-            <div className="flex items-center gap-3 mb-8">
-              <Plane className="h-8 w-8 text-blue-500" />
-              <h2 className="text-3xl font-bold">Airport Transportation</h2>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <motion.div
-                initial={{ y: 20 }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: false }}
-                transition={{ duration: 0.6 }}
-                className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
-              >
-                <h3 className="acc-card-title mb-3">Newark Liberty International (EWR)</h3>
-                <div className="space-y-2 text-gray-600">
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4 text-blue-400" />
-                    <span className="acc-card-base font-medium">25-35 min drive</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Car className="h-4 w-4 text-blue-400" />
-                    <span className="acc-card-base">Uber/Lyft: $35-50</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Navigation className="h-4 w-4 text-blue-400" />
-                    <span className="acc-card-base">Taxi: $45-60</span>
-                  </div>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ y: 20 }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: false }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
-              >
-                <h3 className="acc-card-title mb-3">LaGuardia Airport (LGA)</h3>
-                <div className="space-y-2 text-gray-600">
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4 text-blue-400" />
-                    <span className="acc-card-base font-medium">35-45 min drive</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Car className="h-4 w-4 text-blue-400" />
-                    <span className="acc-card-base">Uber/Lyft: $45-65</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Navigation className="h-4 w-4 text-blue-400" />
-                    <span className="acc-card-base">Taxi: $55-75</span>
-                  </div>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ y: 20 }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: false }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
-              >
-                <h3 className="acc-card-title mb-3">John F. Kennedy International (JFK)</h3>
-                <div className="space-y-2 text-gray-600">
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4 text-blue-400" />
-                    <span className="acc-card-base font-medium">45-60 min drive</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Car className="h-4 w-4 text-blue-400" />
-                    <span className="acc-card-base">Uber/Lyft: $60-85</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Navigation className="h-4 w-4 text-blue-400" />
-                    <span className="acc-card-base">Taxi: $70-95</span>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-            <motion.div
-              initial={{ y: 20 }}
-              whileInView={{ y: 0 }}
-              viewport={{ once: false }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-6"
-            >
-              <p className="acc-card-base text-gray-700 leading-relaxed">
-                <span className="font-semibold">Note:</span> The Temple is currently exploring transportation options from Newark airport for our international guests.
-                We will update this page with detailed information as arrangements are finalized. Travelling to/from Newark airport is the preferred method due it's proximity to the temple.
-              </p>
-            </motion.div>
-          </motion.section>
-
           {/* Hotels Section */}
           <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false }}
             transition={{ duration: 0.8 }}
-            className="mb-16"
+            className="mb-16 mt-24"
           >
             <div className="flex items-center gap-3 mb-8">
               <Hotel className="h-8 w-8 text-purple-500" />
@@ -775,6 +678,103 @@ export default function GuestServicesPage() {
             </motion.div> */}
           </motion.section>
 
+          {/* Airport Transportation Section */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8 }}
+            className="mb-16"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <Plane className="h-8 w-8 text-blue-500" />
+              <h2 className="text-3xl font-bold">Airport Transportation</h2>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <motion.div
+                initial={{ y: 20 }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.6 }}
+                className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
+              >
+                <h3 className="acc-card-title mb-3">Newark Liberty International (EWR)</h3>
+                <div className="space-y-2 text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4 text-blue-400" />
+                    <span className="acc-card-base font-medium">25-35 min drive</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Car className="h-4 w-4 text-blue-400" />
+                    <span className="acc-card-base">Uber/Lyft: $35-50</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Navigation className="h-4 w-4 text-blue-400" />
+                    <span className="acc-card-base">Taxi: $45-60</span>
+                  </div>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ y: 20 }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
+              >
+                <h3 className="acc-card-title mb-3">LaGuardia Airport (LGA)</h3>
+                <div className="space-y-2 text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4 text-blue-400" />
+                    <span className="acc-card-base font-medium">35-45 min drive</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Car className="h-4 w-4 text-blue-400" />
+                    <span className="acc-card-base">Uber/Lyft: $45-65</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Navigation className="h-4 w-4 text-blue-400" />
+                    <span className="acc-card-base">Taxi: $55-75</span>
+                  </div>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ y: 20 }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="bg-white rounded-2xl shadow-lg transition-all duration-200 ease-out cursor-pointer p-6 border-2 border-blue-200"
+              >
+                <h3 className="acc-card-title mb-3">John F. Kennedy International (JFK)</h3>
+                <div className="space-y-2 text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4 text-blue-400" />
+                    <span className="acc-card-base font-medium">45-60 min drive</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Car className="h-4 w-4 text-blue-400" />
+                    <span className="acc-card-base">Uber/Lyft: $60-85</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Navigation className="h-4 w-4 text-blue-400" />
+                    <span className="acc-card-base">Taxi: $70-95</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+            <motion.div
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
+              viewport={{ once: false }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-6"
+            >
+              <p className="acc-card-base text-gray-700 leading-relaxed">
+                <span className="font-semibold">Note:</span> The Temple is currently exploring transportation options from Newark airport for our international guests.
+                We will update this page with detailed information as arrangements are finalized. Travelling to/from Newark airport is the preferred method due it's proximity to the temple.
+              </p>
+            </motion.div>
+          </motion.section>
+
           {/* Transportation Section */}
           <motion.section
             initial={{ opacity: 0, y: 30 }}
@@ -785,7 +785,7 @@ export default function GuestServicesPage() {
           >
             <div className="flex items-center gap-3 mb-8">
               <Car className="h-8 w-8 text-yellow-500" />
-              <h2 className="text-3xl font-bold">Transportation</h2>
+              <h2 className="text-3xl font-bold">Local Transportation</h2>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {transportation.map((transport, index) => (
