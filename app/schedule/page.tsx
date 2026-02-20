@@ -114,6 +114,12 @@ export default function SchedulePage() {
   const [selectedDay, setSelectedDay] = useState<number>(0)
   const [isMobile, setIsMobile] = useState(false)
 
+  const getEventCountExcludingMeals = (events: Event[]) =>
+    events.filter((event) => {
+      const normalizedTitle = event.title.trim().toLowerCase()
+      return normalizedTitle !== "lunch" && normalizedTitle !== "dinner"
+    }).length
+
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 300)
     return () => clearTimeout(timer)
@@ -196,7 +202,7 @@ export default function SchedulePage() {
                       ? 'bg-orange-500 text-white shadow-md'
                       : 'bg-orange-100 text-orange-600 group-hover:bg-orange-200'
                   }`}>
-                    {day.events.length}
+                    {getEventCountExcludingMeals(day.events)}
                   </div>
 
                   {/* Date & Day */}
@@ -252,7 +258,7 @@ export default function SchedulePage() {
                     <div className="text-right">
                       <div className="text-sm font-semibold text-gray-500 mb-2">TOTAL EVENTS</div>
                       <div className={`text-6xl font-black ${theme.colors.highlight}`}>
-                        {scheduleData[selectedDay].events.length}
+                        {getEventCountExcludingMeals(scheduleData[selectedDay].events)}
                       </div>
                     </div>
                   </div>
@@ -356,7 +362,7 @@ export default function SchedulePage() {
                           <div className={`text-sm font-medium ${
                             selectedDay === index ? 'text-orange-600' : 'text-gray-500'
                           }`}>
-                            {day.events.length} events scheduled
+                            {getEventCountExcludingMeals(day.events)} events scheduled
                           </div>
                         </div>
                       </div>
