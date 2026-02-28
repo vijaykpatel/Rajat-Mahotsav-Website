@@ -634,8 +634,8 @@ export default function CommunityServicePage() {
                                           updateSevaFormData("mandal", "Maninagar")
                                           setSevaValue("mandal", "Maninagar", { shouldValidate: true })
                                         } else if (value === "australia") {
-                                          updateSevaFormData("mandal", "Sydney")
-                                          setSevaValue("mandal", "Sydney", { shouldValidate: true })
+                                          updateSevaFormData("mandal", "Perth")
+                                          setSevaValue("mandal", "Perth", { shouldValidate: true })
                                         } else if (value === "canada") {
                                           updateSevaFormData("mandal", "Toronto")
                                           setSevaValue("mandal", "Toronto", { shouldValidate: true })

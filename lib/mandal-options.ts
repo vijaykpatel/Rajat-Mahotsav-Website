@@ -27,7 +27,7 @@ const MANDAL_OPTIONS_BY_COUNTRY: Record<string, string[]> = {
 /** Fixed mandals for india, australia, canada, kenya (country selects mandal) */
 const SPECIAL_COUNTRY_MANDALS: Record<string, string> = {
   india: "Maninagar",
-  australia: "Sydney",
+  australia: "Perth",
   canada: "Toronto",
   kenya: "Nairobi",
 }

@@ -203,7 +203,7 @@ export function SevaSubmissionForm() {
                   updateFormData("country", value)
                   setPhoneCountry(getPhoneCountryFromCountry(value))
                   
-                  const mandalMap: { [key: string]: string } = { "india": "Maninagar", "australia": "Sydney", "canada": "Toronto", "kenya": "Nairobi" }
+                  const mandalMap: { [key: string]: string } = { "india": "Maninagar", "australia": "Perth", "canada": "Toronto", "kenya": "Nairobi" }
                   const mandal = mandalMap[value] || ""
                   updateFormData("mandal", mandal)
                   setValue("mandal", mandal, { shouldValidate: true })

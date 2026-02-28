@@ -497,8 +497,8 @@ export default function SevaSubmissionPage() {
                                     updateFormData("mandal", "Maninagar")
                                     setValue("mandal", "Maninagar", { shouldValidate: true })
                                   } else if (value === "australia") {
-                                    updateFormData("mandal", "Sydney")
-                                    setValue("mandal", "Sydney", { shouldValidate: true })
+                                    updateFormData("mandal", "Perth")
+                                    setValue("mandal", "Perth", { shouldValidate: true })
                                   } else if (value === "canada") {
                                     updateFormData("mandal", "Toronto")
                                     setValue("mandal", "Toronto", { shouldValidate: true })
