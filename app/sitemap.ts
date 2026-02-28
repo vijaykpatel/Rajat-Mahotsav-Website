@@ -5,12 +5,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     '',
+    '/about',
+    '/contact',
+    '/privacy',
+    '/timeline',
     '/registration',
     '/invitation',
     '/latest-events',
     '/schedule',
     '/community-seva',
+    '/community-seva/submit-data',
     '/spiritual-seva',
+    '/spiritual-seva/submit',
     '/guest-services',
     '/media',
   ]
