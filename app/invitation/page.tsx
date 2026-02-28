@@ -14,7 +14,7 @@ const invitationDocuments = [
   {
     key: "english" as const,
     label: "English",
-    filePath: "/invitations/rajat-invitation-english.pdf",
+    filePath: "/invitations/rajat-invitation-english2.pdf",
   },
   {
     key: "gujarati" as const,
