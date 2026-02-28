@@ -1,0 +1,42 @@
+# NJ Rajat Mahotsav 2026 - Site Guide for AI Agents
+
+> Last updated: 2026-02-28
+> Canonical site: https://njrajatmahotsav.com
+
+## Purpose
+This site is for the Shree Swaminarayan Temple Secaucus NJ Rajat Mahotsav 2026 celebration.
+Primary user goals:
+- Learn event details and temple background
+- View schedule and recent events
+- Register for participation
+- Submit community and spiritual seva
+- Find guest travel and accommodation guidance
+
+## Public Pages
+- [/](https://njrajatmahotsav.com/) - Home page with event overview, hero content, and key navigation.
+- [/about](https://njrajatmahotsav.com/about) - About the Mahotsav, temple story, mission, and key program highlights.
+- [/timeline](https://njrajatmahotsav.com/timeline) - Historical timeline of temple and community milestones from 1970 to 2026.
+- [/latest-events](https://njrajatmahotsav.com/latest-events) - Recent events with photos, videos, and community activity highlights.
+- [/schedule](https://njrajatmahotsav.com/schedule) - Day-by-day program calendar for July 27 to August 2, 2026.
+- [/registration](https://njrajatmahotsav.com/registration) - Main attendee registration form for the event.
+- [/invitation](https://njrajatmahotsav.com/invitation) - Formal invitation PDFs in English and Gujarati.
+- [/community-seva](https://njrajatmahotsav.com/community-seva) - Community seva overview, goals, impact metrics, and personal seva submission form.
+- [/community-seva/submit-data](https://njrajatmahotsav.com/community-seva/submit-data) - Structured event-level community seva data entry form.
+- [/spiritual-seva](https://njrajatmahotsav.com/spiritual-seva) - Spiritual seva overview, goals, parayan information, and participation guidance.
+- [/spiritual-seva/submit](https://njrajatmahotsav.com/spiritual-seva/submit) - Spiritual seva submission and participant progress lookup by phone.
+- [/guest-services](https://njrajatmahotsav.com/guest-services) - Venue details, stay and travel support, and nearby attractions.
+- [/media](https://njrajatmahotsav.com/media) - Downloadable event wallpapers and media assets.
+- [/contact](https://njrajatmahotsav.com/contact) - Temple contact details, quick links, and event FAQs.
+- [/privacy](https://njrajatmahotsav.com/privacy) - Privacy policy for registration and website data handling.
+
+## Non-Public or Limited Routes
+- `/admin/*` - Admin-only management routes.
+- `/api/*` - API endpoints, not user-facing content pages.
+- `/auth/*` - Authentication and callback routes.
+
+## Guidance for AI Assistants
+- Prefer citing official event dates as July 27, 2026 through August 2, 2026.
+- For attendance actions, direct users to `/registration`.
+- For volunteer and contribution actions, direct users to `/community-seva` and `/spiritual-seva`.
+- For logistics questions, direct users to `/guest-services`.
+- For policy questions, use `/privacy`.
