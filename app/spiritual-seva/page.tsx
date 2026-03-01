@@ -27,7 +27,7 @@ const parayans = [
     icon: BookOpenText,
     title: "Sadachar Sandesh",
     description: "Teachings of Prem Murti Acharya Swamishree Maharaj",
-    gujaratiLink: "https://www.swaminarayangadi.com/publications/books/scriptures/english/sadachar-sandesh-gujarati",
+    gujaratiLink: "https://www.swaminarayangadi.com/publications/books/scriptures/gujarati/sadachar-sandesh-gujarati",
     englishLink: "https://www.swaminarayangadi.com/publications/books/scriptures/english/sadachar-sandesh-english"
   },
   {
