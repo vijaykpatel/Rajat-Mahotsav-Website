@@ -19,6 +19,7 @@ import { useToast } from "@/hooks/use-toast"
 
 import { useDeviceType } from "@/hooks/use-device-type"
 import { supabase } from "@/utils/supabase/client"
+import { emailSchema } from "@/lib/email-validation"
 import "@/styles/registration-theme.css"
 
 
@@ -33,7 +34,7 @@ const FormSchema = z.object({
   ghaam: z.string().min(1, "Ghaam is required").regex(/^[A-Za-z]+$/, "Ghaam must contain only letters"),
   country: z.string().min(1, "Country is required"),
   mandal: z.string().min(1, "Mandal is required"),
-  email: z.string().email("Invalid email address"),
+  email: emailSchema,
   phoneCountryCode: z.string().min(1, "Phone country code is required"),
   phone: z
     .string()
