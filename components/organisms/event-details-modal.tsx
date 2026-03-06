@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, Calendar, Image as ImageIcon, Play } from "lucide-react"
+import { X, Calendar, Image as ImageIcon } from "lucide-react"
 import { EventData } from "@/lib/events-data"
 import { TagBadge } from "@/components/atoms/tag-badge"
 
@@ -92,6 +91,16 @@ export function EventDetailsModal({
                       <p className="text-base lg:text-lg text-gray-700 leading-relaxed whitespace-pre-wrap">
                         {event.description}
                       </p>
+                      {event.instagramUrl && (
+                        <a
+                          href={event.instagramUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-4 inline-flex text-base font-semibold text-orange-700 transition-colors hover:text-orange-800"
+                        >
+                          Watch the Instagram reel
+                        </a>
+                      )}
                     </div>
 
                     {/* Right Column: YouTube Video */}

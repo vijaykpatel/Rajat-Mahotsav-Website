@@ -87,6 +87,18 @@ export function EventCard({ event, index, onPhotoClick, onCardClick }: EventCard
           {event.description}
         </p>
 
+        {event.instagramUrl && (
+          <a
+            href={event.instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="mb-4 inline-flex text-sm font-semibold text-orange-700 transition-colors hover:text-orange-800"
+          >
+            Watch the Instagram reel
+          </a>
+        )}
+
         {/* Tags */}
         <div className="flex flex-wrap gap-2">
           {event.tags.map(tag => (
