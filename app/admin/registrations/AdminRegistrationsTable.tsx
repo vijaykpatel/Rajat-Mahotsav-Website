@@ -150,6 +150,7 @@ export function AdminRegistrationsTable({ initialTotalCount = null }: AdminRegis
   const tableContainerRef = useRef<HTMLDivElement>(null)
   const abortRef = useRef<AbortController | null>(null)
   const requestIdRef = useRef(0)
+  const countRequestIdRef = useRef(0)
 
   const fetchDistinctValues = useCallback(async () => {
     try {
@@ -220,18 +221,21 @@ export function AdminRegistrationsTable({ initialTotalCount = null }: AdminRegis
 
   /** Fetch total row count for current filters. Only call on load or filter change, not when paginating. */
   const fetchCount = useCallback(async () => {
+    const requestId = ++countRequestIdRef.current
     try {
       const qs = buildFilterParams().toString()
       const res = await fetch(
         `/api/admin/registrations/count${qs ? `?${qs}` : ""}`
       )
       const data = await res.json()
+      if (requestId !== countRequestIdRef.current) return
       if (res.ok && typeof data.count === "number") {
         setTotalCount(data.count)
       } else {
         setTotalCount(null)
       }
     } catch {
+      if (requestId !== countRequestIdRef.current) return
       setTotalCount(null)
     }
   }, [buildFilterParams])

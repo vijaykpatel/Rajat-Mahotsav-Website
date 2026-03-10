@@ -4,6 +4,7 @@ import { isAdminDomainUser } from "@/lib/admin-auth"
 
 const COUNT_CHUNK_SIZE = 500
 const MAX_COUNT = 100_000
+const MAX_COUNT_REQUEST_MS = 12_000
 
 function parseOptionalInt(val: string | null): number | null {
   if (!val || val.trim() === "") return null
@@ -78,8 +79,20 @@ export async function GET(request: Request) {
   let total = 0
   let cursor: number | null = null
   let hasMore = true
+  const startedAt = Date.now()
 
   while (hasMore) {
+    if (Date.now() - startedAt > MAX_COUNT_REQUEST_MS) {
+      return NextResponse.json(
+        {
+          error: "Count request timed out",
+          details:
+            "The filtered count is taking too long. Narrow filters and try again.",
+        },
+        { status: 504, headers }
+      )
+    }
+
     const { data, error } = await supabase.rpc("get_registrations_filtered", {
       p_page_size: COUNT_CHUNK_SIZE,
       p_cursor: cursor,
